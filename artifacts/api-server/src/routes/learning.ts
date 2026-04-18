@@ -163,7 +163,18 @@ async function getCurrentUser(req: Request): Promise<User> {
 
   const adminCount = await db.select({ count: sql<number>`count(*)::int` }).from(usersTable).where(eq(usersTable.role, "admin"));
   const role = process.env.NODE_ENV !== "production" || (adminCount[0]?.count ?? 0) === 0 ? "admin" : "learner";
-  const [user] = await db.insert(usersTable).values({ id: clerkUserId, clerkUserId, email, name, role }).returning();
+  const [user] = await db
+    .insert(usersTable)
+    .values({ id: clerkUserId, clerkUserId, email, name, role })
+    .onConflictDoUpdate({
+      target: usersTable.id,
+      set: { clerkUserId, email, name },
+    })
+    .returning();
+  if (process.env.NODE_ENV !== "production" && user.role !== "admin") {
+    const [updated] = await db.update(usersTable).set({ role: "admin" }).where(eq(usersTable.id, user.id)).returning();
+    return updated;
+  }
   return user;
 }
 

@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { ArrowRight, BookOpen, CheckCircle2, Lock, Medal, PlayCircle, Trophy } from "lucide-react";
+import { ArrowRight, BookOpen, CheckCircle2, Lock, Medal, PlayCircle, Target, Trophy } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Dashboard() {
