@@ -8,9 +8,489 @@
 import * as zod from "zod";
 
 /**
- * Returns server health status
  * @summary Health check
  */
 export const HealthCheckResponse = zod.object({
   status: zod.string(),
+});
+
+/**
+ * @summary Current learner profile
+ */
+export const GetMeResponse = zod.object({
+  id: zod.string(),
+  email: zod.string(),
+  name: zod.string(),
+  role: zod.enum(["learner", "admin"]),
+  premium: zod.boolean(),
+  currentDay: zod.number(),
+});
+
+/**
+ * @summary Learner dashboard summary
+ */
+export const GetDashboardResponse = zod.object({
+  completedDays: zod.number(),
+  totalDays: zod.number(),
+  currentLevel: zod.number(),
+  averageScore: zod.number(),
+  premium: zod.boolean(),
+  nextLesson: zod.union([
+    zod.object({
+      id: zod.string(),
+      day: zod.number(),
+      level: zod.number(),
+      titleEn: zod.string(),
+      titleMn: zod.string(),
+      durationMinutes: zod.number(),
+      isPremium: zod.boolean(),
+      isUnlocked: zod.boolean(),
+      completed: zod.boolean(),
+      bestScore: zod.number().nullable(),
+    }),
+    zod.null(),
+  ]),
+  recentHistory: zod.array(
+    zod.object({
+      id: zod.string(),
+      type: zod.enum(["lesson", "final"]),
+      titleEn: zod.string(),
+      titleMn: zod.string(),
+      day: zod.number().nullable(),
+      level: zod.number(),
+      score: zod.number(),
+      total: zod.number(),
+      percentage: zod.number(),
+      createdAt: zod.string(),
+    }),
+  ),
+  levelProgress: zod.array(
+    zod.object({
+      level: zod.number(),
+      completed: zod.number(),
+      total: zod.number(),
+    }),
+  ),
+});
+
+/**
+ * @summary List lessons
+ */
+export const ListLessonsResponseItem = zod.object({
+  id: zod.string(),
+  day: zod.number(),
+  level: zod.number(),
+  titleEn: zod.string(),
+  titleMn: zod.string(),
+  durationMinutes: zod.number(),
+  isPremium: zod.boolean(),
+  isUnlocked: zod.boolean(),
+  completed: zod.boolean(),
+  bestScore: zod.number().nullable(),
+});
+export const ListLessonsResponse = zod.array(ListLessonsResponseItem);
+
+/**
+ * @summary Get lesson details
+ */
+export const GetLessonParams = zod.object({
+  lessonId: zod.coerce.string(),
+});
+
+export const GetLessonResponse = zod
+  .object({
+    id: zod.string(),
+    day: zod.number(),
+    level: zod.number(),
+    titleEn: zod.string(),
+    titleMn: zod.string(),
+    durationMinutes: zod.number(),
+    isPremium: zod.boolean(),
+    isUnlocked: zod.boolean(),
+    completed: zod.boolean(),
+    bestScore: zod.number().nullable(),
+  })
+  .and(
+    zod.object({
+      objectiveEn: zod.string(),
+      objectiveMn: zod.string(),
+      contentEn: zod.string(),
+      contentMn: zod.string(),
+      vocabulary: zod.array(
+        zod.object({
+          english: zod.string(),
+          mongolian: zod.string(),
+          example: zod.string(),
+        }),
+      ),
+      quiz: zod.array(
+        zod.object({
+          id: zod.string(),
+          promptEn: zod.string(),
+          promptMn: zod.string(),
+          options: zod.array(zod.string()),
+        }),
+      ),
+    }),
+  );
+
+/**
+ * @summary Submit a lesson quiz attempt
+ */
+export const SubmitLessonQuizParams = zod.object({
+  lessonId: zod.coerce.string(),
+});
+
+export const SubmitLessonQuizBody = zod.object({
+  answers: zod.array(
+    zod.object({
+      questionId: zod.string(),
+      answer: zod.string(),
+    }),
+  ),
+});
+
+export const SubmitLessonQuizResponse = zod.object({
+  id: zod.string(),
+  score: zod.number(),
+  total: zod.number(),
+  percentage: zod.number(),
+  passed: zod.boolean(),
+  completedDay: zod.number().nullable(),
+  correctAnswers: zod.array(
+    zod.object({
+      questionId: zod.string(),
+      correctAnswer: zod.string(),
+      isCorrect: zod.boolean(),
+    }),
+  ),
+});
+
+/**
+ * @summary Get a level final test
+ */
+export const getFinalTestPathLevelMax = 3;
+
+export const GetFinalTestParams = zod.object({
+  level: zod.coerce.number().min(1).max(getFinalTestPathLevelMax),
+});
+
+export const GetFinalTestResponse = zod.object({
+  id: zod.string(),
+  level: zod.number(),
+  titleEn: zod.string(),
+  titleMn: zod.string(),
+  questions: zod.array(
+    zod.object({
+      id: zod.string(),
+      promptEn: zod.string(),
+      promptMn: zod.string(),
+      options: zod.array(zod.string()),
+    }),
+  ),
+});
+
+/**
+ * @summary Submit a final test attempt
+ */
+export const submitFinalTestPathLevelMax = 3;
+
+export const SubmitFinalTestParams = zod.object({
+  level: zod.coerce.number().min(1).max(submitFinalTestPathLevelMax),
+});
+
+export const SubmitFinalTestBody = zod.object({
+  answers: zod.array(
+    zod.object({
+      questionId: zod.string(),
+      answer: zod.string(),
+    }),
+  ),
+});
+
+export const SubmitFinalTestResponse = zod.object({
+  id: zod.string(),
+  score: zod.number(),
+  total: zod.number(),
+  percentage: zod.number(),
+  passed: zod.boolean(),
+  completedDay: zod.number().nullable(),
+  correctAnswers: zod.array(
+    zod.object({
+      questionId: zod.string(),
+      correctAnswer: zod.string(),
+      isCorrect: zod.boolean(),
+    }),
+  ),
+});
+
+/**
+ * @summary Get quiz and test history
+ */
+export const GetTestHistoryResponseItem = zod.object({
+  id: zod.string(),
+  type: zod.enum(["lesson", "final"]),
+  titleEn: zod.string(),
+  titleMn: zod.string(),
+  day: zod.number().nullable(),
+  level: zod.number(),
+  score: zod.number(),
+  total: zod.number(),
+  percentage: zod.number(),
+  createdAt: zod.string(),
+});
+export const GetTestHistoryResponse = zod.array(GetTestHistoryResponseItem);
+
+/**
+ * @summary Get premium status
+ */
+export const GetPaymentStatusResponse = zod.object({
+  premium: zod.boolean(),
+  providerConnected: zod.boolean(),
+  message: zod.string(),
+});
+
+/**
+ * @summary Create premium checkout session
+ */
+export const CreateCheckoutSessionBody = zod.object({
+  plan: zod.enum(["program"]),
+});
+
+export const CreateCheckoutSessionResponse = zod.object({
+  checkoutUrl: zod.string().nullable(),
+  providerConnected: zod.boolean(),
+  message: zod.string(),
+});
+
+/**
+ * @summary Admin list lessons
+ */
+export const AdminListLessonsResponseItem = zod
+  .object({
+    id: zod.string(),
+    day: zod.number(),
+    level: zod.number(),
+    titleEn: zod.string(),
+    titleMn: zod.string(),
+    durationMinutes: zod.number(),
+    isPremium: zod.boolean(),
+    isUnlocked: zod.boolean(),
+    completed: zod.boolean(),
+    bestScore: zod.number().nullable(),
+  })
+  .and(
+    zod.object({
+      objectiveEn: zod.string(),
+      objectiveMn: zod.string(),
+      contentEn: zod.string(),
+      contentMn: zod.string(),
+      vocabulary: zod.array(
+        zod.object({
+          english: zod.string(),
+          mongolian: zod.string(),
+          example: zod.string(),
+        }),
+      ),
+      quiz: zod.array(
+        zod.object({
+          id: zod.string(),
+          promptEn: zod.string(),
+          promptMn: zod.string(),
+          options: zod.array(zod.string()),
+        }),
+      ),
+    }),
+  )
+  .and(
+    zod.object({
+      correctAnswers: zod.array(
+        zod.object({
+          questionId: zod.string(),
+          answer: zod.string(),
+        }),
+      ),
+    }),
+  );
+export const AdminListLessonsResponse = zod.array(AdminListLessonsResponseItem);
+
+/**
+ * @summary Create a lesson
+ */
+export const adminCreateLessonBodyDayMax = 90;
+
+export const adminCreateLessonBodyLevelMax = 3;
+
+export const AdminCreateLessonBody = zod.object({
+  day: zod.number().min(1).max(adminCreateLessonBodyDayMax),
+  level: zod.number().min(1).max(adminCreateLessonBodyLevelMax),
+  titleEn: zod.string(),
+  titleMn: zod.string(),
+  objectiveEn: zod.string(),
+  objectiveMn: zod.string(),
+  contentEn: zod.string(),
+  contentMn: zod.string(),
+  durationMinutes: zod.number(),
+  isPremium: zod.boolean(),
+  vocabulary: zod.array(
+    zod.object({
+      english: zod.string(),
+      mongolian: zod.string(),
+      example: zod.string(),
+    }),
+  ),
+  quiz: zod.array(
+    zod.object({
+      id: zod.string(),
+      promptEn: zod.string(),
+      promptMn: zod.string(),
+      options: zod.array(zod.string()),
+      correctAnswer: zod.string(),
+    }),
+  ),
+});
+
+export const AdminCreateLessonResponse = zod
+  .object({
+    id: zod.string(),
+    day: zod.number(),
+    level: zod.number(),
+    titleEn: zod.string(),
+    titleMn: zod.string(),
+    durationMinutes: zod.number(),
+    isPremium: zod.boolean(),
+    isUnlocked: zod.boolean(),
+    completed: zod.boolean(),
+    bestScore: zod.number().nullable(),
+  })
+  .and(
+    zod.object({
+      objectiveEn: zod.string(),
+      objectiveMn: zod.string(),
+      contentEn: zod.string(),
+      contentMn: zod.string(),
+      vocabulary: zod.array(
+        zod.object({
+          english: zod.string(),
+          mongolian: zod.string(),
+          example: zod.string(),
+        }),
+      ),
+      quiz: zod.array(
+        zod.object({
+          id: zod.string(),
+          promptEn: zod.string(),
+          promptMn: zod.string(),
+          options: zod.array(zod.string()),
+        }),
+      ),
+    }),
+  )
+  .and(
+    zod.object({
+      correctAnswers: zod.array(
+        zod.object({
+          questionId: zod.string(),
+          answer: zod.string(),
+        }),
+      ),
+    }),
+  );
+
+/**
+ * @summary Update a lesson
+ */
+export const AdminUpdateLessonParams = zod.object({
+  lessonId: zod.coerce.string(),
+});
+
+export const adminUpdateLessonBodyDayMax = 90;
+
+export const adminUpdateLessonBodyLevelMax = 3;
+
+export const AdminUpdateLessonBody = zod.object({
+  day: zod.number().min(1).max(adminUpdateLessonBodyDayMax),
+  level: zod.number().min(1).max(adminUpdateLessonBodyLevelMax),
+  titleEn: zod.string(),
+  titleMn: zod.string(),
+  objectiveEn: zod.string(),
+  objectiveMn: zod.string(),
+  contentEn: zod.string(),
+  contentMn: zod.string(),
+  durationMinutes: zod.number(),
+  isPremium: zod.boolean(),
+  vocabulary: zod.array(
+    zod.object({
+      english: zod.string(),
+      mongolian: zod.string(),
+      example: zod.string(),
+    }),
+  ),
+  quiz: zod.array(
+    zod.object({
+      id: zod.string(),
+      promptEn: zod.string(),
+      promptMn: zod.string(),
+      options: zod.array(zod.string()),
+      correctAnswer: zod.string(),
+    }),
+  ),
+});
+
+export const AdminUpdateLessonResponse = zod
+  .object({
+    id: zod.string(),
+    day: zod.number(),
+    level: zod.number(),
+    titleEn: zod.string(),
+    titleMn: zod.string(),
+    durationMinutes: zod.number(),
+    isPremium: zod.boolean(),
+    isUnlocked: zod.boolean(),
+    completed: zod.boolean(),
+    bestScore: zod.number().nullable(),
+  })
+  .and(
+    zod.object({
+      objectiveEn: zod.string(),
+      objectiveMn: zod.string(),
+      contentEn: zod.string(),
+      contentMn: zod.string(),
+      vocabulary: zod.array(
+        zod.object({
+          english: zod.string(),
+          mongolian: zod.string(),
+          example: zod.string(),
+        }),
+      ),
+      quiz: zod.array(
+        zod.object({
+          id: zod.string(),
+          promptEn: zod.string(),
+          promptMn: zod.string(),
+          options: zod.array(zod.string()),
+        }),
+      ),
+    }),
+  )
+  .and(
+    zod.object({
+      correctAnswers: zod.array(
+        zod.object({
+          questionId: zod.string(),
+          answer: zod.string(),
+        }),
+      ),
+    }),
+  );
+
+/**
+ * @summary Delete a lesson
+ */
+export const AdminDeleteLessonParams = zod.object({
+  lessonId: zod.coerce.string(),
+});
+
+export const AdminDeleteLessonResponse = zod.object({
+  success: zod.boolean(),
 });

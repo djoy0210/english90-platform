@@ -1,6 +1,5 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
   description: API specification
@@ -10,13 +9,18 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: learning
+    description: Learning program operations
+  - name: admin
+    description: Admin lesson and quiz operations
+  - name: payments
+    description: Premium access operations
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +28,248 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /me:
+    get:
+      operationId: getMe
+      tags: [learning]
+      summary: Current learner profile
+      responses:
+        "200":
+          description: Learner profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserProfile"
+  /dashboard:
+    get:
+      operationId: getDashboard
+      tags: [learning]
+      summary: Learner dashboard summary
+      responses:
+        "200":
+          description: Dashboard summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dashboard"
+  /lessons:
+    get:
+      operationId: listLessons
+      tags: [learning]
+      summary: List lessons
+      responses:
+        "200":
+          description: Lessons grouped by day and level
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LessonSummary"
+  /lessons/{lessonId}:
+    get:
+      operationId: getLesson
+      tags: [learning]
+      summary: Get lesson details
+      parameters:
+        - name: lessonId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lesson details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LessonDetail"
+  /lessons/{lessonId}/quiz-attempts:
+    post:
+      operationId: submitLessonQuiz
+      tags: [learning]
+      summary: Submit a lesson quiz attempt
+      parameters:
+        - name: lessonId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubmitQuizRequest"
+      responses:
+        "200":
+          description: Quiz result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuizAttemptResult"
+  /final-tests/{level}:
+    get:
+      operationId: getFinalTest
+      tags: [learning]
+      summary: Get a level final test
+      parameters:
+        - name: level
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 3
+      responses:
+        "200":
+          description: Final test
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FinalTestDetail"
+  /final-tests/{level}/attempts:
+    post:
+      operationId: submitFinalTest
+      tags: [learning]
+      summary: Submit a final test attempt
+      parameters:
+        - name: level
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 3
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubmitQuizRequest"
+      responses:
+        "200":
+          description: Final test result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuizAttemptResult"
+  /test-history:
+    get:
+      operationId: getTestHistory
+      tags: [learning]
+      summary: Get quiz and test history
+      responses:
+        "200":
+          description: Test history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TestHistoryItem"
+  /payments/status:
+    get:
+      operationId: getPaymentStatus
+      tags: [payments]
+      summary: Get premium status
+      responses:
+        "200":
+          description: Payment status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentStatus"
+  /payments/checkout:
+    post:
+      operationId: createCheckoutSession
+      tags: [payments]
+      summary: Create premium checkout session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCheckoutRequest"
+      responses:
+        "200":
+          description: Checkout information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckoutResponse"
+  /admin/lessons:
+    get:
+      operationId: adminListLessons
+      tags: [admin]
+      summary: Admin list lessons
+      responses:
+        "200":
+          description: Lessons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AdminLesson"
+    post:
+      operationId: adminCreateLesson
+      tags: [admin]
+      summary: Create a lesson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpsertLessonRequest"
+      responses:
+        "200":
+          description: Created lesson
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminLesson"
+  /admin/lessons/{lessonId}:
+    put:
+      operationId: adminUpdateLesson
+      tags: [admin]
+      summary: Update a lesson
+      parameters:
+        - name: lessonId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpsertLessonRequest"
+      responses:
+        "200":
+          description: Updated lesson
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminLesson"
+    delete:
+      operationId: adminDeleteLesson
+      tags: [admin]
+      summary: Delete a lesson
+      parameters:
+        - name: lessonId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MutationResult"
 components:
   schemas:
     HealthStatus:
@@ -31,6 +277,215 @@ components:
       properties:
         status:
           type: string
-      required:
-        - status
-
+      required: [status]
+    UserProfile:
+      type: object
+      properties:
+        id: { type: string }
+        email: { type: string }
+        name: { type: string }
+        role: { type: string, enum: [learner, admin] }
+        premium: { type: boolean }
+        currentDay: { type: integer }
+      required: [id, email, name, role, premium, currentDay]
+    LessonSummary:
+      type: object
+      properties:
+        id: { type: string }
+        day: { type: integer }
+        level: { type: integer }
+        titleEn: { type: string }
+        titleMn: { type: string }
+        durationMinutes: { type: integer }
+        isPremium: { type: boolean }
+        isUnlocked: { type: boolean }
+        completed: { type: boolean }
+        bestScore: { type: integer, nullable: true }
+      required: [id, day, level, titleEn, titleMn, durationMinutes, isPremium, isUnlocked, completed, bestScore]
+    LessonDetail:
+      allOf:
+        - $ref: "#/components/schemas/LessonSummary"
+        - type: object
+          properties:
+            objectiveEn: { type: string }
+            objectiveMn: { type: string }
+            contentEn: { type: string }
+            contentMn: { type: string }
+            vocabulary:
+              type: array
+              items:
+                $ref: "#/components/schemas/VocabularyItem"
+            quiz:
+              type: array
+              items:
+                $ref: "#/components/schemas/QuizQuestion"
+          required: [objectiveEn, objectiveMn, contentEn, contentMn, vocabulary, quiz]
+    VocabularyItem:
+      type: object
+      properties:
+        english: { type: string }
+        mongolian: { type: string }
+        example: { type: string }
+      required: [english, mongolian, example]
+    QuizQuestion:
+      type: object
+      properties:
+        id: { type: string }
+        promptEn: { type: string }
+        promptMn: { type: string }
+        options:
+          type: array
+          items: { type: string }
+      required: [id, promptEn, promptMn, options]
+    SubmitQuizRequest:
+      type: object
+      properties:
+        answers:
+          type: array
+          items:
+            type: object
+            properties:
+              questionId: { type: string }
+              answer: { type: string }
+            required: [questionId, answer]
+      required: [answers]
+    QuizAttemptResult:
+      type: object
+      properties:
+        id: { type: string }
+        score: { type: integer }
+        total: { type: integer }
+        percentage: { type: integer }
+        passed: { type: boolean }
+        completedDay: { type: integer, nullable: true }
+        correctAnswers:
+          type: array
+          items:
+            type: object
+            properties:
+              questionId: { type: string }
+              correctAnswer: { type: string }
+              isCorrect: { type: boolean }
+            required: [questionId, correctAnswer, isCorrect]
+      required: [id, score, total, percentage, passed, completedDay, correctAnswers]
+    FinalTestDetail:
+      type: object
+      properties:
+        id: { type: string }
+        level: { type: integer }
+        titleEn: { type: string }
+        titleMn: { type: string }
+        questions:
+          type: array
+          items:
+            $ref: "#/components/schemas/QuizQuestion"
+      required: [id, level, titleEn, titleMn, questions]
+    TestHistoryItem:
+      type: object
+      properties:
+        id: { type: string }
+        type: { type: string, enum: [lesson, final] }
+        titleEn: { type: string }
+        titleMn: { type: string }
+        day: { type: integer, nullable: true }
+        level: { type: integer }
+        score: { type: integer }
+        total: { type: integer }
+        percentage: { type: integer }
+        createdAt: { type: string }
+      required: [id, type, titleEn, titleMn, day, level, score, total, percentage, createdAt]
+    Dashboard:
+      type: object
+      properties:
+        completedDays: { type: integer }
+        totalDays: { type: integer }
+        currentLevel: { type: integer }
+        averageScore: { type: integer }
+        premium: { type: boolean }
+        nextLesson:
+          anyOf:
+            - $ref: "#/components/schemas/LessonSummary"
+            - type: "null"
+        recentHistory:
+          type: array
+          items:
+            $ref: "#/components/schemas/TestHistoryItem"
+        levelProgress:
+          type: array
+          items:
+            type: object
+            properties:
+              level: { type: integer }
+              completed: { type: integer }
+              total: { type: integer }
+            required: [level, completed, total]
+      required: [completedDays, totalDays, currentLevel, averageScore, premium, nextLesson, recentHistory, levelProgress]
+    PaymentStatus:
+      type: object
+      properties:
+        premium: { type: boolean }
+        providerConnected: { type: boolean }
+        message: { type: string }
+      required: [premium, providerConnected, message]
+    CreateCheckoutRequest:
+      type: object
+      properties:
+        plan: { type: string, enum: [program] }
+      required: [plan]
+    CheckoutResponse:
+      type: object
+      properties:
+        checkoutUrl: { type: string, nullable: true }
+        providerConnected: { type: boolean }
+        message: { type: string }
+      required: [checkoutUrl, providerConnected, message]
+    AdminLesson:
+      allOf:
+        - $ref: "#/components/schemas/LessonDetail"
+        - type: object
+          properties:
+            correctAnswers:
+              type: array
+              items:
+                type: object
+                properties:
+                  questionId: { type: string }
+                  answer: { type: string }
+                required: [questionId, answer]
+          required: [correctAnswers]
+    UpsertLessonRequest:
+      type: object
+      properties:
+        day: { type: integer, minimum: 1, maximum: 90 }
+        level: { type: integer, minimum: 1, maximum: 3 }
+        titleEn: { type: string }
+        titleMn: { type: string }
+        objectiveEn: { type: string }
+        objectiveMn: { type: string }
+        contentEn: { type: string }
+        contentMn: { type: string }
+        durationMinutes: { type: integer }
+        isPremium: { type: boolean }
+        vocabulary:
+          type: array
+          items:
+            $ref: "#/components/schemas/VocabularyItem"
+        quiz:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: string }
+              promptEn: { type: string }
+              promptMn: { type: string }
+              options:
+                type: array
+                items: { type: string }
+              correctAnswer: { type: string }
+            required: [id, promptEn, promptMn, options, correctAnswer]
+      required: [day, level, titleEn, titleMn, objectiveEn, objectiveMn, contentEn, contentMn, durationMinutes, isPremium, vocabulary, quiz]
+    MutationResult:
+      type: object
+      properties:
+        success: { type: boolean }
+      required: [success]

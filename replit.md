@@ -15,6 +15,12 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - **Validation**: Zod (`zod/v4`), `drizzle-zod`
 - **API codegen**: Orval (from OpenAPI spec)
 - **Build**: esbuild (CJS bundle)
+- **Auth**: Clerk-managed authentication
+
+## Product Notes
+
+- Building a 90-day bilingual Mongolian/English self-study web app with lessons, quizzes, final tests, progress tracking, admin lesson editing, and premium access.
+- Stripe authorization was offered but not completed. Payment endpoints currently expose a ready-to-connect premium checkout status instead of creating live Stripe sessions.
 
 ## Key Commands
 

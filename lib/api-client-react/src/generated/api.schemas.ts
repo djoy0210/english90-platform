@@ -8,3 +8,193 @@
 export interface HealthStatus {
   status: string;
 }
+
+export type UserProfileRole =
+  (typeof UserProfileRole)[keyof typeof UserProfileRole];
+
+export const UserProfileRole = {
+  learner: "learner",
+  admin: "admin",
+} as const;
+
+export interface UserProfile {
+  id: string;
+  email: string;
+  name: string;
+  role: UserProfileRole;
+  premium: boolean;
+  currentDay: number;
+}
+
+export interface LessonSummary {
+  id: string;
+  day: number;
+  level: number;
+  titleEn: string;
+  titleMn: string;
+  durationMinutes: number;
+  isPremium: boolean;
+  isUnlocked: boolean;
+  completed: boolean;
+  bestScore: number | null;
+}
+
+export interface VocabularyItem {
+  english: string;
+  mongolian: string;
+  example: string;
+}
+
+export interface QuizQuestion {
+  id: string;
+  promptEn: string;
+  promptMn: string;
+  options: string[];
+}
+
+export type LessonDetail = LessonSummary & {
+  objectiveEn: string;
+  objectiveMn: string;
+  contentEn: string;
+  contentMn: string;
+  vocabulary: VocabularyItem[];
+  quiz: QuizQuestion[];
+};
+
+export type SubmitQuizRequestAnswersItem = {
+  questionId: string;
+  answer: string;
+};
+
+export interface SubmitQuizRequest {
+  answers: SubmitQuizRequestAnswersItem[];
+}
+
+export type QuizAttemptResultCorrectAnswersItem = {
+  questionId: string;
+  correctAnswer: string;
+  isCorrect: boolean;
+};
+
+export interface QuizAttemptResult {
+  id: string;
+  score: number;
+  total: number;
+  percentage: number;
+  passed: boolean;
+  completedDay: number | null;
+  correctAnswers: QuizAttemptResultCorrectAnswersItem[];
+}
+
+export interface FinalTestDetail {
+  id: string;
+  level: number;
+  titleEn: string;
+  titleMn: string;
+  questions: QuizQuestion[];
+}
+
+export type TestHistoryItemType =
+  (typeof TestHistoryItemType)[keyof typeof TestHistoryItemType];
+
+export const TestHistoryItemType = {
+  lesson: "lesson",
+  final: "final",
+} as const;
+
+export interface TestHistoryItem {
+  id: string;
+  type: TestHistoryItemType;
+  titleEn: string;
+  titleMn: string;
+  day: number | null;
+  level: number;
+  score: number;
+  total: number;
+  percentage: number;
+  createdAt: string;
+}
+
+export type DashboardLevelProgressItem = {
+  level: number;
+  completed: number;
+  total: number;
+};
+
+export interface Dashboard {
+  completedDays: number;
+  totalDays: number;
+  currentLevel: number;
+  averageScore: number;
+  premium: boolean;
+  nextLesson: LessonSummary | null;
+  recentHistory: TestHistoryItem[];
+  levelProgress: DashboardLevelProgressItem[];
+}
+
+export interface PaymentStatus {
+  premium: boolean;
+  providerConnected: boolean;
+  message: string;
+}
+
+export type CreateCheckoutRequestPlan =
+  (typeof CreateCheckoutRequestPlan)[keyof typeof CreateCheckoutRequestPlan];
+
+export const CreateCheckoutRequestPlan = {
+  program: "program",
+} as const;
+
+export interface CreateCheckoutRequest {
+  plan: CreateCheckoutRequestPlan;
+}
+
+export interface CheckoutResponse {
+  checkoutUrl: string | null;
+  providerConnected: boolean;
+  message: string;
+}
+
+export type AdminLessonCorrectAnswersItem = {
+  questionId: string;
+  answer: string;
+};
+
+export type AdminLesson = LessonDetail & {
+  correctAnswers: AdminLessonCorrectAnswersItem[];
+};
+
+export type UpsertLessonRequestQuizItem = {
+  id: string;
+  promptEn: string;
+  promptMn: string;
+  options: string[];
+  correctAnswer: string;
+};
+
+export interface UpsertLessonRequest {
+  /**
+   * @minimum 1
+   * @maximum 90
+   */
+  day: number;
+  /**
+   * @minimum 1
+   * @maximum 3
+   */
+  level: number;
+  titleEn: string;
+  titleMn: string;
+  objectiveEn: string;
+  objectiveMn: string;
+  contentEn: string;
+  contentMn: string;
+  durationMinutes: number;
+  isPremium: boolean;
+  vocabulary: VocabularyItem[];
+  quiz: UpsertLessonRequestQuizItem[];
+}
+
+export interface MutationResult {
+  success: boolean;
+}
