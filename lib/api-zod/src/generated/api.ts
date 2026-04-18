@@ -24,6 +24,53 @@ export const GetMeResponse = zod.object({
   role: zod.enum(["learner", "admin"]),
   premium: zod.boolean(),
   currentDay: zod.number(),
+  placementCompleted: zod.boolean(),
+  placementLevel: zod.number(),
+});
+
+/**
+ * @summary Get the signup placement test
+ */
+export const GetPlacementTestResponse = zod.object({
+  titleEn: zod.string(),
+  titleMn: zod.string(),
+  questions: zod.array(
+    zod.object({
+      id: zod.string(),
+      promptEn: zod.string(),
+      promptMn: zod.string(),
+      options: zod.array(zod.string()),
+    }),
+  ),
+});
+
+/**
+ * @summary Submit the signup placement test
+ */
+export const SubmitPlacementTestBody = zod.object({
+  answers: zod.array(
+    zod.object({
+      questionId: zod.string(),
+      answer: zod.string(),
+    }),
+  ),
+});
+
+export const SubmitPlacementTestResponse = zod.object({
+  score: zod.number(),
+  total: zod.number(),
+  percentage: zod.number(),
+  level: zod.number(),
+  startingDay: zod.number(),
+  messageEn: zod.string(),
+  messageMn: zod.string(),
+  correctAnswers: zod.array(
+    zod.object({
+      questionId: zod.string(),
+      correctAnswer: zod.string(),
+      isCorrect: zod.boolean(),
+    }),
+  ),
 });
 
 /**
@@ -119,6 +166,7 @@ export const GetLessonResponse = zod
       vocabulary: zod.array(
         zod.object({
           english: zod.string(),
+          pronunciation: zod.string().optional(),
           mongolian: zod.string(),
           example: zod.string(),
         }),
@@ -288,6 +336,7 @@ export const AdminListLessonsResponseItem = zod
       vocabulary: zod.array(
         zod.object({
           english: zod.string(),
+          pronunciation: zod.string().optional(),
           mongolian: zod.string(),
           example: zod.string(),
         }),
@@ -335,6 +384,7 @@ export const AdminCreateLessonBody = zod.object({
   vocabulary: zod.array(
     zod.object({
       english: zod.string(),
+      pronunciation: zod.string().optional(),
       mongolian: zod.string(),
       example: zod.string(),
     }),
@@ -372,6 +422,7 @@ export const AdminCreateLessonResponse = zod
       vocabulary: zod.array(
         zod.object({
           english: zod.string(),
+          pronunciation: zod.string().optional(),
           mongolian: zod.string(),
           example: zod.string(),
         }),
@@ -422,6 +473,7 @@ export const AdminUpdateLessonBody = zod.object({
   vocabulary: zod.array(
     zod.object({
       english: zod.string(),
+      pronunciation: zod.string().optional(),
       mongolian: zod.string(),
       example: zod.string(),
     }),
@@ -459,6 +511,7 @@ export const AdminUpdateLessonResponse = zod
       vocabulary: zod.array(
         zod.object({
           english: zod.string(),
+          pronunciation: zod.string().optional(),
           mongolian: zod.string(),
           example: zod.string(),
         }),

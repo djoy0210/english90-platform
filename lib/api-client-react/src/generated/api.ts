@@ -27,7 +27,10 @@ import type {
   LessonSummary,
   MutationResult,
   PaymentStatus,
+  PlacementTestDetail,
+  PlacementTestResult,
   QuizAttemptResult,
+  SubmitPlacementTestRequest,
   SubmitQuizRequest,
   TestHistoryItem,
   UpsertLessonRequest,
@@ -180,6 +183,168 @@ export function useGetMe<
 
   return { ...query, queryKey: queryOptions.queryKey };
 }
+
+/**
+ * @summary Get the signup placement test
+ */
+export const getGetPlacementTestUrl = () => {
+  return `/api/placement-test`;
+};
+
+export const getPlacementTest = async (
+  options?: RequestInit,
+): Promise<PlacementTestDetail> => {
+  return customFetch<PlacementTestDetail>(getGetPlacementTestUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getGetPlacementTestQueryKey = () => {
+  return [`/api/placement-test`] as const;
+};
+
+export const getGetPlacementTestQueryOptions = <
+  TData = Awaited<ReturnType<typeof getPlacementTest>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof getPlacementTest>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetPlacementTestQueryKey();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getPlacementTest>>
+  > = ({ signal }) => getPlacementTest({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getPlacementTest>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetPlacementTestQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getPlacementTest>>
+>;
+export type GetPlacementTestQueryError = ErrorType<unknown>;
+
+/**
+ * @summary Get the signup placement test
+ */
+
+export function useGetPlacementTest<
+  TData = Awaited<ReturnType<typeof getPlacementTest>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof getPlacementTest>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetPlacementTestQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Submit the signup placement test
+ */
+export const getSubmitPlacementTestUrl = () => {
+  return `/api/placement-test`;
+};
+
+export const submitPlacementTest = async (
+  submitPlacementTestRequest: SubmitPlacementTestRequest,
+  options?: RequestInit,
+): Promise<PlacementTestResult> => {
+  return customFetch<PlacementTestResult>(getSubmitPlacementTestUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(submitPlacementTestRequest),
+  });
+};
+
+export const getSubmitPlacementTestMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof submitPlacementTest>>,
+    TError,
+    { data: BodyType<SubmitPlacementTestRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof submitPlacementTest>>,
+  TError,
+  { data: BodyType<SubmitPlacementTestRequest> },
+  TContext
+> => {
+  const mutationKey = ["submitPlacementTest"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof submitPlacementTest>>,
+    { data: BodyType<SubmitPlacementTestRequest> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return submitPlacementTest(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type SubmitPlacementTestMutationResult = NonNullable<
+  Awaited<ReturnType<typeof submitPlacementTest>>
+>;
+export type SubmitPlacementTestMutationBody =
+  BodyType<SubmitPlacementTestRequest>;
+export type SubmitPlacementTestMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Submit the signup placement test
+ */
+export const useSubmitPlacementTest = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof submitPlacementTest>>,
+    TError,
+    { data: BodyType<SubmitPlacementTestRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof submitPlacementTest>>,
+  TError,
+  { data: BodyType<SubmitPlacementTestRequest> },
+  TContext
+> => {
+  return useMutation(getSubmitPlacementTestMutationOptions(options));
+};
 
 /**
  * @summary Learner dashboard summary

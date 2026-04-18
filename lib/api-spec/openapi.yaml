@@ -40,6 +40,35 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserProfile"
+  /placement-test:
+    get:
+      operationId: getPlacementTest
+      tags: [learning]
+      summary: Get the signup placement test
+      responses:
+        "200":
+          description: Placement test
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlacementTestDetail"
+    post:
+      operationId: submitPlacementTest
+      tags: [learning]
+      summary: Submit the signup placement test
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubmitPlacementTestRequest"
+      responses:
+        "200":
+          description: Placement result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlacementTestResult"
   /dashboard:
     get:
       operationId: getDashboard
@@ -287,7 +316,51 @@ components:
         role: { type: string, enum: [learner, admin] }
         premium: { type: boolean }
         currentDay: { type: integer }
-      required: [id, email, name, role, premium, currentDay]
+        placementCompleted: { type: boolean }
+        placementLevel: { type: integer }
+      required: [id, email, name, role, premium, currentDay, placementCompleted, placementLevel]
+    PlacementTestDetail:
+      type: object
+      properties:
+        titleEn: { type: string }
+        titleMn: { type: string }
+        questions:
+          type: array
+          items:
+            $ref: "#/components/schemas/QuizQuestion"
+      required: [titleEn, titleMn, questions]
+    SubmitPlacementTestRequest:
+      type: object
+      properties:
+        answers:
+          type: array
+          items:
+            type: object
+            properties:
+              questionId: { type: string }
+              answer: { type: string }
+            required: [questionId, answer]
+      required: [answers]
+    PlacementTestResult:
+      type: object
+      properties:
+        score: { type: integer }
+        total: { type: integer }
+        percentage: { type: integer }
+        level: { type: integer }
+        startingDay: { type: integer }
+        messageEn: { type: string }
+        messageMn: { type: string }
+        correctAnswers:
+          type: array
+          items:
+            type: object
+            properties:
+              questionId: { type: string }
+              correctAnswer: { type: string }
+              isCorrect: { type: boolean }
+            required: [questionId, correctAnswer, isCorrect]
+      required: [score, total, percentage, level, startingDay, messageEn, messageMn, correctAnswers]
     LessonSummary:
       type: object
       properties:
@@ -324,6 +397,7 @@ components:
       type: object
       properties:
         english: { type: string }
+        pronunciation: { type: string }
         mongolian: { type: string }
         example: { type: string }
       required: [english, mongolian, example]

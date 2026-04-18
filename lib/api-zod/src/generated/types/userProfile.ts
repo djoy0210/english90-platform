@@ -14,4 +14,6 @@ export interface UserProfile {
   role: UserProfileRole;
   premium: boolean;
   currentDay: number;
+  placementCompleted: boolean;
+  placementLevel: number;
 }

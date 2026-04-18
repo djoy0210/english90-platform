@@ -7,7 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, BookOpen, CheckCircle2, AlertCircle, PlayCircle, Star, Lock } from "lucide-react";
+import { ArrowLeft, BookOpen, CheckCircle2, AlertCircle, PlayCircle, Lock, Volume2, Clock, ClipboardList } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 
@@ -124,6 +124,22 @@ export default function LessonView() {
     );
   };
 
+  const speakWord = (word: string) => {
+    if (!("speechSynthesis" in window)) {
+      toast({
+        title: "Дуу тоглуулах боломжгүй",
+        description: "Таны browser pronunciation дэмжихгүй байна.",
+        variant: "destructive",
+      });
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = "en-US";
+    utterance.rate = 0.85;
+    window.speechSynthesis.speak(utterance);
+  };
+
   return (
     <div className="space-y-6 animate-in fade-in duration-500 max-w-4xl mx-auto">
       <Button variant="ghost" className="mb-2 -ml-4" onClick={() => setLocation("/lessons")}>
@@ -133,7 +149,7 @@ export default function LessonView() {
       <div>
         <div className="flex items-center gap-3 mb-2">
           <span className="text-sm font-bold text-muted-foreground bg-muted px-2 py-0.5 rounded border">
-            Өдөр {lesson.day} • Түвшин {lesson.level}
+            Өдөр {lesson.day} • Түвшин {lesson.level} • {lesson.durationMinutes} минут
           </span>
           {lesson.completed && (
             <span className="flex items-center text-sm font-medium text-primary bg-primary/10 px-2 py-0.5 rounded">
@@ -164,6 +180,23 @@ export default function LessonView() {
                 <p className="font-medium text-foreground">{lesson.objectiveMn}</p>
                 <p className="text-muted-foreground mt-1">{lesson.objectiveEn}</p>
               </div>
+              <div className="grid gap-3 sm:grid-cols-3 pt-3">
+                <div className="rounded-lg border bg-background p-4">
+                  <Clock className="h-5 w-5 text-primary mb-2" />
+                  <p className="font-semibold">{lesson.durationMinutes} минут</p>
+                  <p className="text-sm text-muted-foreground">Өдөр бүрийн хичээл</p>
+                </div>
+                <div className="rounded-lg border bg-background p-4">
+                  <Volume2 className="h-5 w-5 text-primary mb-2" />
+                  <p className="font-semibold">20 шинэ үг</p>
+                  <p className="text-sm text-muted-foreground">Дарж дуудлага сонсоно</p>
+                </div>
+                <div className="rounded-lg border bg-background p-4">
+                  <ClipboardList className="h-5 w-5 text-primary mb-2" />
+                  <p className="font-semibold">Гэрийн даалгавар</p>
+                  <p className="text-sm text-muted-foreground">Өдөр бүр давтлага хийнэ</p>
+                </div>
+              </div>
             </CardContent>
           </Card>
 
@@ -189,9 +222,20 @@ export default function LessonView() {
               <Card key={idx} className="overflow-hidden">
                 <div className="h-2 bg-primary/20 w-full" />
                 <CardContent className="p-5">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-bold text-xl text-primary">{vocab.english}</h3>
+                  <div className="flex justify-between items-start gap-3 mb-2">
+                    <button
+                      type="button"
+                      onClick={() => speakWord(vocab.english)}
+                      className="font-bold text-xl text-primary text-left hover:underline flex items-center gap-2"
+                      title="Click to hear pronunciation"
+                    >
+                      {vocab.english}
+                      <Volume2 className="w-4 h-4" />
+                    </button>
                   </div>
+                  {"pronunciation" in vocab && vocab.pronunciation && (
+                    <p className="text-sm text-muted-foreground mb-2">{vocab.pronunciation}</p>
+                  )}
                   <p className="font-medium mb-4">{vocab.mongolian}</p>
                   <div className="bg-muted p-3 rounded-md text-sm border border-border/50">
                     <span className="text-muted-foreground font-medium mb-1 block">Жишээ:</span>

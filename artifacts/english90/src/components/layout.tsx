@@ -23,6 +23,7 @@ import {
   LayoutDashboard,
   History as HistoryIcon,
   CreditCard,
+  Target,
   Settings,
   LogOut,
   ChevronUp,
@@ -48,6 +49,11 @@ const mainNavItems = [
     title: "Lessons",
     url: "/lessons",
     icon: BookOpen,
+  },
+  {
+    title: "Placement Test",
+    url: "/placement",
+    icon: Target,
   },
   {
     title: "History",

@@ -13,8 +13,10 @@ import History from "./pages/history";
 import FinalTestView from "./pages/final-test-view";
 import Billing from "./pages/billing";
 import Admin from "./pages/admin";
+import PlacementTest from "./pages/placement-test";
 import NotFound from "./pages/not-found";
 import Layout from "./components/layout";
+import { useGetMe } from "@workspace/api-client-react";
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 const clerkProxyUrl = import.meta.env.VITE_CLERK_PROXY_URL;
@@ -99,18 +101,30 @@ function HomeRedirect() {
 }
 
 function ProtectedRoute({ component: Component, adminOnly = false }: { component: any, adminOnly?: boolean }) {
-  // We'd typically check admin here, but we'll do it inside the page for now
   return (
     <>
       <Show when="signed-in">
-        <Layout>
-          <Component />
-        </Layout>
+        <ProtectedContent component={Component} adminOnly={adminOnly} />
       </Show>
       <Show when="signed-out">
         <Redirect to="/sign-in" />
       </Show>
     </>
+  );
+}
+
+function ProtectedContent({ component: Component, adminOnly = false }: { component: any, adminOnly?: boolean }) {
+  const [location] = useLocation();
+  const { data: user } = useGetMe();
+
+  if (user && user.role !== "admin" && !user.placementCompleted && location !== "/placement") {
+    return <Redirect to="/placement" />;
+  }
+
+  return (
+    <Layout>
+      <Component />
+    </Layout>
   );
 }
 
@@ -180,6 +194,7 @@ function App() {
               <Route path="/sign-up/*?" component={SignUpPage} />
               
               <Route path="/dashboard" component={() => <ProtectedRoute component={Dashboard} />} />
+              <Route path="/placement" component={() => <ProtectedRoute component={PlacementTest} />} />
               <Route path="/lessons" component={() => <ProtectedRoute component={Lessons} />} />
               <Route path="/lessons/:lessonId" component={() => <ProtectedRoute component={LessonView} />} />
               <Route path="/final-tests/:level" component={() => <ProtectedRoute component={FinalTestView} />} />

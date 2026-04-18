@@ -6,9 +6,8 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface VocabularyItem {
-  english: string;
-  pronunciation?: string;
-  mongolian: string;
-  example: string;
-}
+export type PlacementTestResultCorrectAnswersItem = {
+  questionId: string;
+  correctAnswer: string;
+  isCorrect: boolean;
+};

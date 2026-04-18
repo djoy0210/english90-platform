@@ -24,6 +24,47 @@ export interface UserProfile {
   role: UserProfileRole;
   premium: boolean;
   currentDay: number;
+  placementCompleted: boolean;
+  placementLevel: number;
+}
+
+export interface QuizQuestion {
+  id: string;
+  promptEn: string;
+  promptMn: string;
+  options: string[];
+}
+
+export interface PlacementTestDetail {
+  titleEn: string;
+  titleMn: string;
+  questions: QuizQuestion[];
+}
+
+export type SubmitPlacementTestRequestAnswersItem = {
+  questionId: string;
+  answer: string;
+};
+
+export interface SubmitPlacementTestRequest {
+  answers: SubmitPlacementTestRequestAnswersItem[];
+}
+
+export type PlacementTestResultCorrectAnswersItem = {
+  questionId: string;
+  correctAnswer: string;
+  isCorrect: boolean;
+};
+
+export interface PlacementTestResult {
+  score: number;
+  total: number;
+  percentage: number;
+  level: number;
+  startingDay: number;
+  messageEn: string;
+  messageMn: string;
+  correctAnswers: PlacementTestResultCorrectAnswersItem[];
 }
 
 export interface LessonSummary {
@@ -41,15 +82,9 @@ export interface LessonSummary {
 
 export interface VocabularyItem {
   english: string;
+  pronunciation?: string;
   mongolian: string;
   example: string;
-}
-
-export interface QuizQuestion {
-  id: string;
-  promptEn: string;
-  promptMn: string;
-  options: string[];
 }
 
 export type LessonDetail = LessonSummary & {

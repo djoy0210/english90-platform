@@ -11,6 +11,7 @@ import {
 
 export type VocabularyItem = {
   english: string;
+  pronunciation?: string;
   mongolian: string;
   example: string;
 };
@@ -30,6 +31,8 @@ export const usersTable = pgTable("users", {
   name: text("name").notNull(),
   role: text("role").notNull().default("learner"),
   premium: boolean("premium").notNull().default(false),
+    placementCompleted: boolean("placement_completed").notNull().default(false),
+    placementLevel: integer("placement_level").notNull().default(1),
   stripeCustomerId: text("stripe_customer_id"),
   stripeSubscriptionId: text("stripe_subscription_id"),
   createdAt: timestamp("created_at").notNull().defaultNow(),

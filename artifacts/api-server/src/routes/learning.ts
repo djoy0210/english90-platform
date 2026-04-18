@@ -19,6 +19,7 @@ import {
   CreateCheckoutSessionBody,
   GetFinalTestParams,
   GetLessonParams,
+  SubmitPlacementTestBody,
   SubmitFinalTestBody,
   SubmitFinalTestParams,
   SubmitLessonQuizBody,
@@ -50,7 +51,126 @@ function getLevel(day: number) {
   return Math.ceil(day / 30);
 }
 
+function getStartingDay(user: User) {
+  return ((user.placementLevel ?? 1) - 1) * 30 + 1;
+}
+
+function getCurrentDay(user: User, completedCount: number) {
+  return Math.min(90, getStartingDay(user) + completedCount);
+}
+
+const placementQuestions: StoredQuizQuestion[] = [
+  { id: "placement-q1", promptEn: "Choose the correct sentence.", promptMn: "Зөв өгүүлбэрийг сонгоно уу.", options: ["I am a student.", "I is a student.", "I are a student."], correctAnswer: "I am a student." },
+  { id: "placement-q2", promptEn: "What does 'Good morning' mean?", promptMn: "'Good morning' ямар утгатай вэ?", options: ["Өглөөний мэнд", "Оройн мэнд", "Баяртай"], correctAnswer: "Өглөөний мэнд" },
+  { id: "placement-q3", promptEn: "Complete: She _____ from Mongolia.", promptMn: "Гүйцээ: She _____ from Mongolia.", options: ["am", "is", "are"], correctAnswer: "is" },
+  { id: "placement-q4", promptEn: "Choose the best reply: How are you?", promptMn: "Хамгийн зөв хариултыг сонго: How are you?", options: ["I am fine, thank you.", "My name morning.", "Goodbye student."], correctAnswer: "I am fine, thank you." },
+  { id: "placement-q5", promptEn: "Complete: They _____ my friends.", promptMn: "Гүйцээ: They _____ my friends.", options: ["is", "am", "are"], correctAnswer: "are" },
+  { id: "placement-q6", promptEn: "Choose the correct past sentence.", promptMn: "Зөв өнгөрсөн цагийн өгүүлбэрийг сонго.", options: ["Yesterday I went to school.", "Yesterday I go to school.", "Yesterday I going school."], correctAnswer: "Yesterday I went to school." },
+  { id: "placement-q7", promptEn: "Choose the polite request.", promptMn: "Эелдэг хүсэлтийг сонго.", options: ["Could you help me, please?", "Help me now.", "You help."], correctAnswer: "Could you help me, please?" },
+  { id: "placement-q8", promptEn: "Complete: I have lived here _____ 2020.", promptMn: "Гүйцээ: I have lived here _____ 2020.", options: ["for", "since", "during"], correctAnswer: "since" },
+  { id: "placement-q9", promptEn: "Choose the sentence with correct word order.", promptMn: "Үгийн зөв дараалалтай өгүүлбэрийг сонго.", options: ["I usually drink tea in the morning.", "Usually drink I tea morning in.", "Tea morning I usually drink."], correctAnswer: "I usually drink tea in the morning." },
+  { id: "placement-q10", promptEn: "Choose the best meaning: I would rather stay home.", promptMn: "Зөв утгыг сонго: I would rather stay home.", options: ["Би гэртээ байсан нь дээр.", "Би гэр олж чаддаггүй.", "Би гэрээ зарсан."], correctAnswer: "Би гэртээ байсан нь дээр." },
+  { id: "placement-q11", promptEn: "Choose the correct conditional.", promptMn: "Зөв нөхцөл өгүүлбэрийг сонго.", options: ["If I have time, I will call you.", "If I will have time, I call you.", "If time have, I called you."], correctAnswer: "If I have time, I will call you." },
+  { id: "placement-q12", promptEn: "Choose the clearest opinion sentence.", promptMn: "Санал бодлоо зөв илэрхийлсэн өгүүлбэрийг сонго.", options: ["In my opinion, daily practice is the best way to improve.", "Opinion daily best improve.", "I best way practice opinion."], correctAnswer: "In my opinion, daily practice is the best way to improve." },
+];
+
+const dayOneLesson = {
+  day: 1,
+  level: 1,
+  titleEn: "Day 1: Greetings & Introductions",
+  titleMn: "Өдөр 1: Мэндчилгээ ба танилцуулах",
+  objectiveEn: "Spend about one hour learning 20 greeting words, practicing the verb to be, reading and speaking a short introduction, listening for details, and completing homework.",
+  objectiveMn: "Ойролцоогоор нэг цаг зарцуулж 20 мэндчилгээний үг, to be дүрэм, унших/ярих дасгал, сонсголын ойлголт болон гэрийн даалгаврыг хийнэ.",
+  contentEn: `60-minute self-study plan:
+1. Vocabulary pronunciation — 15 minutes. Click each word, listen, repeat 3 times, then cover the Mongolian meaning and test yourself.
+2. Grammar — 10 minutes. Study the verb "to be": I am, you/we/they are, he/she/it is. Use it for names, jobs, nationality, location, age, and feelings.
+3. Reading & speaking — 15 minutes. Read aloud twice: Hello! My name is Bat. I am a student. I am from Ulaanbaatar, Mongolia. This is my friend, Sarnai. She is a teacher. "Good morning, Sarnai!" "Good morning, Bat! How are you?" "I am fine, thank you. And you?" "I am fine too. Nice to meet you!" "Nice to meet you too! Goodbye, Bat!" "Bye, Sarnai! See you tomorrow!"
+4. Role play — 10 minutes. A: Hello! My name is Bat. What is your name? B: Hi Bat! My name is Sarnai. Nice to meet you! A: Nice to meet you, Sarnai! How are you today? B: I am fine, thank you! And you? A: I'm fine too. Are you a student here? B: Yes, I am a student. And you?
+5. Listening — 10 minutes. Listen/read the script and answer the quiz: Teacher: Good morning, class! Students: Good morning, teacher! Teacher: My name is Ms. Bold. I am your English teacher. What is your name? Bat: My name is Bat. I am from Ulaanbaatar. I am a student. Teacher: Nice to meet you, Bat. How are you today? Bat: I am fine, thank you. And you? Teacher: I am fine too! Sarnai: Hello! My name is Sarnai. I am also a student. Nice to meet you, Ms. Bold! Teacher: Nice to meet you too, Sarnai! Welcome to English class, everyone! Students: Thank you, Ms. Bold!
+
+Homework:
+Writing: Write 5+ sentences using My name is..., I am from..., I am a...
+Vocabulary: Write all 20 words 3 times. Cover and test yourself.
+Speaking: Greet 3 different people in English today.
+Review: Re-read the listening script before sleeping.`,
+  contentMn: `60 минутын өөрөө сурах төлөвлөгөө:
+1. Үгийн дуудлага — 15 минут. Үг бүр дээр дарж сонсоод 3 удаа давтана. Дараа нь Монгол утгыг хааж өөрийгөө шалгана.
+2. Дүрэм — 10 минут. "To be" үйл үгийг судална: I am, you/we/they are, he/she/it is. Нэр, ажил, үндэстэн, байршил, нас, мэдрэмж хэлэхэд хэрэглэнэ.
+3. Унших ба ярих — 15 минут. Эхийг 2 удаа чангаар уншина: Hello! My name is Bat. I am a student. I am from Ulaanbaatar, Mongolia. This is my friend, Sarnai. She is a teacher. "Good morning, Sarnai!" "Good morning, Bat! How are you?" "I am fine, thank you. And you?" "I am fine too. Nice to meet you!" "Nice to meet you too! Goodbye, Bat!" "Bye, Sarnai! See you tomorrow!"
+4. Дүрд тоглох — 10 минут. A/B хоёр дүрээр ярьж давтана. Алдаа гаргасан ч зогсолгүй чангаар ярь.
+5. Сонсох — 10 минут. Багш, Bat, Sarnai нарын яриаг сонсоод/уншаад сорилын асуултад хариулна.
+
+Гэрийн даалгавар:
+Бичих: My name is..., I am from..., I am a... ашиглан 5+ өгүүлбэр бич.
+Үгийн сан: 20 үгийг бүгдийг 3 удаа бич. Хааж өөрийгөө шалга.
+Ярих: Өнөөдөр 3 өөр хүнтэй Англиар мэндчил.
+Давтах: Унтахаасаа өмнө listening script-ийг дахин унш.`,
+  durationMinutes: 60,
+  isPremium: false,
+  vocabulary: [
+    { english: "Hello", pronunciation: "/həˈloʊ/", mongolian: "Сайн уу", example: "Hello! My name is Bat." },
+    { english: "Hi", pronunciation: "/haɪ/", mongolian: "Сайн уу (өдөр тутмын яриа)", example: "Hi! How are you?" },
+    { english: "Good morning", pronunciation: "/ɡʊd ˈmɔːrnɪŋ/", mongolian: "Өглөөний мэнд", example: "Good morning, teacher!" },
+    { english: "Good afternoon", pronunciation: "/ɡʊd ˌæftərˈnuːn/", mongolian: "Өдрийн мэнд", example: "Good afternoon, sir." },
+    { english: "Good evening", pronunciation: "/ɡʊd ˈiːvnɪŋ/", mongolian: "Оройн мэнд", example: "Good evening, everyone." },
+    { english: "Goodbye", pronunciation: "/ˌɡʊdˈbaɪ/", mongolian: "Баяртай (албан ёсны)", example: "Goodbye! See you tomorrow." },
+    { english: "Bye", pronunciation: "/baɪ/", mongolian: "Баяртай (өдөр тутмын яриа)", example: "Bye! Take care." },
+    { english: "My name is", pronunciation: "/maɪ neɪm ɪz/", mongolian: "Миний нэр ... мөн", example: "My name is Sarnai." },
+    { english: "I am", pronunciation: "/aɪ æm/", mongolian: "Би ... юм", example: "I am a student." },
+    { english: "Nice to meet you", pronunciation: "/naɪs tə miːt juː/", mongolian: "Танилцсандаа таатай байна", example: "Nice to meet you, Bat." },
+    { english: "Please", pronunciation: "/pliːz/", mongolian: "Гуйя", example: "Please sit down." },
+    { english: "Thank you", pronunciation: "/θæŋk juː/", mongolian: "Баярлалаа", example: "Thank you very much!" },
+    { english: "You're welcome", pronunciation: "/jʊr ˈwɛlkəm/", mongolian: "Зүгээр ээ", example: "You're welcome, friend." },
+    { english: "Sorry", pronunciation: "/ˈsɑːri/", mongolian: "Уучлаарай", example: "Sorry, I am late." },
+    { english: "Excuse me", pronunciation: "/ɪkˈskjuːz miː/", mongolian: "Өршөөгөөрэй", example: "Excuse me, where is the exit?" },
+    { english: "Yes", pronunciation: "/jɛs/", mongolian: "Тийм", example: "Yes, I am from Mongolia." },
+    { english: "No", pronunciation: "/noʊ/", mongolian: "Үгүй", example: "No, I am not a teacher." },
+    { english: "How are you?", pronunciation: "/haʊ ɑːr juː/", mongolian: "Та сайн уу? Юу байна?", example: "Hi! How are you?" },
+    { english: "I am fine", pronunciation: "/aɪ æm faɪn/", mongolian: "Би сайн байна", example: "I am fine, thank you." },
+    { english: "And you?", pronunciation: "/ænd juː/", mongolian: "Харин та?", example: "I am fine. And you?" },
+  ],
+  quiz: [
+    { id: "d1-q1", promptEn: "What is the teacher's name?", promptMn: "Багшийн нэр хэн бэ?", options: ["Ms. Bold", "Ms. Sarnai", "Ms. Bat"], correctAnswer: "Ms. Bold" },
+    { id: "d1-q2", promptEn: "What is Ms. Bold's job?", promptMn: "Ms. Bold ямар ажилтай вэ?", options: ["student", "doctor", "English teacher"], correctAnswer: "English teacher" },
+    { id: "d1-q3", promptEn: "Where is Bat from?", promptMn: "Bat хаанаас ирсэн бэ?", options: ["Beijing", "Ulaanbaatar", "Seoul"], correctAnswer: "Ulaanbaatar" },
+    { id: "d1-q4", promptEn: "How is Bat today?", promptMn: "Bat өнөөдөр хэр байна вэ?", options: ["tired", "sad", "fine"], correctAnswer: "fine" },
+    { id: "d1-q5", promptEn: "What is Sarnai?", promptMn: "Sarnai юу вэ?", options: ["a teacher", "a doctor", "a student"], correctAnswer: "a student" },
+    { id: "d1-q6", promptEn: "Complete: I _____ a student.", promptMn: "Гүйцээ: I _____ a student.", options: ["am", "is", "are"], correctAnswer: "am" },
+    { id: "d1-q7", promptEn: "Complete: She _____ from Mongolia.", promptMn: "Гүйцээ: She _____ from Mongolia.", options: ["am", "is", "are"], correctAnswer: "is" },
+    { id: "d1-q8", promptEn: "What does 'Good morning' mean?", promptMn: "'Good morning' ямар утгатай вэ?", options: ["Оройн мэнд", "Өглөөний мэнд", "Баяртай"], correctAnswer: "Өглөөний мэнд" },
+    { id: "d1-q9", promptEn: "What should you say when you meet someone new?", promptMn: "Шинэ хүнтэй танилцахдаа юу гэж хэлэх вэ?", options: ["Nice to meet you", "Goodbye", "No"], correctAnswer: "Nice to meet you" },
+    { id: "d1-q10", promptEn: "What is today's homework?", promptMn: "Өнөөдрийн гэрийн даалгавар юу вэ?", options: ["Write sentences and practice vocabulary", "Skip vocabulary", "Only watch a video"], correctAnswer: "Write sentences and practice vocabulary" },
+  ],
+};
+
+function buildVocabulary(focus: string) {
+  const words = [
+    ["practice", "/ˈpræktɪs/", "давтах, дадлага хийх", "I practice English every morning."],
+    ["sentence", "/ˈsɛntəns/", "өгүүлбэр", "Write one sentence about your day."],
+    ["listen", "/ˈlɪsən/", "сонсох", "Listen and repeat the word."],
+    ["repeat", "/rɪˈpiːt/", "давтах", "Repeat the sentence three times."],
+    ["speak", "/spiːk/", "ярих", "Speak English out loud."],
+    ["read", "/riːd/", "унших", "Read the passage twice."],
+    ["write", "/raɪt/", "бичих", "Write your homework tonight."],
+    ["question", "/ˈkwɛstʃən/", "асуулт", "Answer the question in English."],
+    ["answer", "/ˈænsər/", "хариулт", "Choose the best answer."],
+    ["meaning", "/ˈmiːnɪŋ/", "утга", "What is the meaning of this word?"],
+    ["example", "/ɪɡˈzæmpəl/", "жишээ", "Read the example sentence."],
+    ["homework", "/ˈhoʊmwɜːrk/", "гэрийн даалгавар", "Finish your homework before tomorrow."],
+    ["review", "/rɪˈvjuː/", "давтах, хянах", "Review the lesson before sleeping."],
+    ["grammar", "/ˈɡræmər/", "дүрэм", "Study the grammar rule."],
+    ["vocabulary", "/voʊˈkæbjəleri/", "үгийн сан", "Learn twenty vocabulary words."],
+    ["dialogue", "/ˈdaɪəlɔːɡ/", "харилцан яриа", "Practice the dialogue with a friend."],
+    ["teacher", "/ˈtiːtʃər/", "багш", "The teacher speaks slowly."],
+    ["student", "/ˈstuːdənt/", "оюутан, сурагч", "I am a student."],
+    ["today", "/təˈdeɪ/", "өнөөдөр", `Today I study ${focus}.`],
+    [focus.split(" ")[0] || "study", "", "өнөөдрийн гол үг", `Today I talk about ${focus}.`],
+  ];
+  return words.map(([english, pronunciation, mongolian, example]) => ({ english, pronunciation, mongolian, example }));
+}
+
 function buildSeedLesson(day: number) {
+  if (day === 1) return dayOneLesson;
   const level = getLevel(day);
   const levelName = level === 1 ? "Foundation" : level === 2 ? "Everyday Communication" : "Confident Expression";
   const focus = [
@@ -74,13 +194,9 @@ function buildSeedLesson(day: number) {
     objectiveMn: `${focus} сэдвээр өдөр тутмын Англи хэлний өгүүлбэр, үгийн санг давтана.`,
     contentEn: `Level ${level} (${levelName}) lesson for day ${day}. Read the model sentences aloud, compare the Mongolian meaning, then write three personal sentences using today's pattern. Example pattern: I can talk about ${focus} in simple, clear English.`,
     contentMn: `${level}-р түвшин (${levelName}) - ${day}-р өдрийн хичээл. Жишээ өгүүлбэрийг чангаар уншаад Монгол утгатай нь харьцуулж, өнөөдрийн бүтэц ашиглан өөрийн 3 өгүүлбэр бичээрэй.`,
-    durationMinutes: 20 + (day % 3) * 5,
+    durationMinutes: 60,
     isPremium: day > 7,
-    vocabulary: [
-      { english: "practice", mongolian: "давтах, дадлага хийх", example: "I practice English every morning." },
-      { english: "sentence", mongolian: "өгүүлбэр", example: "Write one sentence about your day." },
-      { english: focus.split(" ")[0] || "study", mongolian: "өнөөдрийн гол үг", example: `Today I talk about ${focus}.` },
-    ],
+    vocabulary: buildVocabulary(focus),
     quiz: [
       {
         id: `d${day}-q1`,
@@ -111,7 +227,13 @@ async function ensureSeeded() {
   if (!seedPromise) {
     seedPromise = (async () => {
       const existing = await db.select({ id: lessonsTable.id }).from(lessonsTable).limit(1);
-      if (existing.length > 0) return;
+      if (existing.length > 0) {
+        const currentDayOne = await db.select().from(lessonsTable).where(eq(lessonsTable.day, 1)).limit(1);
+        if ((currentDayOne[0]?.vocabulary?.length ?? 0) < 20) {
+          await db.update(lessonsTable).set({ ...dayOneLesson, updatedAt: new Date() }).where(eq(lessonsTable.day, 1));
+        }
+        return;
+      }
 
       await db.insert(lessonsTable).values(Array.from({ length: 90 }, (_, index) => buildSeedLesson(index + 1))).onConflictDoNothing();
       await db.insert(finalTestsTable).values([1, 2, 3].map((level) => ({
@@ -165,7 +287,7 @@ async function getCurrentUser(req: Request): Promise<User> {
   const role = process.env.NODE_ENV !== "production" || (adminCount[0]?.count ?? 0) === 0 ? "admin" : "learner";
   const [user] = await db
     .insert(usersTable)
-    .values({ id: clerkUserId, clerkUserId, email, name, role })
+    .values({ id: clerkUserId, clerkUserId, email, name, role, placementCompleted: role === "admin" })
     .onConflictDoUpdate({
       target: usersTable.id,
       set: { clerkUserId, email, name },
@@ -258,7 +380,39 @@ router.get("/me", async (req, res, next) => {
   try {
     const user = await getCurrentUser(req);
     const completed = await db.select({ count: sql<number>`count(*)::int` }).from(lessonProgressTable).where(and(eq(lessonProgressTable.userId, user.id), eq(lessonProgressTable.completed, true)));
-    res.json({ id: user.id, email: user.email, name: user.name, role: user.role, premium: user.premium, currentDay: (completed[0]?.count ?? 0) + 1 });
+    res.json({ id: user.id, email: user.email, name: user.name, role: user.role, premium: user.premium, currentDay: getCurrentDay(user, completed[0]?.count ?? 0), placementCompleted: user.placementCompleted, placementLevel: user.placementLevel });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/placement-test", async (_req, res, next) => {
+  try {
+    res.json({
+      titleEn: "English Placement Test",
+      titleMn: "Англи хэлний түвшин тогтоох тест",
+      questions: placementQuestions.map(getQuestionPublic),
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/placement-test", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    const body = SubmitPlacementTestBody.parse(req.body);
+    const result = grade(placementQuestions, body.answers);
+    const level = result.score <= 4 ? 1 : result.score <= 8 ? 2 : 3;
+    const startingDay = (level - 1) * 30 + 1;
+    await db.update(usersTable).set({ placementCompleted: true, placementLevel: level }).where(eq(usersTable.id, user.id));
+    res.json({
+      ...result,
+      level,
+      startingDay,
+      messageEn: `Your recommended level is Level ${level}. Start from Day ${startingDay}.`,
+      messageMn: `Таны санал болгож буй түвшин ${level}-р түвшин. ${startingDay}-р өдрөөс эхлээрэй.`,
+    });
   } catch (error) {
     next(error);
   }
@@ -360,12 +514,13 @@ router.get("/dashboard", async (req, res, next) => {
     const progress = await db.select().from(lessonProgressTable).where(eq(lessonProgressTable.userId, user.id));
     const history = await historyFor(user.id);
     const completedIds = new Set(progress.filter((item) => item.completed).map((item) => item.lessonId));
-    const nextLesson = lessons.find((lesson) => !completedIds.has(lesson.id));
+    const startDay = getStartingDay(user);
+    const nextLesson = lessons.find((lesson) => lesson.day >= startDay && !completedIds.has(lesson.id));
     const averageScore = history.length === 0 ? 0 : Math.round(history.reduce((sum, item) => sum + item.percentage, 0) / history.length);
     res.json({
       completedDays: completedIds.size,
       totalDays: 90,
-      currentLevel: Math.min(3, Math.max(1, Math.ceil((completedIds.size + 1) / 30))),
+      currentLevel: Math.min(3, Math.max(1, Math.ceil(getCurrentDay(user, completedIds.size) / 30))),
       averageScore,
       premium: user.premium,
       nextLesson: nextLesson ? toLessonSummary(nextLesson, user, progress.find((item) => item.lessonId === nextLesson.id)) : null,

@@ -14,6 +14,49 @@ import { Plus, Edit, Trash2, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
 
+function formatVocabulary(vocabulary: any[]) {
+  return (vocabulary || [])
+    .map((item) => [item.english, item.pronunciation || "", item.mongolian, item.example].join(" | "))
+    .join("\n");
+}
+
+function parseVocabulary(value: string) {
+  return value
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const [english = "", pronunciation = "", mongolian = "", example = ""] = line.split("|").map((part) => part.trim());
+      return { english, pronunciation, mongolian, example };
+    })
+    .filter((item) => item.english && item.mongolian && item.example);
+}
+
+function formatQuiz(quiz: any[]) {
+  return (quiz || [])
+    .map((item) => [item.promptEn, item.promptMn, (item.options || []).join("; "), item.correctAnswer || ""].join(" | "))
+    .join("\n");
+}
+
+function parseQuiz(value: string) {
+  return value
+    .split("\n")
+    .map((line, index) => ({ line: line.trim(), index }))
+    .filter(({ line }) => line)
+    .map(({ line, index }) => {
+      const [promptEn = "", promptMn = "", optionsText = "", correctAnswer = ""] = line.split("|").map((part) => part.trim());
+      const options = optionsText.split(";").map((option) => option.trim()).filter(Boolean);
+      return {
+        id: `admin-q-${index + 1}`,
+        promptEn,
+        promptMn,
+        options,
+        correctAnswer,
+      };
+    })
+    .filter((item) => item.promptEn && item.promptMn && item.options.length > 0 && item.correctAnswer);
+}
+
 export default function Admin() {
   const { data: lessons, isLoading } = useAdminListLessons();
   const deleteLesson = useAdminDeleteLesson();
@@ -43,7 +86,7 @@ export default function Admin() {
 
   const handleOpenCreate = () => {
     setFormData({
-      day: 1, level: 1, titleEn: "", titleMn: "", objectiveEn: "", objectiveMn: "", contentEn: "", contentMn: "", durationMinutes: 20, isPremium: false, vocabulary: [], quiz: []
+      day: 1, level: 1, titleEn: "", titleMn: "", objectiveEn: "", objectiveMn: "", contentEn: "", contentMn: "", durationMinutes: 60, isPremium: false, vocabulary: [], quiz: []
     });
     setEditingLessonId(null);
     setIsDialogOpen(true);
@@ -147,7 +190,7 @@ export default function Admin() {
               Шинэ хичээл
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>{editingLessonId ? "Хичээл засах" : "Шинэ хичээл"}</DialogTitle>
             </DialogHeader>
@@ -185,12 +228,42 @@ export default function Admin() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label>Агуулга (EN)</Label>
-                  <Textarea value={formData.contentEn} onChange={(e) => setFormData({...formData, contentEn: e.target.value})} />
+                  <Textarea className="min-h-40" value={formData.contentEn} onChange={(e) => setFormData({...formData, contentEn: e.target.value})} />
                 </div>
                 <div className="space-y-2">
                   <Label>Агуулга (MN)</Label>
-                  <Textarea value={formData.contentMn} onChange={(e) => setFormData({...formData, contentMn: e.target.value})} />
+                  <Textarea className="min-h-40" value={formData.contentMn} onChange={(e) => setFormData({...formData, contentMn: e.target.value})} />
                 </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Хичээлийн хугацаа (минут)</Label>
+                  <Input type="number" value={formData.durationMinutes} onChange={(e) => setFormData({...formData, durationMinutes: parseInt(e.target.value) || 60})} />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label>20 шинэ үг</Label>
+                <p className="text-xs text-muted-foreground">
+                  Мөр бүр: English | pronunciation | Mongolian meaning | example sentence
+                </p>
+                <Textarea
+                  className="min-h-48 font-mono text-sm"
+                  value={formatVocabulary(formData.vocabulary)}
+                  onChange={(e) => setFormData({...formData, vocabulary: parseVocabulary(e.target.value)})}
+                  placeholder={"Hello | /həˈloʊ/ | Сайн уу | Hello! My name is Bat.\nHi | /haɪ/ | Сайн уу | Hi! How are you?"}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Сорил / quiz questions</Label>
+                <p className="text-xs text-muted-foreground">
+                  Мөр бүр: Question EN | Question MN | option 1; option 2; option 3 | correct answer
+                </p>
+                <Textarea
+                  className="min-h-40 font-mono text-sm"
+                  value={formatQuiz(formData.quiz)}
+                  onChange={(e) => setFormData({...formData, quiz: parseQuiz(e.target.value)})}
+                  placeholder={"What is your name? | Таны нэр хэн бэ? | My name is Bat; I am fine; Goodbye | My name is Bat"}
+                />
               </div>
               <div className="flex items-center space-x-2">
                 <Checkbox id="premium" checked={formData.isPremium} onCheckedChange={(checked) => setFormData({...formData, isPremium: !!checked})} />
