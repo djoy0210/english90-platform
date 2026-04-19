@@ -2,12 +2,15 @@ import { getAuth } from "@clerk/express";
 import { db } from "@workspace/db";
 import {
   finalTestsTable,
+  contentUnlocksTable,
   lessonProgressTable,
   lessonsTable,
+  paymentInvoicesTable,
   quizAttemptsTable,
   usersTable,
   type FinalTest,
   type Lesson,
+  type PaymentInvoice,
   type StoredQuizQuestion,
   type User,
 } from "@workspace/db/schema";
@@ -16,7 +19,10 @@ import {
   AdminDeleteLessonParams,
   AdminUpdateLessonBody,
   AdminUpdateLessonParams,
+  CheckQpayInvoiceParams,
   CreateCheckoutSessionBody,
+  CreateQpayInvoiceBody,
+  GetQpayInvoiceParams,
   GetFinalTestParams,
   GetLessonParams,
   SubmitPlacementTestBody,
@@ -27,6 +33,7 @@ import {
 } from "@workspace/api-zod";
 import { and, desc, eq, sql } from "drizzle-orm";
 import { Router, type Request } from "express";
+import { checkQPayInvoiceStatus, createQPayInvoice, isQPayConfigured, verifyQPayWebhook, type QPayInvoiceStatus } from "../services/qpay";
 
 const router = Router();
 let seedPromise: Promise<void> | null = null;
@@ -57,6 +64,63 @@ function getStartingDay(user: User) {
 
 function getCurrentDay(user: User, completedCount: number) {
   return Math.min(90, getStartingDay(user) + completedCount);
+}
+
+function getLessonTemplateContent() {
+  return {
+    page1: {
+      grammarTopic: `Verb "To Be" — am / is / are`,
+      grammarExplanation: `The verb "to be" is the most important verb in English. In Mongolian you can say "Би оюутан" without a verb, but in English you must say "I am a student." Use am with I, is with he/she/it, and are with you/we/they.`,
+      grammarTable: [
+        { subject: "I", verb: "am", positive: "I am happy.", negative: "I am not sad.", question: "Am I right?", mongolian: "Би" },
+        { subject: "You", verb: "are", positive: "You are kind.", negative: "You are not late.", question: "Are you ready?", mongolian: "Та / Чи" },
+        { subject: "He", verb: "is", positive: "He is a doctor.", negative: "He is not here.", question: "Is he your friend?", mongolian: "Тэр (эр)" },
+        { subject: "She", verb: "is", positive: "She is a teacher.", negative: "She is not busy.", question: "Is she a student?", mongolian: "Тэр (эм)" },
+        { subject: "We", verb: "are", positive: "We are students.", negative: "We are not tired.", question: "Are we late?", mongolian: "Бид" },
+        { subject: "They", verb: "are", positive: "They are friends.", negative: "They are not here.", question: "Are they ready?", mongolian: "Тэд" },
+      ],
+      quickPractice: ["I _____ a student.", "She _____ from Mongolia.", "They _____ my friends.", "He _____ a teacher.", "We _____ happy.", "You _____ very kind.", "My name _____ Bat.", "I _____ fine, thank you."],
+      commonMistakes: ["He are my friend. → He is my friend.", "I is happy. → I am happy.", "She am a doctor. → She is a doctor.", "They is here. → They are here."],
+      answerKey: ["1-am", "2-is", "3-are", "4-is", "5-are", "6-are", "7-is", "8-am"],
+    },
+    page2: {
+      readingPassage: `Hello! My name is Bat. I am a student. I am from Ulaanbaatar, Mongolia. This is my friend, Sarnai. She is a teacher. "Good morning, Sarnai!" "Good morning, Bat! How are you?" "I am fine, thank you. And you?" "I am fine too. Nice to meet you!" "Nice to meet you too! Goodbye, Bat!" "Bye, Sarnai! See you tomorrow!"`,
+      keyPhrases: [
+        { english: "My name is Bat", mongolian: "Миний нэр Бат", note: "My name is + [your name]" },
+        { english: "I am a student", mongolian: "Би оюутан", note: "I am + job or role" },
+        { english: "I am from ...", mongolian: "Би ...-аас ирсэн", note: "I am from + city/country" },
+        { english: "How are you?", mongolian: "Та сайн уу? Юу байна?", note: "Standard daily greeting" },
+        { english: "I am fine, thank you", mongolian: "Би сайн байна, баярлалаа", note: "Most common answer" },
+        { english: "Nice to meet you", mongolian: "Танилцсандаа таатай байна", note: "Say when meeting someone new" },
+      ],
+      speakingQuestions: ["What is your name?", "Where are you from?", "Are you a student or a teacher?", "How are you today?", "How do you greet someone in the morning?", "What do you say when you meet someone new?"],
+      rolePlay: [
+        { speaker: "A", text: "Hello! My name is Bat. What is your name?" },
+        { speaker: "B", text: "Hi Bat! My name is Sarnai. Nice to meet you!" },
+        { speaker: "A", text: "Nice to meet you, Sarnai! How are you today?" },
+        { speaker: "B", text: "I am fine, thank you! And you?" },
+        { speaker: "A", text: "I'm fine too. Are you a student here?" },
+        { speaker: "B", text: "Yes, I am a student. And you?" },
+      ],
+      speakingTip: "Don't worry about mistakes — just keep talking. Confidence is more important than perfection at this stage.",
+    },
+    page3: {
+      listeningScript: `Teacher: Good morning, class! Students: Good morning, teacher! Teacher: My name is Ms. Bold. I am your English teacher. What is your name? Bat: My name is Bat. I am from Ulaanbaatar. I am a student. Teacher: Nice to meet you, Bat. How are you today? Bat: I am fine, thank you. And you? Teacher: I am fine too! Sarnai: Hello! My name is Sarnai. I am also a student. Nice to meet you, Ms. Bold! Teacher: Nice to meet you too, Sarnai! Welcome to English class, everyone! Students: Thank you, Ms. Bold!`,
+      comprehensionQuestions: [],
+      grammarPractice: ["I _____ a student.", "She _____ from Mongolia.", "They _____ my friends.", "He _____ a teacher.", "We _____ happy.", "You _____ very kind."],
+      matchingExercise: [
+        { left: "Good morning", right: "Өглөөний мэнд" },
+        { left: "Thank you", right: "Баярлалаа" },
+        { left: "Nice to meet you", right: "Танилцсандаа таатай байна" },
+        { left: "Excuse me", right: "Өршөөгөөрэй" },
+        { left: "You're welcome", right: "Зүгээр ээ" },
+      ],
+      homework: ["Writing: Write 5+ sentences: My name is... / I am from... / I am a...", "Vocabulary: Write all 20 words 3 times. Cover and test yourself.", "Speaking: Greet 3 different people in English today.", "Review: Re-read the listening script before sleeping."],
+      answerKey: ["Fill in blanks: 1-am, 2-is, 3-are, 4-is, 5-are, 6-are", "Matching: 1-Good morning=Өглөөний мэнд, 2-Thank you=Баярлалаа, 3-Nice to meet you=Танилцсандаа таатай байна, 4-Excuse me=Өршөөгөөрэй, 5-You're welcome=Зүгээр ээ", "Listening: 1-a, 2-c, 3-b, 4-c, 5-c, 6-b, 7-b, 8-c, 9-b, 10-b"],
+      completionSummary: ["Learned 20 new words", "Mastered verb 'to be'", "Read a passage", "Completed grammar practice", "Practiced speaking", "Completed listening practice", "Introduced yourself"],
+      nextLessonPreview: "Day 2: Numbers & Daily Routines",
+    },
+  };
 }
 
 const placementQuestions: StoredQuizQuestion[] = [
@@ -105,6 +169,8 @@ Review: Re-read the listening script before sleeping.`,
 Үгийн сан: 20 үгийг бүгдийг 3 удаа бич. Хааж өөрийгөө шалга.
 Ярих: Өнөөдөр 3 өөр хүнтэй Англиар мэндчил.
 Давтах: Унтахаасаа өмнө listening script-ийг дахин унш.`,
+  lessonContent: getLessonTemplateContent(),
+  pdfUrl: null,
   durationMinutes: 60,
   isPremium: false,
   vocabulary: [
@@ -194,6 +260,19 @@ function buildSeedLesson(day: number) {
     objectiveMn: `${focus} сэдвээр өдөр тутмын Англи хэлний өгүүлбэр, үгийн санг давтана.`,
     contentEn: `Level ${level} (${levelName}) lesson for day ${day}. Read the model sentences aloud, compare the Mongolian meaning, then write three personal sentences using today's pattern. Example pattern: I can talk about ${focus} in simple, clear English.`,
     contentMn: `${level}-р түвшин (${levelName}) - ${day}-р өдрийн хичээл. Жишээ өгүүлбэрийг чангаар уншаад Монгол утгатай нь харьцуулж, өнөөдрийн бүтэц ашиглан өөрийн 3 өгүүлбэр бичээрэй.`,
+    lessonContent: {
+      ...getLessonTemplateContent(),
+      page1: {
+        ...getLessonTemplateContent().page1,
+        grammarTopic: `Daily English pattern for ${focus}`,
+        grammarExplanation: `Study today's pattern, then make your own sentences about ${focus}.`,
+      },
+      page3: {
+        ...getLessonTemplateContent().page3,
+        nextLessonPreview: `Day ${day + 1}: Continue your 90-day practice`,
+      },
+    },
+    pdfUrl: null,
     durationMinutes: 60,
     isPremium: day > 7,
     vocabulary: buildVocabulary(focus),
@@ -229,7 +308,7 @@ async function ensureSeeded() {
       const existing = await db.select({ id: lessonsTable.id }).from(lessonsTable).limit(1);
       if (existing.length > 0) {
         const currentDayOne = await db.select().from(lessonsTable).where(eq(lessonsTable.day, 1)).limit(1);
-        if ((currentDayOne[0]?.vocabulary?.length ?? 0) < 20) {
+        if ((currentDayOne[0]?.vocabulary?.length ?? 0) < 20 || !currentDayOne[0]?.lessonContent) {
           await db.update(lessonsTable).set({ ...dayOneLesson, updatedAt: new Date() }).where(eq(lessonsTable.day, 1));
         }
         return;
@@ -308,11 +387,26 @@ function ensureAdmin(user: User) {
   }
 }
 
-function isUnlocked(lesson: Lesson, user: User) {
-  return !lesson.isPremium || user.premium || user.role === "admin";
+type UnlockSet = Set<string>;
+
+function lessonProductId(lessonId: string) {
+  return `lesson:${lessonId}`;
 }
 
-function toLessonSummary(lesson: Lesson, user: User, progress?: { completed: boolean; bestScore: number }) {
+function levelProductId(level: number) {
+  return `level:${level}`;
+}
+
+function isUnlocked(lesson: Lesson, user: User, unlocks: UnlockSet = new Set()) {
+  return !lesson.isPremium || user.premium || user.role === "admin" || unlocks.has("course:full") || unlocks.has(levelProductId(lesson.level)) || unlocks.has(lessonProductId(lesson.id));
+}
+
+async function getUnlockedProducts(userId: string): Promise<UnlockSet> {
+  const unlocks = await db.select().from(contentUnlocksTable).where(eq(contentUnlocksTable.userId, userId));
+  return new Set(unlocks.map((unlock) => unlock.productId));
+}
+
+function toLessonSummary(lesson: Lesson, user: User, progress?: { completed: boolean; bestScore: number }, unlocks: UnlockSet = new Set()) {
   return {
     id: lesson.id,
     day: lesson.day,
@@ -321,21 +415,24 @@ function toLessonSummary(lesson: Lesson, user: User, progress?: { completed: boo
     titleMn: lesson.titleMn,
     durationMinutes: lesson.durationMinutes,
     isPremium: lesson.isPremium,
-    isUnlocked: isUnlocked(lesson, user),
+    isUnlocked: isUnlocked(lesson, user, unlocks),
     completed: progress?.completed ?? false,
     bestScore: progress?.bestScore ?? null,
   };
 }
 
-function toLessonDetail(lesson: Lesson, user: User, progress?: { completed: boolean; bestScore: number }) {
+function toLessonDetail(lesson: Lesson, user: User, progress?: { completed: boolean; bestScore: number }, unlocks: UnlockSet = new Set()) {
+  const unlocked = isUnlocked(lesson, user, unlocks);
   return {
-    ...toLessonSummary(lesson, user, progress),
+    ...toLessonSummary(lesson, user, progress, unlocks),
     objectiveEn: lesson.objectiveEn,
     objectiveMn: lesson.objectiveMn,
-    contentEn: isUnlocked(lesson, user) ? lesson.contentEn : "Premium access is required to unlock this lesson.",
-    contentMn: isUnlocked(lesson, user) ? lesson.contentMn : "Энэ хичээлийг нээхийн тулд premium эрх шаардлагатай.",
-    vocabulary: isUnlocked(lesson, user) ? lesson.vocabulary : [],
-    quiz: isUnlocked(lesson, user) ? lesson.quiz.map(getQuestionPublic) : [],
+    contentEn: unlocked ? lesson.contentEn : "Premium access is required to unlock this lesson.",
+    contentMn: unlocked ? lesson.contentMn : "Энэ хичээлийг нээхийн тулд premium эрх шаардлагатай.",
+    lessonContent: unlocked ? (lesson.lessonContent ?? getLessonTemplateContent()) : {},
+    pdfUrl: unlocked ? lesson.pdfUrl ?? null : null,
+    vocabulary: unlocked ? lesson.vocabulary : [],
+    quiz: unlocked ? lesson.quiz.map(getQuestionPublic) : [],
   };
 }
 
@@ -365,6 +462,88 @@ async function historyFor(userId: string) {
     percentage: attempt.percentage,
     createdAt: attempt.createdAt.toISOString(),
   }));
+}
+
+function getPublicBaseUrl(req: Request) {
+  const proto = req.get("x-forwarded-proto") ?? req.protocol ?? "https";
+  const host = req.get("x-forwarded-host") ?? req.get("host") ?? "localhost";
+  return `${proto}://${host}`;
+}
+
+async function resolveProduct(productId: string) {
+  if (productId === "course:full") {
+    return { productId, productName: "Full 90-Day Course", amount: 79000, lessonId: null as string | null, level: null as number | null };
+  }
+
+  if (productId.startsWith("level:")) {
+    const level = Number(productId.split(":")[1]);
+    if (![1, 2, 3].includes(level)) throw new Error("Invalid level product");
+    return { productId, productName: `Level ${level} Package`, amount: 29000, lessonId: null as string | null, level };
+  }
+
+  if (productId.startsWith("lesson:")) {
+    const lessonId = productId.split(":")[1];
+    const [lesson] = await db.select().from(lessonsTable).where(eq(lessonsTable.id, lessonId)).limit(1);
+    if (!lesson) throw new Error("Lesson product not found");
+    return { productId, productName: `Day ${lesson.day}: ${lesson.titleEn}`, amount: 4900, lessonId, level: lesson.level };
+  }
+
+  throw new Error("Invalid product id");
+}
+
+function invoiceToResponse(invoice: PaymentInvoice, providerConnected = isQPayConfigured(), message?: string) {
+  return {
+    id: invoice.id,
+    invoiceCode: invoice.invoiceCode,
+    qpayInvoiceId: invoice.qpayInvoiceId,
+    paymentStatus: invoice.paymentStatus,
+    productId: invoice.productId,
+    productName: invoice.productName,
+    amount: invoice.amount,
+    currency: invoice.currency,
+    unlockStatus: invoice.unlockStatus,
+    qrText: invoice.qrText,
+    qrImage: invoice.qrImage,
+    paymentUrl: invoice.paymentUrl,
+    providerConnected,
+    message,
+    createdAt: invoice.createdAt.toISOString(),
+    updatedAt: invoice.updatedAt.toISOString(),
+  };
+}
+
+async function unlockPurchasedContent(invoice: PaymentInvoice) {
+  if (invoice.paymentStatus !== "paid" || invoice.unlockStatus === "unlocked") return invoice;
+  const product = await resolveProduct(invoice.productId);
+
+  await db.insert(contentUnlocksTable).values({
+    userId: invoice.userId,
+    productId: invoice.productId,
+    lessonId: product.lessonId,
+    level: product.level,
+    unlockedByInvoiceId: invoice.id,
+  }).onConflictDoNothing();
+
+  if (invoice.productId === "course:full") {
+    await db.update(usersTable).set({ premium: true }).where(eq(usersTable.id, invoice.userId));
+  }
+
+  const [updated] = await db.update(paymentInvoicesTable).set({ unlockStatus: "unlocked", updatedAt: new Date() }).where(eq(paymentInvoicesTable.id, invoice.id)).returning();
+  return updated;
+}
+
+async function updateInvoiceStatus(invoice: PaymentInvoice, status: QPayInvoiceStatus, payload?: Record<string, unknown>) {
+  const [updated] = await db.update(paymentInvoicesTable).set({
+    paymentStatus: status,
+    providerPayload: payload ?? invoice.providerPayload,
+    updatedAt: new Date(),
+  }).where(eq(paymentInvoicesTable.id, invoice.id)).returning();
+
+  if (updated.paymentStatus === "paid") {
+    return unlockPurchasedContent(updated);
+  }
+
+  return updated;
 }
 
 router.use(async (_req, _res, next) => {
@@ -421,10 +600,11 @@ router.post("/placement-test", async (req, res, next) => {
 router.get("/lessons", async (req, res, next) => {
   try {
     const user = await getCurrentUser(req);
+    const unlocks = await getUnlockedProducts(user.id);
     const lessons = await db.select().from(lessonsTable).orderBy(lessonsTable.day);
     const progress = await db.select().from(lessonProgressTable).where(eq(lessonProgressTable.userId, user.id));
     const progressMap = new Map(progress.map((item) => [item.lessonId, item]));
-    res.json(lessons.map((lesson) => toLessonSummary(lesson, user, progressMap.get(lesson.id))));
+    res.json(lessons.map((lesson) => toLessonSummary(lesson, user, progressMap.get(lesson.id), unlocks)));
   } catch (error) {
     next(error);
   }
@@ -434,10 +614,11 @@ router.get("/lessons/:lessonId", async (req, res, next) => {
   try {
     const { lessonId } = GetLessonParams.parse(req.params);
     const user = await getCurrentUser(req);
+    const unlocks = await getUnlockedProducts(user.id);
     const [lesson] = await db.select().from(lessonsTable).where(eq(lessonsTable.id, lessonId)).limit(1);
     if (!lesson) return res.status(404).json({ error: "Lesson not found" });
     const [progress] = await db.select().from(lessonProgressTable).where(and(eq(lessonProgressTable.userId, user.id), eq(lessonProgressTable.lessonId, lesson.id))).limit(1);
-    res.json(toLessonDetail(lesson, user, progress));
+    res.json(toLessonDetail(lesson, user, progress, unlocks));
   } catch (error) {
     next(error);
   }
@@ -448,9 +629,10 @@ router.post("/lessons/:lessonId/quiz-attempts", async (req, res, next) => {
     const { lessonId } = SubmitLessonQuizParams.parse(req.params);
     const body = SubmitLessonQuizBody.parse(req.body);
     const user = await getCurrentUser(req);
+    const unlocks = await getUnlockedProducts(user.id);
     const [lesson] = await db.select().from(lessonsTable).where(eq(lessonsTable.id, lessonId)).limit(1);
     if (!lesson) return res.status(404).json({ error: "Lesson not found" });
-    if (!isUnlocked(lesson, user)) return res.status(402).json({ error: "Premium access required" });
+    if (!isUnlocked(lesson, user, unlocks)) return res.status(402).json({ error: "Premium access required" });
     const result = grade(lesson.quiz, body.answers);
     const [attempt] = await db.insert(quizAttemptsTable).values({
       userId: user.id,
@@ -510,6 +692,7 @@ router.get("/test-history", async (req, res, next) => {
 router.get("/dashboard", async (req, res, next) => {
   try {
     const user = await getCurrentUser(req);
+    const unlocks = await getUnlockedProducts(user.id);
     const lessons = await db.select().from(lessonsTable).orderBy(lessonsTable.day);
     const progress = await db.select().from(lessonProgressTable).where(eq(lessonProgressTable.userId, user.id));
     const history = await historyFor(user.id);
@@ -523,7 +706,7 @@ router.get("/dashboard", async (req, res, next) => {
       currentLevel: Math.min(3, Math.max(1, Math.ceil(getCurrentDay(user, completedIds.size) / 30))),
       averageScore,
       premium: user.premium,
-      nextLesson: nextLesson ? toLessonSummary(nextLesson, user, progress.find((item) => item.lessonId === nextLesson.id)) : null,
+      nextLesson: nextLesson ? toLessonSummary(nextLesson, user, progress.find((item) => item.lessonId === nextLesson.id), unlocks) : null,
       recentHistory: history.slice(0, 5),
       levelProgress: [1, 2, 3].map((level) => ({ level, completed: lessons.filter((lesson) => lesson.level === level && completedIds.has(lesson.id)).length, total: 30 })),
     });
@@ -535,7 +718,18 @@ router.get("/dashboard", async (req, res, next) => {
 router.get("/payments/status", async (req, res, next) => {
   try {
     const user = await getCurrentUser(req);
-    res.json({ premium: user.premium, providerConnected: false, message: "Stripe was not connected yet. Connect Stripe to enable live checkout for premium access." });
+    const recentInvoices = await db.select().from(paymentInvoicesTable).where(eq(paymentInvoicesTable.userId, user.id)).orderBy(desc(paymentInvoicesTable.createdAt)).limit(10);
+    res.json({
+      premium: user.premium,
+      providerConnected: isQPayConfigured(),
+      message: isQPayConfigured() ? "QPay is configured for live invoice creation." : "QPay credentials are not configured yet. Add merchant credentials as environment variables before taking live payments.",
+      recentInvoices: recentInvoices.map((invoice) => invoiceToResponse(invoice)),
+      products: [
+        { productId: "lesson:LESSON_ID", name: "Single lesson", amount: 4900, currency: "MNT" },
+        { productId: "level:1", name: "Level 1 package", amount: 29000, currency: "MNT" },
+        { productId: "course:full", name: "Full 90-day course", amount: 79000, currency: "MNT" },
+      ],
+    });
   } catch (error) {
     next(error);
   }
@@ -545,7 +739,87 @@ router.post("/payments/checkout", async (req, res, next) => {
   try {
     CreateCheckoutSessionBody.parse(req.body);
     await getCurrentUser(req);
-    res.json({ checkoutUrl: null, providerConnected: false, message: "Stripe checkout is ready to connect, but the Stripe account authorization was skipped." });
+    res.json({ checkoutUrl: null, providerConnected: isQPayConfigured(), message: "Stripe is not used. Use QPay invoice endpoints for Mongolian payments." });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/payments/qpay/invoices", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    const body = CreateQpayInvoiceBody.parse(req.body);
+    const product = await resolveProduct(body.productId);
+    const invoiceCode = `E90-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+    const qpay = await createQPayInvoice({
+      invoiceCode,
+      productName: product.productName,
+      amount: product.amount,
+      callbackUrl: `${getPublicBaseUrl(req)}/api/payments/qpay/callback`,
+    });
+
+    const [invoice] = await db.insert(paymentInvoicesTable).values({
+      userId: user.id,
+      invoiceCode,
+      qpayInvoiceId: qpay.qpayInvoiceId || null,
+      paymentStatus: "pending",
+      productId: product.productId,
+      productName: product.productName,
+      amount: product.amount,
+      qrText: qpay.qrText || null,
+      qrImage: qpay.qrImage || null,
+      paymentUrl: qpay.paymentUrl || null,
+      providerPayload: qpay.raw,
+    }).returning();
+
+    res.json(invoiceToResponse(invoice, qpay.providerConnected, qpay.message));
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/payments/qpay/invoices/:invoiceId", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    const { invoiceId } = GetQpayInvoiceParams.parse(req.params);
+    const [invoice] = await db.select().from(paymentInvoicesTable).where(and(eq(paymentInvoicesTable.id, invoiceId), eq(paymentInvoicesTable.userId, user.id))).limit(1);
+    if (!invoice) return res.status(404).json({ error: "Invoice not found" });
+    res.json(invoiceToResponse(invoice));
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/payments/qpay/invoices/:invoiceId/check", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    const { invoiceId } = CheckQpayInvoiceParams.parse(req.params);
+    const [invoice] = await db.select().from(paymentInvoicesTable).where(and(eq(paymentInvoicesTable.id, invoiceId), eq(paymentInvoicesTable.userId, user.id))).limit(1);
+    if (!invoice) return res.status(404).json({ error: "Invoice not found" });
+
+    const qpayStatus = await checkQPayInvoiceStatus(invoice.qpayInvoiceId ?? "", invoice.invoiceCode);
+    const updated = await updateInvoiceStatus(invoice, qpayStatus.status, qpayStatus.raw);
+    res.json(invoiceToResponse(updated, qpayStatus.providerConnected, qpayStatus.message));
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/payments/qpay/callback", async (req, res, next) => {
+  try {
+    if (!verifyQPayWebhook(req.headers)) {
+      return res.status(401).json({ error: "Invalid QPay webhook token" });
+    }
+
+    const invoiceCode = String(req.body?.invoice_code ?? req.body?.invoiceCode ?? req.body?.sender_invoice_no ?? "");
+    const qpayInvoiceId = String(req.body?.invoice_id ?? req.body?.qpayInvoiceId ?? "");
+    const rawStatus = String(req.body?.payment_status ?? req.body?.status ?? req.body?.state ?? "").toLowerCase();
+    const status: QPayInvoiceStatus = rawStatus.includes("paid") || rawStatus.includes("success") ? "paid" : rawStatus.includes("fail") ? "failed" : rawStatus.includes("expire") ? "expired" : "pending";
+    const [invoice] = await db.select().from(paymentInvoicesTable).where(invoiceCode ? eq(paymentInvoicesTable.invoiceCode, invoiceCode) : eq(paymentInvoicesTable.qpayInvoiceId, qpayInvoiceId)).limit(1);
+    if (!invoice) return res.status(404).json({ error: "Invoice not found" });
+
+    const updated = await updateInvoiceStatus(invoice, status, req.body);
+    res.json({ success: true, invoice: invoiceToResponse(updated) });
   } catch (error) {
     next(error);
   }
@@ -555,8 +829,9 @@ router.get("/admin/lessons", async (req, res, next) => {
   try {
     const user = await getCurrentUser(req);
     ensureAdmin(user);
+    const unlocks = await getUnlockedProducts(user.id);
     const lessons = await db.select().from(lessonsTable).orderBy(lessonsTable.day);
-    res.json(lessons.map((lesson) => ({ ...toLessonDetail(lesson, user), correctAnswers: lesson.quiz.map((question) => ({ questionId: question.id, answer: question.correctAnswer })) })));
+    res.json(lessons.map((lesson) => ({ ...toLessonDetail(lesson, user, undefined, unlocks), correctAnswers: lesson.quiz.map((question) => ({ questionId: question.id, answer: question.correctAnswer })) })));
   } catch (error) {
     next(error);
   }
@@ -568,7 +843,7 @@ router.post("/admin/lessons", async (req, res, next) => {
     ensureAdmin(user);
     const body = AdminCreateLessonBody.parse(req.body);
     const [lesson] = await db.insert(lessonsTable).values(body).returning();
-    res.json({ ...toLessonDetail(lesson, user), correctAnswers: lesson.quiz.map((question) => ({ questionId: question.id, answer: question.correctAnswer })) });
+    res.json({ ...toLessonDetail(lesson, user, undefined, new Set(["course:full"])), correctAnswers: lesson.quiz.map((question) => ({ questionId: question.id, answer: question.correctAnswer })) });
   } catch (error) {
     next(error);
   }
@@ -582,7 +857,7 @@ router.put("/admin/lessons/:lessonId", async (req, res, next) => {
     const body = AdminUpdateLessonBody.parse(req.body);
     const [lesson] = await db.update(lessonsTable).set({ ...body, updatedAt: new Date() }).where(eq(lessonsTable.id, lessonId)).returning();
     if (!lesson) return res.status(404).json({ error: "Lesson not found" });
-    res.json({ ...toLessonDetail(lesson, user), correctAnswers: lesson.quiz.map((question) => ({ questionId: question.id, answer: question.correctAnswer })) });
+    res.json({ ...toLessonDetail(lesson, user, undefined, new Set(["course:full"])), correctAnswers: lesson.quiz.map((question) => ({ questionId: question.id, answer: question.correctAnswer })) });
   } catch (error) {
     next(error);
   }

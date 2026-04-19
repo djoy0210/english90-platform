@@ -24,6 +24,34 @@ export type StoredQuizQuestion = {
   correctAnswer: string;
 };
 
+export type LessonTemplateContent = {
+  page1?: {
+    grammarTopic?: string;
+    grammarExplanation?: string;
+    grammarTable?: Array<Record<string, string>>;
+    quickPractice?: string[];
+    commonMistakes?: string[];
+    answerKey?: string[];
+  };
+  page2?: {
+    readingPassage?: string;
+    keyPhrases?: Array<{ english: string; mongolian: string; note?: string }>;
+    speakingQuestions?: string[];
+    rolePlay?: Array<{ speaker: string; text: string }>;
+    speakingTip?: string;
+  };
+  page3?: {
+    listeningScript?: string;
+    comprehensionQuestions?: StoredQuizQuestion[];
+    grammarPractice?: string[];
+    matchingExercise?: Array<{ left: string; right: string }>;
+    homework?: string[];
+    answerKey?: string[];
+    completionSummary?: string[];
+    nextLessonPreview?: string;
+  };
+};
+
 export const usersTable = pgTable("users", {
   id: text("id").primaryKey(),
   clerkUserId: text("clerk_user_id").notNull().unique(),
@@ -50,6 +78,8 @@ export const lessonsTable = pgTable(
     objectiveMn: text("objective_mn").notNull(),
     contentEn: text("content_en").notNull(),
     contentMn: text("content_mn").notNull(),
+    lessonContent: jsonb("lesson_content").$type<LessonTemplateContent>(),
+    pdfUrl: text("pdf_url"),
     durationMinutes: integer("duration_minutes").notNull().default(20),
     isPremium: boolean("is_premium").notNull().default(false),
     vocabulary: jsonb("vocabulary").$type<VocabularyItem[]>().notNull(),
@@ -112,6 +142,52 @@ export const quizAttemptsTable = pgTable("quiz_attempts", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+export const paymentInvoicesTable = pgTable(
+  "payment_invoices",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => usersTable.id, { onDelete: "cascade" }),
+    invoiceCode: text("invoice_code").notNull(),
+    qpayInvoiceId: text("qpay_invoice_id"),
+    paymentStatus: text("payment_status").notNull().default("pending"),
+    productId: text("product_id").notNull(),
+    productName: text("product_name").notNull(),
+    amount: integer("amount").notNull(),
+    currency: text("currency").notNull().default("MNT"),
+    unlockStatus: text("unlock_status").notNull().default("locked"),
+    qrText: text("qr_text"),
+    qrImage: text("qr_image"),
+    paymentUrl: text("payment_url"),
+    providerPayload: jsonb("provider_payload").$type<Record<string, unknown>>(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  },
+  (table) => [uniqueIndex("payment_invoices_invoice_code_unique").on(table.invoiceCode)],
+);
+
+export const contentUnlocksTable = pgTable(
+  "content_unlocks",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => usersTable.id, { onDelete: "cascade" }),
+    productId: text("product_id").notNull(),
+    lessonId: uuid("lesson_id").references(() => lessonsTable.id, {
+      onDelete: "cascade",
+    }),
+    level: integer("level"),
+    unlockedByInvoiceId: uuid("unlocked_by_invoice_id").references(() => paymentInvoicesTable.id, {
+      onDelete: "set null",
+    }),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+  },
+  (table) => [uniqueIndex("content_unlocks_user_product_unique").on(table.userId, table.productId)],
+);
+
 export type User = typeof usersTable.$inferSelect;
 export type Lesson = typeof lessonsTable.$inferSelect;
 export type FinalTest = typeof finalTestsTable.$inferSelect;
+export type PaymentInvoice = typeof paymentInvoicesTable.$inferSelect;

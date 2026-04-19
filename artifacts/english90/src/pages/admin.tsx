@@ -57,6 +57,34 @@ function parseQuiz(value: string) {
     .filter((item) => item.promptEn && item.promptMn && item.options.length > 0 && item.correctAnswer);
 }
 
+const emptyLessonContent = {
+  page1: {
+    grammarTopic: "",
+    grammarExplanation: "",
+    grammarTable: [],
+    quickPractice: [],
+    commonMistakes: [],
+    answerKey: [],
+  },
+  page2: {
+    readingPassage: "",
+    keyPhrases: [],
+    speakingQuestions: [],
+    rolePlay: [],
+    speakingTip: "",
+  },
+  page3: {
+    listeningScript: "",
+    comprehensionQuestions: [],
+    grammarPractice: [],
+    matchingExercise: [],
+    homework: [],
+    answerKey: [],
+    completionSummary: [],
+    nextLessonPreview: "",
+  },
+};
+
 export default function Admin() {
   const { data: lessons, isLoading } = useAdminListLessons();
   const deleteLesson = useAdminDeleteLesson();
@@ -78,6 +106,8 @@ export default function Admin() {
     objectiveMn: "",
     contentEn: "",
     contentMn: "",
+    lessonContent: emptyLessonContent as any,
+    pdfUrl: null as string | null,
     durationMinutes: 20,
     isPremium: false,
     vocabulary: [] as any[],
@@ -86,7 +116,7 @@ export default function Admin() {
 
   const handleOpenCreate = () => {
     setFormData({
-      day: 1, level: 1, titleEn: "", titleMn: "", objectiveEn: "", objectiveMn: "", contentEn: "", contentMn: "", durationMinutes: 60, isPremium: false, vocabulary: [], quiz: []
+      day: 1, level: 1, titleEn: "", titleMn: "", objectiveEn: "", objectiveMn: "", contentEn: "", contentMn: "", lessonContent: emptyLessonContent, pdfUrl: null, durationMinutes: 60, isPremium: false, vocabulary: [], quiz: []
     });
     setEditingLessonId(null);
     setIsDialogOpen(true);
@@ -102,6 +132,8 @@ export default function Admin() {
       objectiveMn: lesson.objectiveMn || "",
       contentEn: lesson.contentEn || "",
       contentMn: lesson.contentMn || "",
+      lessonContent: lesson.lessonContent || emptyLessonContent,
+      pdfUrl: lesson.pdfUrl || null,
       durationMinutes: lesson.durationMinutes,
       isPremium: lesson.isPremium,
       vocabulary: lesson.vocabulary || [],
@@ -129,9 +161,10 @@ export default function Admin() {
   };
 
   const handleSave = () => {
+    const { lessonContentText, ...payload } = formData as any;
     if (editingLessonId) {
       updateLesson.mutate(
-        { lessonId: editingLessonId, data: formData },
+        { lessonId: editingLessonId, data: payload },
         {
           onSuccess: () => {
             toast({ title: "Хадгалагдлаа", description: "Хичээл амжилттай шинэчлэгдлээ." });
@@ -145,7 +178,7 @@ export default function Admin() {
       );
     } else {
       createLesson.mutate(
-        { data: formData },
+        { data: payload },
         {
           onSuccess: () => {
             toast({ title: "Үүсгэгдлээ", description: "Хичээл амжилттай үүслээ." });
@@ -158,6 +191,21 @@ export default function Admin() {
         }
       );
     }
+  };
+
+  const handleLessonContentChange = (value: string) => {
+    try {
+      setFormData({ ...formData, lessonContent: JSON.parse(value) });
+    } catch {
+      setFormData({ ...formData, lessonContentText: value } as any);
+    }
+  };
+
+  const handlePdfUpload = (file?: File) => {
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => setFormData({ ...formData, pdfUrl: String(reader.result) });
+    reader.readAsDataURL(file);
   };
 
   if (isLoading) {
@@ -252,6 +300,29 @@ export default function Admin() {
                   onChange={(e) => setFormData({...formData, vocabulary: parseVocabulary(e.target.value)})}
                   placeholder={"Hello | /həˈloʊ/ | Сайн уу | Hello! My name is Bat.\nHi | /haɪ/ | Сайн уу | Hi! How are you?"}
                 />
+              </div>
+              <div className="space-y-2">
+                <Label>Reusable 3-page lesson template JSON</Label>
+                <p className="text-xs text-muted-foreground">
+                  Page 1, Page 2, Page 3 structured content. This powers the dynamic lesson page.
+                </p>
+                <Textarea
+                  className="min-h-80 font-mono text-xs"
+                  value={(formData as any).lessonContentText ?? JSON.stringify(formData.lessonContent || emptyLessonContent, null, 2)}
+                  onChange={(e) => handleLessonContentChange(e.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Optional PDF upload / эх PDF</Label>
+                <Input type="file" accept="application/pdf" onChange={(e) => handlePdfUpload(e.target.files?.[0])} />
+                {formData.pdfUrl && (
+                  <div className="flex items-center justify-between rounded-md border p-3 text-sm">
+                    <span>PDF attached</span>
+                    <Button type="button" variant="outline" size="sm" onClick={() => setFormData({ ...formData, pdfUrl: null })}>
+                      Remove
+                    </Button>
+                  </div>
+                )}
               </div>
               <div className="space-y-2">
                 <Label>Сорил / quiz questions</Label>

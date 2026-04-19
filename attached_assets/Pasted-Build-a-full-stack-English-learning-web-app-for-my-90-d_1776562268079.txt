@@ -1,0 +1,159 @@
+Build a full-stack English learning web app for my 90-day self-study English course. The website must be fully functional, mobile-friendly, clean, modern, and easy for Mongolian students to use.
+
+Main goal:
+Users can sign up, log in, study lessons day by day, take quizzes/tests, save their scores and progress, and unlock paid content after successful payment. I want an admin panel to manage lessons, quizzes, and users.
+
+Core requirements:
+
+1. User authentication
+- Sign up, log in, log out
+- Email + password authentication
+- User profile page
+- Dashboard showing:
+  - current level
+  - completed lessons
+  - quiz scores
+  - unlocked content
+  - progress percentage
+
+2. Course structure
+- The course is called: “90 Days English Self-Study Program”
+- Structure:
+  - Level 1: Days 1–30
+  - Level 2: Days 31–60
+  - Level 3: Days 61–90
+- Each lesson page should include:
+  - lesson title
+  - vocabulary section
+  - grammar explanation
+  - reading section
+  - listening script section
+  - practice section
+  - homework
+  - self-check
+  - quiz/test button
+
+3. Quiz and test system
+- Each lesson has a quiz
+- Support these question types:
+  - multiple choice
+  - true/false
+  - fill in the blank
+- Show score immediately after submission
+- Save score to database
+- Save whether the lesson is passed or not
+- Show quiz history in user dashboard
+- Prevent users from editing score manually
+- Optional: require at least 70% to mark lesson completed
+
+4. Progress tracking
+- Track completed lessons
+- Track locked/unlocked lessons
+- Show progress bar
+- Show percentage completed for each level and full course
+- Dashboard should clearly show:
+  - lessons completed
+  - next lesson
+  - average score
+  - total progress
+
+5. Payment system
+I am based in Mongolia, so do NOT use Stripe as the main payment system.
+Use a payment structure that supports local Mongolian payment flow.
+
+I want the app architecture ready for QPay integration.
+Create:
+- pricing page
+- checkout page
+- payment status page
+- unlock content after successful payment
+
+Products:
+- Single lesson purchase
+- Full Level 1 purchase
+- Full 90-day course purchase
+
+Payment logic:
+- when payment is successful, automatically unlock the correct lesson/package
+- save payment record in database
+- show payment history in user account
+
+For now:
+- create a clean payment module with placeholders and clear backend endpoints for QPay integration
+- structure it so I can later connect merchant credentials and payment verification
+- include invoice ID, payment status, unlock rule, and webhook handling structure
+
+6. Admin panel
+Create a secure admin dashboard where admin can:
+- create lessons
+- edit lessons
+- delete lessons
+- create quizzes
+- edit quiz answers
+- see users
+- see payment records
+- manually unlock lessons if needed
+- view student progress and scores
+
+7. Pages required
+- Home page
+- About the course page
+- Pricing page
+- Login page
+- Register page
+- Student dashboard
+- Lesson list page
+- Single lesson page
+- Quiz page
+- Results page
+- Payment page
+- Payment success / failed page
+- Contact page
+- Admin dashboard
+
+8. Design requirements
+- Premium, professional, modern design
+- Clean typography
+- Soft colors, trustworthy educational feel
+- Fully responsive for mobile and desktop
+- Easy navigation
+- Dashboard should feel like a real online learning platform
+- Use cards, progress bars, buttons, status badges, and clean layouts
+
+9. Technical requirements
+- Build as a real full-stack app
+- Use a database for users, lessons, quizzes, scores, purchases, and progress
+- Keep code organized and scalable
+- Add protected routes for logged-in students and admin-only pages
+- Add seed/sample content for a few lessons and quizzes so I can test immediately
+- Include comments in code where QPay integration should be connected
+- Create clear API endpoints for:
+  - creating payment invoice
+  - checking payment status
+  - handling payment callback/webhook
+  - unlocking purchased content
+
+10. Sample pricing
+Use placeholder pricing:
+- 1 lesson = 4,900 MNT
+- Level 1 = 29,000 MNT
+- Full 90 days = 79,000 MNT
+
+11. Extra features
+- search lessons
+- filter by level
+- student can retake quiz
+- best score and latest score should both be saved
+- show completion certificate page placeholder for future
+- add contact/support form placeholder
+
+12. Important instruction
+Do not build this as a simple static website.
+Build it as a working online course platform with authentication, database, quiz logic, progress tracking, payment-ready architecture, and admin management.
+
+13. Final output
+After generating the app:
+- explain project structure
+- explain where to connect QPay API
+- explain which files handle auth, lessons, quizzes, payments, and admin
+- provide simple steps to deploy

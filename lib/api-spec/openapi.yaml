@@ -227,6 +227,81 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CheckoutResponse"
+  /payments/qpay/invoices:
+    post:
+      operationId: createQpayInvoice
+      tags: [payments]
+      summary: Create QPay invoice and QR data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateQpayInvoiceRequest"
+      responses:
+        "200":
+          description: QPay invoice
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QpayInvoice"
+  /payments/qpay/invoices/{invoiceId}:
+    get:
+      operationId: getQpayInvoice
+      tags: [payments]
+      summary: Get QPay invoice status data
+      parameters:
+        - name: invoiceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: QPay invoice
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QpayInvoice"
+  /payments/qpay/invoices/{invoiceId}/check:
+    post:
+      operationId: checkQpayInvoice
+      tags: [payments]
+      summary: Check QPay invoice payment status
+      parameters:
+        - name: invoiceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Updated QPay invoice
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QpayInvoice"
+  /payments/qpay/callback:
+    post:
+      operationId: handleQpayCallback
+      tags: [payments]
+      summary: Handle QPay payment webhook callback
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QpayCallbackRequest"
+      responses:
+        "200":
+          description: Callback handled
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                required: [success]
   /admin/lessons:
     get:
       operationId: adminListLessons
@@ -384,6 +459,9 @@ components:
             objectiveMn: { type: string }
             contentEn: { type: string }
             contentMn: { type: string }
+            lessonContent:
+              $ref: "#/components/schemas/LessonTemplateContent"
+            pdfUrl: { type: string, nullable: true }
             vocabulary:
               type: array
               items:
@@ -392,7 +470,10 @@ components:
               type: array
               items:
                 $ref: "#/components/schemas/QuizQuestion"
-          required: [objectiveEn, objectiveMn, contentEn, contentMn, vocabulary, quiz]
+          required: [objectiveEn, objectiveMn, contentEn, contentMn, lessonContent, pdfUrl, vocabulary, quiz]
+    LessonTemplateContent:
+      type: object
+      additionalProperties: true
     VocabularyItem:
       type: object
       properties:
@@ -500,7 +581,21 @@ components:
         premium: { type: boolean }
         providerConnected: { type: boolean }
         message: { type: string }
-      required: [premium, providerConnected, message]
+        recentInvoices:
+          type: array
+          items:
+            $ref: "#/components/schemas/QpayInvoice"
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              productId: { type: string }
+              name: { type: string }
+              amount: { type: integer }
+              currency: { type: string }
+            required: [productId, name, amount, currency]
+      required: [premium, providerConnected, message, recentInvoices, products]
     CreateCheckoutRequest:
       type: object
       properties:
@@ -513,6 +608,36 @@ components:
         providerConnected: { type: boolean }
         message: { type: string }
       required: [checkoutUrl, providerConnected, message]
+    CreateQpayInvoiceRequest:
+      type: object
+      properties:
+        productId:
+          type: string
+          examples: ["lesson:LESSON_UUID", "level:1", "course:full"]
+      required: [productId]
+    QpayCallbackRequest:
+      type: object
+      additionalProperties: true
+    QpayInvoice:
+      type: object
+      properties:
+        id: { type: string }
+        invoiceCode: { type: string }
+        qpayInvoiceId: { type: string, nullable: true }
+        paymentStatus: { type: string, enum: [pending, paid, failed, expired] }
+        productId: { type: string }
+        productName: { type: string }
+        amount: { type: integer }
+        currency: { type: string }
+        unlockStatus: { type: string, enum: [locked, unlocked] }
+        qrText: { type: string, nullable: true }
+        qrImage: { type: string, nullable: true }
+        paymentUrl: { type: string, nullable: true }
+        providerConnected: { type: boolean }
+        message: { type: string, nullable: true }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+      required: [id, invoiceCode, paymentStatus, productId, productName, amount, currency, unlockStatus, providerConnected, createdAt, updatedAt]
     AdminLesson:
       allOf:
         - $ref: "#/components/schemas/LessonDetail"
@@ -538,6 +663,9 @@ components:
         objectiveMn: { type: string }
         contentEn: { type: string }
         contentMn: { type: string }
+        lessonContent:
+          $ref: "#/components/schemas/LessonTemplateContent"
+        pdfUrl: { type: string, nullable: true }
         durationMinutes: { type: integer }
         isPremium: { type: boolean }
         vocabulary:

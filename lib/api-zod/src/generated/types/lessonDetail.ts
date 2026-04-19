@@ -6,6 +6,7 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { LessonSummary } from "./lessonSummary";
+import type { LessonTemplateContent } from "./lessonTemplateContent";
 import type { QuizQuestion } from "./quizQuestion";
 import type { VocabularyItem } from "./vocabularyItem";
 
@@ -14,6 +15,8 @@ export type LessonDetail = LessonSummary & {
   objectiveMn: string;
   contentEn: string;
   contentMn: string;
+  lessonContent: LessonTemplateContent;
+  pdfUrl: string | null;
   vocabulary: VocabularyItem[];
   quiz: QuizQuestion[];
 };

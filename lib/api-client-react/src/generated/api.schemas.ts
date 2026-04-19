@@ -80,6 +80,10 @@ export interface LessonSummary {
   bestScore: number | null;
 }
 
+export interface LessonTemplateContent {
+  [key: string]: unknown;
+}
+
 export interface VocabularyItem {
   english: string;
   pronunciation?: string;
@@ -92,6 +96,8 @@ export type LessonDetail = LessonSummary & {
   objectiveMn: string;
   contentEn: string;
   contentMn: string;
+  lessonContent: LessonTemplateContent;
+  pdfUrl: string | null;
   vocabulary: VocabularyItem[];
   quiz: QuizQuestion[];
 };
@@ -167,10 +173,56 @@ export interface Dashboard {
   levelProgress: DashboardLevelProgressItem[];
 }
 
+export type PaymentStatusProductsItem = {
+  productId: string;
+  name: string;
+  amount: number;
+  currency: string;
+};
+
+export type QpayInvoicePaymentStatus =
+  (typeof QpayInvoicePaymentStatus)[keyof typeof QpayInvoicePaymentStatus];
+
+export const QpayInvoicePaymentStatus = {
+  pending: "pending",
+  paid: "paid",
+  failed: "failed",
+  expired: "expired",
+} as const;
+
+export type QpayInvoiceUnlockStatus =
+  (typeof QpayInvoiceUnlockStatus)[keyof typeof QpayInvoiceUnlockStatus];
+
+export const QpayInvoiceUnlockStatus = {
+  locked: "locked",
+  unlocked: "unlocked",
+} as const;
+
+export interface QpayInvoice {
+  id: string;
+  invoiceCode: string;
+  qpayInvoiceId?: string | null;
+  paymentStatus: QpayInvoicePaymentStatus;
+  productId: string;
+  productName: string;
+  amount: number;
+  currency: string;
+  unlockStatus: QpayInvoiceUnlockStatus;
+  qrText?: string | null;
+  qrImage?: string | null;
+  paymentUrl?: string | null;
+  providerConnected: boolean;
+  message?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface PaymentStatus {
   premium: boolean;
   providerConnected: boolean;
   message: string;
+  recentInvoices: QpayInvoice[];
+  products: PaymentStatusProductsItem[];
 }
 
 export type CreateCheckoutRequestPlan =
@@ -188,6 +240,14 @@ export interface CheckoutResponse {
   checkoutUrl: string | null;
   providerConnected: boolean;
   message: string;
+}
+
+export interface CreateQpayInvoiceRequest {
+  productId: string;
+}
+
+export interface QpayCallbackRequest {
+  [key: string]: unknown;
 }
 
 export type AdminLessonCorrectAnswersItem = {
@@ -224,6 +284,8 @@ export interface UpsertLessonRequest {
   objectiveMn: string;
   contentEn: string;
   contentMn: string;
+  lessonContent?: LessonTemplateContent;
+  pdfUrl?: string | null;
   durationMinutes: number;
   isPremium: boolean;
   vocabulary: VocabularyItem[];
@@ -233,3 +295,7 @@ export interface UpsertLessonRequest {
 export interface MutationResult {
   success: boolean;
 }
+
+export type HandleQpayCallback200 = {
+  success: boolean;
+};

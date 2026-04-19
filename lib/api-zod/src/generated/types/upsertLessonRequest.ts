@@ -5,6 +5,7 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { LessonTemplateContent } from "./lessonTemplateContent";
 import type { UpsertLessonRequestQuizItem } from "./upsertLessonRequestQuizItem";
 import type { VocabularyItem } from "./vocabularyItem";
 
@@ -25,6 +26,8 @@ export interface UpsertLessonRequest {
   objectiveMn: string;
   contentEn: string;
   contentMn: string;
+  lessonContent?: LessonTemplateContent;
+  pdfUrl?: string | null;
   durationMinutes: number;
   isPremium: boolean;
   vocabulary: VocabularyItem[];

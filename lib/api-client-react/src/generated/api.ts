@@ -20,8 +20,10 @@ import type {
   AdminLesson,
   CheckoutResponse,
   CreateCheckoutRequest,
+  CreateQpayInvoiceRequest,
   Dashboard,
   FinalTestDetail,
+  HandleQpayCallback200,
   HealthStatus,
   LessonDetail,
   LessonSummary,
@@ -29,6 +31,8 @@ import type {
   PaymentStatus,
   PlacementTestDetail,
   PlacementTestResult,
+  QpayCallbackRequest,
+  QpayInvoice,
   QuizAttemptResult,
   SubmitPlacementTestRequest,
   SubmitQuizRequest,
@@ -1076,6 +1080,350 @@ export const useCreateCheckoutSession = <
   TContext
 > => {
   return useMutation(getCreateCheckoutSessionMutationOptions(options));
+};
+
+/**
+ * @summary Create QPay invoice and QR data
+ */
+export const getCreateQpayInvoiceUrl = () => {
+  return `/api/payments/qpay/invoices`;
+};
+
+export const createQpayInvoice = async (
+  createQpayInvoiceRequest: CreateQpayInvoiceRequest,
+  options?: RequestInit,
+): Promise<QpayInvoice> => {
+  return customFetch<QpayInvoice>(getCreateQpayInvoiceUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(createQpayInvoiceRequest),
+  });
+};
+
+export const getCreateQpayInvoiceMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createQpayInvoice>>,
+    TError,
+    { data: BodyType<CreateQpayInvoiceRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof createQpayInvoice>>,
+  TError,
+  { data: BodyType<CreateQpayInvoiceRequest> },
+  TContext
+> => {
+  const mutationKey = ["createQpayInvoice"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof createQpayInvoice>>,
+    { data: BodyType<CreateQpayInvoiceRequest> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createQpayInvoice(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreateQpayInvoiceMutationResult = NonNullable<
+  Awaited<ReturnType<typeof createQpayInvoice>>
+>;
+export type CreateQpayInvoiceMutationBody = BodyType<CreateQpayInvoiceRequest>;
+export type CreateQpayInvoiceMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Create QPay invoice and QR data
+ */
+export const useCreateQpayInvoice = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createQpayInvoice>>,
+    TError,
+    { data: BodyType<CreateQpayInvoiceRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof createQpayInvoice>>,
+  TError,
+  { data: BodyType<CreateQpayInvoiceRequest> },
+  TContext
+> => {
+  return useMutation(getCreateQpayInvoiceMutationOptions(options));
+};
+
+/**
+ * @summary Get QPay invoice status data
+ */
+export const getGetQpayInvoiceUrl = (invoiceId: string) => {
+  return `/api/payments/qpay/invoices/${invoiceId}`;
+};
+
+export const getQpayInvoice = async (
+  invoiceId: string,
+  options?: RequestInit,
+): Promise<QpayInvoice> => {
+  return customFetch<QpayInvoice>(getGetQpayInvoiceUrl(invoiceId), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getGetQpayInvoiceQueryKey = (invoiceId: string) => {
+  return [`/api/payments/qpay/invoices/${invoiceId}`] as const;
+};
+
+export const getGetQpayInvoiceQueryOptions = <
+  TData = Awaited<ReturnType<typeof getQpayInvoice>>,
+  TError = ErrorType<unknown>,
+>(
+  invoiceId: string,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getQpayInvoice>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getGetQpayInvoiceQueryKey(invoiceId);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof getQpayInvoice>>> = ({
+    signal,
+  }) => getQpayInvoice(invoiceId, { signal, ...requestOptions });
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!invoiceId,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof getQpayInvoice>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetQpayInvoiceQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getQpayInvoice>>
+>;
+export type GetQpayInvoiceQueryError = ErrorType<unknown>;
+
+/**
+ * @summary Get QPay invoice status data
+ */
+
+export function useGetQpayInvoice<
+  TData = Awaited<ReturnType<typeof getQpayInvoice>>,
+  TError = ErrorType<unknown>,
+>(
+  invoiceId: string,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof getQpayInvoice>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetQpayInvoiceQueryOptions(invoiceId, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Check QPay invoice payment status
+ */
+export const getCheckQpayInvoiceUrl = (invoiceId: string) => {
+  return `/api/payments/qpay/invoices/${invoiceId}/check`;
+};
+
+export const checkQpayInvoice = async (
+  invoiceId: string,
+  options?: RequestInit,
+): Promise<QpayInvoice> => {
+  return customFetch<QpayInvoice>(getCheckQpayInvoiceUrl(invoiceId), {
+    ...options,
+    method: "POST",
+  });
+};
+
+export const getCheckQpayInvoiceMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof checkQpayInvoice>>,
+    TError,
+    { invoiceId: string },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof checkQpayInvoice>>,
+  TError,
+  { invoiceId: string },
+  TContext
+> => {
+  const mutationKey = ["checkQpayInvoice"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof checkQpayInvoice>>,
+    { invoiceId: string }
+  > = (props) => {
+    const { invoiceId } = props ?? {};
+
+    return checkQpayInvoice(invoiceId, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CheckQpayInvoiceMutationResult = NonNullable<
+  Awaited<ReturnType<typeof checkQpayInvoice>>
+>;
+
+export type CheckQpayInvoiceMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Check QPay invoice payment status
+ */
+export const useCheckQpayInvoice = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof checkQpayInvoice>>,
+    TError,
+    { invoiceId: string },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof checkQpayInvoice>>,
+  TError,
+  { invoiceId: string },
+  TContext
+> => {
+  return useMutation(getCheckQpayInvoiceMutationOptions(options));
+};
+
+/**
+ * @summary Handle QPay payment webhook callback
+ */
+export const getHandleQpayCallbackUrl = () => {
+  return `/api/payments/qpay/callback`;
+};
+
+export const handleQpayCallback = async (
+  qpayCallbackRequest?: QpayCallbackRequest,
+  options?: RequestInit,
+): Promise<HandleQpayCallback200> => {
+  return customFetch<HandleQpayCallback200>(getHandleQpayCallbackUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(qpayCallbackRequest),
+  });
+};
+
+export const getHandleQpayCallbackMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof handleQpayCallback>>,
+    TError,
+    { data: BodyType<QpayCallbackRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof handleQpayCallback>>,
+  TError,
+  { data: BodyType<QpayCallbackRequest> },
+  TContext
+> => {
+  const mutationKey = ["handleQpayCallback"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof handleQpayCallback>>,
+    { data: BodyType<QpayCallbackRequest> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return handleQpayCallback(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type HandleQpayCallbackMutationResult = NonNullable<
+  Awaited<ReturnType<typeof handleQpayCallback>>
+>;
+export type HandleQpayCallbackMutationBody = BodyType<QpayCallbackRequest>;
+export type HandleQpayCallbackMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Handle QPay payment webhook callback
+ */
+export const useHandleQpayCallback = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof handleQpayCallback>>,
+    TError,
+    { data: BodyType<QpayCallbackRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof handleQpayCallback>>,
+  TError,
+  { data: BodyType<QpayCallbackRequest> },
+  TContext
+> => {
+  return useMutation(getHandleQpayCallbackMutationOptions(options));
 };
 
 /**

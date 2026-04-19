@@ -5,9 +5,13 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
+import type { PaymentStatusProductsItem } from "./paymentStatusProductsItem";
+import type { QpayInvoice } from "./qpayInvoice";
 
 export interface PaymentStatus {
   premium: boolean;
   providerConnected: boolean;
   message: string;
+  recentInvoices: QpayInvoice[];
+  products: PaymentStatusProductsItem[];
 }

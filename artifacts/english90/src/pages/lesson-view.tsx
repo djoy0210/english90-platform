@@ -140,6 +140,11 @@ export default function LessonView() {
     window.speechSynthesis.speak(utterance);
   };
 
+  const lessonContent = (lesson as any).lessonContent || {};
+  const page1 = lessonContent.page1 || {};
+  const page2 = lessonContent.page2 || {};
+  const page3 = lessonContent.page3 || {};
+
   return (
     <div className="space-y-6 animate-in fade-in duration-500 max-w-4xl mx-auto">
       <Button variant="ghost" className="mb-2 -ml-4" onClick={() => setLocation("/lessons")}>
@@ -159,16 +164,22 @@ export default function LessonView() {
         </div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">{lesson.titleMn}</h1>
         <p className="text-xl text-muted-foreground mt-1">{lesson.titleEn}</p>
+        {(lesson as any).pdfUrl && (
+          <a href={(lesson as any).pdfUrl} target="_blank" rel="noreferrer" className="text-sm text-primary underline mt-2 inline-block">
+            Original PDF / эх PDF харах
+          </a>
+        )}
       </div>
 
-      <Tabs defaultValue="content" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="content">Хичээл</TabsTrigger>
-          <TabsTrigger value="vocab">Шинэ үгс ({lesson.vocabulary.length})</TabsTrigger>
+      <Tabs defaultValue="page1" className="w-full">
+        <TabsList className="grid w-full grid-cols-4">
+          <TabsTrigger value="page1">Page 1</TabsTrigger>
+          <TabsTrigger value="page2">Page 2</TabsTrigger>
+          <TabsTrigger value="page3">Page 3</TabsTrigger>
           <TabsTrigger value="quiz">Сорил</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="content" className="space-y-6 mt-6">
+        <TabsContent value="page1" className="space-y-6 mt-6">
           <Card>
             <CardHeader className="bg-muted/30 border-b">
               <CardTitle className="text-lg flex items-center gap-2">
@@ -203,48 +214,144 @@ export default function LessonView() {
           <Card>
             <CardHeader className="bg-muted/30 border-b">
               <CardTitle className="text-lg flex items-center gap-2">
-                <PlayCircle className="w-5 h-5 text-primary" /> Агуулга
+                <Volume2 className="w-5 h-5 text-primary" /> Vocabulary — 20 New Words
               </CardTitle>
             </CardHeader>
+            <CardContent className="p-0 overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="bg-muted/40 text-left">
+                  <tr>
+                    <th className="p-3">#</th>
+                    <th className="p-3">English</th>
+                    <th className="p-3">Pronunciation</th>
+                    <th className="p-3">Монгол</th>
+                    <th className="p-3">Example</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {lesson.vocabulary.map((vocab, idx) => (
+                    <tr key={idx} className="border-t">
+                      <td className="p-3 text-muted-foreground">{idx + 1}</td>
+                      <td className="p-3">
+                        <button type="button" onClick={() => speakWord(vocab.english)} className="font-bold text-primary hover:underline inline-flex items-center gap-2">
+                          {vocab.english}<Volume2 className="w-4 h-4" />
+                        </button>
+                      </td>
+                      <td className="p-3 text-muted-foreground">{(vocab as any).pronunciation || ""}</td>
+                      <td className="p-3">{vocab.mongolian}</td>
+                      <td className="p-3 italic">{vocab.example}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="bg-muted/30 border-b">
+              <CardTitle>{page1.grammarTopic || "Grammar"}</CardTitle>
+            </CardHeader>
             <CardContent className="p-6 space-y-6">
-              <div className="prose dark:prose-invert max-w-none">
-                <div dangerouslySetInnerHTML={{ __html: lesson.contentMn.replace(/\n/g, '<br/>') }} />
-                <hr className="my-6 border-dashed" />
-                <div className="text-muted-foreground" dangerouslySetInnerHTML={{ __html: lesson.contentEn.replace(/\n/g, '<br/>') }} />
+              <p className="leading-7 whitespace-pre-line">{page1.grammarExplanation || lesson.contentEn}</p>
+              {Array.isArray(page1.grammarTable) && page1.grammarTable.length > 0 && (
+                <div className="overflow-x-auto rounded-lg border">
+                  <table className="w-full text-sm">
+                    <tbody>
+                      {page1.grammarTable.map((row: any, idx: number) => (
+                        <tr key={idx} className="border-t first:border-t-0">
+                          {Object.entries(row).map(([key, value]) => (
+                            <td key={key} className="p-3 align-top">
+                              <span className="block text-xs uppercase text-muted-foreground">{key}</span>
+                              <span className="font-medium">{String(value)}</span>
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              <div className="grid gap-4 md:grid-cols-3">
+                <div className="rounded-lg border p-4">
+                  <h3 className="font-semibold mb-3">Quick Practice</h3>
+                  <ul className="space-y-2 text-sm list-disc pl-5">{(page1.quickPractice || []).map((item: string, idx: number) => <li key={idx}>{item}</li>)}</ul>
+                </div>
+                <div className="rounded-lg border p-4">
+                  <h3 className="font-semibold mb-3">Common Mistakes</h3>
+                  <ul className="space-y-2 text-sm list-disc pl-5">{(page1.commonMistakes || []).map((item: string, idx: number) => <li key={idx}>{item}</li>)}</ul>
+                </div>
+                <div className="rounded-lg border p-4 bg-primary/5">
+                  <h3 className="font-semibold mb-3">Answer Key</h3>
+                  <ul className="space-y-2 text-sm list-disc pl-5">{(page1.answerKey || []).map((item: string, idx: number) => <li key={idx}>{item}</li>)}</ul>
+                </div>
               </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="vocab" className="mt-6">
-          <div className="grid gap-4 md:grid-cols-2">
-            {lesson.vocabulary.map((vocab, idx) => (
-              <Card key={idx} className="overflow-hidden">
-                <div className="h-2 bg-primary/20 w-full" />
-                <CardContent className="p-5">
-                  <div className="flex justify-between items-start gap-3 mb-2">
-                    <button
-                      type="button"
-                      onClick={() => speakWord(vocab.english)}
-                      className="font-bold text-xl text-primary text-left hover:underline flex items-center gap-2"
-                      title="Click to hear pronunciation"
-                    >
-                      {vocab.english}
-                      <Volume2 className="w-4 h-4" />
-                    </button>
-                  </div>
-                  {"pronunciation" in vocab && vocab.pronunciation && (
-                    <p className="text-sm text-muted-foreground mb-2">{vocab.pronunciation}</p>
-                  )}
-                  <p className="font-medium mb-4">{vocab.mongolian}</p>
-                  <div className="bg-muted p-3 rounded-md text-sm border border-border/50">
-                    <span className="text-muted-foreground font-medium mb-1 block">Жишээ:</span>
-                    <p className="italic text-foreground">"{vocab.example}"</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+        <TabsContent value="page2" className="space-y-6 mt-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Reading & Speaking · Унших ба Ярих</CardTitle>
+            </CardHeader>
+            <CardContent className="p-6 space-y-6">
+              <div className="rounded-xl bg-muted/40 p-5 leading-8 whitespace-pre-line">{page2.readingPassage || lesson.contentEn}</div>
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="rounded-lg border p-4">
+                  <h3 className="font-semibold mb-3">Key Phrases</h3>
+                  <div className="space-y-3">{(page2.keyPhrases || []).map((phrase: any, idx: number) => <div key={idx} className="border-b pb-2 last:border-0"><p className="font-medium">{phrase.english}</p><p className="text-sm text-muted-foreground">{phrase.mongolian}</p><p className="text-xs text-primary">{phrase.note}</p></div>)}</div>
+                </div>
+                <div className="rounded-lg border p-4">
+                  <h3 className="font-semibold mb-3">Speaking Questions</h3>
+                  <ol className="space-y-2 list-decimal pl-5">{(page2.speakingQuestions || []).map((item: string, idx: number) => <li key={idx}>{item}</li>)}</ol>
+                </div>
+              </div>
+              <div className="rounded-lg border p-4">
+                <h3 className="font-semibold mb-3">Role Play</h3>
+                <div className="grid gap-3 md:grid-cols-2">{(page2.rolePlay || []).map((line: any, idx: number) => <div key={idx} className="rounded-lg bg-background p-3 border"><span className="font-bold text-primary">{line.speaker}: </span>{line.text}</div>)}</div>
+              </div>
+              <div className="rounded-lg bg-secondary/10 p-4 text-sm font-medium">{page2.speakingTip}</div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="page3" className="space-y-6 mt-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Listening · Practice · Homework</CardTitle>
+            </CardHeader>
+            <CardContent className="p-6 space-y-6">
+              <div>
+                <h3 className="font-semibold mb-2">Listening Script</h3>
+                <div className="rounded-xl bg-muted/40 p-5 leading-8 whitespace-pre-line">{page3.listeningScript}</div>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="rounded-lg border p-4">
+                  <h3 className="font-semibold mb-3">Grammar Practice</h3>
+                  <ol className="space-y-2 list-decimal pl-5">{(page3.grammarPractice || []).map((item: string, idx: number) => <li key={idx}>{item}</li>)}</ol>
+                </div>
+                <div className="rounded-lg border p-4">
+                  <h3 className="font-semibold mb-3">Matching Exercise</h3>
+                  <div className="space-y-2">{(page3.matchingExercise || []).map((item: any, idx: number) => <div key={idx} className="flex justify-between gap-4 text-sm"><span>{item.left}</span><span className="font-medium">{item.right}</span></div>)}</div>
+                </div>
+              </div>
+              <div className="grid gap-4 md:grid-cols-3">
+                <div className="rounded-lg border p-4">
+                  <h3 className="font-semibold mb-3">Homework</h3>
+                  <ul className="space-y-2 list-disc pl-5 text-sm">{(page3.homework || []).map((item: string, idx: number) => <li key={idx}>{item}</li>)}</ul>
+                </div>
+                <div className="rounded-lg border p-4 bg-primary/5">
+                  <h3 className="font-semibold mb-3">Answer Key</h3>
+                  <ul className="space-y-2 list-disc pl-5 text-sm">{(page3.answerKey || []).map((item: string, idx: number) => <li key={idx}>{item}</li>)}</ul>
+                </div>
+                <div className="rounded-lg border p-4">
+                  <h3 className="font-semibold mb-3">Lesson Complete</h3>
+                  <ul className="space-y-2 text-sm">{(page3.completionSummary || []).map((item: string, idx: number) => <li key={idx} className="flex gap-2"><CheckCircle2 className="w-4 h-4 text-primary shrink-0" />{item}</li>)}</ul>
+                  <p className="text-sm text-primary mt-4 font-semibold">{page3.nextLessonPreview}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
 
         <TabsContent value="quiz" className="mt-6">

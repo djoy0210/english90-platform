@@ -163,6 +163,8 @@ export const GetLessonResponse = zod
       objectiveMn: zod.string(),
       contentEn: zod.string(),
       contentMn: zod.string(),
+      lessonContent: zod.record(zod.string(), zod.unknown()),
+      pdfUrl: zod.string().nullable(),
       vocabulary: zod.array(
         zod.object({
           english: zod.string(),
@@ -296,6 +298,34 @@ export const GetPaymentStatusResponse = zod.object({
   premium: zod.boolean(),
   providerConnected: zod.boolean(),
   message: zod.string(),
+  recentInvoices: zod.array(
+    zod.object({
+      id: zod.string(),
+      invoiceCode: zod.string(),
+      qpayInvoiceId: zod.string().nullish(),
+      paymentStatus: zod.enum(["pending", "paid", "failed", "expired"]),
+      productId: zod.string(),
+      productName: zod.string(),
+      amount: zod.number(),
+      currency: zod.string(),
+      unlockStatus: zod.enum(["locked", "unlocked"]),
+      qrText: zod.string().nullish(),
+      qrImage: zod.string().nullish(),
+      paymentUrl: zod.string().nullish(),
+      providerConnected: zod.boolean(),
+      message: zod.string().nullish(),
+      createdAt: zod.string(),
+      updatedAt: zod.string(),
+    }),
+  ),
+  products: zod.array(
+    zod.object({
+      productId: zod.string(),
+      name: zod.string(),
+      amount: zod.number(),
+      currency: zod.string(),
+    }),
+  ),
 });
 
 /**
@@ -309,6 +339,93 @@ export const CreateCheckoutSessionResponse = zod.object({
   checkoutUrl: zod.string().nullable(),
   providerConnected: zod.boolean(),
   message: zod.string(),
+});
+
+/**
+ * @summary Create QPay invoice and QR data
+ */
+export const CreateQpayInvoiceBody = zod.object({
+  productId: zod.string(),
+});
+
+export const CreateQpayInvoiceResponse = zod.object({
+  id: zod.string(),
+  invoiceCode: zod.string(),
+  qpayInvoiceId: zod.string().nullish(),
+  paymentStatus: zod.enum(["pending", "paid", "failed", "expired"]),
+  productId: zod.string(),
+  productName: zod.string(),
+  amount: zod.number(),
+  currency: zod.string(),
+  unlockStatus: zod.enum(["locked", "unlocked"]),
+  qrText: zod.string().nullish(),
+  qrImage: zod.string().nullish(),
+  paymentUrl: zod.string().nullish(),
+  providerConnected: zod.boolean(),
+  message: zod.string().nullish(),
+  createdAt: zod.string(),
+  updatedAt: zod.string(),
+});
+
+/**
+ * @summary Get QPay invoice status data
+ */
+export const GetQpayInvoiceParams = zod.object({
+  invoiceId: zod.coerce.string(),
+});
+
+export const GetQpayInvoiceResponse = zod.object({
+  id: zod.string(),
+  invoiceCode: zod.string(),
+  qpayInvoiceId: zod.string().nullish(),
+  paymentStatus: zod.enum(["pending", "paid", "failed", "expired"]),
+  productId: zod.string(),
+  productName: zod.string(),
+  amount: zod.number(),
+  currency: zod.string(),
+  unlockStatus: zod.enum(["locked", "unlocked"]),
+  qrText: zod.string().nullish(),
+  qrImage: zod.string().nullish(),
+  paymentUrl: zod.string().nullish(),
+  providerConnected: zod.boolean(),
+  message: zod.string().nullish(),
+  createdAt: zod.string(),
+  updatedAt: zod.string(),
+});
+
+/**
+ * @summary Check QPay invoice payment status
+ */
+export const CheckQpayInvoiceParams = zod.object({
+  invoiceId: zod.coerce.string(),
+});
+
+export const CheckQpayInvoiceResponse = zod.object({
+  id: zod.string(),
+  invoiceCode: zod.string(),
+  qpayInvoiceId: zod.string().nullish(),
+  paymentStatus: zod.enum(["pending", "paid", "failed", "expired"]),
+  productId: zod.string(),
+  productName: zod.string(),
+  amount: zod.number(),
+  currency: zod.string(),
+  unlockStatus: zod.enum(["locked", "unlocked"]),
+  qrText: zod.string().nullish(),
+  qrImage: zod.string().nullish(),
+  paymentUrl: zod.string().nullish(),
+  providerConnected: zod.boolean(),
+  message: zod.string().nullish(),
+  createdAt: zod.string(),
+  updatedAt: zod.string(),
+});
+
+/**
+ * @summary Handle QPay payment webhook callback
+ */
+export const HandleQpayCallbackBody = zod.record(zod.string(), zod.unknown());
+
+export const HandleQpayCallbackResponse = zod.object({
+  success: zod.boolean(),
 });
 
 /**
@@ -333,6 +450,8 @@ export const AdminListLessonsResponseItem = zod
       objectiveMn: zod.string(),
       contentEn: zod.string(),
       contentMn: zod.string(),
+      lessonContent: zod.record(zod.string(), zod.unknown()),
+      pdfUrl: zod.string().nullable(),
       vocabulary: zod.array(
         zod.object({
           english: zod.string(),
@@ -379,6 +498,8 @@ export const AdminCreateLessonBody = zod.object({
   objectiveMn: zod.string(),
   contentEn: zod.string(),
   contentMn: zod.string(),
+  lessonContent: zod.record(zod.string(), zod.unknown()).optional(),
+  pdfUrl: zod.string().nullish(),
   durationMinutes: zod.number(),
   isPremium: zod.boolean(),
   vocabulary: zod.array(
@@ -419,6 +540,8 @@ export const AdminCreateLessonResponse = zod
       objectiveMn: zod.string(),
       contentEn: zod.string(),
       contentMn: zod.string(),
+      lessonContent: zod.record(zod.string(), zod.unknown()),
+      pdfUrl: zod.string().nullable(),
       vocabulary: zod.array(
         zod.object({
           english: zod.string(),
@@ -468,6 +591,8 @@ export const AdminUpdateLessonBody = zod.object({
   objectiveMn: zod.string(),
   contentEn: zod.string(),
   contentMn: zod.string(),
+  lessonContent: zod.record(zod.string(), zod.unknown()).optional(),
+  pdfUrl: zod.string().nullish(),
   durationMinutes: zod.number(),
   isPremium: zod.boolean(),
   vocabulary: zod.array(
@@ -508,6 +633,8 @@ export const AdminUpdateLessonResponse = zod
       objectiveMn: zod.string(),
       contentEn: zod.string(),
       contentMn: zod.string(),
+      lessonContent: zod.record(zod.string(), zod.unknown()),
+      pdfUrl: zod.string().nullable(),
       vocabulary: zod.array(
         zod.object({
           english: zod.string(),
