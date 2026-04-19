@@ -22,7 +22,6 @@ export default function Landing() {
           </Button>
         </div>
       </header>
-
       <main className="flex-1">
         {/* Hero Section */}
         <section className="py-20 md:py-32 px-4 md:px-8 max-w-5xl mx-auto text-center space-y-8">
@@ -39,10 +38,7 @@ export default function Landing() {
             <span className="text-primary">өөрийн болго.</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Өдөрт ердөө 20 минут. Цэгцтэй хөтөлбөр, байнгийн сорил, бодит үр дүн.
-            Монгол хүний сурах арга барилд тусгайлан зориулав.
-          </p>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">Өдөрт ердөө 60 минут. Цэгцтэй хөтөлбөр, байнгийн сорил, бодит үр дүн. Монгол хүний сурах арга барилд тусгайлан зориулав.</p>
           
           <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button asChild size="lg" className="w-full sm:w-auto h-14 px-8 text-base">
@@ -106,7 +102,6 @@ export default function Landing() {
           </Button>
         </section>
       </main>
-
       <footer className="border-t py-8 px-4 text-center text-muted-foreground text-sm">
         <p>© {new Date().getFullYear()} English90. Бүх эрх хуулиар хамгаалагдсан.</p>
       </footer>
