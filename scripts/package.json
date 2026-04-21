@@ -12,6 +12,8 @@
     "tsx": "catalog:"
   },
   "dependencies": {
-    "jszip": "^3.10.1"
+    "@neondatabase/serverless": "^1.1.0",
+    "jszip": "^3.10.1",
+    "ws": "^8.20.0"
   }
 }
