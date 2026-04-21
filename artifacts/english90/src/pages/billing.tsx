@@ -19,7 +19,6 @@ const BANK = {
 
 type Product = { id: string; titleMn: string; titleEn: string; amount: number; highlight?: boolean; description: string };
 const PRODUCTS: Product[] = [
-  { id: "lesson:1", titleMn: "Нэг хичээл", titleEn: "Single lesson", amount: 4900, description: "Тухайн нэг premium хичээлийн эрх" },
   { id: "level:1", titleMn: "Level 1 багц (30 хичээл)", titleEn: "Level 1 pack", amount: 29000, highlight: true, description: "Эхлэгчдэд зориулсан 30 хоногийн бүтэн контент" },
   { id: "level:2", titleMn: "Level 2 багц (30 хичээл)", titleEn: "Level 2 pack", amount: 29000, description: "Дунд түвшний 30 хоногийн бүтэн контент" },
   { id: "level:3", titleMn: "Level 3 багц (30 хичээл)", titleEn: "Level 3 pack", amount: 29000, description: "Дээд түвшний 30 хоногийн бүтэн контент" },
@@ -46,7 +45,7 @@ export default function Billing() {
   const [screenshotUrl, setScreenshotUrl] = useState("");
   const [note, setNote] = useState("");
 
-  const selectedProduct = useMemo(() => PRODUCTS.find((p) => p.id === productId) ?? PRODUCTS[1], [productId]);
+  const selectedProduct = useMemo(() => PRODUCTS.find((p) => p.id === productId) ?? PRODUCTS[0], [productId]);
   const hasApproved = (requests ?? []).some((r) => r.status === "approved");
 
   const copy = (val: string, label: string) => {
@@ -88,6 +87,20 @@ export default function Billing() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Багц авах</h1>
         <p className="text-muted-foreground mt-2">Хаан банк руу шилжүүлэг хийгээд гүйлгээний мэдээллээ илгээнэ үү. Админ баталгаажуулмагц контент автоматаар нээгдэнэ.</p>
+      </div>
+
+      <div className="grid gap-3 sm:grid-cols-3">
+        {[
+          { n: "1", t: "Багц сонгох", d: "Танд хэрэгтэй багцаа сонгож, үнийг анхаарна." },
+          { n: "2", t: "Хаан банкаар шилжүүлэх", d: "Дансанд яг үнэн дүнг шилжүүлж, гүйлгээний утга дээр өөрийн email бичнэ." },
+          { n: "3", t: "Хүсэлт илгээх", d: "Гүйлгээний дугаар, төлөгчийн нэрийг доор бөглөж илгээнэ. 24 цагт багтаан баталгаажуулна." },
+        ].map((s) => (
+          <div key={s.n} className="rounded-xl border bg-card p-4">
+            <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground font-bold flex items-center justify-center mb-2">{s.n}</div>
+            <p className="font-semibold">{s.t}</p>
+            <p className="text-xs text-muted-foreground mt-1">{s.d}</p>
+          </div>
+        ))}
       </div>
 
       {hasApproved && (

@@ -17,9 +17,10 @@ export default function FinalTestView() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const { data: test, isLoading } = useGetFinalTest(levelNum, {
-    query: { enabled: !!levelNum, queryKey: getGetFinalTestQueryKey(levelNum) },
+  const { data: test, isLoading, error } = useGetFinalTest(levelNum, {
+    query: { enabled: !!levelNum, queryKey: getGetFinalTestQueryKey(levelNum), retry: false },
   });
+  const accessDenied = (error as any)?.status === 403 || (error as any)?.response?.status === 403;
 
   const submitTest = useSubmitFinalTest();
 
@@ -38,6 +39,22 @@ export default function FinalTestView() {
             <Skeleton className="h-20 w-full" />
           </CardContent>
         </Card>
+      </div>
+    );
+  }
+
+  if (accessDenied) {
+    return (
+      <div className="max-w-2xl mx-auto py-16 text-center space-y-6">
+        <div className="w-20 h-20 mx-auto rounded-full bg-secondary/10 text-secondary-foreground flex items-center justify-center">
+          <Trophy className="w-10 h-10" />
+        </div>
+        <h1 className="text-3xl font-bold">Level {levelNum} шалгалт түгжээтэй</h1>
+        <p className="text-muted-foreground">Энэ шалгалтыг өгөхийн тулд Level {levelNum} багц эсвэл бүтэн курс авсан байх шаардлагатай.</p>
+        <div className="flex gap-3 justify-center">
+          <Button size="lg" onClick={() => setLocation("/billing")}>Багц авах</Button>
+          <Button size="lg" variant="outline" onClick={() => setLocation("/lessons")}>Буцах</Button>
+        </div>
       </div>
     );
   }

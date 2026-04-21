@@ -60,15 +60,15 @@ export default function Lessons() {
                 {levelLessons.map((lesson) => (
                   <Link 
                     key={lesson.id} 
-                    href={lesson.isUnlocked ? `/lessons/${lesson.id}` : "#"}
-                    className={lesson.isUnlocked ? "block" : "block cursor-not-allowed"}
+                    href={lesson.isUnlocked ? `/lessons/${lesson.id}` : "/billing"}
+                    className="block"
                   >
                     <Card className={`h-full transition-all duration-200 border-2 ${
                       lesson.completed 
                         ? 'border-primary/20 bg-primary/5 hover:border-primary/50' 
                         : lesson.isUnlocked 
                           ? 'hover:border-primary hover:shadow-md' 
-                          : 'opacity-60 grayscale-[0.5]'
+                          : 'opacity-70 hover:border-secondary hover:opacity-100'
                     }`}>
                       <CardContent className="p-5 flex flex-col h-full">
                         <div className="flex justify-between items-start mb-4">
@@ -95,7 +95,7 @@ export default function Lessons() {
                             </span>
                           ) : lesson.isPremium && !lesson.isUnlocked ? (
                             <span className="font-medium text-secondary-foreground flex items-center gap-1 bg-secondary/10 px-1.5 py-0.5 rounded">
-                              <Lock className="w-3 h-3" /> Premium
+                              <Lock className="w-3 h-3" /> Level {lesson.level}
                             </span>
                           ) : null}
                         </div>

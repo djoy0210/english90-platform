@@ -76,12 +76,12 @@ export default function PlacementTest() {
           </CardHeader>
           <CardContent className="space-y-6 text-center">
             <div className="rounded-xl bg-muted p-5">
-              <p className="font-semibold text-foreground">Your recommended level is Level {result.level}</p>
-              <p className="text-muted-foreground">Start from Day {result.startingDay}</p>
-              <p className="text-sm text-muted-foreground mt-2">Score: {result.score}/{result.total} ({result.percentage}%)</p>
+              <p className="font-semibold text-foreground">Зөвлөмж: Level {result.level}</p>
+              <p className="text-muted-foreground">Өдөр {result.startingDay}-аас эхлээрэй</p>
+              <p className="text-sm text-muted-foreground mt-2">Оноо: {result.score}/{result.total} ({result.percentage}%)</p>
             </div>
             <Button size="lg" onClick={() => setLocation("/dashboard")} className="w-full sm:w-auto">
-              Миний хичээлийг эхлүүлэх
+              Хянах самбар руу очих
             </Button>
           </CardContent>
         </Card>
@@ -94,18 +94,18 @@ export default function PlacementTest() {
       <div>
         <div className="flex items-center gap-3 mb-2 text-primary">
           <Target className="h-6 w-6" />
-          <span className="font-semibold">Before you start</span>
+          <span className="font-semibold">Эхлэхийн өмнө</span>
         </div>
         <h1 className="text-3xl font-bold tracking-tight">{test.titleMn}</h1>
         <p className="text-muted-foreground mt-2">
-          Answer these questions first. At the end, we will recommend your level and starting day.
+          Эдгээр асуултанд хариулсны эцэст бид таны түвшин болон эхлэх өдрийг санал болгоно. Үнэгүй.
         </p>
       </div>
 
       <Card>
         <CardHeader>
           <CardTitle>{test.titleEn}</CardTitle>
-          <CardDescription>Choose the best answer for each question.</CardDescription>
+          <CardDescription>Асуулт бүрт хамгийн зөв хариултыг сонгоно уу.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-8">
           {test.questions.map((question, index) => (

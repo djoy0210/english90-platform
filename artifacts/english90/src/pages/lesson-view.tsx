@@ -434,7 +434,7 @@ export default function LessonView() {
                     </Button>
                     {quizResult.passed && (
                       <Button onClick={() => setLocation("/lessons")}>
-                        Дараагийн хичээл
+                        Хичээлийн жагсаалт
                       </Button>
                     )}
                   </div>

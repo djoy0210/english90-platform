@@ -41,27 +41,27 @@ import {
 
 const mainNavItems = [
   {
-    title: "Dashboard",
+    title: "Хянах самбар",
     url: "/dashboard",
     icon: LayoutDashboard,
   },
   {
-    title: "Lessons",
+    title: "Хичээлүүд",
     url: "/lessons",
     icon: BookOpen,
   },
   {
-    title: "Placement Test",
+    title: "Шатлалын тест",
     url: "/placement",
     icon: Target,
   },
   {
-    title: "History",
+    title: "Түүх",
     url: "/history",
     icon: HistoryIcon,
   },
   {
-    title: "Premium",
+    title: "Багц авах",
     url: "/billing",
     icon: CreditCard,
   },
@@ -87,7 +87,7 @@ function AppSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Learning</SidebarGroupLabel>
+          <SidebarGroupLabel>Хичээл</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {mainNavItems.map((item) => (
@@ -106,14 +106,14 @@ function AppSidebar() {
 
         {user?.role === "admin" && (
           <SidebarGroup>
-            <SidebarGroupLabel>Administration</SidebarGroupLabel>
+            <SidebarGroupLabel>Удирдлага</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 <SidebarMenuItem>
-                  <SidebarMenuButton asChild isActive={location === "/admin"} tooltip="Admin Panel">
+                  <SidebarMenuButton asChild isActive={location === "/admin"} tooltip="Admin">
                     <Link href="/admin">
                       <ShieldCheck />
-                      <span>Admin Panel</span>
+                      <span>Админ удирдлага</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -158,13 +158,13 @@ function AppSidebar() {
                 <DropdownMenuItem asChild>
                   <Link href="/billing" className="w-full flex items-center cursor-pointer">
                     <CreditCard className="mr-2 h-4 w-4" />
-                    <span>Subscription</span>
+                    <span>Багц авах</span>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => signOut()} className="text-destructive focus:text-destructive cursor-pointer">
                   <LogOut className="mr-2 h-4 w-4" />
-                  <span>Sign out</span>
+                  <span>Гарах</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

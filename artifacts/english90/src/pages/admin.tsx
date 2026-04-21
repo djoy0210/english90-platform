@@ -72,7 +72,7 @@ export default function Admin() {
         <p className="text-muted-foreground mt-1">Хичээл, төлбөр, сурагч, шалгалтыг удирдах</p>
       </div>
       <Tabs defaultValue="payments">
-        <TabsList className="grid grid-cols-4 w-full max-w-2xl">
+        <TabsList className="grid grid-cols-2 sm:grid-cols-4 w-full max-w-2xl h-auto sm:h-10">
           <TabsTrigger value="payments">Төлбөр</TabsTrigger>
           <TabsTrigger value="students">Сурагчид</TabsTrigger>
           <TabsTrigger value="lessons">Хичээлүүд</TabsTrigger>
@@ -233,7 +233,7 @@ function StudentsPanel() {
 }
 
 function StudentDetailDialog({ studentId, onClose }: { studentId: string | null; onClose: () => void }) {
-  const { data, isLoading } = useAdminGetStudent(studentId ?? "", { query: { enabled: !!studentId } });
+  const { data, isLoading } = useAdminGetStudent(studentId ?? "", { query: { enabled: !!studentId, queryKey: getAdminGetStudentQueryKey(studentId ?? "") } });
   const unlock = useAdminUnlockStudentProduct();
   const reset = useAdminResetStudentProgress();
   const queryClient = useQueryClient();
@@ -323,7 +323,7 @@ function StudentDetailDialog({ studentId, onClose }: { studentId: string | null;
                   {data.history.map((h, i) => (
                     <div key={i} className="text-sm flex items-center justify-between border-b py-1.5">
                       <span>{h.type}{h.level ? ` · L${h.level}` : ""}</span>
-                      <span className="font-mono">{h.score}/{h.totalQuestions ?? "?"}</span>
+                      <span className="font-mono">{h.score}/{h.total} ({h.percentage}%)</span>
                     </div>
                   ))}
                 </div>
@@ -364,6 +364,13 @@ function LessonsPanel() {
     setIsDialogOpen(true);
   };
   const handleOpenEdit = (lesson: any) => {
+    const answersByQuestion = new Map<string, string>(
+      (lesson.correctAnswers || []).map((a: any) => [a.questionId, a.answer])
+    );
+    const quizWithAnswers = (lesson.quiz || []).map((q: any) => ({
+      ...q,
+      correctAnswer: q.correctAnswer ?? answersByQuestion.get(q.id) ?? "",
+    }));
     setFormData({
       day: lesson.day, level: lesson.level,
       titleEn: lesson.titleEn, titleMn: lesson.titleMn,
@@ -372,7 +379,7 @@ function LessonsPanel() {
       lessonContent: lesson.lessonContent || emptyLessonContent,
       pdfUrl: lesson.pdfUrl || null, audioUrl: lesson.audioUrl || null,
       durationMinutes: lesson.durationMinutes, isPremium: lesson.isPremium,
-      vocabulary: lesson.vocabulary || [], quiz: lesson.quiz || [],
+      vocabulary: lesson.vocabulary || [], quiz: quizWithAnswers,
     });
     setEditingLessonId(lesson.id);
     setIsDialogOpen(true);
@@ -532,12 +539,20 @@ function FinalTestsPanel() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Шалгалтууд</CardTitle>
-        <CardDescription>Level 1, 2, 3-ын төгсгөлийн шалгалтууд. Контентыг одоохондоо seed-ээр удирдаж байна.</CardDescription>
+        <CardTitle>Түвшний шалгалтууд</CardTitle>
+        <CardDescription>Level 1 / 2 / 3 төгсгөлийн шалгалтуудын төлөв.</CardDescription>
       </CardHeader>
-      <CardContent className="text-sm text-muted-foreground space-y-2">
-        <p>Сурагчид <code>/final-test/level-1</code>-д тухайн түвшний эрхтэй болсныхоо дараа нэвтэрнэ.</p>
-        <p>Дараагийн шинэчлэлтэд: шалгалтын асуултуудыг энд шууд засварлах боломжтой болно.</p>
+      <CardContent className="space-y-3 text-sm">
+        {[1, 2, 3].map((lv) => (
+          <div key={lv} className="flex items-center justify-between rounded-lg border p-3">
+            <div>
+              <p className="font-semibold">Level {lv} шалгалт</p>
+              <p className="text-xs text-muted-foreground">Зам: <code>/final-tests/{lv}</code> · Тэнцэх оноо: 80%</p>
+            </div>
+            <Badge variant="secondary">Идэвхтэй</Badge>
+          </div>
+        ))}
+        <p className="text-xs text-muted-foreground pt-2">Шалгалтын асуултуудыг одоогоор серверийн seed-ээр удирдаж байна. Сурагч тухайн түвшний багц авмагц шалгалт автоматаар нээгдэнэ.</p>
       </CardContent>
     </Card>
   );

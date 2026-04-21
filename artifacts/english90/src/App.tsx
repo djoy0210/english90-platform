@@ -115,7 +115,19 @@ function ProtectedRoute({ component: Component, adminOnly = false }: { component
 
 function ProtectedContent({ component: Component, adminOnly = false }: { component: any, adminOnly?: boolean }) {
   const [location] = useLocation();
-  const { data: user } = useGetMe();
+  const { data: user, isLoading } = useGetMe();
+
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="flex items-center justify-center py-24 text-muted-foreground">Уншиж байна...</div>
+      </Layout>
+    );
+  }
+
+  if (adminOnly && user && user.role !== "admin") {
+    return <Redirect to="/dashboard" />;
+  }
 
   if (user && user.role !== "admin" && !user.placementCompleted && location !== "/placement") {
     return <Redirect to="/placement" />;

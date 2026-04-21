@@ -1,4 +1,4 @@
-import { useGetDashboard, useGetMe, useListMyPaymentRequests } from "@workspace/api-client-react";
+import { useGetDashboard, useGetMe, useListLessons, useListMyPaymentRequests } from "@workspace/api-client-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
@@ -11,8 +11,10 @@ export default function Dashboard() {
   const { data: dashboard, isLoading, error } = useGetDashboard();
   const { data: me } = useGetMe();
   const { data: paymentRequests } = useListMyPaymentRequests();
+  const { data: lessons } = useListLessons();
   const pendingPayment = (paymentRequests ?? []).find((r) => r.status === "pending");
   const hasApproved = (paymentRequests ?? []).some((r) => r.status === "approved");
+  const freeLesson = (lessons ?? []).find((l) => !l.isPremium && l.isUnlocked) ?? (lessons ?? [])[0];
 
   if (isLoading) {
     return (
@@ -51,11 +53,11 @@ export default function Dashboard() {
             Таны 90 өдрийн аялал үргэлжилж байна. Та {dashboard.completedDays} өдрийг амжилттай давлаа.
           </p>
         </div>
-        {!dashboard.premium && (
+        {!dashboard.premium && !hasApproved && (
           <Button asChild variant="outline" className="border-secondary text-secondary-foreground hover:bg-secondary/10">
             <Link href="/billing">
               <Medal className="w-4 h-4 mr-2" />
-              Premium идэвхжүүлэх
+              Багц авах
             </Link>
           </Button>
         )}
@@ -68,10 +70,10 @@ export default function Dashboard() {
               <GraduationCap className="w-6 h-6 text-primary" />
               <div>
                 <p className="font-semibold">Шатлал тогтоох тест өг</p>
-                <p className="text-sm text-muted-foreground">Үнэгүй · Танд тохирох түвшнийг тогтооно</p>
+                <p className="text-sm text-muted-foreground">Үнэгүй · 5 минут · Танд тохирох түвшнийг тогтооно</p>
               </div>
             </div>
-            <Button asChild><Link href="/placement-test">Тест эхлэх</Link></Button>
+            <Button asChild><Link href="/placement">Тест эхлэх</Link></Button>
           </CardContent>
         </Card>
       )}
@@ -91,19 +93,23 @@ export default function Dashboard() {
         </Card>
       )}
 
-      {!dashboard.premium && !hasApproved && !pendingPayment && (
+      {!dashboard.premium && !hasApproved && !pendingPayment && (me?.placementCompleted ?? true) && (
         <Card className="border-secondary/40 bg-secondary/5">
-          <CardContent className="p-5 flex items-center justify-between gap-4 flex-wrap">
-            <div className="flex items-center gap-3">
-              <Sparkles className="w-5 h-5 text-secondary-foreground" />
+          <CardContent className="p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="flex items-start gap-3">
+              <Sparkles className="w-5 h-5 text-secondary-foreground mt-0.5 shrink-0" />
               <div>
-                <p className="font-semibold">Үнэгүй демо хичээл туршаад үз</p>
-                <p className="text-sm text-muted-foreground">Эхний хичээл бүгдэд нээлттэй. Хэрэгтэй бол Level 1 багц аваарай.</p>
+                <p className="font-semibold">Үнэгүй демо хичээл туршаад үзээрэй</p>
+                <p className="text-sm text-muted-foreground mt-1">Day 1 хичээл бүгдэд нээлттэй. Танд таалагдвал Level 1 багц авна уу.</p>
               </div>
             </div>
-            <div className="flex gap-2">
-              <Button asChild variant="outline"><Link href="/lessons">Үнэгүй хичээл</Link></Button>
-              <Button asChild><Link href="/billing">Багц авах</Link></Button>
+            <div className="flex flex-wrap gap-2 w-full md:w-auto">
+              {freeLesson && (
+                <Button asChild variant="outline" className="flex-1 md:flex-none">
+                  <Link href={`/lessons/${freeLesson.id}`}>Day 1 туршаад үз</Link>
+                </Button>
+              )}
+              <Button asChild className="flex-1 md:flex-none"><Link href="/billing">Level 1 авах · 29,000₮</Link></Button>
             </div>
           </CardContent>
         </Card>
