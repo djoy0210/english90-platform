@@ -330,13 +330,6 @@ export default function LessonView() {
               <div>
                 <h3 className="font-semibold mb-2 flex items-center gap-2"><PlayCircle className="w-4 h-4 text-primary" /> Listening Script</h3>
                 <div className="rounded-xl bg-muted/40 p-5 leading-8 whitespace-pre-line">{page3.listeningScript}</div>
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {page3.listeningScript && (
-                    <Button type="button" size="sm" variant="outline" onClick={() => speakWord(page3.listeningScript)}>
-                      <Volume2 className="w-4 h-4 mr-2" /> Уншуулах (TTS)
-                    </Button>
-                  )}
-                </div>
                 {(lesson as any).audioUrl && (
                   <AudioPlayer
                     src={
