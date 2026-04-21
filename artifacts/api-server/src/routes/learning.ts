@@ -28,6 +28,7 @@ import {
   GetFinalTestParams,
   GetLessonParams,
   SubmitPlacementTestBody,
+  UpdateMeBody,
   SubmitFinalTestBody,
   SubmitFinalTestParams,
   SubmitLessonQuizBody,
@@ -574,11 +575,45 @@ router.get("/me", async (req, res, next) => {
       id: user.id,
       email: user.email,
       name: user.name,
+      phone: user.phone,
       role: user.role,
       premium: user.premium,
       currentDay: Math.min(90, count + 1),
       placementCompleted: user.placementCompleted,
       placementLevel: user.placementLevel,
+      createdAt: user.createdAt,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.patch("/me", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    const body = UpdateMeBody.parse(req.body);
+    const updates: { name?: string; phone?: string | null } = {};
+    if (body.name !== undefined) updates.name = body.name;
+    if (body.phone !== undefined) updates.phone = body.phone === "" ? null : body.phone;
+    const [updated] = Object.keys(updates).length
+      ? await db.update(usersTable).set(updates).where(eq(usersTable.id, user.id)).returning()
+      : [user];
+    const completedCount = await db
+      .select({ count: sql<number>`count(*)::int` })
+      .from(lessonProgressTable)
+      .where(and(eq(lessonProgressTable.userId, updated.id), eq(lessonProgressTable.completed, true)));
+    const count = completedCount[0]?.count ?? 0;
+    res.json({
+      id: updated.id,
+      email: updated.email,
+      name: updated.name,
+      phone: updated.phone,
+      role: updated.role,
+      premium: updated.premium,
+      currentDay: Math.min(90, count + 1),
+      placementCompleted: updated.placementCompleted,
+      placementLevel: updated.placementLevel,
+      createdAt: updated.createdAt,
     });
   } catch (error) {
     next(error);

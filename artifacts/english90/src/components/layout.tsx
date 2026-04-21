@@ -156,6 +156,12 @@ function AppSidebar() {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
+                  <Link href="/account" className="w-full flex items-center cursor-pointer">
+                    <Settings className="mr-2 h-4 w-4" />
+                    <span>Хувийн мэдээлэл</span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
                   <Link href="/billing" className="w-full flex items-center cursor-pointer">
                     <CreditCard className="mr-2 h-4 w-4" />
                     <span>Багц авах</span>

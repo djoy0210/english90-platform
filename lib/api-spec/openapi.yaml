@@ -40,6 +40,23 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserProfile"
+    patch:
+      operationId: updateMe
+      tags: [learning]
+      summary: Update current learner profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProfileRequest"
+      responses:
+        "200":
+          description: Updated profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserProfile"
   /placement-test:
     get:
       operationId: getPlacementTest
@@ -555,12 +572,19 @@ components:
         id: { type: string }
         email: { type: string }
         name: { type: string }
+        phone: { type: string, nullable: true }
         role: { type: string, enum: [learner, admin] }
         premium: { type: boolean }
         currentDay: { type: integer }
         placementCompleted: { type: boolean }
         placementLevel: { type: integer }
-      required: [id, email, name, role, premium, currentDay, placementCompleted, placementLevel]
+        createdAt: { type: string, format: date-time }
+      required: [id, email, name, role, premium, currentDay, placementCompleted, placementLevel, createdAt]
+    UpdateProfileRequest:
+      type: object
+      properties:
+        name: { type: string, minLength: 1, maxLength: 100 }
+        phone: { type: string, maxLength: 30, nullable: true }
     PlacementTestDetail:
       type: object
       properties:

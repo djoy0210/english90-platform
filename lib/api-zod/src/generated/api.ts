@@ -21,11 +21,38 @@ export const GetMeResponse = zod.object({
   id: zod.string(),
   email: zod.string(),
   name: zod.string(),
+  phone: zod.string().nullish(),
   role: zod.enum(["learner", "admin"]),
   premium: zod.boolean(),
   currentDay: zod.number(),
   placementCompleted: zod.boolean(),
   placementLevel: zod.number(),
+  createdAt: zod.coerce.date(),
+});
+
+/**
+ * @summary Update current learner profile
+ */
+export const updateMeBodyNameMax = 100;
+
+export const updateMeBodyPhoneMax = 30;
+
+export const UpdateMeBody = zod.object({
+  name: zod.string().min(1).max(updateMeBodyNameMax).optional(),
+  phone: zod.string().max(updateMeBodyPhoneMax).nullish(),
+});
+
+export const UpdateMeResponse = zod.object({
+  id: zod.string(),
+  email: zod.string(),
+  name: zod.string(),
+  phone: zod.string().nullish(),
+  role: zod.enum(["learner", "admin"]),
+  premium: zod.boolean(),
+  currentDay: zod.number(),
+  placementCompleted: zod.boolean(),
+  placementLevel: zod.number(),
+  createdAt: zod.coerce.date(),
 });
 
 /**

@@ -11,9 +11,11 @@ export interface UserProfile {
   id: string;
   email: string;
   name: string;
+  phone?: string | null;
   role: UserProfileRole;
   premium: boolean;
   currentDay: number;
   placementCompleted: boolean;
   placementLevel: number;
+  createdAt: Date;
 }

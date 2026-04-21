@@ -13,6 +13,7 @@ import History from "./pages/history";
 import FinalTestView from "./pages/final-test-view";
 import Billing from "./pages/billing";
 import Admin from "./pages/admin";
+import Account from "./pages/account";
 import PlacementTest from "./pages/placement-test";
 import NotFound from "./pages/not-found";
 import Layout from "./components/layout";
@@ -212,6 +213,7 @@ function App() {
               <Route path="/final-tests/:level" component={() => <ProtectedRoute component={FinalTestView} />} />
               <Route path="/history" component={() => <ProtectedRoute component={History} />} />
               <Route path="/billing" component={() => <ProtectedRoute component={Billing} />} />
+              <Route path="/account" component={() => <ProtectedRoute component={Account} />} />
               <Route path="/admin" component={() => <ProtectedRoute component={Admin} adminOnly />} />
               
               <Route component={NotFound} />

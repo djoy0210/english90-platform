@@ -21,11 +21,23 @@ export interface UserProfile {
   id: string;
   email: string;
   name: string;
+  phone?: string | null;
   role: UserProfileRole;
   premium: boolean;
   currentDay: number;
   placementCompleted: boolean;
   placementLevel: number;
+  createdAt: string;
+}
+
+export interface UpdateProfileRequest {
+  /**
+   * @minLength 1
+   * @maxLength 100
+   */
+  name?: string;
+  /** @maxLength 30 */
+  phone?: string | null;
 }
 
 export interface QuizQuestion {

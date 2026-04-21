@@ -58,6 +58,7 @@ export const usersTable = pgTable("users", {
   clerkUserId: text("clerk_user_id").notNull().unique(),
   email: text("email").notNull(),
   name: text("name").notNull(),
+  phone: text("phone"),
   role: text("role").notNull().default("learner"),
   premium: boolean("premium").notNull().default(false),
     placementCompleted: boolean("placement_completed").notNull().default(false),

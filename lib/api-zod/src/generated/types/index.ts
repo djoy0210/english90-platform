@@ -51,6 +51,7 @@ export * from "./submitQuizRequest";
 export * from "./submitQuizRequestAnswersItem";
 export * from "./testHistoryItem";
 export * from "./testHistoryItemType";
+export * from "./updateProfileRequest";
 export * from "./upsertLessonRequest";
 export * from "./upsertLessonRequestQuizItem";
 export * from "./userProfile";
