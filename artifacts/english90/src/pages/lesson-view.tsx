@@ -12,6 +12,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { AudioPlayer } from "../components/AudioPlayer";
 import { FillInBlanks, MatchingGame, ListeningMcq } from "../components/LessonExercises";
+import { TtsPlayer } from "../components/TtsPlayer";
 
 export default function LessonView() {
   const { lessonId } = useParams<{ lessonId: string }>();
@@ -330,7 +331,7 @@ export default function LessonView() {
               <div>
                 <h3 className="font-semibold mb-2 flex items-center gap-2"><PlayCircle className="w-4 h-4 text-primary" /> Listening Script</h3>
                 <div className="rounded-xl bg-muted/40 p-5 leading-8 whitespace-pre-line">{page3.listeningScript}</div>
-                {(lesson as any).audioUrl && (
+                {(lesson as any).audioUrl ? (
                   <AudioPlayer
                     src={
                       /^https?:\/\//.test((lesson as any).audioUrl)
@@ -339,7 +340,12 @@ export default function LessonView() {
                     }
                     title="Жинхэнэ дуу хичээл · Real recorded listening"
                   />
-                )}
+                ) : page3.listeningScript ? (
+                  <TtsPlayer
+                    text={page3.listeningScript}
+                    title="🔊 Browser-ийн дуу унших · Tap Play to hear the script (TTS — temporary until real audio is added)"
+                  />
+                ) : null}
               </div>
               {Array.isArray(page3.listeningQuestions) && page3.listeningQuestions.length > 0 && (
                 <ListeningMcq
