@@ -72,7 +72,7 @@ export default function Landing() {
           <div className="max-w-5xl mx-auto px-4 md:px-8">
             <div className="text-center mb-14">
               <h2 className="text-3xl font-bold mb-3">Яагаад English90 гэж?</h2>
-              <p className="text-muted-foreground max-w-xl mx-auto">Бид зүгээр нэг хичээл биш, харин 90 хоногийн системт дадал бүтээх систем юм.</p>
+              <p className="text-muted-foreground max-w-xl mx-auto">Энэ бол зүгээр нэг хичээл биш, харин 90 хоногт Англиар ярих дадал бүтээх систем юм.</p>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {[
