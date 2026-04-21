@@ -215,7 +215,7 @@ export default function Account() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <LogOut className="w-5 h-5" />
-            С
+            Системээс гарах
           </CardTitle>
           <CardDescription>Та одоогийн төхөөрөмжөөс гарах боломжтой.</CardDescription>
         </CardHeader>

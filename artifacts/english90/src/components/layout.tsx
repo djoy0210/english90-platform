@@ -51,7 +51,7 @@ const mainNavItems = [
     icon: BookOpen,
   },
   {
-    title: "Шатлалын тест",
+    title: "Түвшин тогтоох тест",
     url: "/placement",
     icon: Target,
   },

@@ -88,7 +88,6 @@ export default function Billing() {
         <h1 className="text-3xl font-bold tracking-tight">Багц авах</h1>
         <p className="text-muted-foreground mt-2">Хаан банк руу шилжүүлэг хийгээд гүйлгээний мэдээллээ илгээнэ үү. Админ баталгаажуулмагц контент автоматаар нээгдэнэ.</p>
       </div>
-
       <div className="grid gap-3 sm:grid-cols-3">
         {[
           { n: "1", t: "Багц сонгох", d: "Танд хэрэгтэй багцаа сонгож, үнийг анхаарна." },
@@ -102,7 +101,6 @@ export default function Billing() {
           </div>
         ))}
       </div>
-
       {hasApproved && (
         <Card className="border-green-500/40 bg-green-500/5">
           <CardContent className="flex items-center gap-3 p-4 text-sm">
@@ -111,7 +109,6 @@ export default function Billing() {
           </CardContent>
         </Card>
       )}
-
       <div className="grid gap-6 lg:grid-cols-2">
         <Card>
           <CardHeader>
@@ -160,7 +157,7 @@ export default function Billing() {
               <span className="font-bold text-lg">{formatMnt(selectedProduct.amount)}</span>
             </div>
             <div className="space-y-1.5">
-              <Label htmlFor="ref">Гүйлгээний дугаар *</Label>
+              <Label htmlFor="ref">Гүйлгээний утга *</Label>
               <Input id="ref" value={transactionRef} onChange={(e) => setTransactionRef(e.target.value)} placeholder="ж: 2026042100123456" />
             </div>
             <div className="space-y-1.5">
@@ -181,7 +178,6 @@ export default function Billing() {
           </CardContent>
         </Card>
       </div>
-
       <Card>
         <CardHeader>
           <CardTitle>Миний хүсэлтүүд</CardTitle>
