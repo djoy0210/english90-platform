@@ -1,0 +1,222 @@
+My website structure is now good.
+
+Now I want to move into the content-loading stage.
+
+IMPORTANT:
+Do NOT redesign the whole website.
+Keep the current structure, layout, navigation, and working systems.
+Focus on helping me add my real course content into the existing platform cleanly and efficiently.
+
+My goals now:
+1. add my real placement test
+2. add all Level 1 lessons
+3. add Level 1 final test
+4. prepare the system for Level 2 and Level 3 lessons
+5. add final tests for all 3 levels
+6. make content entry fast, structured, and safe
+
+==================================================
+1. CONTENT LOADING GOAL
+==================================================
+
+I already have:
+- lesson content
+- placement test content
+- final test content
+- structured lesson format
+
+Now improve the site so I can input all this content properly.
+
+The website must become easy to manage as a real course platform.
+
+==================================================
+2. PLACEMENT TEST CONTENT SYSTEM
+==================================================
+
+Improve the placement test system so I can enter my real placement test.
+
+Requirements:
+- admin can fully edit placement test
+- add, edit, delete questions
+- support multiple choice
+- support answer key
+- support scoring logic
+- support result recommendation
+- support section labels if needed
+- support explanation text after result
+- save attempts properly
+- keep result visible in student dashboard
+
+Create a clean admin editor for the placement test so I can enter all my real questions quickly.
+
+==================================================
+3. FINAL TEST SYSTEM FOR ALL 3 LEVELS
+==================================================
+
+I want a final test for:
+- Level 1
+- Level 2
+- Level 3
+
+Requirements:
+- create 3 separate final test structures
+- each final test must be editable in admin
+- admin can add, edit, delete questions
+- admin can set passing score
+- admin can view student attempts
+- final test result should be saved
+- show pass/fail clearly
+- show final score clearly
+- connect each final test to the correct level
+
+Rules:
+- Level 1 final test belongs to Level 1
+- Level 2 final test belongs to Level 2
+- Level 3 final test belongs to Level 3
+
+Make the system scalable and clear.
+
+==================================================
+4. LESSON CONTENT ENTRY SYSTEM
+==================================================
+
+I now want to add all lessons into the website using the same lesson structure.
+
+Each lesson uses this structure:
+
+Section 1:
+- day number
+- English title
+- Mongolian title
+- duration
+- vocabulary rows
+- pronunciation
+- Mongolian meaning
+- example sentence
+- grammar topic
+- grammar explanation
+- grammar table
+- quick practice
+- common mistakes
+- answer key
+
+Section 2:
+- reading passage
+- key phrases
+- Mongolian translation
+- speaking questions
+- role play
+- speaking tip
+
+Section 3:
+- listening script
+- 10 comprehension questions
+- grammar practice
+- matching exercise
+- homework
+- answer key
+- completion summary
+- next lesson preview
+
+Requirements:
+- improve lesson editor so entering this content is easy
+- dynamic vocabulary row entry
+- dynamic question row entry
+- dynamic grammar practice row entry
+- dynamic matching row entry
+- optional PDF upload
+- lesson preview before save
+- duplicate lesson feature
+- save and continue editing feature
+- make it fast to enter all 90 lessons without breaking layout
+
+==================================================
+5. LEVEL STRUCTURE
+==================================================
+
+Make sure the lesson structure supports:
+
+- Level 1 = Days 1–30
+- Level 2 = Days 31–60
+- Level 3 = Days 61–90
+
+Requirements:
+- lesson editor must assign lesson to correct level
+- lesson numbering must stay correct
+- next lesson logic must remain correct
+- level tabs/pages must show correct lessons only
+- final tests must connect to the correct level
+
+==================================================
+6. CONTENT IMPORT / BULK ENTRY PREPARATION
+==================================================
+
+I may add lessons manually one by one, but I want the system optimized for speed.
+
+Improve admin tools for fast content entry:
+- duplicate previous lesson
+- structured form sections
+- collapsible content blocks
+- quick save
+- save draft
+- publish/unpublish lesson
+- preview lesson
+- import-friendly data structure if possible
+- easy editing without breaking current design
+
+If possible, create a content schema or JSON-friendly format that I can later use to import lesson data faster.
+
+==================================================
+7. LAUNCH PRIORITY
+==================================================
+
+My launch priority is:
+1. placement test
+2. all 30 Level 1 lessons
+3. Level 1 final test
+
+So optimize the platform for this first.
+
+Levels 2 and 3 should remain supported, but Level 1 content entry should be the easiest and fastest.
+
+==================================================
+8. STUDENT EXPERIENCE RULES
+==================================================
+
+Make sure student-facing flow stays correct:
+- placement test is free
+- one lesson is free
+- remaining Level 1 lessons unlock after purchase
+- final test appears when appropriate
+- completed lessons update progress correctly
+- lesson content displays beautifully and clearly
+
+==================================================
+9. ADMIN PAGES TO IMPROVE NOW
+==================================================
+
+Improve these admin pages now:
+- Lessons
+- Lesson Editor
+- Placement Test Editor
+- Final Test Editor
+- Quiz Editor
+
+Make them practical for real heavy content entry, not just simple demo editing.
+
+==================================================
+10. FINAL OUTPUT
+==================================================
+
+After updating, explain clearly:
+1. how to enter the placement test
+2. how to enter the 3 final tests
+3. how to enter all 30 Level 1 lessons fastest
+4. how duplicate lesson works
+5. how lesson preview works
+6. how level assignment works
+7. how to continue with Level 2 and Level 3 later
+
+Use my current website as the base.
+Do not destroy what is already working.
+Focus on making content entry smooth, structured, and ready for my real course material.
