@@ -12,11 +12,17 @@ import {
   useAdminUnlockStudentProduct,
   useAdminResetStudentProgress,
   useAdminDuplicateLesson,
+  useAdminListPlacementQuestions,
+  useAdminCreatePlacementQuestion,
+  useAdminUpdatePlacementQuestion,
+  useAdminDeletePlacementQuestion,
+  getAdminListPlacementQuestionsQueryKey,
   getAdminListPaymentRequestsQueryKey,
   getAdminListStudentsQueryKey,
   getAdminGetStudentQueryKey,
   type AdminPaymentRequest,
   type AdminStudentSummary,
+  type AdminPlacementQuestion,
 } from "@workspace/api-client-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -72,15 +78,17 @@ export default function Admin() {
         <p className="text-muted-foreground mt-1">Хичээл, төлбөр, сурагч, шалгалтыг удирдах</p>
       </div>
       <Tabs defaultValue="payments">
-        <TabsList className="grid grid-cols-2 sm:grid-cols-4 w-full max-w-2xl h-auto sm:h-10">
+        <TabsList className="grid grid-cols-2 sm:grid-cols-5 w-full max-w-3xl h-auto sm:h-10">
           <TabsTrigger value="payments">Төлбөр</TabsTrigger>
           <TabsTrigger value="students">Сурагчид</TabsTrigger>
           <TabsTrigger value="lessons">Хичээлүүд</TabsTrigger>
+          <TabsTrigger value="placement">Түвшин тогтоох</TabsTrigger>
           <TabsTrigger value="finalTests">Шалгалт</TabsTrigger>
         </TabsList>
         <TabsContent value="payments" className="mt-6"><PaymentsPanel /></TabsContent>
         <TabsContent value="students" className="mt-6"><StudentsPanel /></TabsContent>
         <TabsContent value="lessons" className="mt-6"><LessonsPanel /></TabsContent>
+        <TabsContent value="placement" className="mt-6"><PlacementPanel /></TabsContent>
         <TabsContent value="finalTests" className="mt-6"><FinalTestsPanel /></TabsContent>
       </Tabs>
     </div>
@@ -811,6 +819,226 @@ function QuizEditor({ quiz, onChange }: { quiz: any[]; onChange: (q: any[]) => v
         {quiz.length === 0 && <div className="text-center text-muted-foreground p-4 border rounded-md">Асуулт алга. "+5 асуулт" дарна уу.</div>}
       </div>
     </div>
+  );
+}
+
+type PlacementBand = "a1" | "a2" | "b1";
+const BAND_LABEL: Record<PlacementBand, string> = { a1: "A1 — Эхлэгч", a2: "A2 — Бага", b1: "B1 — Дунд" };
+
+function PlacementPanel() {
+  const { data: questions = [], isLoading } = useAdminListPlacementQuestions();
+  const create = useAdminCreatePlacementQuestion();
+  const update = useAdminUpdatePlacementQuestion();
+  const del = useAdminDeletePlacementQuestion();
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
+  const [editing, setEditing] = useState<AdminPlacementQuestion | null>(null);
+  const [creating, setCreating] = useState(false);
+
+  const refresh = () => queryClient.invalidateQueries({ queryKey: getAdminListPlacementQuestionsQueryKey() });
+
+  const handleDelete = async (q: AdminPlacementQuestion) => {
+    if (!confirm(`Асуулт #${q.position}-г устгах уу?`)) return;
+    try {
+      await del.mutateAsync({ questionId: q.id });
+      toast({ title: "Устгасан" });
+      await refresh();
+    } catch (err: any) {
+      toast({ title: "Алдаа", description: err?.message, variant: "destructive" });
+    }
+  };
+
+  const counts = questions.reduce(
+    (acc, q) => { acc[q.band as PlacementBand] = (acc[q.band as PlacementBand] || 0) + 1; return acc; },
+    {} as Record<PlacementBand, number>,
+  );
+
+  return (
+    <Card>
+      <CardHeader className="flex flex-row items-start justify-between gap-2">
+        <div>
+          <CardTitle>Түвшин тогтоох тестийн асуултууд</CardTitle>
+          <CardDescription>
+            Нийт {questions.length} асуулт · A1: {counts.a1 || 0} · A2: {counts.a2 || 0} · B1: {counts.b1 || 0}
+          </CardDescription>
+        </div>
+        <Button size="sm" onClick={() => setCreating(true)}><Plus className="h-4 w-4 mr-1" /> Шинэ асуулт</Button>
+      </CardHeader>
+      <CardContent>
+        {isLoading ? (
+          <Skeleton className="h-40 w-full" />
+        ) : questions.length === 0 ? (
+          <p className="text-sm text-muted-foreground">Одоогоор асуулт алга.</p>
+        ) : (
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-12">#</TableHead>
+                <TableHead className="w-24">Түвшин</TableHead>
+                <TableHead>Асуулт</TableHead>
+                <TableHead>Зөв хариулт</TableHead>
+                <TableHead className="w-24 text-right">Үйлдэл</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {questions.map((q) => (
+                <TableRow key={q.id}>
+                  <TableCell className="font-mono text-xs">{q.position}</TableCell>
+                  <TableCell><Badge variant="outline">{BAND_LABEL[q.band as PlacementBand] ?? q.band}</Badge></TableCell>
+                  <TableCell className="max-w-md">
+                    <div className="text-sm font-medium truncate">{q.promptEn}</div>
+                    {q.promptMn && <div className="text-xs text-muted-foreground truncate">{q.promptMn}</div>}
+                  </TableCell>
+                  <TableCell className="text-sm">{q.correctAnswer}</TableCell>
+                  <TableCell className="text-right">
+                    <Button size="icon" variant="ghost" onClick={() => setEditing(q)}><Edit className="h-4 w-4" /></Button>
+                    <Button size="icon" variant="ghost" onClick={() => handleDelete(q)}><Trash2 className="h-4 w-4" /></Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
+      </CardContent>
+      {(creating || editing) && (
+        <PlacementQuestionDialog
+          initial={editing ?? undefined}
+          defaultPosition={questions.length + 1}
+          onClose={() => { setCreating(false); setEditing(null); }}
+          onSubmit={async (values) => {
+            try {
+              if (editing) {
+                await update.mutateAsync({ questionId: editing.id, data: values });
+                toast({ title: "Шинэчилсэн" });
+              } else {
+                await create.mutateAsync({ data: values });
+                toast({ title: "Нэмсэн" });
+              }
+              setCreating(false);
+              setEditing(null);
+              await refresh();
+            } catch (err: any) {
+              toast({ title: "Алдаа", description: err?.message, variant: "destructive" });
+            }
+          }}
+        />
+      )}
+    </Card>
+  );
+}
+
+function PlacementQuestionDialog({
+  initial,
+  defaultPosition,
+  onClose,
+  onSubmit,
+}: {
+  initial?: AdminPlacementQuestion;
+  defaultPosition: number;
+  onClose: () => void;
+  onSubmit: (values: { position: number; band: PlacementBand; promptEn: string; promptMn: string; options: string[]; correctAnswer: string }) => Promise<void>;
+}) {
+  const [position, setPosition] = useState(initial?.position ?? defaultPosition);
+  const [band, setBand] = useState<PlacementBand>((initial?.band as PlacementBand) ?? "a1");
+  const [promptEn, setPromptEn] = useState(initial?.promptEn ?? "");
+  const [promptMn, setPromptMn] = useState(initial?.promptMn ?? "");
+  const [options, setOptions] = useState<string[]>(initial?.options ?? ["", "", "", ""]);
+  const [correctAnswer, setCorrectAnswer] = useState(initial?.correctAnswer ?? "");
+  const [saving, setSaving] = useState(false);
+
+  const updateOption = (i: number, value: string) => {
+    const next = [...options];
+    next[i] = value;
+    setOptions(next);
+  };
+  const addOption = () => setOptions([...options, ""]);
+  const removeOption = (i: number) => setOptions(options.filter((_, idx) => idx !== i));
+
+  const submit = async () => {
+    const cleanOptions = options.map((o) => o.trim()).filter(Boolean);
+    if (cleanOptions.length < 2) { alert("Хамгийн багадаа 2 сонголт оруулна уу."); return; }
+    if (!cleanOptions.includes(correctAnswer.trim())) { alert("Зөв хариулт нь сонголтуудын аль нэг байх ёстой."); return; }
+    if (!promptEn.trim()) { alert("Асуултын текст шаардлагатай."); return; }
+    setSaving(true);
+    try {
+      await onSubmit({
+        position,
+        band,
+        promptEn: promptEn.trim(),
+        promptMn: promptMn.trim(),
+        options: cleanOptions,
+        correctAnswer: correctAnswer.trim(),
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <Dialog open onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>{initial ? `Асуулт #${initial.position} засах` : "Шинэ асуулт"}</DialogTitle>
+        </DialogHeader>
+        <div className="space-y-4">
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <Label>Дугаар (position)</Label>
+              <Input type="number" min={1} value={position} onChange={(e) => setPosition(parseInt(e.target.value) || 1)} />
+            </div>
+            <div>
+              <Label>Түвшин (band)</Label>
+              <Select value={band} onValueChange={(v) => setBand(v as PlacementBand)}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="a1">A1 — Эхлэгч</SelectItem>
+                  <SelectItem value="a2">A2 — Бага</SelectItem>
+                  <SelectItem value="b1">B1 — Дунд</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <div>
+            <Label>Асуулт (Англи)</Label>
+            <Textarea rows={2} value={promptEn} onChange={(e) => setPromptEn(e.target.value)} />
+          </div>
+          <div>
+            <Label>Тайлбар (Монгол, заавал биш)</Label>
+            <Textarea rows={2} value={promptMn} onChange={(e) => setPromptMn(e.target.value)} />
+          </div>
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <Label>Сонголтууд</Label>
+              <Button type="button" size="sm" variant="outline" onClick={addOption}><Plus className="h-3 w-3 mr-1" />Нэмэх</Button>
+            </div>
+            {options.map((opt, i) => (
+              <div key={i} className="flex gap-2">
+                <Input value={opt} placeholder={`Сонголт ${i + 1}`} onChange={(e) => updateOption(i, e.target.value)} />
+                {options.length > 2 && (
+                  <Button type="button" size="icon" variant="ghost" onClick={() => removeOption(i)}><Trash2 className="h-4 w-4" /></Button>
+                )}
+              </div>
+            ))}
+          </div>
+          <div>
+            <Label>Зөв хариулт</Label>
+            <Select value={correctAnswer} onValueChange={setCorrectAnswer}>
+              <SelectTrigger><SelectValue placeholder="Сонгоно уу" /></SelectTrigger>
+              <SelectContent>
+                {options.map((o, i) => o.trim() && (
+                  <SelectItem key={i} value={o.trim()}>{o.trim()}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        <DialogFooter>
+          <Button variant="outline" onClick={onClose}>Болих</Button>
+          <Button onClick={submit} disabled={saving}>{saving ? "Хадгалж байна..." : "Хадгалах"}</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
 

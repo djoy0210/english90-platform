@@ -7,6 +7,7 @@ import {
   lessonsTable,
   paymentInvoicesTable,
   paymentRequestsTable,
+  placementQuestionsTable,
   quizAttemptsTable,
   usersTable,
   type FinalTest,
@@ -37,6 +38,10 @@ import {
   AdminDecidePaymentRequestBody,
   AdminUnlockStudentProductBody,
   AdminDuplicateLessonBody,
+  AdminCreatePlacementQuestionBody,
+  AdminUpdatePlacementQuestionBody,
+  AdminUpdatePlacementQuestionParams,
+  AdminDeletePlacementQuestionParams,
 } from "@workspace/api-zod";
 import { and, desc, eq, sql } from "drizzle-orm";
 import { Router, type Request } from "express";
@@ -133,7 +138,7 @@ function getLessonTemplateContent() {
 type PlacementBand = "a1" | "a2" | "b1";
 type PlacementQuestion = StoredQuizQuestion & { band: PlacementBand };
 
-const placementQuestions: PlacementQuestion[] = [
+const defaultPlacementQuestions: PlacementQuestion[] = [
   // A1 — Эхлэгч (1-10, very easy)
   { id: "placement-q1", band: "a1", promptEn: '"Сайн байна уу" гэдгийг англиар юу гэдэг вэ?', promptMn: "", options: ["Goodbye", "Thank you", "Hello", "Sorry"], correctAnswer: "Hello" },
   { id: "placement-q2", band: "a1", promptEn: "Намайг Бат гэдэг. Англиар хэрхэн хэлэх вэ?", promptMn: "", options: ["My name Bat.", "I am name Bat.", "My name is Bat.", "Name me is Bat."], correctAnswer: "My name is Bat." },
@@ -347,6 +352,7 @@ async function ensureSeeded() {
       }
 
       await db.insert(lessonsTable).values(Array.from({ length: 90 }, (_, index) => buildSeedLesson(index + 1))).onConflictDoNothing();
+      await ensurePlacementSeeded();
       await db.insert(finalTestsTable).values([1, 2, 3].map((level) => ({
         level,
         titleEn: `Level ${level} Final Test`,
@@ -645,12 +651,39 @@ router.patch("/me", async (req, res, next) => {
   }
 });
 
+async function ensurePlacementSeeded() {
+  const existing = await db.select({ id: placementQuestionsTable.id }).from(placementQuestionsTable).limit(1);
+  if (existing.length > 0) return;
+  await db.insert(placementQuestionsTable).values(defaultPlacementQuestions.map((q, i) => ({
+    position: i + 1,
+    band: q.band,
+    promptEn: q.promptEn,
+    promptMn: q.promptMn,
+    options: q.options,
+    correctAnswer: q.correctAnswer,
+  }))).onConflictDoNothing();
+}
+
+async function loadPlacementQuestions(): Promise<PlacementQuestion[]> {
+  await ensurePlacementSeeded();
+  const rows = await db.select().from(placementQuestionsTable).orderBy(placementQuestionsTable.position);
+  return rows.map((r) => ({
+    id: r.id,
+    band: r.band as PlacementBand,
+    promptEn: r.promptEn,
+    promptMn: r.promptMn ?? "",
+    options: r.options as string[],
+    correctAnswer: r.correctAnswer,
+  }));
+}
+
 router.get("/placement-test", async (_req, res, next) => {
   try {
+    const questions = await loadPlacementQuestions();
     res.json({
       titleEn: "English Placement Test",
       titleMn: "Англи хэлний түвшин тогтоох тест",
-      questions: placementQuestions.map(getQuestionPublic),
+      questions: questions.map(getQuestionPublic),
     });
   } catch (error) {
     next(error);
@@ -661,10 +694,11 @@ router.post("/placement-test", async (req, res, next) => {
   try {
     const user = await getCurrentUser(req);
     const body = SubmitPlacementTestBody.parse(req.body);
-    const result = grade(placementQuestions, body.answers);
+    const questions = await loadPlacementQuestions();
+    const result = grade(questions, body.answers);
     const correctById = new Map(result.correctAnswers.map((a) => [a.questionId, a.isCorrect]));
     let a1c = 0, a2c = 0, b1c = 0;
-    for (const q of placementQuestions) {
+    for (const q of questions) {
       if (!correctById.get(q.id)) continue;
       if (q.band === "a1") a1c++;
       else if (q.band === "a2") a2c++;
@@ -1271,6 +1305,93 @@ router.delete("/admin/lessons/:lessonId", async (req, res, next) => {
     ensureAdmin(user);
     const { lessonId } = AdminDeleteLessonParams.parse(req.params);
     await db.delete(lessonsTable).where(eq(lessonsTable.id, lessonId));
+    res.json({ success: true });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/admin/placement-questions", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    ensureAdmin(user);
+    await ensurePlacementSeeded();
+    const rows = await db.select().from(placementQuestionsTable).orderBy(placementQuestionsTable.position);
+    res.json(rows.map((r) => ({
+      id: r.id,
+      position: r.position,
+      band: r.band,
+      promptEn: r.promptEn,
+      promptMn: r.promptMn ?? "",
+      options: r.options as string[],
+      correctAnswer: r.correctAnswer,
+    })));
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/admin/placement-questions", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    ensureAdmin(user);
+    const body = AdminCreatePlacementQuestionBody.parse(req.body);
+    if (!body.options.includes(body.correctAnswer)) {
+      return res.status(400).json({ error: "correctAnswer must be one of options" });
+    }
+    const [row] = await db.insert(placementQuestionsTable).values({
+      position: body.position,
+      band: body.band,
+      promptEn: body.promptEn,
+      promptMn: body.promptMn ?? "",
+      options: body.options,
+      correctAnswer: body.correctAnswer,
+    }).returning();
+    res.json({
+      id: row.id, position: row.position, band: row.band,
+      promptEn: row.promptEn, promptMn: row.promptMn ?? "",
+      options: row.options as string[], correctAnswer: row.correctAnswer,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.put("/admin/placement-questions/:questionId", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    ensureAdmin(user);
+    const { questionId } = AdminUpdatePlacementQuestionParams.parse(req.params);
+    const body = AdminUpdatePlacementQuestionBody.parse(req.body);
+    if (!body.options.includes(body.correctAnswer)) {
+      return res.status(400).json({ error: "correctAnswer must be one of options" });
+    }
+    const [row] = await db.update(placementQuestionsTable).set({
+      position: body.position,
+      band: body.band,
+      promptEn: body.promptEn,
+      promptMn: body.promptMn ?? "",
+      options: body.options,
+      correctAnswer: body.correctAnswer,
+      updatedAt: new Date(),
+    }).where(eq(placementQuestionsTable.id, questionId)).returning();
+    if (!row) return res.status(404).json({ error: "Question not found" });
+    res.json({
+      id: row.id, position: row.position, band: row.band,
+      promptEn: row.promptEn, promptMn: row.promptMn ?? "",
+      options: row.options as string[], correctAnswer: row.correctAnswer,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.delete("/admin/placement-questions/:questionId", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    ensureAdmin(user);
+    const { questionId } = AdminDeletePlacementQuestionParams.parse(req.params);
+    await db.delete(placementQuestionsTable).where(eq(placementQuestionsTable.id, questionId));
     res.json({ success: true });
   } catch (error) {
     next(error);

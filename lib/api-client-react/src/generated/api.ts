@@ -21,6 +21,7 @@ import type {
   AdminLesson,
   AdminListPaymentRequestsParams,
   AdminPaymentRequest,
+  AdminPlacementQuestion,
   AdminStudentDetail,
   AdminStudentSummary,
   AdminUnlockStudentPayload,
@@ -48,6 +49,7 @@ import type {
   TestHistoryItem,
   UpdateProfileRequest,
   UpsertLessonRequest,
+  UpsertPlacementQuestionRequest,
   UserProfile,
 } from "./api.schemas";
 
@@ -2210,6 +2212,354 @@ export const useAdminResetStudentProgress = <
   TContext
 > => {
   return useMutation(getAdminResetStudentProgressMutationOptions(options));
+};
+
+/**
+ * @summary List placement test questions
+ */
+export const getAdminListPlacementQuestionsUrl = () => {
+  return `/api/admin/placement-questions`;
+};
+
+export const adminListPlacementQuestions = async (
+  options?: RequestInit,
+): Promise<AdminPlacementQuestion[]> => {
+  return customFetch<AdminPlacementQuestion[]>(
+    getAdminListPlacementQuestionsUrl(),
+    {
+      ...options,
+      method: "GET",
+    },
+  );
+};
+
+export const getAdminListPlacementQuestionsQueryKey = () => {
+  return [`/api/admin/placement-questions`] as const;
+};
+
+export const getAdminListPlacementQuestionsQueryOptions = <
+  TData = Awaited<ReturnType<typeof adminListPlacementQuestions>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof adminListPlacementQuestions>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getAdminListPlacementQuestionsQueryKey();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof adminListPlacementQuestions>>
+  > = ({ signal }) =>
+    adminListPlacementQuestions({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof adminListPlacementQuestions>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type AdminListPlacementQuestionsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof adminListPlacementQuestions>>
+>;
+export type AdminListPlacementQuestionsQueryError = ErrorType<unknown>;
+
+/**
+ * @summary List placement test questions
+ */
+
+export function useAdminListPlacementQuestions<
+  TData = Awaited<ReturnType<typeof adminListPlacementQuestions>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof adminListPlacementQuestions>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getAdminListPlacementQuestionsQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Create a placement question
+ */
+export const getAdminCreatePlacementQuestionUrl = () => {
+  return `/api/admin/placement-questions`;
+};
+
+export const adminCreatePlacementQuestion = async (
+  upsertPlacementQuestionRequest: UpsertPlacementQuestionRequest,
+  options?: RequestInit,
+): Promise<AdminPlacementQuestion> => {
+  return customFetch<AdminPlacementQuestion>(
+    getAdminCreatePlacementQuestionUrl(),
+    {
+      ...options,
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...options?.headers },
+      body: JSON.stringify(upsertPlacementQuestionRequest),
+    },
+  );
+};
+
+export const getAdminCreatePlacementQuestionMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof adminCreatePlacementQuestion>>,
+    TError,
+    { data: BodyType<UpsertPlacementQuestionRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof adminCreatePlacementQuestion>>,
+  TError,
+  { data: BodyType<UpsertPlacementQuestionRequest> },
+  TContext
+> => {
+  const mutationKey = ["adminCreatePlacementQuestion"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof adminCreatePlacementQuestion>>,
+    { data: BodyType<UpsertPlacementQuestionRequest> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return adminCreatePlacementQuestion(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type AdminCreatePlacementQuestionMutationResult = NonNullable<
+  Awaited<ReturnType<typeof adminCreatePlacementQuestion>>
+>;
+export type AdminCreatePlacementQuestionMutationBody =
+  BodyType<UpsertPlacementQuestionRequest>;
+export type AdminCreatePlacementQuestionMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Create a placement question
+ */
+export const useAdminCreatePlacementQuestion = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof adminCreatePlacementQuestion>>,
+    TError,
+    { data: BodyType<UpsertPlacementQuestionRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof adminCreatePlacementQuestion>>,
+  TError,
+  { data: BodyType<UpsertPlacementQuestionRequest> },
+  TContext
+> => {
+  return useMutation(getAdminCreatePlacementQuestionMutationOptions(options));
+};
+
+/**
+ * @summary Update a placement question
+ */
+export const getAdminUpdatePlacementQuestionUrl = (questionId: string) => {
+  return `/api/admin/placement-questions/${questionId}`;
+};
+
+export const adminUpdatePlacementQuestion = async (
+  questionId: string,
+  upsertPlacementQuestionRequest: UpsertPlacementQuestionRequest,
+  options?: RequestInit,
+): Promise<AdminPlacementQuestion> => {
+  return customFetch<AdminPlacementQuestion>(
+    getAdminUpdatePlacementQuestionUrl(questionId),
+    {
+      ...options,
+      method: "PUT",
+      headers: { "Content-Type": "application/json", ...options?.headers },
+      body: JSON.stringify(upsertPlacementQuestionRequest),
+    },
+  );
+};
+
+export const getAdminUpdatePlacementQuestionMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof adminUpdatePlacementQuestion>>,
+    TError,
+    { questionId: string; data: BodyType<UpsertPlacementQuestionRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof adminUpdatePlacementQuestion>>,
+  TError,
+  { questionId: string; data: BodyType<UpsertPlacementQuestionRequest> },
+  TContext
+> => {
+  const mutationKey = ["adminUpdatePlacementQuestion"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof adminUpdatePlacementQuestion>>,
+    { questionId: string; data: BodyType<UpsertPlacementQuestionRequest> }
+  > = (props) => {
+    const { questionId, data } = props ?? {};
+
+    return adminUpdatePlacementQuestion(questionId, data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type AdminUpdatePlacementQuestionMutationResult = NonNullable<
+  Awaited<ReturnType<typeof adminUpdatePlacementQuestion>>
+>;
+export type AdminUpdatePlacementQuestionMutationBody =
+  BodyType<UpsertPlacementQuestionRequest>;
+export type AdminUpdatePlacementQuestionMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Update a placement question
+ */
+export const useAdminUpdatePlacementQuestion = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof adminUpdatePlacementQuestion>>,
+    TError,
+    { questionId: string; data: BodyType<UpsertPlacementQuestionRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof adminUpdatePlacementQuestion>>,
+  TError,
+  { questionId: string; data: BodyType<UpsertPlacementQuestionRequest> },
+  TContext
+> => {
+  return useMutation(getAdminUpdatePlacementQuestionMutationOptions(options));
+};
+
+/**
+ * @summary Delete a placement question
+ */
+export const getAdminDeletePlacementQuestionUrl = (questionId: string) => {
+  return `/api/admin/placement-questions/${questionId}`;
+};
+
+export const adminDeletePlacementQuestion = async (
+  questionId: string,
+  options?: RequestInit,
+): Promise<MutationResult> => {
+  return customFetch<MutationResult>(
+    getAdminDeletePlacementQuestionUrl(questionId),
+    {
+      ...options,
+      method: "DELETE",
+    },
+  );
+};
+
+export const getAdminDeletePlacementQuestionMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof adminDeletePlacementQuestion>>,
+    TError,
+    { questionId: string },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof adminDeletePlacementQuestion>>,
+  TError,
+  { questionId: string },
+  TContext
+> => {
+  const mutationKey = ["adminDeletePlacementQuestion"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof adminDeletePlacementQuestion>>,
+    { questionId: string }
+  > = (props) => {
+    const { questionId } = props ?? {};
+
+    return adminDeletePlacementQuestion(questionId, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type AdminDeletePlacementQuestionMutationResult = NonNullable<
+  Awaited<ReturnType<typeof adminDeletePlacementQuestion>>
+>;
+
+export type AdminDeletePlacementQuestionMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Delete a placement question
+ */
+export const useAdminDeletePlacementQuestion = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof adminDeletePlacementQuestion>>,
+    TError,
+    { questionId: string },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof adminDeletePlacementQuestion>>,
+  TError,
+  { questionId: string },
+  TContext
+> => {
+  return useMutation(getAdminDeletePlacementQuestionMutationOptions(options));
 };
 
 /**

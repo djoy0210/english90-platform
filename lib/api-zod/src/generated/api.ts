@@ -702,6 +702,90 @@ export const AdminResetStudentProgressResponse = zod.object({
 });
 
 /**
+ * @summary List placement test questions
+ */
+export const AdminListPlacementQuestionsResponseItem = zod.object({
+  id: zod.string(),
+  position: zod.number(),
+  band: zod.enum(["a1", "a2", "b1"]),
+  promptEn: zod.string(),
+  promptMn: zod.string(),
+  options: zod.array(zod.string()),
+  correctAnswer: zod.string(),
+});
+export const AdminListPlacementQuestionsResponse = zod.array(
+  AdminListPlacementQuestionsResponseItem,
+);
+
+/**
+ * @summary Create a placement question
+ */
+
+export const adminCreatePlacementQuestionBodyOptionsMin = 2;
+
+export const AdminCreatePlacementQuestionBody = zod.object({
+  position: zod.number().min(1),
+  band: zod.enum(["a1", "a2", "b1"]),
+  promptEn: zod.string().min(1),
+  promptMn: zod.string().optional(),
+  options: zod
+    .array(zod.string().min(1))
+    .min(adminCreatePlacementQuestionBodyOptionsMin),
+  correctAnswer: zod.string().min(1),
+});
+
+export const AdminCreatePlacementQuestionResponse = zod.object({
+  id: zod.string(),
+  position: zod.number(),
+  band: zod.enum(["a1", "a2", "b1"]),
+  promptEn: zod.string(),
+  promptMn: zod.string(),
+  options: zod.array(zod.string()),
+  correctAnswer: zod.string(),
+});
+
+/**
+ * @summary Update a placement question
+ */
+export const AdminUpdatePlacementQuestionParams = zod.object({
+  questionId: zod.coerce.string(),
+});
+
+export const adminUpdatePlacementQuestionBodyOptionsMin = 2;
+
+export const AdminUpdatePlacementQuestionBody = zod.object({
+  position: zod.number().min(1),
+  band: zod.enum(["a1", "a2", "b1"]),
+  promptEn: zod.string().min(1),
+  promptMn: zod.string().optional(),
+  options: zod
+    .array(zod.string().min(1))
+    .min(adminUpdatePlacementQuestionBodyOptionsMin),
+  correctAnswer: zod.string().min(1),
+});
+
+export const AdminUpdatePlacementQuestionResponse = zod.object({
+  id: zod.string(),
+  position: zod.number(),
+  band: zod.enum(["a1", "a2", "b1"]),
+  promptEn: zod.string(),
+  promptMn: zod.string(),
+  options: zod.array(zod.string()),
+  correctAnswer: zod.string(),
+});
+
+/**
+ * @summary Delete a placement question
+ */
+export const AdminDeletePlacementQuestionParams = zod.object({
+  questionId: zod.coerce.string(),
+});
+
+export const AdminDeletePlacementQuestionResponse = zod.object({
+  success: zod.boolean(),
+});
+
+/**
  * @summary Duplicate a lesson into a new day
  */
 export const AdminDuplicateLessonParams = zod.object({

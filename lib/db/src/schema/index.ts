@@ -93,6 +93,22 @@ export const lessonsTable = pgTable(
   (table) => [uniqueIndex("lessons_day_unique").on(table.day)],
 );
 
+export const placementQuestionsTable = pgTable(
+  "placement_questions",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    position: integer("position").notNull(),
+    band: text("band").notNull(),
+    promptEn: text("prompt_en").notNull(),
+    promptMn: text("prompt_mn").notNull().default(""),
+    options: jsonb("options").$type<string[]>().notNull(),
+    correctAnswer: text("correct_answer").notNull(),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
+  },
+  (table) => [uniqueIndex("placement_questions_position_unique").on(table.position)],
+);
+
 export const finalTestsTable = pgTable(
   "final_tests",
   {

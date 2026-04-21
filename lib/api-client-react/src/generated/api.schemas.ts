@@ -306,6 +306,47 @@ export interface UpsertLessonRequest {
   quiz: UpsertLessonRequestQuizItem[];
 }
 
+export type AdminPlacementQuestionBand =
+  (typeof AdminPlacementQuestionBand)[keyof typeof AdminPlacementQuestionBand];
+
+export const AdminPlacementQuestionBand = {
+  a1: "a1",
+  a2: "a2",
+  b1: "b1",
+} as const;
+
+export interface AdminPlacementQuestion {
+  id: string;
+  position: number;
+  band: AdminPlacementQuestionBand;
+  promptEn: string;
+  promptMn: string;
+  options: string[];
+  correctAnswer: string;
+}
+
+export type UpsertPlacementQuestionRequestBand =
+  (typeof UpsertPlacementQuestionRequestBand)[keyof typeof UpsertPlacementQuestionRequestBand];
+
+export const UpsertPlacementQuestionRequestBand = {
+  a1: "a1",
+  a2: "a2",
+  b1: "b1",
+} as const;
+
+export interface UpsertPlacementQuestionRequest {
+  /** @minimum 1 */
+  position: number;
+  band: UpsertPlacementQuestionRequestBand;
+  /** @minLength 1 */
+  promptEn: string;
+  promptMn?: string;
+  /** @minItems 2 */
+  options: string[];
+  /** @minLength 1 */
+  correctAnswer: string;
+}
+
 export interface MutationResult {
   success: boolean;
 }

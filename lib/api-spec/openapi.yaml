@@ -463,6 +463,76 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/MutationResult"
+  /admin/placement-questions:
+    get:
+      operationId: adminListPlacementQuestions
+      tags: [admin]
+      summary: List placement test questions
+      responses:
+        "200":
+          description: Questions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AdminPlacementQuestion"
+    post:
+      operationId: adminCreatePlacementQuestion
+      tags: [admin]
+      summary: Create a placement question
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpsertPlacementQuestionRequest"
+      responses:
+        "200":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminPlacementQuestion"
+  /admin/placement-questions/{questionId}:
+    put:
+      operationId: adminUpdatePlacementQuestion
+      tags: [admin]
+      summary: Update a placement question
+      parameters:
+        - name: questionId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpsertPlacementQuestionRequest"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminPlacementQuestion"
+    delete:
+      operationId: adminDeletePlacementQuestion
+      tags: [admin]
+      summary: Delete a placement question
+      parameters:
+        - name: questionId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Deleted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MutationResult"
   /admin/lessons/{lessonId}/duplicate:
     post:
       operationId: adminDuplicateLesson
@@ -879,6 +949,32 @@ components:
               correctAnswer: { type: string }
             required: [id, promptEn, promptMn, options, correctAnswer]
       required: [day, level, titleEn, titleMn, objectiveEn, objectiveMn, contentEn, contentMn, durationMinutes, isPremium, vocabulary, quiz]
+    AdminPlacementQuestion:
+      type: object
+      properties:
+        id: { type: string }
+        position: { type: integer }
+        band: { type: string, enum: [a1, a2, b1] }
+        promptEn: { type: string }
+        promptMn: { type: string }
+        options:
+          type: array
+          items: { type: string }
+        correctAnswer: { type: string }
+      required: [id, position, band, promptEn, promptMn, options, correctAnswer]
+    UpsertPlacementQuestionRequest:
+      type: object
+      properties:
+        position: { type: integer, minimum: 1 }
+        band: { type: string, enum: [a1, a2, b1] }
+        promptEn: { type: string, minLength: 1 }
+        promptMn: { type: string }
+        options:
+          type: array
+          items: { type: string, minLength: 1 }
+          minItems: 2
+        correctAnswer: { type: string, minLength: 1 }
+      required: [position, band, promptEn, options, correctAnswer]
     MutationResult:
       type: object
       properties:
