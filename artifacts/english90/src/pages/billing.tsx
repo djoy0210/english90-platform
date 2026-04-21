@@ -158,11 +158,11 @@ export default function Billing() {
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="ref">Гүйлгээний утга *</Label>
-              <Input id="ref" value={transactionRef} onChange={(e) => setTransactionRef(e.target.value)} placeholder="ж: 2026042100123456" />
+              <Input id="ref" value={transactionRef} onChange={(e) => setTransactionRef(e.target.value)} placeholder="ж: Level 1 Username " />
             </div>
             <div className="space-y-1.5">
-              <Label htmlFor="payer">Төлөгчийн нэр *</Label>
-              <Input id="payer" value={payerName} onChange={(e) => setPayerName(e.target.value)} placeholder="Гүйлгээ хийсэн хүний бүтэн нэр" />
+              <Label htmlFor="payer">Худалдан авагчийн эмайл *</Label>
+              <Input id="payer" value={payerName} onChange={(e) => setPayerName(e.target.value)} placeholder="username@gmail.com" />
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="ss">Баримтын зургийн URL (заавал биш)</Label>
