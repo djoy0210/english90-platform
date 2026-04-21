@@ -4,7 +4,7 @@ import { ArrowRight, BookOpen, Brain, CheckCircle2, ClipboardCheck, GraduationCa
 
 const PRICING = [
   { id: "lesson:1", title: "Нэг хичээл", price: "4,900₮", desc: "Тухайн нэг хичээлийг туршиж үзэх", features: ["1 өдрийн бүтэн контент", "20 шинэ үг", "Сорил + хариулт"], cta: "Туршиж үзэх", href: "/sign-up" },
-  { id: "level:1", title: "Level 1 багц", price: "29,000₮", desc: "Эхлэгчдэд зориулсан 30 хоног", features: ["30 хоногийн бүтэн контент", "Audio listening", "Level 1 шалгалт", "PDF материал"], cta: "Level 1 авах", href: "/sign-up", highlight: true },
+  { id: "level:1", title: "Level 1 багц", price: "29,000₮", desc: "Эхлэгчдэд зориулсан 30 хоног", features: ["30 хоногийн бүтэн контент", "Audio listening", "Level 1 шалгалт"], cta: "Level 1 авах", href: "/sign-up", highlight: true },
   { id: "course:full", title: "Бүтэн 90 хоног", price: "79,000₮", desc: "Бүх 3 түвшин + бүх шалгалт", features: ["90 хоногийн бүх контент", "3 түвшний шалгалт", "Хязгааргүй давталт", "Сертификат"], cta: "Бүгдийг авах", href: "/sign-up" },
 ];
 
