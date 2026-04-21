@@ -26,7 +26,6 @@ export default function Landing() {
           <Button asChild size="sm"><Link href="/sign-up">Бүртгүүлэх</Link></Button>
         </div>
       </header>
-
       <main className="flex-1">
         <section className="py-20 md:py-28 px-4 md:px-8 max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
@@ -46,7 +45,7 @@ export default function Landing() {
                   <Link href="/sign-up">Үнэгүй бүртгүүлэх <ArrowRight className="ml-2 h-5 w-5" /></Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="h-14 px-8 text-base">
-                  <Link href="/sign-up">Шатлал тогтоох тест өгөх</Link>
+                  <Link href="/sign-up">Түвшин тогтоох тест өгөх</Link>
                 </Button>
               </div>
               <div className="flex items-center gap-4 text-sm text-muted-foreground justify-center lg:justify-start pt-2">
@@ -174,7 +173,6 @@ export default function Landing() {
           </div>
         </section>
       </main>
-
       <footer className="border-t py-8 px-4 text-center text-muted-foreground text-sm">
         <p>© {new Date().getFullYear()} English90. Бүх эрх хуулиар хамгаалагдсан.</p>
       </footer>
