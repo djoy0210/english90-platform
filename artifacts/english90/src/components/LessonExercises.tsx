@@ -6,15 +6,31 @@ function norm(s: string) {
   return String(s ?? "").toLowerCase().replace(/[.,!?;:'"]/g, "").trim();
 }
 
-function parseAnswerKey(answerKey: string[] | undefined, count: number): string[] {
+function parseAnswerKey(
+  answerKey: string[] | undefined,
+  count: number,
+  preferLabel?: RegExp,
+): string[] {
   if (!Array.isArray(answerKey)) return Array(count).fill("");
-  const flat = answerKey
-    .flatMap((a) => String(a).split(/[,;\n]/))
-    .map((s) => s.replace(/^[^:]*:\s*/, "").trim());
+  const labeled: string[] = [];
+  const unlabeled: string[] = [];
+  for (const raw of answerKey) {
+    const s = String(raw);
+    const labelMatch = s.match(/^([^:]+):\s*(.*)$/);
+    if (labelMatch) {
+      if (preferLabel && preferLabel.test(labelMatch[1])) labeled.push(labelMatch[2]);
+    } else {
+      unlabeled.push(s);
+    }
+  }
+  const sources = labeled.length > 0 ? labeled : unlabeled.length > 0 ? unlabeled : [];
   const map: Record<string, string> = {};
-  for (const item of flat) {
-    const m = item.match(/^(\d+)\s*[-=:]\s*(.+)$/);
-    if (m) map[m[1]] = m[2].trim();
+  for (const line of sources) {
+    const parts = line.split(/[,;·•|\n]|\s+\/\s+/);
+    for (const part of parts) {
+      const m = part.trim().match(/^(\d+)\s*[-=:.)]\s*(.+)$/);
+      if (m && map[m[1]] === undefined) map[m[1]] = m[2].trim();
+    }
   }
   return Array.from({ length: count }, (_, i) => map[String(i + 1)] ?? "");
 }
@@ -23,10 +39,14 @@ interface FillInProps {
   items: string[];
   answerKey?: string[];
   title: string;
+  labelMatch?: RegExp;
 }
 
-export function FillInBlanks({ items, answerKey, title }: FillInProps) {
-  const answers = useMemo(() => parseAnswerKey(answerKey, items.length), [answerKey, items.length]);
+export function FillInBlanks({ items, answerKey, title, labelMatch }: FillInProps) {
+  const answers = useMemo(
+    () => parseAnswerKey(answerKey, items.length, labelMatch ?? /fill|blank|grammar|practice|дасгал|дүрэм/i),
+    [answerKey, items.length, labelMatch],
+  );
   const [values, setValues] = useState<string[]>(() => items.map(() => ""));
   const [checked, setChecked] = useState(false);
   const [showAnswers, setShowAnswers] = useState(false);
