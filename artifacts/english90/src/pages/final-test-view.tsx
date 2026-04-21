@@ -3,6 +3,8 @@ import { useLocation, useParams } from "wouter";
 import { useGetFinalTest, useSubmitFinalTest, getGetFinalTestQueryKey } from "@workspace/api-client-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { BookOpen } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -26,6 +28,9 @@ export default function FinalTestView() {
 
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [testResult, setTestResult] = useState<any>(null);
+  const [passageOpen, setPassageOpen] = useState(false);
+
+  const passageText: string | undefined = (test?.questions as any[] | undefined)?.find((q: any) => q?.passage)?.passage;
 
   if (isLoading) {
     return (
@@ -125,6 +130,32 @@ export default function FinalTestView() {
       <Button variant="ghost" className="mb-2 -ml-4" onClick={() => setLocation("/lessons")}>
         <ArrowLeft className="mr-2 w-4 h-4" /> Хичээлүүд
       </Button>
+
+      {passageText && !testResult && (
+        <>
+          <Button
+            type="button"
+            onClick={() => setPassageOpen(true)}
+            className="fixed bottom-6 right-6 z-50 shadow-lg rounded-full h-14 px-5 gap-2"
+            size="lg"
+          >
+            <BookOpen className="w-5 h-5" />
+            <span className="hidden sm:inline">View passage</span>
+            <span className="sm:hidden">Passage</span>
+          </Button>
+          <Dialog open={passageOpen} onOpenChange={setPassageOpen}>
+            <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle className="flex items-center gap-2 text-primary">
+                  <BookOpen className="w-5 h-5" />
+                  Reading passage · Унших текст
+                </DialogTitle>
+              </DialogHeader>
+              <p className="text-sm leading-7 whitespace-pre-line mt-2">{passageText}</p>
+            </DialogContent>
+          </Dialog>
+        </>
+      )}
 
       <div className="text-center mb-8">
         <div className="w-16 h-16 bg-secondary/20 text-secondary-foreground rounded-full flex items-center justify-center mx-auto mb-4">
