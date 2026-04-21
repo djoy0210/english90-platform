@@ -194,28 +194,42 @@ export default function FinalTestView() {
       ) : (
         <div className="space-y-8">
           {(() => {
-            const sections: { title: string; intro?: string; count: number }[] = [];
-            for (const q of test.questions as any[]) {
-              if (q.sectionTitle) sections.push({ title: q.sectionTitle, intro: q.sectionIntro, count: 1 });
-              else if (sections.length > 0) sections[sections.length - 1].count++;
-            }
+            const sections: { title: string; intro?: string; count: number; anchorId: string; firstQ: number }[] = [];
+            (test.questions as any[]).forEach((q, qIdx) => {
+              if (q.sectionTitle) {
+                sections.push({ title: q.sectionTitle, intro: q.sectionIntro, count: 1, anchorId: `section-${sections.length + 1}`, firstQ: qIdx + 1 });
+              } else if (sections.length > 0) {
+                sections[sections.length - 1].count++;
+              }
+            });
             if (sections.length === 0) return null;
+            const jumpTo = (id: string) => {
+              const el = document.getElementById(id);
+              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+            };
             return (
               <Card className="border-primary/30 bg-primary/5">
                 <CardContent className="p-5 sm:p-6">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-primary mb-3">Шалгалтын бүтэц · Test outline</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-primary mb-3">
+                    Шалгалтын бүтэц · Test outline · <span className="normal-case font-normal text-muted-foreground">tap a section to jump</span>
+                  </p>
                   <div className="grid sm:grid-cols-2 gap-3">
                     {sections.map((s, i) => (
-                      <div key={i} className="flex items-start gap-3 rounded-lg bg-background border p-3">
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => jumpTo(s.anchorId)}
+                        className="text-left flex items-start gap-3 rounded-lg bg-background border p-3 hover:border-primary hover:shadow-sm transition cursor-pointer"
+                      >
                         <div className="w-8 h-8 rounded-full bg-primary/15 text-primary font-bold flex items-center justify-center shrink-0">
                           {i + 1}
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="font-semibold text-sm leading-tight">{s.title}</p>
-                          {s.intro && <p className="text-xs text-muted-foreground mt-1 leading-snug">{s.intro}</p>}
-                          <p className="text-xs text-primary mt-1 font-medium">{s.count} асуулт</p>
+                          {s.intro && <p className="text-xs text-muted-foreground mt-1 leading-snug line-clamp-2">{s.intro}</p>}
+                          <p className="text-xs text-primary mt-1 font-medium">{s.count} асуулт · jump ↓</p>
                         </div>
-                      </div>
+                      </button>
                     ))}
                   </div>
                 </CardContent>
@@ -227,10 +241,17 @@ export default function FinalTestView() {
               <div className="space-y-10">
                 {test.questions.map((question: any, idx: number) => {
                   const isFill = question.type === "fill" || (Array.isArray(question.options) && question.options.length === 0);
+                  let sectionAnchor: string | undefined;
+                  if (question.sectionTitle) {
+                    const sectionIdx = (test.questions as any[])
+                      .slice(0, idx + 1)
+                      .filter((q: any) => q.sectionTitle).length;
+                    sectionAnchor = `section-${sectionIdx}`;
+                  }
                   return (
-                    <div key={question.id} className="space-y-5">
+                    <div key={question.id} className="space-y-5" id={sectionAnchor}>
                       {question.sectionTitle && (
-                        <div className="border-l-4 border-primary bg-muted/40 px-4 py-3 rounded-r-md">
+                        <div className="border-l-4 border-primary bg-muted/40 px-4 py-3 rounded-r-md scroll-mt-4">
                           <h2 className="font-semibold text-base">{question.sectionTitle}</h2>
                           {question.sectionIntro && (
                             <p className="text-sm text-muted-foreground mt-1">{question.sectionIntro}</p>
