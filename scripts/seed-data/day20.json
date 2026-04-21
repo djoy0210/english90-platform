@@ -1,0 +1,154 @@
+{
+  "day": 20,
+  "level": 1,
+  "titleEn": "Day 20: Restaurants & Ordering Food",
+  "titleMn": "Өдөр 20: Ресторан ба захиалга өгөх",
+  "objectiveEn": "About one hour. Learn 20 restaurant words, 'Would you like...?' polite offers and requests, listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. Рестораны 20 шинэ үг, 'Would you like...?' эелдэг санал, хүсэлт, сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Today you learn 20 restaurant words and how to make polite offers and orders using 'Would you like', 'I would like', and 'I'll have'.",
+  "contentMn": "Өнөөдөр рестораны 20 үг сурч, 'Would you like', 'I would like', 'I'll have' гэх эелдэг хэлбэрээр захиалга өгч сурна.",
+  "vocabulary": [
+    { "english": "menu", "pronunciation": "/ˈmɛnjuː/", "mongolian": "цэс", "example": "Can I see the menu please?" },
+    { "english": "waiter", "pronunciation": "/ˈweɪtər/", "mongolian": "зөөгч", "example": "The waiter is very polite." },
+    { "english": "order", "pronunciation": "/ˈɔːrdər/", "mongolian": "захиалах", "example": "I would like to order now." },
+    { "english": "starter", "pronunciation": "/ˈstɑːrtər/", "mongolian": "хөнгөн зууш / хоолны эхэнд иддэг", "example": "I'll have the soup as a starter." },
+    { "english": "main course", "pronunciation": "/meɪn kɔːrs/", "mongolian": "үндсэн хоол", "example": "For main course I want rice." },
+    { "english": "dessert", "pronunciation": "/dɪˈzɜːrt/", "mongolian": "амттан / хоолны дараа иддэг", "example": "I would like chocolate dessert." },
+    { "english": "bill", "pronunciation": "/bɪl/", "mongolian": "тооцоо", "example": "Can I have the bill please?" },
+    { "english": "tip", "pronunciation": "/tɪp/", "mongolian": "гарын мөнгө", "example": "I always leave a tip." },
+    { "english": "reservation", "pronunciation": "/ˌrɛzərˈveɪʃən/", "mongolian": "захиалга", "example": "I have a reservation for two." },
+    { "english": "table", "pronunciation": "/ˈteɪbəl/", "mongolian": "ширээ", "example": "A table for two please." },
+    { "english": "vegetarian", "pronunciation": "/ˌvɛdʒɪˈtɛriən/", "mongolian": "цагаан хоолтон", "example": "I am vegetarian." },
+    { "english": "glass", "pronunciation": "/ɡlɑːs/", "mongolian": "шил", "example": "A glass of water please." },
+    { "english": "bottle", "pronunciation": "/ˈbɒtəl/", "mongolian": "лонх", "example": "A bottle of juice please." },
+    { "english": "portion", "pronunciation": "/ˈpɔːrʃən/", "mongolian": "порц / хэсэг", "example": "A small portion please." },
+    { "english": "spicy", "pronunciation": "/ˈspaɪsi/", "mongolian": "халуун ногоотой", "example": "Is this dish spicy?" },
+    { "english": "mild", "pronunciation": "/maɪld/", "mongolian": "зөөлөн хурц бус", "example": "I prefer mild food." },
+    { "english": "enjoy", "pronunciation": "/ɪnˈdʒɔɪ/", "mongolian": "таашаах", "example": "Enjoy your meal!" },
+    { "english": "recommend", "pronunciation": "/ˌrɛkəˈmɛnd/", "mongolian": "санал болгох", "example": "What do you recommend?" },
+    { "english": "ready", "pronunciation": "/ˈrɛdi/", "mongolian": "бэлэн", "example": "Are you ready to order?" },
+    { "english": "delicious", "pronunciation": "/dɪˈlɪʃəs/", "mongolian": "амттай", "example": "This food is delicious!" }
+  ],
+  "quiz": [
+    { "question": "Which is the MOST polite way to order?", "options": ["I want soup.", "Give me soup.", "I would like the soup.", "Soup!"], "answer": "I would like the soup.", "explanation": "'I would like' is the polite, restaurant-appropriate form." },
+    { "question": "What does 'I'll have' mean?", "options": ["I had", "I have had", "I will have / I want", "I am having"], "answer": "I will have / I want", "explanation": "I'll = I will. Polite way to order." },
+    { "question": "_____ you like some coffee?", "options": ["Do", "Are", "Would", "Will"], "answer": "Would", "explanation": "'Would you like...?' = polite offer." },
+    { "question": "_____ I have the bill please?", "options": ["Do", "Will", "Can", "Would"], "answer": "Can", "explanation": "'Can I have...please?' = polite request." },
+    { "question": "What does the waiter recommend?", "options": ["noodles", "Mongolian beef soup", "salad", "rice"], "answer": "Mongolian beef soup", "explanation": "From the listening: 'I recommend the Mongolian beef soup.'" },
+    { "question": "What does the waiter say at the end?", "options": ["Thank you", "Enjoy your meal", "Have a nice day", "Goodbye"], "answer": "Enjoy your meal", "explanation": "Standard waiter goodbye phrase." },
+    { "question": "What does Bat order?", "options": ["noodles", "salad", "beef soup and water", "dessert"], "answer": "beef soup and water", "explanation": "Bat says: 'I'll have that please. And a glass of water.'" },
+    { "question": "What special request does Sarnai have?", "options": ["extra portion", "no salt", "not too spicy", "no meat"], "answer": "not too spicy", "explanation": "Sarnai says: 'Not too spicy!'" },
+    { "question": "Choose the correct sentence:", "options": ["I want coffee.", "Give me coffee.", "I would like coffee.", "Coffee!"], "answer": "I would like coffee.", "explanation": "Polite restaurant English: 'I would like...'" },
+    { "question": "I'd like = ?", "options": ["I do like", "I would like", "I am like", "I will like"], "answer": "I would like", "explanation": "I'd = I would (contraction)." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Would you like...? — Polite offers and requests",
+      "grammarExplanation": "'Would you like...?' is the POLITE way to offer or ask about preferences. To ORDER food: 'I would like + noun' OR 'I'll have + noun' OR 'Can I have + noun please?'. To RESPOND: 'Yes please' or 'No thank you'. In a restaurant, NEVER say 'I want...' — always use 'I would like' or 'I'll have'. / 'Would you like...?' нь эелдэг санал болгох хэлбэр. Захиалга өгөхдөө: 'I would like + нэр' эсвэл 'I'll have + нэр'. ЧУХАЛ: Ресторанд 'I want...' гэж ХЭЛЭХГҮЙ.",
+      "grammarTable": [
+        { "subject": "Would you like?", "verb": "offer", "positive": "Would you like coffee?", "negative": "No thank you.", "question": "Would you like a seat?", "mongolian": "... авах уу?" },
+        { "subject": "I would like", "verb": "order", "positive": "I would like soup.", "negative": "I wouldn't like that.", "question": "Would you like soup?", "mongolian": "Би ... авмаар байна" },
+        { "subject": "I'll have", "verb": "order", "positive": "I'll have the salad.", "negative": "—", "question": "What will you have?", "mongolian": "Би ... авна" },
+        { "subject": "Can I have?", "verb": "request", "positive": "Can I have the menu?", "negative": "—", "question": "Can I have a receipt?", "mongolian": "Надад ... өгнө үү?" },
+        { "subject": "Yes please", "verb": "accept", "positive": "Yes please.", "negative": "No thank you.", "question": "Would you like more?", "mongolian": "Тийм ээ, баярлалаа" }
+      ],
+      "quickPractice": [
+        "_____ you like some coffee? (Would)",
+        "I _____ have the soup. (will / I'll)",
+        "_____ you like to order? (Would)",
+        "Can I _____ the menu? (have)",
+        "I _____ like the chicken please. (would)",
+        "_____ I have the bill please? (Can)",
+        "I _____ like dessert please. (would)",
+        "What _____ you recommend? (do)"
+      ],
+      "answerKey": ["1-Would", "2-I'll/will", "3-Are/Would", "4-have", "5-would", "6-Can", "7-would", "8-do"],
+      "commonMistakes": [
+        "I want coffee. → I would like coffee. / I'll have coffee.",
+        "Would you like to coffee? → Would you like SOME coffee?",
+        "Can I have a menu? → Can I see THE menu?",
+        "I would like to have soup. → I would like the soup. / I'll have the soup."
+      ]
+    },
+    "page2": {
+      "readingPassage": "Bat and Sarnai are at a restaurant. The waiter comes: 'Would you like to see the menu?' 'Yes please,' says Bat. They look at the menu. 'I would like the beef soup and rice please,' says Bat. Sarnai says: 'I'll have the vegetarian noodles.' The waiter asks: 'Would you like anything to drink?' 'Can I have a glass of water please?' The food is delicious!",
+      "keyPhrases": [
+        { "english": "Would you like to order?", "mongolian": "Захиалга өгөхөд бэлэн үү?", "note": "Waiter asking customer" },
+        { "english": "I would like the soup", "mongolian": "Би шөл авмаар байна", "note": "Polite way to order" },
+        { "english": "I'll have the salad", "mongolian": "Би салат авна", "note": "Alternative polite order" },
+        { "english": "Can I have the bill?", "mongolian": "Тооцоо авч болох уу?", "note": "Asking for the bill" },
+        { "english": "What do you recommend?", "mongolian": "Та юуг санал болгоно вэ?", "note": "Asking waiter's advice" },
+        { "english": "Enjoy your meal!", "mongolian": "Сайхан хооллоорой!", "note": "Waiter's goodbye phrase" }
+      ],
+      "speakingQuestions": [
+        "What would you like to eat for dinner tonight?",
+        "Have you ever been to a restaurant?",
+        "What is your favorite restaurant food?",
+        "Do you prefer spicy or mild food?",
+        "What would you like to drink right now?",
+        "Can you say 'I would like...' in a sentence?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "Good evening! Would you like a table for two?" },
+        { "speaker": "B", "text": "Yes please. No, we don't have a reservation." },
+        { "speaker": "A", "text": "No problem! Would you like to see the menu?" },
+        { "speaker": "B", "text": "Yes please. Thank you very much." },
+        { "speaker": "A", "text": "Are you ready to order?" },
+        { "speaker": "B", "text": "Yes. I would like the beef soup and rice please." },
+        { "speaker": "A", "text": "Would you like anything to drink?" },
+        { "speaker": "B", "text": "Can I have a bottle of water please?" }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Waiter: Good evening! Would you like a table? Bat: Yes please. A table for two. Waiter: Here you are. Would you like to see the menu? Sarnai: Yes please. What do you recommend? Waiter: I recommend the Mongolian beef soup. It is very delicious today. Bat: I'll have that please. And a glass of water. Sarnai: I would like the noodles please. Not too spicy! Waiter: Of course! Enjoy your meal!",
+      "listeningQuestions": [
+        { "question": "What does the waiter offer first?", "options": ["the menu", "drinks", "a table"], "answer": "a table" },
+        { "question": "How many people are eating?", "options": ["one", "three", "two"], "answer": "two" },
+        { "question": "What does Sarnai ask the waiter?", "options": ["the price", "what he recommends", "if it is spicy"], "answer": "what he recommends" },
+        { "question": "What does the waiter recommend?", "options": ["noodles", "Mongolian beef soup", "salad"], "answer": "Mongolian beef soup" },
+        { "question": "What does Bat order?", "options": ["noodles", "salad", "beef soup and water"], "answer": "beef soup and water" },
+        { "question": "What does Sarnai order?", "options": ["beef soup", "noodles", "salad"], "answer": "noodles" },
+        { "question": "What special request does Sarnai have?", "options": ["extra portion", "no salt", "not too spicy"], "answer": "not too spicy" },
+        { "question": "What does the waiter say at the end?", "options": ["Thank you", "Enjoy your meal", "Have a nice day"], "answer": "Enjoy your meal" },
+        { "question": "Which is the MOST polite way to order?", "options": ["I want soup.", "Give me soup.", "I would like the soup."], "answer": "I would like the soup." },
+        { "question": "What does 'I'll have' mean?", "options": ["I had", "I have had", "I will have / I want"], "answer": "I will have / I want" }
+      ],
+      "grammarPractice": [
+        "_____ you like some coffee? (Would)",
+        "I _____ have the soup. (will/I'll)",
+        "_____ I have the bill please? (Can)",
+        "I _____ like the chicken. (would)",
+        "What _____ you recommend? (do)",
+        "_____ you ready to order? (Are)"
+      ],
+      "matchingExercise": [
+        { "left": "menu", "right": "цэс" },
+        { "left": "bill", "right": "тооцоо" },
+        { "left": "waiter", "right": "зөөгч" },
+        { "left": "tip", "right": "гарын мөнгө" },
+        { "left": "reservation", "right": "захиалга" }
+      ],
+      "homework": [
+        "Writing: Write a restaurant conversation (6 lines) using 'Would you like' and 'I would like'.",
+        "Vocabulary: Practice ordering food with a family member at home (in English!).",
+        "Speaking: Say 'I would like...' 5 times with different foods — natural and polite!",
+        "Review: 'Would you like?' = offer · 'I'd like' = polite order · NEVER 'I want' in a restaurant!"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-Would · 2-I'll · 3-Can · 4-would · 5-do · 6-Are",
+        "Matching: 1-C · 2-B · 3-E · 4-A · 5-D",
+        "Listening: 1-c · 2-c · 3-b · 4-b · 5-c · 6-b · 7-c · 8-b · 9-c · 10-c"
+      ],
+      "completionSummary": [
+        "Learned 20 new restaurant words",
+        "Mastered 'Would you like?' polite offers",
+        "Read about ordering food at a restaurant",
+        "Practiced grammar with fill-in exercises",
+        "Practiced speaking restaurant dialogues",
+        "Completed listening practice with 10 questions",
+        "Learned to order food politely in English"
+      ]
+    }
+  }
+}

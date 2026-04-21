@@ -1,0 +1,155 @@
+{
+  "day": 22,
+  "level": 1,
+  "titleEn": "Day 22: Yesterday & Last Week",
+  "titleMn": "Өдөр 22: Өчигдөр ба өнгөрсөн долоо хоног",
+  "objectiveEn": "About one hour. Learn 20 past time words, Past Simple of 'to be' (was/were), reading, speaking, listening, and homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 өнгөрсөн цагийн үг, was/were дүрэм, унших, ярих, сонсох, гэрийн даалгавар.",
+  "contentEn": "Learn how to talk about yesterday and last week using was and were, with reading and listening practice about a sick day.",
+  "contentMn": "Was, were ашиглан өчигдөр болон өнгөрсөн долоо хоногийн тухай ярьж сурна; өвчтэй өдрийн тухай унших, сонсох дасгал.",
+  "vocabulary": [
+    { "english": "yesterday", "pronunciation": "/ˈjɛstərdeɪ/", "mongolian": "өчигдөр", "example": "Yesterday was Monday." },
+    { "english": "last week", "pronunciation": "/lɑːst wiːk/", "mongolian": "өнгөрсөн долоо хоног", "example": "Last week was very busy." },
+    { "english": "last month", "pronunciation": "/lɑːst mʌnθ/", "mongolian": "өнгөрсөн сар", "example": "Last month was cold." },
+    { "english": "last year", "pronunciation": "/lɑːst jɪər/", "mongolian": "өнгөрсөн жил", "example": "Last year was great!" },
+    { "english": "ago", "pronunciation": "/əˈɡoʊ/", "mongolian": "өмнө", "example": "Three days ago I was sick." },
+    { "english": "morning", "pronunciation": "/ˈmɔːrnɪŋ/", "mongolian": "өглөө", "example": "This morning I was tired." },
+    { "english": "afternoon", "pronunciation": "/ˌæftərˈnuːn/", "mongolian": "өдөр", "example": "Yesterday afternoon was sunny." },
+    { "english": "weekend", "pronunciation": "/ˈwiːkɛnd/", "mongolian": "амралтын өдрүүд", "example": "Last weekend was amazing." },
+    { "english": "born", "pronunciation": "/bɔːrn/", "mongolian": "төрсөн", "example": "I was born in Ulaanbaatar." },
+    { "english": "young", "pronunciation": "/jʌŋ/", "mongolian": "залуу", "example": "She was young and energetic." },
+    { "english": "busy", "pronunciation": "/ˈbɪzi/", "mongolian": "завгүй", "example": "I was busy all day yesterday." },
+    { "english": "late", "pronunciation": "/leɪt/", "mongolian": "оройтох", "example": "We were late for school." },
+    { "english": "early", "pronunciation": "/ˈɜːrli/", "mongolian": "эрт", "example": "I was early this morning." },
+    { "english": "alone", "pronunciation": "/əˈloʊn/", "mongolian": "ганцаараа", "example": "She was alone at home." },
+    { "english": "together", "pronunciation": "/təˈɡɛðər/", "mongolian": "хамт", "example": "We were together yesterday." },
+    { "english": "before", "pronunciation": "/bɪˈfɔːr/", "mongolian": "өмнө (цаг)", "example": "Before lunch I was at school." },
+    { "english": "after", "pronunciation": "/ˈɑːftər/", "mongolian": "дараа", "example": "After school I was tired." },
+    { "english": "during", "pronunciation": "/ˈdjʊərɪŋ/", "mongolian": "үед", "example": "During lunch I was happy." },
+    { "english": "at home", "pronunciation": "/æt hoʊm/", "mongolian": "гэртээ", "example": "I was at home all day." },
+    { "english": "at school", "pronunciation": "/æt skuːl/", "mongolian": "сургууль дээр", "example": "She was at school yesterday." }
+  ],
+  "quiz": [
+    { "question": "I _____ tired yesterday.", "options": ["am", "was", "were", "is"], "answer": "was", "explanation": "Use WAS with I in the past." },
+    { "question": "They _____ late for class.", "options": ["was", "were", "are", "is"], "answer": "were", "explanation": "Use WERE with they (plural)." },
+    { "question": "_____ she at school yesterday?", "options": ["Were", "Is", "Was", "Did"], "answer": "Was", "explanation": "Past question with she uses WAS." },
+    { "question": "We _____ ready — we were early!", "options": ["wasn't", "weren't", "isn't", "aren't"], "answer": "weren't", "explanation": "Negative for 'we' in past is WEREN'T." },
+    { "question": "Where was Bat yesterday?", "options": ["at school", "at the park", "at home", "at work"], "answer": "at home", "explanation": "Bat was at home because he was sick." },
+    { "question": "Why was Bat absent?", "options": ["he was bored", "he was sick", "he was late", "he was busy"], "answer": "he was sick", "explanation": "Bat was sick with a bad cold." },
+    { "question": "What is 'was not' in contracted form?", "options": ["weren't", "isn't", "wasn't", "aren't"], "answer": "wasn't", "explanation": "was not = wasn't." },
+    { "question": "Which sentence is correct?", "options": ["I were sick.", "They was late.", "She were happy.", "She was happy."], "answer": "She was happy.", "explanation": "Use WAS with she/he/it." },
+    { "question": "What was yesterday's lesson about?", "options": ["Present Simple", "Past Simple", "Future tense", "Modals"], "answer": "Past Simple", "explanation": "The lesson was about Past Simple." },
+    { "question": "He _____ sick last week.", "options": ["were", "was", "is", "are"], "answer": "was", "explanation": "Use WAS with he in past." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Past Simple — was / were (To Be in the past)",
+      "grammarExplanation": "Past Simple of 'To Be' has two forms: WAS (for I, he, she, it — singular) and WERE (for you, we, they — plural). WAS and WERE are the past tense of IS/AM and ARE. Use them to describe states, feelings, locations, and conditions in the past. Negative: was not = wasn't / were not = weren't. Question: move WAS/WERE to the front of the sentence. 'To Be' үйл үгийн өнгөрсөн цаг: WAS (I, he, she, it — нэгдмэл) ба WERE (you, we, they — олон тоо). WAS/WERE нь IS/AM ба ARE-ийн өнгөрсөн цаг. Өнгөрсөн цагийн байдал, нөхцөл, байршлыг тодорхойлоход хэрэглэнэ. Үгүйсгэл: wasn't / weren't. Асуулт: WAS/WERE-г эхэнд тавь.",
+      "grammarTable": [
+        { "subject": "I", "verb": "was", "positive": "I was tired.", "negative": "I was not tired.", "question": "Was I right?", "mongolian": "Би (өнгөрсөнд)" },
+        { "subject": "He / She", "verb": "was", "positive": "She was happy.", "negative": "She was not sad.", "question": "Was she happy?", "mongolian": "Тэр (өнгөрсөнд)" },
+        { "subject": "It", "verb": "was", "positive": "It was cold.", "negative": "It was not warm.", "question": "Was it cold?", "mongolian": "Энэ (өнгөрсөнд)" },
+        { "subject": "You", "verb": "were", "positive": "You were late.", "negative": "You were not early.", "question": "Were you late?", "mongolian": "Та (өнгөрсөнд)" },
+        { "subject": "We", "verb": "were", "positive": "We were at school.", "negative": "We were not tired.", "question": "Were we late?", "mongolian": "Бид (өнгөрсөнд)" },
+        { "subject": "They", "verb": "were", "positive": "They were friends.", "negative": "They were not here.", "question": "Were they here?", "mongolian": "Тэд (өнгөрсөнд)" }
+      ],
+      "quickPractice": [
+        "1. I _____ tired yesterday. (am)",
+        "2. They _____ late for class. (Are)",
+        "3. He _____ sick last week. (is)",
+        "4. _____ you happy? (Are)",
+        "5. _____ she at school? (Is)",
+        "6. We _____ at home all day. (Are)",
+        "7. It _____ cold yesterday. (is)",
+        "8. She _____ not ready. (is)"
+      ],
+      "answerKey": ["1-was", "2-were", "3-was", "4-Were", "5-Was", "6-were", "7-was", "8-was"],
+      "commonMistakes": [
+        "I were sick → I WAS sick",
+        "They was late → They WERE late",
+        "Was they there? → WERE they there?",
+        "She were happy → She WAS happy"
+      ]
+    },
+    "page2": {
+      "readingPassage": "Last weekend was very special. On Saturday, Bat and his family were at the park. The weather was sunny and warm. Bat's mother was very happy. His father was relaxed. On Sunday, Bat was at his grandmother's house. His cousins were there too. They were all together and very happy. Bat thinks: 'Last weekend was the best!'",
+      "keyPhrases": [
+        { "english": "I was at school yesterday", "mongolian": "Би өчигдөр сургуульд байсан", "note": "I was + location + time" },
+        { "english": "They were happy", "mongolian": "Тэд баяртай байсан", "note": "They were + adjective" },
+        { "english": "Was she at home?", "mongolian": "Тэр гэртээ байсан уу?", "note": "Was + subject + location?" },
+        { "english": "I wasn't tired", "mongolian": "Би ядарсан байгаагүй", "note": "I wasn't = I was not" },
+        { "english": "Where were you yesterday?", "mongolian": "Та өчигдөр хаана байсан бэ?", "note": "Where + were + you?" },
+        { "english": "It was sunny last week", "mongolian": "Өнгөрсөн долоо хоног нартай байсан", "note": "It was + weather + time" }
+      ],
+      "speakingQuestions": [
+        "Where were you yesterday? / Та өчигдөр хаана байсан бэ?",
+        "Were you at school yesterday?",
+        "How was the weather last week?",
+        "Were you happy last weekend?",
+        "What day was yesterday?",
+        "Were you tired this morning?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "Where were you yesterday? I didn't see you." },
+        { "speaker": "B", "text": "I was at home. I was sick." },
+        { "speaker": "A", "text": "Oh no! Were you very sick?" },
+        { "speaker": "B", "text": "Yes, I was. I had a headache and a fever." },
+        { "speaker": "A", "text": "Was anyone at home with you?" },
+        { "speaker": "B", "text": "Yes, my mother was with me all day." },
+        { "speaker": "A", "text": "How was yesterday's English lesson?" },
+        { "speaker": "B", "text": "It was great! The grammar was easy." }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Good morning! Where were you yesterday, Bat? You weren't in class. Bat: I was at home, teacher. I was sick — I had a bad cold. Teacher: I'm sorry to hear that. Were you sick all day? Bat: Yes. I wasn't well at all. My mother was with me. Teacher: Sarnai, were you at school yesterday? Sarnai: Yes I was. The lesson was very interesting! It was about Past Simple. Teacher: That's right! And today Bat is back. Were you well this morning, Bat? Bat: Yes! I was fine. I wasn't late either. I'm happy to be back!",
+      "listeningQuestions": [
+        { "question": "Where was Bat yesterday?", "options": ["at school", "at the park", "at home"], "answer": "at home" },
+        { "question": "Why was Bat absent?", "options": ["he was bored", "he was sick", "he was late"], "answer": "he was sick" },
+        { "question": "Was Bat alone at home?", "options": ["yes", "no, his mother was with him", "not mentioned"], "answer": "no, his mother was with him" },
+        { "question": "Was Sarnai at school yesterday?", "options": ["no", "yes", "not mentioned"], "answer": "yes" },
+        { "question": "What was yesterday's lesson about?", "options": ["Present Simple", "Past Simple", "Future tense"], "answer": "Past Simple" },
+        { "question": "Was the lesson interesting?", "options": ["no", "yes", "not mentioned"], "answer": "yes" },
+        { "question": "Was Bat well this morning?", "options": ["no", "yes", "still sick"], "answer": "yes" },
+        { "question": "Was Bat late today?", "options": ["yes", "no, he wasn't", "not mentioned"], "answer": "no, he wasn't" },
+        { "question": "How does Bat feel about coming back?", "options": ["tired", "nervous", "happy"], "answer": "happy" },
+        { "question": "What is 'was not' in contracted form?", "options": ["weren't", "isn't", "wasn't"], "answer": "wasn't" }
+      ],
+      "grammarPractice": [
+        "1. I _____ tired yesterday.",
+        "2. They _____ late for class.",
+        "3. He _____ sick last week.",
+        "4. _____ you happy? Yes, I was!",
+        "5. She _____ at home — she was at school.",
+        "6. We _____ ready — we were early!"
+      ],
+      "matchingExercise": [
+        { "left": "yesterday", "right": "өчигдөр" },
+        { "left": "last week", "right": "өнгөрсөн долоо хоног" },
+        { "left": "last year", "right": "өнгөрсөн жил" },
+        { "left": "last month", "right": "өнгөрсөн сар" },
+        { "left": "three days ago", "right": "3 өдрийн өмнө" }
+      ],
+      "homework": [
+        "Writing: Write 5 sentences about where you were last weekend using was/were.",
+        "Vocabulary: Write 5 sentences using 'last week', 'yesterday', 'ago' and was/were.",
+        "Speaking: Ask a friend: 'Where were you yesterday?' — use was/were in your answer.",
+        "Review: I/he/she/it = WAS · you/we/they = WERE · Negative: wasn't/weren't"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-was · 2-were · 3-was · 4-Were · 5-wasn't · 6-weren't",
+        "Matching: 1-B · 2-E · 3-A · 4-C · 5-D",
+        "Listening: 1-c · 2-b · 3-b · 4-b · 5-b · 6-b · 7-b · 8-b · 9-c · 10-c"
+      ],
+      "completionSummary": [
+        "Learned 20 past time words",
+        "Mastered was / were (past of To Be)",
+        "Read about last weekend",
+        "Practiced grammar exercises",
+        "Practiced speaking",
+        "Practiced listening",
+        "Learned to describe the past"
+      ]
+    }
+  }
+}

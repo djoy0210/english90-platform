@@ -1,0 +1,154 @@
+{
+  "day": 29,
+  "level": 1,
+  "titleEn": "Day 29: A1 Full Review — All Skills",
+  "titleMn": "Өдөр 29: A1 Бүрэн давталт — Бүх дадлага",
+  "objectiveEn": "About one hour. Learn 20 review words, all A1 grammar review (am/is/are · can · Simple · Past · Going to), listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 шинэ үг, бүх A1 дүрмийн давталт, сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Review every grammar topic from the first 28 days while learning study and progress vocabulary.",
+  "contentMn": "Эхний 28 хоногт сурсан бүх дүрмийг давтаж, суралцах ба ахицын тухай үгсийг сурна.",
+  "vocabulary": [
+    { "english": "review", "pronunciation": "/rɪˈvjuː/", "mongolian": "давтах", "example": "Let's review all our grammar!" },
+    { "english": "remember", "pronunciation": "/rɪˈmɛmbər/", "mongolian": "санах", "example": "Do you remember Day 1?" },
+    { "english": "practice", "pronunciation": "/ˈpræktɪs/", "mongolian": "дадлага хийх", "example": "Practice makes perfect!" },
+    { "english": "improve", "pronunciation": "/ɪmˈpruːv/", "mongolian": "сайжруулах", "example": "I improved a lot this month." },
+    { "english": "confident", "pronunciation": "/ˈkɒnfɪdənt/", "mongolian": "итгэлтэй", "example": "I feel confident in English." },
+    { "english": "fluent", "pronunciation": "/ˈfluːənt/", "mongolian": "чөлөөтэй ярих", "example": "I want to be fluent in English." },
+    { "english": "communicate", "pronunciation": "/kəˈmjuːnɪkeɪt/", "mongolian": "харилцах", "example": "I can communicate in English." },
+    { "english": "vocabulary", "pronunciation": "/vəˈkæbjʊləri/", "mongolian": "үгсийн сан", "example": "I have a big vocabulary now." },
+    { "english": "grammar", "pronunciation": "/ˈɡræmər/", "mongolian": "дүрэм", "example": "My grammar is getting better." },
+    { "english": "pronunciation", "pronunciation": "/prəˌnʌnsiˈeɪʃən/", "mongolian": "дуудлага", "example": "My pronunciation is improving." },
+    { "english": "skill", "pronunciation": "/skɪl/", "mongolian": "ур чадвар", "example": "I have four English skills now." },
+    { "english": "reading", "pronunciation": "/ˈriːdɪŋ/", "mongolian": "унших", "example": "Reading helps me learn words." },
+    { "english": "writing", "pronunciation": "/ˈraɪtɪŋ/", "mongolian": "бичих", "example": "Writing practice is important." },
+    { "english": "speaking", "pronunciation": "/ˈspiːkɪŋ/", "mongolian": "ярих", "example": "Speaking is my favorite skill." },
+    { "english": "listening", "pronunciation": "/ˈlɪsənɪŋ/", "mongolian": "сонсох", "example": "Listening helps my pronunciation." },
+    { "english": "mistake", "pronunciation": "/mɪˈsteɪk/", "mongolian": "алдаа", "example": "Every mistake helps you learn." },
+    { "english": "correct", "pronunciation": "/kəˈrɛkt/", "mongolian": "зөв / засах", "example": "Correct your mistakes and move on." },
+    { "english": "progress", "pronunciation": "/ˈprəʊɡrɛs/", "mongolian": "ахиц", "example": "I made great progress!" },
+    { "english": "achieve", "pronunciation": "/əˈtʃiːv/", "mongolian": "биелүүлэх", "example": "I achieved my A1 goal!" },
+    { "english": "celebrate", "pronunciation": "/ˈsɛlɪbreɪt/", "mongolian": "тэмдэглэх", "example": "Let's celebrate our progress!" }
+  ],
+  "quiz": [
+    { "question": "She _____ a teacher.", "options": ["am", "is", "are", "be"], "answer": "is", "explanation": "3rd person singular of 'to be' is 'is'." },
+    { "question": "I _____ English every day.", "options": ["studies", "studying", "study", "am study"], "answer": "study", "explanation": "Present Simple for habits with 'I' uses base verb." },
+    { "question": "They _____ late — they were early!", "options": ["wasn't", "weren't", "didn't", "aren't"], "answer": "weren't", "explanation": "Past tense negative for plural 'they' is 'weren't'." },
+    { "question": "He _____ come yesterday.", "options": ["doesn't", "didn't", "don't", "wasn't"], "answer": "didn't", "explanation": "Past Simple negative uses 'didn't + base verb'." },
+    { "question": "I _____ to the park yesterday.", "options": ["go", "went", "going", "goes"], "answer": "went", "explanation": "Irregular past of 'go' is 'went'." },
+    { "question": "How old is Bat?", "options": ["15", "16", "17", "18"], "answer": "16", "explanation": "Bat says 'I am 16 years old' in the listening." },
+    { "question": "Where is Bat from?", "options": ["Darkhan", "Ulaanbaatar", "Seoul", "Erdenet"], "answer": "Ulaanbaatar", "explanation": "Bat says he is from Ulaanbaatar, Mongolia." },
+    { "question": "Can Bat speak English now?", "options": ["a little", "not yet", "yes!", "only in writing"], "answer": "yes!", "explanation": "Bat confidently says 'Yes I can!'" },
+    { "question": "What happens tomorrow in the listening?", "options": ["more tests", "Graduation Day", "a new book", "a holiday"], "answer": "Graduation Day", "explanation": "The teacher says 'See you tomorrow for Graduation Day!'" },
+    { "question": "_____ you swim? Yes, I can!", "options": ["Do", "Are", "Can", "Did"], "answer": "Can", "explanation": "Ability questions use 'Can you + base verb?'" }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "All grammar review — am/is/are · can · Simple · Past · Going to",
+      "grammarExplanation": "Today we review ALL grammar from 28 days! A1 covers: To Be (am/is/are/was/were) · Present Simple (habits) · Present Continuous (now) · Can/Can't (ability) · There is/There are · Past Simple · Going to (future plans) · Possessive adjectives · Prepositions · Object pronouns. You have learned ALL of these — every single one! · Өнөөдөр 28 өдрийн БҮХ дүрмийг давтана! A1 түвшин: To Be · Present Simple · Present Continuous · Can/Can't · There is/are · Past Simple · Going to · бүх зүйлийг сурсан!",
+      "grammarTable": [
+        { "subject": "To Be", "verb": "am/is/are/was/were", "positive": "I am happy. She was tired.", "negative": "I am not. She wasn't.", "question": "Are you? Was she?", "mongolian": "Байх үйл үг" },
+        { "subject": "Present Simple", "verb": "I go / she goes", "positive": "I study every day.", "negative": "I don't study.", "question": "Do you study?", "mongolian": "Байнгын давтагддаг үйл" },
+        { "subject": "Past Simple", "verb": "went / walked / was", "positive": "I went yesterday.", "negative": "I didn't go.", "question": "Did you go?", "mongolian": "Өнгөрсөн цаг" },
+        { "subject": "Going to", "verb": "am/is/are going to", "positive": "I am going to study.", "negative": "I am not going to.", "question": "Are you going to?", "mongolian": "Ирээдүй цаг" },
+        { "subject": "Can / Can't", "verb": "can (all subjects)", "positive": "I can swim.", "negative": "I can't fly.", "question": "Can you swim?", "mongolian": "Чадвар" }
+      ],
+      "quickPractice": [
+        "1. She _____ a teacher.",
+        "2. I _____ English every day.",
+        "3. They _____ late — they were early.",
+        "4. He _____ come yesterday.",
+        "5. I _____ to the park yesterday.",
+        "6. _____ you swim? Yes, I can!",
+        "7. I _____ going to study tomorrow.",
+        "8. What _____ you doing now?"
+      ],
+      "answerKey": ["1-is", "2-study", "3-weren't", "4-didn't", "5-went", "6-Can", "7-am", "8-are"],
+      "commonMistakes": [
+        "I am go every day. → I GO every day. (habit = Simple)",
+        "Yesterday I go. → Yesterday I WENT. (past!)",
+        "She cans swim. → She CAN swim. (can never changes)",
+        "I am going to went. → I am going to GO. (base verb!)"
+      ]
+    },
+    "page2": {
+      "readingPassage": "Today is Day 29 — the review day! Bat thinks about his English journey. One month ago, he couldn't say much in English. Now he can introduce himself, describe his family, talk about food, give directions, and discuss his plans. He studied every day and never gave up. Tomorrow is going to be the most special day — Graduation Day! Bat is so proud of himself!",
+      "keyPhrases": [
+        { "english": "I am a student", "mongolian": "Би бол оюутан", "note": "To Be — am/is/are" },
+        { "english": "I study every day", "mongolian": "Би өдөр бүр суралцдаг", "note": "Present Simple — habit" },
+        { "english": "I am studying now", "mongolian": "Би яг одоо судалж байна", "note": "Present Continuous — right now" },
+        { "english": "I went to school", "mongolian": "Би сургуульдаа явсан", "note": "Past Simple — past action" },
+        { "english": "I can speak English!", "mongolian": "Би англиар ярьж чаддаг!", "note": "Can — ability" },
+        { "english": "I am going to pass!", "mongolian": "Би тэнцэнэ гэж байна!", "note": "Going to — future plan" }
+      ],
+      "speakingQuestions": [
+        "1. Tell me about yourself: name, age, family, job/school.",
+        "2. What do you do every day? (Present Simple)",
+        "3. What did you do yesterday? (Past Simple)",
+        "4. What are you going to do tomorrow? (Going to)",
+        "5. What can you do well in English now?",
+        "6. How much has your English improved in 29 days?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "Let's review! What is your name and where are you from?" },
+        { "speaker": "B", "text": "My name is Bat. I am from Ulaanbaatar, Mongolia." },
+        { "speaker": "A", "text": "What do you do every day?" },
+        { "speaker": "B", "text": "I study English every day and go to school." },
+        { "speaker": "A", "text": "What did you do last weekend?" },
+        { "speaker": "B", "text": "I went to the park and visited my grandparents." },
+        { "speaker": "A", "text": "What can you do in English now and what are you going to do next year?" },
+        { "speaker": "B", "text": "I can read, write, speak, and understand English! I am going to study at university and travel." }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Today is our review day before graduation. Let's test everything! Bat, introduce yourself. Bat: My name is Bat. I am 16 years old. I am a student from Ulaanbaatar, Mongolia. Teacher: What did you do yesterday? Bat: I studied English for two hours and went for a walk in the park. Teacher: What are you going to do after graduation? Bat: I am going to start Book 2 and keep improving my English! Teacher: Can you speak English now? Bat: Yes I can! I can introduce myself, talk about my life, and have basic conversations! Teacher: I am so proud of you! See you tomorrow for Graduation Day!",
+      "listeningQuestions": [
+        { "question": "How old is Bat?", "options": ["15", "17", "16"], "answer": "c" },
+        { "question": "Where is Bat from?", "options": ["Darkhan", "Ulaanbaatar", "Seoul"], "answer": "b" },
+        { "question": "How long did Bat study yesterday?", "options": ["one hour", "two hours", "three hours"], "answer": "b" },
+        { "question": "What else did Bat do yesterday?", "options": ["watched TV", "cooked dinner", "went for a walk"], "answer": "c" },
+        { "question": "What is Bat going to do after graduation?", "options": ["take a break", "start Book 2", "travel to Korea"], "answer": "b" },
+        { "question": "Can Bat speak English now?", "options": ["a little", "not yet", "yes!"], "answer": "c" },
+        { "question": "What can Bat do in English?", "options": ["introduce himself and communicate", "write novels", "teach English"], "answer": "a" },
+        { "question": "How does the teacher feel?", "options": ["worried", "disappointed", "very proud"], "answer": "c" },
+        { "question": "What happens tomorrow?", "options": ["more tests", "Graduation Day", "a new book"], "answer": "b" },
+        { "question": "What is today's main purpose?", "options": ["learn new words", "review all A1 grammar", "practice writing only"], "answer": "b" }
+      ],
+      "grammarPractice": [
+        "1. She _____ a teacher.",
+        "2. I _____ English every day.",
+        "3. They _____ late — they were early!",
+        "4. He _____ come yesterday.",
+        "5. I _____ to the park yesterday.",
+        "6. I _____ going to study tomorrow."
+      ],
+      "matchingExercise": [
+        { "left": "am / is / are", "right": "To Be (одоо)" },
+        { "left": "every day", "right": "Байнгын давтагддаг зүйл" },
+        { "left": "went / walked", "right": "Өнгөрсөн цаг" },
+        { "left": "going to", "right": "Ирээдүй цаг" },
+        { "left": "can / can't", "right": "Чадах / чадахгүй" }
+      ],
+      "homework": [
+        "Writing: Write 8-10 sentences introducing yourself using ALL grammar — to be, present simple, past simple, going to, can.",
+        "Vocabulary: Review ALL 560 words from Days 1-28 — test yourself one last time!",
+        "Speaking: Practice saying: 'My name is... I am from... I study... Yesterday I... I can... I am going to...'.",
+        "Get ready: Tomorrow is Graduation Day! 🎓 You deserve to celebrate!"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-is · 2-study · 3-weren't · 4-didn't · 5-went · 6-am",
+        "Matching: 1-C · 2-E · 3-A · 4-B · 5-D",
+        "Listening: 1-c · 2-b · 3-b · 4-c · 5-b · 6-c · 7-a · 8-c · 9-b · 10-b"
+      ],
+      "completionSummary": [
+        "Learned 20 review words",
+        "Reviewed all A1 grammar",
+        "Read about 29 days of progress",
+        "Practiced all tenses in writing",
+        "Practiced full speaking review",
+        "Completed listening practice",
+        "Completed FULL A1 review — ready for Day 30!"
+      ]
+    }
+  }
+}

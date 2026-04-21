@@ -1,0 +1,155 @@
+{
+  "day": 18,
+  "level": 1,
+  "titleEn": "Day 18: Sports & Hobbies",
+  "titleMn": "Өдөр 18: Спорт ба хобби",
+  "objectiveEn": "About one hour. Learn 20 sport/hobby words, object pronouns (me/him/her/us/them/it), listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. Спорт ба хоббигийн 20 шинэ үг, объектын төлөөний үг (me/him/her/us/them/it), сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Today you learn 20 sports and hobby words and how to use object pronouns me, him, her, us, them, it correctly.",
+  "contentMn": "Өнөөдөр спорт, хоббигийн 20 үг сурч, me, him, her, us, them, it объектын төлөөний үгсийг зөв ашиглаж сурна.",
+  "vocabulary": [
+    { "english": "football", "pronunciation": "/ˈfʊtbɔːl/", "mongolian": "хөл бөмбөг", "example": "I play football every weekend." },
+    { "english": "basketball", "pronunciation": "/ˈbɑːskɪtbɔːl/", "mongolian": "сагсан бөмбөг", "example": "She plays basketball at school." },
+    { "english": "volleyball", "pronunciation": "/ˈvɒlibɔːl/", "mongolian": "волейбол", "example": "We play volleyball in PE class." },
+    { "english": "swimming", "pronunciation": "/ˈswɪmɪŋ/", "mongolian": "сэлэлт", "example": "Swimming is great exercise." },
+    { "english": "running", "pronunciation": "/ˈrʌnɪŋ/", "mongolian": "гүйлт", "example": "Running keeps you healthy." },
+    { "english": "cycling", "pronunciation": "/ˈsaɪklɪŋ/", "mongolian": "дугуй унах", "example": "She loves cycling in the park." },
+    { "english": "gym", "pronunciation": "/dʒɪm/", "mongolian": "биеийн тамирын заал", "example": "He goes to the gym every day." },
+    { "english": "team", "pronunciation": "/tiːm/", "mongolian": "баг", "example": "I am on the school football team." },
+    { "english": "win", "pronunciation": "/wɪn/", "mongolian": "хожих", "example": "We always win the game!" },
+    { "english": "lose", "pronunciation": "/luːz/", "mongolian": "хожигдох", "example": "Don't be sad if you lose." },
+    { "english": "practice", "pronunciation": "/ˈpræktɪs/", "mongolian": "бэлтгэл хийх", "example": "I practice football every day." },
+    { "english": "match", "pronunciation": "/mætʃ/", "mongolian": "тоглолт", "example": "There is a match on Saturday." },
+    { "english": "score", "pronunciation": "/skɔːr/", "mongolian": "оноо / гол хийх", "example": "The score is 3-1." },
+    { "english": "goal", "pronunciation": "/ɡoʊl/", "mongolian": "гол / зорилго", "example": "He scored a goal!" },
+    { "english": "painting", "pronunciation": "/ˈpeɪntɪŋ/", "mongolian": "зураг зурах", "example": "Painting is her hobby." },
+    { "english": "photography", "pronunciation": "/fəˈtɒɡrəfi/", "mongolian": "гэрэл зураг авах", "example": "Photography is a fun hobby." },
+    { "english": "cooking", "pronunciation": "/ˈkʊkɪŋ/", "mongolian": "хоол хийх", "example": "Cooking is my favorite hobby." },
+    { "english": "reading", "pronunciation": "/ˈriːdɪŋ/", "mongolian": "унших", "example": "Reading improves your English!" },
+    { "english": "gaming", "pronunciation": "/ˈɡeɪmɪŋ/", "mongolian": "тоглоом тоглох", "example": "He spends hours gaming." },
+    { "english": "hiking", "pronunciation": "/ˈhaɪkɪŋ/", "mongolian": "ууланд алхах", "example": "I love hiking in summer." }
+  ],
+  "quiz": [
+    { "question": "What is the object pronoun for 'he'?", "options": ["he", "him", "his", "himself"], "answer": "him", "explanation": "he → him as object pronoun." },
+    { "question": "What is the object pronoun for 'she'?", "options": ["she", "hers", "her", "herself"], "answer": "her", "explanation": "she → her as object pronoun." },
+    { "question": "Choose the correct sentence:", "options": ["She likes he.", "She likes him.", "She liking he.", "She like he."], "answer": "She likes him.", "explanation": "Object pronoun comes after the verb: he → him." },
+    { "question": "Help _____ please! (I)", "options": ["I", "my", "me", "mine"], "answer": "me", "explanation": "I → me as object pronoun." },
+    { "question": "I love _____ (they)", "options": ["they", "their", "them", "theirs"], "answer": "them", "explanation": "they → them as object pronoun." },
+    { "question": "Give it to _____ (she)", "options": ["she", "her", "hers", "herself"], "answer": "her", "explanation": "After preposition 'to', use object form: her." },
+    { "question": "What sport does Bat play?", "options": ["basketball", "volleyball", "football", "tennis"], "answer": "football", "explanation": "From the listening: 'I play football with my friends.'" },
+    { "question": "How do the team feel about the coach?", "options": ["they dislike him", "they respect him", "they don't know him", "they fear him"], "answer": "they respect him", "explanation": "Bat says: 'We all respect him.'" },
+    { "question": "What is Sarnai's hobby?", "options": ["painting", "cooking", "photography", "hiking"], "answer": "photography", "explanation": "Sarnai says: 'My hobby is photography.'" },
+    { "question": "Which sentence uses an object pronoun correctly?", "options": ["She likes he.", "I love they.", "Help me please!", "Give it to she."], "answer": "Help me please!", "explanation": "'Me' is the correct object pronoun after the verb 'help'." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Object Pronouns — me / him / her / us / them / it",
+      "grammarExplanation": "Object pronouns REPLACE nouns that receive the action of the verb. They come AFTER the verb or preposition. Subject pronouns (I, you, he, she, we, they) come BEFORE the verb. Object pronouns (me, you, him, her, it, us, them) come AFTER the verb. / Объектын төлөөний үгс нь үйлийг хүлээн авч буй нэрийг орлодог — үйл үгийн ДАРАА ирдэг. Субьектын (I, he, she) үйл үгийн ӨМНӨ, объектын (me, him, her, us, them) ДАРАА ирдэг.",
+      "grammarTable": [
+        { "subject": "I → me", "verb": "object", "positive": "Help me please.", "negative": "Don't help me.", "question": "Can you help me?", "mongolian": "надад / намайг" },
+        { "subject": "he → him", "verb": "object", "positive": "I like him.", "negative": "I don't like him.", "question": "Do you know him?", "mongolian": "түүнд (эр) / түүнийг" },
+        { "subject": "she → her", "verb": "object", "positive": "She helped her.", "negative": "She didn't help her.", "question": "Can you see her?", "mongolian": "түүнд (эм) / түүнийг" },
+        { "subject": "they → them", "verb": "object", "positive": "I love them.", "negative": "I don't know them.", "question": "Do you see them?", "mongolian": "тэдэнд / тэдний" },
+        { "subject": "we → us", "verb": "object", "positive": "She knows us.", "negative": "She doesn't know us.", "question": "Does she know us?", "mongolian": "бидэнд / биднийг" },
+        { "subject": "it → it", "verb": "object", "positive": "I love it.", "negative": "I don't like it.", "question": "Do you have it?", "mongolian": "үүнд / үүнийг" }
+      ],
+      "quickPractice": [
+        "She likes _____ (he)",
+        "Help _____ please! (I)",
+        "I love _____ (they)",
+        "He knows _____ (she)",
+        "Give it to _____ (she)",
+        "They know _____ (we)",
+        "Can you call _____ ? (I)",
+        "Do you like _____ ? (he)"
+      ],
+      "answerKey": ["1-him", "2-me", "3-them", "4-her", "5-her", "6-us", "7-me", "8-him"],
+      "commonMistakes": [
+        "She likes he. → She likes HIM.",
+        "Give it to she. → Give it to HER.",
+        "They know we. → They know US.",
+        "I love they. → I love THEM."
+      ]
+    },
+    "page2": {
+      "readingPassage": "Bat loves football. He plays it every Saturday. His best friend Dorj also loves football. Bat always passes the ball to him during the game. Their coach is Mr. Gantulga. The team respects him very much. Sarnai loves photography. Her friends ask her to take photos at every event. She takes photos of them and sends them on their phones. Sports and hobbies make us happy!",
+      "keyPhrases": [
+        { "english": "Can you help me?", "mongolian": "Та надад тусалж чадах уу?", "note": "help + me (object pronoun)" },
+        { "english": "I like him / her", "mongolian": "Би түүнд дуртай", "note": "like + him/her" },
+        { "english": "She knows us", "mongolian": "Тэр биднийг мэддэг", "note": "knows + us" },
+        { "english": "Give it to them", "mongolian": "Тэдэнд өг", "note": "give + it + to + them" },
+        { "english": "Do you know him?", "mongolian": "Та түүнийг таньдаг уу?", "note": "Do you know + him?" },
+        { "english": "I love playing with them", "mongolian": "Би тэдэнтэй тоглоход дуртай", "note": "with + them" }
+      ],
+      "speakingQuestions": [
+        "What sport do you like? / Та ямар спортод дуртай вэ?",
+        "Do you have a hobby? / Та хоббитой юу?",
+        "Who do you play sports with?",
+        "Does anyone help you with English?",
+        "What sport do you watch on TV?",
+        "Can you teach me your hobby? / Та хоббиоо надад заагаад өгнө үү?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "What sport do you like?" },
+        { "speaker": "B", "text": "I love football! I play it every weekend." },
+        { "speaker": "A", "text": "Who do you play with?" },
+        { "speaker": "B", "text": "I play with my friends. I always pass the ball to them." },
+        { "speaker": "A", "text": "Does your team win often?" },
+        { "speaker": "B", "text": "Yes! Our coach helps us a lot. We respect him." },
+        { "speaker": "A", "text": "Can you take a photo of me?" },
+        { "speaker": "B", "text": "Of course! Smile — I am taking it now!" }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Today's topic is sports and hobbies. Bat, what sport do you play? Bat: I play football with my friends. I love it! Teacher: Does anyone help you improve? Bat: Yes! Our coach helps us every Saturday. We all respect him. Teacher: Sarnai, what is your hobby? Sarnai: My hobby is photography. My friends always ask me to take photos of them! Teacher: Do you enjoy it? Sarnai: Yes! I love it. It makes me and my friends very happy.",
+      "listeningQuestions": [
+        { "question": "What sport does Bat play?", "options": ["basketball", "volleyball", "football"], "answer": "football" },
+        { "question": "When does Bat play?", "options": ["every day", "every weekend", "on Fridays"], "answer": "every weekend" },
+        { "question": "Who helps the team improve?", "options": ["a friend", "their coach", "a teacher"], "answer": "their coach" },
+        { "question": "How do they feel about the coach?", "options": ["they dislike him", "they respect him", "they don't know him"], "answer": "they respect him" },
+        { "question": "What is Sarnai's hobby?", "options": ["painting", "cooking", "photography"], "answer": "photography" },
+        { "question": "What do Sarnai's friends ask her?", "options": ["to cook", "to take photos of them", "to play football"], "answer": "to take photos of them" },
+        { "question": "Does Sarnai enjoy her hobby?", "options": ["not really", "yes, loves it", "sometimes"], "answer": "yes, loves it" },
+        { "question": "What does her hobby make them feel?", "options": ["tired", "bored", "very happy"], "answer": "very happy" },
+        { "question": "Which is the object pronoun for 'she'?", "options": ["she", "her", "hers"], "answer": "her" },
+        { "question": "Which sentence uses object pronoun correctly?", "options": ["She likes he.", "I love they.", "Help me please!"], "answer": "Help me please!" }
+      ],
+      "grammarPractice": [
+        "She likes _____ (he)",
+        "Help _____ please! (I)",
+        "I love _____ (they)",
+        "He knows _____ (she)",
+        "Give it to _____ (she)",
+        "They know _____ (we)"
+      ],
+      "matchingExercise": [
+        { "left": "I →", "right": "me" },
+        { "left": "he →", "right": "him" },
+        { "left": "she →", "right": "her" },
+        { "left": "we →", "right": "us" },
+        { "left": "they →", "right": "them" }
+      ],
+      "homework": [
+        "Writing: Write 5 sentences using object pronouns (me, him, her, us, them).",
+        "Vocabulary: Write about your favorite sport or hobby in 3-5 sentences.",
+        "Speaking: Ask a friend: 'What sport do you play?' and use 'him/her/them' in your answer.",
+        "Review: I→me · he→him · she→her · we→us · they→them · it→it"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-him · 2-me · 3-them · 4-her · 5-her · 6-us",
+        "Matching: 1-D · 2-E · 3-B · 4-C · 5-A",
+        "Listening: 1-c · 2-b · 3-b · 4-b · 5-c · 6-b · 7-b · 8-c · 9-b · 10-c"
+      ],
+      "completionSummary": [
+        "Learned 20 new sports & hobby words",
+        "Mastered object pronouns me/him/her/us/them/it",
+        "Read about sports and hobbies",
+        "Practiced grammar with fill-in exercises",
+        "Practiced speaking about favorite sports",
+        "Completed listening practice with 10 questions",
+        "Used object pronouns naturally in sentences"
+      ]
+    }
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "day": 17,
+  "level": 1,
+  "titleEn": "Day 17: School & Studies",
+  "titleMn": "Өдөр 17: Сургууль ба суралцах",
+  "objectiveEn": "About one hour. Learn 20 school words, Present Simple vs Present Continuous, listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. Сургуулийн 20 шинэ үг, Present Simple ба Present Continuous-ын ялгаа, сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Today you learn 20 school and study words and master the difference between Present Simple (habits) and Present Continuous (right now).",
+  "contentMn": "Өнөөдөр сургуулийн 20 шинэ үг сурч, Present Simple (дадал) ба Present Continuous (яг одоо)-ын ялгааг эзэмшинэ.",
+  "vocabulary": [
+    { "english": "classroom", "pronunciation": "/ˈklɑːsruːm/", "mongolian": "анги", "example": "Our classroom is very big." },
+    { "english": "lesson", "pronunciation": "/ˈlɛsən/", "mongolian": "хичээл", "example": "The English lesson starts now." },
+    { "english": "homework", "pronunciation": "/ˈhoʊmwɜːrk/", "mongolian": "гэрийн даалгавар", "example": "I do my homework every day." },
+    { "english": "exam", "pronunciation": "/ɪɡˈzæm/", "mongolian": "шалгалт", "example": "My exam is on Friday." },
+    { "english": "result", "pronunciation": "/rɪˈzʌlt/", "mongolian": "дүн / үр дүн", "example": "My exam result is very good." },
+    { "english": "subject", "pronunciation": "/ˈsʌbdʒɪkt/", "mongolian": "хичээлийн сэдэв", "example": "English is my favorite subject." },
+    { "english": "math", "pronunciation": "/mæθ/", "mongolian": "математик", "example": "I am good at math." },
+    { "english": "science", "pronunciation": "/ˈsaɪəns/", "mongolian": "шинжлэх ухаан", "example": "I love science class." },
+    { "english": "history", "pronunciation": "/ˈhɪstəri/", "mongolian": "түүх", "example": "History is very interesting." },
+    { "english": "art", "pronunciation": "/ɑːrt/", "mongolian": "урлаг", "example": "She is very good at art." },
+    { "english": "library", "pronunciation": "/ˈlaɪbrəri/", "mongolian": "номын сан", "example": "I study at the library." },
+    { "english": "pen", "pronunciation": "/pɛn/", "mongolian": "үзэг", "example": "I write with a pen." },
+    { "english": "pencil", "pronunciation": "/ˈpɛnsɪl/", "mongolian": "харандаа", "example": "She draws with a pencil." },
+    { "english": "notebook", "pronunciation": "/ˈnoʊtbʊk/", "mongolian": "дэвтэр", "example": "I write in my notebook." },
+    { "english": "dictionary", "pronunciation": "/ˈdɪkʃənɛri/", "mongolian": "толь бичиг", "example": "I use a dictionary every day." },
+    { "english": "understand", "pronunciation": "/ˌʌndərˈstænd/", "mongolian": "ойлгох", "example": "Do you understand this lesson?" },
+    { "english": "remember", "pronunciation": "/rɪˈmɛmbər/", "mongolian": "санах", "example": "I can't remember this word!" },
+    { "english": "forget", "pronunciation": "/fərˈɡɛt/", "mongolian": "мартах", "example": "Don't forget your homework!" },
+    { "english": "learn", "pronunciation": "/lɜːrn/", "mongolian": "суралцах", "example": "I learn something new every day." },
+    { "english": "practice", "pronunciation": "/ˈpræktɪs/", "mongolian": "дадлага", "example": "Practice makes perfect!" }
+  ],
+  "quiz": [
+    { "question": "Which signal word goes with Present Simple?", "options": ["right now", "at the moment", "every day", "look!"], "answer": "every day", "explanation": "Every day = habits = Present Simple." },
+    { "question": "Which signal word goes with Present Continuous?", "options": ["usually", "right now", "always", "every Monday"], "answer": "right now", "explanation": "Right now = this moment = Present Continuous." },
+    { "question": "Choose the correct sentence: She _____ her homework now.", "options": ["do", "does", "is doing", "doing"], "answer": "is doing", "explanation": "'Now' signals Present Continuous → is + verb-ing." },
+    { "question": "He always _____ to school by bus.", "options": ["go", "goes", "is going", "going"], "answer": "goes", "explanation": "'Always' = habit → Present Simple, 3rd person singular adds -es." },
+    { "question": "Which verb CANNOT use the -ing form?", "options": ["study", "run", "understand", "play"], "answer": "understand", "explanation": "Stative verbs like understand/know/like never take -ing." },
+    { "question": "Choose the correct question: _____ you understand?", "options": ["Are", "Do", "Is", "Does"], "answer": "Do", "explanation": "Understand is stative; use Present Simple → Do you understand?" },
+    { "question": "What does Bat usually do after school?", "options": ["watch TV", "play games", "study English & homework", "sleep"], "answer": "study English & homework", "explanation": "From the listening: Bat usually studies English and does homework." },
+    { "question": "What is Bat doing right now?", "options": ["eating", "listening and taking notes", "sleeping", "running"], "answer": "listening and taking notes", "explanation": "He says: 'Right now I am listening to you and taking notes.'" },
+    { "question": "I _____ the answer! (verb 'know')", "options": ["am knowing", "knowing", "know", "knows"], "answer": "know", "explanation": "Know is a stative verb — never -ing." },
+    { "question": "Negative form of 'I study on Sundays': I _____ on Sundays.", "options": ["not study", "don't study", "am not study", "doesn't study"], "answer": "don't study", "explanation": "Present Simple negative for 'I' = don't + base verb." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Present Simple vs Present Continuous — key differences",
+      "grammarExplanation": "Present Simple = HABITS and ROUTINES (every day, always, usually). Present Continuous = what is happening RIGHT NOW (now, at the moment, look!). Some verbs (know, like, love, want, understand, remember, forget, need, have) NEVER use the continuous form. / Present Simple = ДАДАЛ ЗУРШИЛ (өдөр бүр болдог зүйл). Present Continuous = ЯГ ОДОО болж буй зүйл. Зарим үйл үгс (know, like, love, want, understand, need) Continuous хэлбэрийг хэзээ ч хэрэглэдэггүй.",
+      "grammarTable": [
+        { "subject": "Every day", "verb": "Simple", "positive": "I study every day.", "negative": "I don't study Sundays.", "question": "Do you study every day?", "mongolian": "Өдөр бүр (дадал)" },
+        { "subject": "Right now", "verb": "Continuous", "positive": "I am studying now.", "negative": "I am not studying now.", "question": "Are you studying now?", "mongolian": "Яг одоо (үйлдэл)" },
+        { "subject": "Always", "verb": "Simple", "positive": "She always reads.", "negative": "She never reads.", "question": "Does she always read?", "mongolian": "Үргэлж (дадал)" },
+        { "subject": "At the moment", "verb": "Continuous", "positive": "She is reading now.", "negative": "She isn't reading now.", "question": "Is she reading now?", "mongolian": "Одоо (үйлдэл)" },
+        { "subject": "Usually", "verb": "Simple", "positive": "He usually goes by bus.", "negative": "He doesn't go by car.", "question": "Does he usually go by bus?", "mongolian": "Ихэвчлэн (дадал)" },
+        { "subject": "Look! / Now", "verb": "Continuous", "positive": "Look! He is running.", "negative": "He isn't walking.", "question": "Is he running now?", "mongolian": "Хар! (яг одоо)" }
+      ],
+      "quickPractice": [
+        "I _____ English every day. (study — habit)",
+        "She _____ English right now. (study — now)",
+        "They _____ their homework now. (do — now)",
+        "He always _____ to school by bus. (go — habit)",
+        "She _____ her homework now. (do — now)",
+        "He usually _____ to school by bus. (go — habit)",
+        "_____ you understand? (Do — habit)",
+        "I _____ the answer! (know — NOT -ing)"
+      ],
+      "answerKey": ["1-study", "2-is studying", "3-are doing", "4-goes", "5-is doing", "6-goes", "7-Do", "8-know"],
+      "commonMistakes": [
+        "I am study every day. → I study every day. (habit → Simple)",
+        "I study now. → I AM studying now. (now → Continuous)",
+        "She is knowing the answer. → She knows the answer.",
+        "Are you understand? → Do you understand?"
+      ]
+    },
+    "page2": {
+      "readingPassage": "Bat loves school. He usually studies English for one hour every evening. But today is different! Right now, it is 3 PM and he is studying with his friend Sarnai in the library. They have an exam tomorrow. Sarnai usually reads at home, but today she is reading at the library. They both work hard because English is very important for their future!",
+      "keyPhrases": [
+        { "english": "I study every day", "mongolian": "Би өдөр бүр судалдаг", "note": "Every day → Present Simple" },
+        { "english": "I am studying right now", "mongolian": "Би яг одоо судалж байна", "note": "Right now → Present Continuous" },
+        { "english": "She usually reads at home", "mongolian": "Тэр ихэвчлэн гэртээ уншдаг", "note": "Usually → Present Simple" },
+        { "english": "She is reading at the library", "mongolian": "Тэр номын санд уншиж байна", "note": "→ Present Continuous" },
+        { "english": "Do you understand?", "mongolian": "Та ойлгож байна уу?", "note": "understand → NEVER -ing!" },
+        { "english": "What do you usually do?", "mongolian": "Та ихэвчлэн юу хийдэг вэ?", "note": "Usually → Simple" }
+      ],
+      "speakingQuestions": [
+        "What do you usually study after school?",
+        "What are you studying right now?",
+        "What subjects do you like? / Та ямар хичээлд дуртай вэ?",
+        "Are you studying English every day?",
+        "Do you understand today's grammar?",
+        "What do you usually do in the library?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "What do you usually do after school?" },
+        { "speaker": "B", "text": "I usually study English for an hour." },
+        { "speaker": "A", "text": "What are you doing right now?" },
+        { "speaker": "B", "text": "I am doing my homework for tomorrow." },
+        { "speaker": "A", "text": "Do you understand today's lesson?" },
+        { "speaker": "B", "text": "I understand most of it, but not all." },
+        { "speaker": "A", "text": "What are you studying at the moment?" },
+        { "speaker": "B", "text": "I am reviewing my vocabulary words now." }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Today we compare Present Simple and Continuous. Bat, what do you usually do after school? Bat: I usually study English and do my homework. Teacher: Good! And what are you doing right now? Bat: Right now I am listening to you and taking notes! Teacher: Perfect! Sarnai, do you study English every day? Sarnai: Yes, I study English every day. Right now I am also studying grammar. Teacher: Do you understand the difference between Simple and Continuous? Students: Yes! Simple = every day. Continuous = right now!",
+      "listeningQuestions": [
+        { "question": "What is today's grammar topic?", "options": ["Past Simple", "Simple vs Continuous", "Future tense"], "answer": "Simple vs Continuous" },
+        { "question": "What does Bat usually do after school?", "options": ["watch TV", "play games", "study English & homework"], "answer": "study English & homework" },
+        { "question": "What is Bat doing right now?", "options": ["eating", "listening and taking notes", "sleeping"], "answer": "listening and taking notes" },
+        { "question": "Does Sarnai study English every day?", "options": ["sometimes", "never", "yes, every day"], "answer": "yes, every day" },
+        { "question": "What is Sarnai doing right now?", "options": ["eating", "studying grammar", "sleeping"], "answer": "studying grammar" },
+        { "question": "Which signal word goes with Present Simple?", "options": ["right now", "at the moment", "every day"], "answer": "every day" },
+        { "question": "Which signal word goes with Present Continuous?", "options": ["usually", "right now", "always"], "answer": "right now" },
+        { "question": "Do the students understand the difference?", "options": ["no", "yes", "not sure"], "answer": "yes" },
+        { "question": "What do students say at the end?", "options": ["Simple=now · Continuous=every day", "Simple=every day · Continuous=now", "They are the same"], "answer": "Simple=every day · Continuous=now" },
+        { "question": "Which verb cannot use -ing form?", "options": ["study", "run", "understand"], "answer": "understand" }
+      ],
+      "grammarPractice": [
+        "I _____ English every day. (study)",
+        "She _____ English right now. (study-now)",
+        "He always _____ to school by bus. (go)",
+        "They _____ their homework now. (do-now)",
+        "_____ you understand? (Do)",
+        "I _____ the answer. (know — no -ing!)"
+      ],
+      "matchingExercise": [
+        { "left": "every day", "right": "өдөр бүр" },
+        { "left": "right now", "right": "яг одоо" },
+        { "left": "usually", "right": "ихэвчлэн" },
+        { "left": "always", "right": "үргэлж" },
+        { "left": "at the moment", "right": "энэ мөчид" }
+      ],
+      "homework": [
+        "Writing: Write 4 sentences with Present Simple (every day) and 4 with Continuous (now).",
+        "Vocabulary: Write your school subjects in English and say which you like / don't like.",
+        "Speaking: Tell someone: 'I usually... but right now I am...'",
+        "Review: Key rule: Every day = Simple · Right now = Continuous · know/like/love = NEVER -ing"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-study · 2-is studying · 3-goes · 4-are doing · 5-Do · 6-know",
+        "Matching: 1-C · 2-A · 3-E · 4-B · 5-D",
+        "Listening: 1-b · 2-c · 3-b · 4-c · 5-b · 6-c · 7-b · 8-b · 9-b · 10-c"
+      ],
+      "completionSummary": [
+        "Learned 20 new school words",
+        "Mastered Present Simple vs Present Continuous",
+        "Read about studying at the library",
+        "Practiced grammar with fill-in-the-blank exercises",
+        "Practiced speaking about study routines",
+        "Completed listening practice with 10 questions",
+        "Learned which verbs never take -ing form"
+      ]
+    }
+  }
+}

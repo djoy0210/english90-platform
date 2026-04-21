@@ -1,0 +1,155 @@
+{
+  "day": 3,
+  "level": 1,
+  "titleEn": "Day 3: Family & People",
+  "titleMn": "Өдөр 3: Гэр бүл ба Хүмүүс",
+  "objectiveEn": "About one hour. Learn 20 family words, possessive adjectives (my/your/his/her/our/their), reading, listening, speaking, and homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 шинэ үг, өмчийн тэмдэг нэр (my/your/his/her/our/their), сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Learn 20 family vocabulary words and how to use possessive adjectives correctly to describe people.",
+  "contentMn": "Гэр бүлийн 20 шинэ үг сурч, хүмүүсийн талаар ярихдаа өмчийн тэмдэг нэрийг хэрхэн зөв ашиглахыг сурна.",
+  "vocabulary": [
+    { "english": "mother", "pronunciation": "/ˈmʌðər/", "mongolian": "эх / ээж", "example": "My mother is kind." },
+    { "english": "father", "pronunciation": "/ˈfɑːðər/", "mongolian": "аав / эцэг", "example": "My father works hard." },
+    { "english": "sister", "pronunciation": "/ˈsɪstər/", "mongolian": "эгч / дүү (охин)", "example": "My sister is a student." },
+    { "english": "brother", "pronunciation": "/ˈbrʌðər/", "mongolian": "ах / дүү (хөвгүүн)", "example": "My brother plays football." },
+    { "english": "grandmother", "pronunciation": "/ˈɡrænˌmʌðər/", "mongolian": "эмээ", "example": "My grandmother is 70." },
+    { "english": "grandfather", "pronunciation": "/ˈɡrænˌfɑːðər/", "mongolian": "өвөө", "example": "My grandfather is a teacher." },
+    { "english": "son", "pronunciation": "/sʌn/", "mongolian": "хүү", "example": "She has one son." },
+    { "english": "daughter", "pronunciation": "/ˈdɔːtər/", "mongolian": "охин", "example": "He has two daughters." },
+    { "english": "family", "pronunciation": "/ˈfæmɪli/", "mongolian": "гэр бүл", "example": "My family is big." },
+    { "english": "husband", "pronunciation": "/ˈhʌzbənd/", "mongolian": "нөхөр", "example": "Her husband is a doctor." },
+    { "english": "wife", "pronunciation": "/waɪf/", "mongolian": "эхнэр", "example": "His wife is a nurse." },
+    { "english": "child", "pronunciation": "/tʃaɪld/", "mongolian": "хүүхэд", "example": "They have three children." },
+    { "english": "old", "pronunciation": "/oʊld/", "mongolian": "хөгшин / настай", "example": "My grandfather is old." },
+    { "english": "young", "pronunciation": "/jʌŋ/", "mongolian": "залуу", "example": "My sister is young." },
+    { "english": "tall", "pronunciation": "/tɔːl/", "mongolian": "өндөр", "example": "My brother is tall." },
+    { "english": "short", "pronunciation": "/ʃɔːrt/", "mongolian": "намхан", "example": "My mother is short." },
+    { "english": "kind", "pronunciation": "/kaɪnd/", "mongolian": "эелдэг", "example": "My grandmother is kind." },
+    { "english": "smart", "pronunciation": "/smɑːrt/", "mongolian": "ухаалаг", "example": "My father is smart." },
+    { "english": "happy", "pronunciation": "/ˈhæpi/", "mongolian": "баяртай / жаргалтай", "example": "My family is happy." },
+    { "english": "love", "pronunciation": "/lʌv/", "mongolian": "хайр", "example": "I love my family." }
+  ],
+  "quiz": [
+    { "question": "Choose the correct possessive: 'This is _____ mother.' (I)", "options": ["my", "me", "mine", "I"], "answer": "my", "explanation": "I → my (possessive adjective before noun)." },
+    { "question": "Which is correct for a male owner?", "options": ["her name", "his name", "their name", "our name"], "answer": "his name", "explanation": "his = male owner; her = female owner." },
+    { "question": "How many people are in Bat's family?", "options": ["4", "5", "6", "3"], "answer": "5", "explanation": "Bat says his family has five people." },
+    { "question": "What is Bat's mother's job?", "options": ["teacher", "doctor", "nurse", "engineer"], "answer": "nurse", "explanation": "She works at the hospital as a nurse." },
+    { "question": "What does Bat's father do?", "options": ["doctor", "engineer", "teacher", "driver"], "answer": "engineer", "explanation": "He works at a big company as an engineer." },
+    { "question": "Choose the correct sentence:", "options": ["She is my sister. His name is Ana.", "She is my sister. Her name is Ana.", "She is my sister. Their name is Ana.", "She is my sister. Our name is Ana."], "answer": "She is my sister. Her name is Ana.", "explanation": "For a female (sister) use 'her'." },
+    { "question": "Fill in: '_____ family is big.' (We)", "options": ["Their", "Our", "Your", "His"], "answer": "Our", "explanation": "We → our." },
+    { "question": "How old is Bat's older sister?", "options": ["16", "18", "20", "22"], "answer": "18", "explanation": "She is 18 and goes to university." },
+    { "question": "What does the Mongolian word 'эмээ' mean?", "options": ["mother", "grandmother", "sister", "aunt"], "answer": "grandmother", "explanation": "эмээ = grandmother." },
+    { "question": "Which is wrong?", "options": ["My family loves our house.", "His name is Bat.", "Her name is Ana.", "His name is Ana (about a woman)."], "answer": "His name is Ana (about a woman).", "explanation": "Use 'her' for female owners." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Possessive Adjectives — my / your / his / her / our / their",
+      "grammarExplanation": "Possessive adjectives show who something belongs to. They come BEFORE nouns and NEVER change based on the noun — only based on who the owner is. Key rule: 'his' for male owners, 'her' for female owners. Өмчийн тэмдэг нэр нь ямар нэг зүйл хэнийх болохыг харуулдаг. Нэрийн ӨМНӨ ирж, нэрний дагуу өөрчлөгддөггүй — зөвхөн эзэмшигчийн дагуу өөрчлөгддөг. Дүрэм: эр эзэмшигчид 'his', эм эзэмшигчид 'her'.",
+      "grammarTable": [
+        { "subject": "I", "verb": "my", "positive": "my mother", "negative": "—", "question": "Is this your book?", "mongolian": "Миний" },
+        { "subject": "You", "verb": "your", "positive": "your father", "negative": "—", "question": "Where is your bag?", "mongolian": "Чиний / Таны" },
+        { "subject": "He", "verb": "his", "positive": "his sister", "negative": "—", "question": "Is this his car?", "mongolian": "Түүний (эр)" },
+        { "subject": "She", "verb": "her", "positive": "her brother", "negative": "—", "question": "What is her name?", "mongolian": "Түүний (эм)" },
+        { "subject": "We", "verb": "our", "positive": "our family", "negative": "—", "question": "This is our house.", "mongolian": "Манай" },
+        { "subject": "They", "verb": "their", "positive": "their children", "negative": "—", "question": "Where is their dog?", "mongolian": "Тэдний" }
+      ],
+      "quickPractice": [
+        "1. This is _____ mother. (I)",
+        "2. _____ father is tall. (He)",
+        "3. I love _____ grandmother. (I)",
+        "4. _____ sister is kind. (She)",
+        "5. _____ family is big. (We)",
+        "6. _____ daughter is smart. (They)",
+        "7. What is _____ name? (You)",
+        "8. _____ son is young. (He)"
+      ],
+      "answerKey": ["1-my", "2-his", "3-my", "4-her", "5-our", "6-their", "7-your", "8-his"],
+      "commonMistakes": [
+        "He is my brother. Her name is Bat. → His name is Bat.",
+        "She is my sister. His name is Ana. → Her name is Ana.",
+        "This is her book. (about a man) → This is his book.",
+        "My family loves their house. → My family loves our house."
+      ]
+    },
+    "page2": {
+      "readingPassage": "My name is Bat and I have a big family. My mother is a teacher and my father is a doctor. I have two sisters and one brother. My older sister is 20 years old and she is a university student. My younger sister is 10. My brother is 15. My grandmother lives with us. She is 68 and very kind. I love my family very much!",
+      "keyPhrases": [
+        { "english": "My family has 5 people", "mongolian": "Манай гэр бүл 5 хүнтэй", "note": "My family has + number" },
+        { "english": "My mother is a teacher", "mongolian": "Миний ээж багш", "note": "My + noun + is + job" },
+        { "english": "She is 20 years old", "mongolian": "Тэр 20 настай", "note": "Subject + is + age + years old" },
+        { "english": "His name is Bat", "mongolian": "Түүний нэр Бат", "note": "his = male · her = female" },
+        { "english": "I love my family", "mongolian": "Би гэр бүлээ хайрладаг", "note": "love + possessive + noun" },
+        { "english": "Do you have siblings?", "mongolian": "Та ах дүү байна уу?", "note": "Asking about family" }
+      ],
+      "speakingQuestions": [
+        "1. Tell me about your family. / Гэр бүлийнхээ тухай хэлнэ үү.",
+        "2. How many people are in your family?",
+        "3. What does your mother or father do?",
+        "4. Do you have brothers or sisters? How old are they?",
+        "5. Who is the oldest in your family?",
+        "6. What is your grandmother's or grandfather's name?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "Tell me about your family!" },
+        { "speaker": "B", "text": "Sure! My family has five people." },
+        { "speaker": "A", "text": "What does your father do?" },
+        { "speaker": "B", "text": "My father is a doctor. And your father?" },
+        { "speaker": "A", "text": "My father is an engineer. Do you have siblings?" },
+        { "speaker": "B", "text": "Yes! I have one brother and one sister." },
+        { "speaker": "A", "text": "Is your family big or small?" },
+        { "speaker": "B", "text": "My family is big! I love them very much." }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Today let's talk about family. Bat, tell us about yours. Bat: My family has five people — my father, mother, two sisters, and me. Teacher: What does your mother do? Bat: My mother is a nurse. She works at the hospital. Teacher: And your father? Bat: My father is an engineer. He works at a big company. Teacher: Do your sisters go to school? Bat: Yes. My older sister is 18 and goes to university. My younger sister is 12 and goes to my school. Teacher: Beautiful family! Thank you, Bat.",
+      "listeningQuestions": [
+        { "question": "How many people in Bat's family?", "options": ["4", "5", "6"], "answer": "b" },
+        { "question": "What is Bat's mother's job?", "options": ["teacher", "doctor", "nurse"], "answer": "c" },
+        { "question": "Where does his mother work?", "options": ["school", "hospital", "company"], "answer": "b" },
+        { "question": "What is Bat's father?", "options": ["doctor", "engineer", "teacher"], "answer": "b" },
+        { "question": "How old is Bat's older sister?", "options": ["16", "18", "20"], "answer": "b" },
+        { "question": "Where does the older sister study?", "options": ["school", "university", "hospital"], "answer": "b" },
+        { "question": "How old is the younger sister?", "options": ["10", "11", "12"], "answer": "c" },
+        { "question": "Do Bat and younger sister go to same school?", "options": ["yes", "no", "not mentioned"], "answer": "a" },
+        { "question": "What does the teacher say at the end?", "options": ["Great job", "Beautiful family", "Very nice"], "answer": "b" },
+        { "question": "Who is telling the story?", "options": ["Teacher", "Sarnai", "Bat"], "answer": "c" }
+      ],
+      "grammarPractice": [
+        "1. This is _____ mother. (I)",
+        "2. _____ father is tall. (He)",
+        "3. I love _____ grandmother. (I)",
+        "4. _____ sister is kind. (She)",
+        "5. _____ family is big. (We)",
+        "6. _____ children go to school. (They)"
+      ],
+      "matchingExercise": [
+        { "left": "mother", "right": "ээж" },
+        { "left": "father", "right": "аав" },
+        { "left": "grandmother", "right": "эмээ" },
+        { "left": "brother", "right": "ах / дүү" },
+        { "left": "family", "right": "гэр бүл" }
+      ],
+      "homework": [
+        "Writing: Write 5 sentences about your family using my, his, her, our, their.",
+        "Vocabulary: Draw your family tree and label each person in English.",
+        "Speaking: Ask a friend: 'How many brothers and sisters do you have?'",
+        "Review: Practice saying: 'My name is... My mother is... My father is...'"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-my · 2-his · 3-my · 4-her · 5-our · 6-their",
+        "Matching: 1-C · 2-D · 3-A · 4-B · 5-E",
+        "Listening: 1-b · 2-c · 3-b · 4-b · 5-b · 6-b · 7-c · 8-a · 9-b · 10-c"
+      ],
+      "completionSummary": [
+        "Learned 20 family vocabulary words",
+        "Mastered possessive adjectives (my/your/his/her/our/their)",
+        "Read a passage about a family",
+        "Completed grammar practice exercises",
+        "Practiced talking about your family",
+        "Completed listening comprehension",
+        "Learned to describe people's age and personality"
+      ]
+    }
+  }
+}

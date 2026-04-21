@@ -1,0 +1,154 @@
+{
+  "day": 15,
+  "level": 1,
+  "titleEn": "Day 15: Daily Actions & Verbs",
+  "titleMn": "Өдөр 15: Өдөр тутмын үйлдэл ба үйл үгс",
+  "objectiveEn": "About one hour. Learn 20 action verbs, Present Continuous (am/is/are + -ing), listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 үйлдлийн үг, Present Continuous (am/is/are + -ing) дүрэм, сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Describe actions happening right now using Present Continuous: am/is/are + verb-ing.",
+  "contentMn": "Яг одоо болж буй үйлдлийг Present Continuous: am/is/are + verb-ing хэлбэрээр илэрхийлнэ.",
+  "vocabulary": [
+    { "english": "brush", "pronunciation": "/brʌʃ/", "mongolian": "шүдээ угаах", "example": "I brush my teeth every morning." },
+    { "english": "wash", "pronunciation": "/wɒʃ/", "mongolian": "угаах", "example": "She is washing her hands now." },
+    { "english": "clean", "pronunciation": "/kliːn/", "mongolian": "цэвэрлэх / цэвэрхэн", "example": "He is cleaning his room today." },
+    { "english": "cook", "pronunciation": "/kʊk/", "mongolian": "хоол хийх", "example": "She is cooking dinner right now." },
+    { "english": "study", "pronunciation": "/ˈstʌdi/", "mongolian": "суралцах", "example": "They are studying English now." },
+    { "english": "listen", "pronunciation": "/ˈlɪsən/", "mongolian": "сонсох", "example": "I am listening to music now." },
+    { "english": "watch", "pronunciation": "/wɒtʃ/", "mongolian": "үзэх", "example": "He is watching TV at the moment." },
+    { "english": "talk", "pronunciation": "/tɔːk/", "mongolian": "ярих", "example": "We are talking to our teacher." },
+    { "english": "walk", "pronunciation": "/wɔːk/", "mongolian": "явах", "example": "She is walking to school now." },
+    { "english": "sit", "pronunciation": "/sɪt/", "mongolian": "суух", "example": "They are sitting in class." },
+    { "english": "stand", "pronunciation": "/stænd/", "mongolian": "зогсох", "example": "He is standing at the door." },
+    { "english": "come", "pronunciation": "/kʌm/", "mongolian": "ирэх", "example": "She is coming home right now." },
+    { "english": "wait", "pronunciation": "/weɪt/", "mongolian": "хүлээх", "example": "I am waiting for the bus." },
+    { "english": "help", "pronunciation": "/hɛlp/", "mongolian": "туслах", "example": "She is helping her mother now." },
+    { "english": "use", "pronunciation": "/juːz/", "mongolian": "хэрэглэх", "example": "I am using my phone now." },
+    { "english": "open", "pronunciation": "/ˈoʊpən/", "mongolian": "нээх", "example": "She is opening the window." },
+    { "english": "close", "pronunciation": "/kloʊz/", "mongolian": "хаах", "example": "He is closing the door now." },
+    { "english": "call", "pronunciation": "/kɔːl/", "mongolian": "залгах", "example": "I am calling my friend now." },
+    { "english": "send", "pronunciation": "/sɛnd/", "mongolian": "илгээх", "example": "She is sending a message." },
+    { "english": "think", "pronunciation": "/θɪŋk/", "mongolian": "бодох", "example": "I am thinking about my answer." }
+  ],
+  "quiz": [
+    { "question": "I am ___ breakfast right now.", "options": ["eat", "eating", "eats", "ate"], "answer": "eating", "explanation": "Present Continuous: am + verb-ing." },
+    { "question": "She ___ her room.", "options": ["is clean", "is cleaning", "cleans", "cleaning"], "answer": "is cleaning", "explanation": "She + is + verb-ing." },
+    { "question": "Which word signals Present Continuous?", "options": ["every day", "yesterday", "right now", "always"], "answer": "right now", "explanation": "'Right now' shows action happening this moment." },
+    { "question": "What is the woman doing in the picture?", "options": ["cleaning", "cooking", "sleeping", "reading"], "answer": "cooking", "explanation": "Bat said the woman is cooking in the kitchen." },
+    { "question": "What is the man doing?", "options": ["reading a newspaper", "watching TV", "cooking", "sleeping"], "answer": "reading a newspaper", "explanation": "Bat described the man reading a newspaper." },
+    { "question": "How many children are playing?", "options": ["one", "two", "three", "four"], "answer": "two", "explanation": "Two children are playing in the garden." },
+    { "question": "What is the dog doing?", "options": ["sleeping", "eating", "running and barking", "sitting"], "answer": "running and barking", "explanation": "Sarnai said the dog is running and barking." },
+    { "question": "What grammar topic are they studying?", "options": ["Past Simple", "Present Simple", "Present Continuous", "Future"], "answer": "Present Continuous", "explanation": "The students are learning Present Continuous." },
+    { "question": "They are ___ football in the garden.", "options": ["play", "plays", "playing", "played"], "answer": "playing", "explanation": "are + verb-ing for plural subject." },
+    { "question": "What are the students doing right now?", "options": ["sleeping", "eating", "learning English", "playing"], "answer": "learning English", "explanation": "The students answered 'We are learning English!'." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Present Continuous — I am doing / She is eating right now",
+      "grammarExplanation": "Present Continuous describes actions happening RIGHT NOW. Form: am/is/are + verb + -ing. Compare: 'I study English every day.' (habit — Simple) vs 'I am studying English right now.' (NOW — Continuous). Signal words: now, right now, at the moment, look!, currently. Present Continuous нь яг одоо болж буй үйлдлийг тодорхойлдог. Хэлбэр: am/is/are + үйл үг + -ing. Чухал үгс: now, right now, at the moment, look!.",
+      "grammarTable": [
+        { "subject": "I am", "verb": "verb-ing", "positive": "I am eating.", "negative": "I am not eating.", "question": "Am I late?", "mongolian": "Би яг одоо ..." },
+        { "subject": "She is", "verb": "verb-ing", "positive": "She is cooking.", "negative": "She is not cooking.", "question": "Is she cooking?", "mongolian": "Тэр яг одоо ..." },
+        { "subject": "He is", "verb": "verb-ing", "positive": "He is sleeping.", "negative": "He is not sleeping.", "question": "Is he sleeping?", "mongolian": "Тэр яг одоо ..." },
+        { "subject": "We are", "verb": "verb-ing", "positive": "We are studying.", "negative": "We are not studying.", "question": "Are we late?", "mongolian": "Бид яг одоо ..." },
+        { "subject": "They are", "verb": "verb-ing", "positive": "They are talking.", "negative": "They are not talking.", "question": "Are they talking?", "mongolian": "Тэд яг одоо ..." }
+      ],
+      "quickPractice": [
+        "1. I am _____ breakfast. (eat)",
+        "2. He is _____ his room. (clean)",
+        "3. We are _____ English. (study)",
+        "4. She is _____ dinner. (cook)",
+        "5. She is _____ to music. (listen)",
+        "6. They are _____ in class. (sit)",
+        "7. She is _____ the door. (open)",
+        "8. I am _____ for the bus. (wait)"
+      ],
+      "answerKey": ["1-eating", "2-cleaning", "3-studying", "4-cooking", "5-listening", "6-sitting", "7-opening", "8-waiting"],
+      "commonMistakes": [
+        "I am eat now. → I am EATING now.",
+        "She is study now. → She IS STUDYING now.",
+        "They are play football. → They are PLAYING football.",
+        "I studying English. → I AM studying English."
+      ]
+    },
+    "page2": {
+      "readingPassage": "It is 7 o'clock in the morning. Bat's family is very busy right now. His mother is cooking breakfast in the kitchen. His father is washing his car outside. His sister is brushing her teeth in the bathroom. Bat is studying his English vocabulary. The cat is sleeping on the sofa. Everyone is doing something! Bat thinks: 'My family is working hard today!'",
+      "keyPhrases": [
+        { "english": "What are you doing?", "mongolian": "Та юу хийж байна вэ?", "note": "What + are + you + doing?" },
+        { "english": "I am studying English", "mongolian": "Би англи хэл судалж байна", "note": "I am + verb-ing" },
+        { "english": "She is cooking dinner", "mongolian": "Тэр оройн хоол хийж байна", "note": "She is + verb-ing" },
+        { "english": "They are not sleeping", "mongolian": "Тэд унтаагүй байна", "note": "They are not + verb-ing" },
+        { "english": "Is he watching TV?", "mongolian": "Тэр телевиз үзэж байна уу?", "note": "Is + subject + verb-ing?" },
+        { "english": "Look! She is running!", "mongolian": "Хардаа! Тэр гүйж байна!", "note": "Look! = signal for Continuous" }
+      ],
+      "speakingQuestions": [
+        "1. What are you doing right now? / Та яг одоо юу хийж байна вэ?",
+        "2. What is your mother doing at home right now?",
+        "3. What are your classmates doing?",
+        "4. Are you studying hard this week?",
+        "5. What are you thinking about right now?",
+        "6. Is it raining outside now?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "What are you doing?" },
+        { "speaker": "B", "text": "I am studying for the English test tomorrow." },
+        { "speaker": "A", "text": "Are you studying alone?" },
+        { "speaker": "B", "text": "No, I am studying with my friend Sarnai." },
+        { "speaker": "A", "text": "What is Sarnai doing right now?" },
+        { "speaker": "B", "text": "She is reading the grammar notes." },
+        { "speaker": "A", "text": "What about you? What are you studying?" },
+        { "speaker": "B", "text": "I am memorizing the vocabulary words." }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Look at the picture! What is happening? Bat, describe it. Bat: A woman is cooking in the kitchen. A man is reading a newspaper. Teacher: Good! What are the children doing? Bat: Two children are playing in the garden. One child is sleeping. Teacher: Excellent! Sarnai, what is the dog doing? Sarnai: The dog is running in the garden and barking! Teacher: Perfect! What are YOU doing right now, class? Students: We are learning English! We are studying Present Continuous!",
+      "listeningQuestions": [
+        { "question": "What is the woman doing in the picture?", "options": ["cleaning", "cooking", "sleeping"], "answer": "cooking" },
+        { "question": "What is the man doing?", "options": ["reading a newspaper", "watching TV", "cooking"], "answer": "reading a newspaper" },
+        { "question": "How many children are playing?", "options": ["one", "three", "two"], "answer": "two" },
+        { "question": "What is one child doing?", "options": ["eating", "sleeping", "running"], "answer": "sleeping" },
+        { "question": "What is the dog doing?", "options": ["sleeping", "eating", "running and barking"], "answer": "running and barking" },
+        { "question": "Where are the children playing?", "options": ["in the house", "in the garden", "in the park"], "answer": "in the garden" },
+        { "question": "What are the students doing right now?", "options": ["sleeping", "eating", "learning English"], "answer": "learning English" },
+        { "question": "What grammar topic are they studying?", "options": ["Past Simple", "Present Simple", "Present Continuous"], "answer": "Present Continuous" },
+        { "question": "Who describes the dog?", "options": ["Bat", "Teacher", "Sarnai"], "answer": "Sarnai" },
+        { "question": "Which word signals Present Continuous?", "options": ["every day", "yesterday", "right now"], "answer": "right now" }
+      ],
+      "grammarPractice": [
+        "1. I am _____ breakfast. (eat)",
+        "2. She is _____ her room. (clean)",
+        "3. They are _____ English. (study)",
+        "4. He is _____ TV. (watch)",
+        "5. We are _____ in class. (sit)",
+        "6. She is _____ a message. (send)"
+      ],
+      "matchingExercise": [
+        { "left": "cooking", "right": "хоол хийж байна" },
+        { "left": "sleeping", "right": "унтаж байна" },
+        { "left": "listening", "right": "сонсож байна" },
+        { "left": "studying", "right": "суралцаж байна" },
+        { "left": "talking", "right": "ярьж байна" }
+      ],
+      "homework": [
+        "Writing: Write 5 sentences about what your family members are doing RIGHT NOW.",
+        "Vocabulary: Write the -ing form of all 20 verbs from today (brush→brushing, etc.).",
+        "Speaking: Look around you and say 5 things that are happening now!",
+        "Review: Practice Simple vs Continuous — 'I study' (every day) vs 'I am studying' (now)."
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-eating · 2-cleaning · 3-studying · 4-watching · 5-sitting · 6-sending",
+        "Matching: 1-B · 2-C · 3-A · 4-E · 5-D",
+        "Listening: 1-b · 2-a · 3-c · 4-b · 5-c · 6-b · 7-c · 8-c · 9-c · 10-c"
+      ],
+      "completionSummary": [
+        "Learned 20 action verbs",
+        "Mastered Present Continuous: am/is/are + -ing",
+        "Read about Bat's busy family morning",
+        "Practiced describing actions happening now",
+        "Listened to a picture-description dialog",
+        "Compared Present Simple vs Continuous",
+        "Practiced -ing spelling rules"
+      ]
+    }
+  }
+}

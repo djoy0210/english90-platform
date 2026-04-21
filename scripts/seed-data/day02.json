@@ -1,0 +1,153 @@
+{
+  "day": 2,
+  "level": 1,
+  "titleEn": "Day 2: Numbers & Daily Routines",
+  "titleMn": "Өдөр 2: Тоо ба Өдөр тутмын үйл явдал",
+  "objectiveEn": "About one hour. Learn 20 number and routine words, Present Simple grammar for I/You/We/They, listening, speaking, and homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 шинэ үг, I/You/We/They-тай Present Simple дүрэм, сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Learn numbers 1-10 and daily routine verbs while practicing the Present Simple tense for I, You, We, They.",
+  "contentMn": "1-ээс 10 хүртэлх тоо болон өдөр тутмын үйлдлийн үгсийг сурч, I/You/We/They-тай Present Simple цагийг дадлагажуулна.",
+  "vocabulary": [
+    { "english": "one", "pronunciation": "/wʌn/", "mongolian": "нэг", "example": "I have one book." },
+    { "english": "two", "pronunciation": "/tuː/", "mongolian": "хоёр", "example": "She has two sisters." },
+    { "english": "three", "pronunciation": "/θriː/", "mongolian": "гурав", "example": "We have three dogs." },
+    { "english": "four", "pronunciation": "/fɔːr/", "mongolian": "дөрөв", "example": "I wake up at four." },
+    { "english": "five", "pronunciation": "/faɪv/", "mongolian": "тав", "example": "He works five days." },
+    { "english": "six", "pronunciation": "/sɪks/", "mongolian": "зургаа", "example": "I sleep six hours." },
+    { "english": "seven", "pronunciation": "/ˈsɛvən/", "mongolian": "долоо", "example": "There are seven days." },
+    { "english": "eight", "pronunciation": "/eɪt/", "mongolian": "найм", "example": "I eat at eight o'clock." },
+    { "english": "nine", "pronunciation": "/naɪn/", "mongolian": "ес", "example": "She arrives at nine." },
+    { "english": "ten", "pronunciation": "/tɛn/", "mongolian": "арав", "example": "I study for ten minutes." },
+    { "english": "morning", "pronunciation": "/ˈmɔːrnɪŋ/", "mongolian": "өглөө", "example": "I wake up in the morning." },
+    { "english": "afternoon", "pronunciation": "/ˌæftərˈnuːn/", "mongolian": "өдөр", "example": "I eat lunch in the afternoon." },
+    { "english": "evening", "pronunciation": "/ˈiːvnɪŋ/", "mongolian": "орой", "example": "I study in the evening." },
+    { "english": "night", "pronunciation": "/naɪt/", "mongolian": "шөнө", "example": "I sleep at night." },
+    { "english": "wake up", "pronunciation": "/weɪk ʌp/", "mongolian": "босох", "example": "I wake up at 7 o'clock." },
+    { "english": "eat", "pronunciation": "/iːt/", "mongolian": "идэх", "example": "I eat breakfast every day." },
+    { "english": "drink", "pronunciation": "/drɪŋk/", "mongolian": "уух", "example": "I drink water in the morning." },
+    { "english": "go", "pronunciation": "/ɡoʊ/", "mongolian": "явах", "example": "I go to school every day." },
+    { "english": "work", "pronunciation": "/wɜːrk/", "mongolian": "ажиллах", "example": "My father works every day." },
+    { "english": "sleep", "pronunciation": "/sliːp/", "mongolian": "унтах", "example": "I sleep at ten o'clock." }
+  ],
+  "quiz": [
+    { "question": "Choose the correct sentence:", "options": ["I wakes up at 7.", "I wake up at 7.", "I waking up at 7.", "I wake at 7 up."], "answer": "I wake up at 7.", "explanation": "With I/You/We/They use the base verb (no -s)." },
+    { "question": "What time does Bat wake up in the listening?", "options": ["7:00", "6:30", "8:00", "9:00"], "answer": "6:30", "explanation": "Bat says 'I wake up at six thirty.'" },
+    { "question": "Make this negative: 'They sleep early.'", "options": ["They don't sleep early.", "They doesn't sleep early.", "They no sleep early.", "They not sleep early."], "answer": "They don't sleep early.", "explanation": "For They, use don't + base verb." },
+    { "question": "Which is a question form?", "options": ["You drink milk?", "Do you drink milk?", "Drink you milk?", "Are you drink milk?"], "answer": "Do you drink milk?", "explanation": "Move 'do' to the front for yes/no questions." },
+    { "question": "What does Bat eat for breakfast?", "options": ["rice", "tea and bread", "eggs", "soup"], "answer": "tea and bread", "explanation": "He says 'I drink tea and eat bread.'" },
+    { "question": "What time does Bat sleep?", "options": ["9:00", "10:00", "11:00", "12:00"], "answer": "10:00", "explanation": "He says 'I sleep at ten o'clock.'" },
+    { "question": "Choose the correct word: 'I _____ water every morning.'", "options": ["drinks", "drinking", "drink", "to drink"], "answer": "drink", "explanation": "I + base verb in Present Simple." },
+    { "question": "Which is a signal word for Present Simple?", "options": ["yesterday", "now", "every day", "tomorrow"], "answer": "every day", "explanation": "Present Simple uses every day, always, usually, never." },
+    { "question": "How do you say 'босох' in English?", "options": ["sleep", "wake up", "eat", "go"], "answer": "wake up", "explanation": "wake up = босох." },
+    { "question": "What do Bat and Sarnai say at the end of the dialogue?", "options": ["Goodbye", "Goodnight", "Good morning", "Hello"], "answer": "Goodnight", "explanation": "They wish each other 'Goodnight.'" }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Present Simple — I / You / We / They",
+      "grammarExplanation": "The Present Simple tense describes things we do regularly, habits, and daily routines. For I / You / We / They — just use the BASE VERB with NO changes. Add 'do not' (don't) for negatives and 'do' to make questions. Signal words: every day, always, usually, never, sometimes, on Mondays. Одоо цагийн энгийн хэлбэр нь өдөр тутмын үйл явдал, дадал зуршлыг тодорхойлдог. I / You / We / They-тай үйл үгийг хэвийн хэлбэрээр ашигладаг. Үгүйсгэлд 'don't', асуултад 'do' ашигладаг. Гол үгс: every day, always, usually, never.",
+      "grammarTable": [
+        { "subject": "I", "verb": "eat", "positive": "I eat breakfast.", "negative": "I don't eat meat.", "question": "Do I look ok?", "mongolian": "Би (идэх)" },
+        { "subject": "You", "verb": "drink", "positive": "You drink tea.", "negative": "You don't drink coffee.", "question": "Do you drink milk?", "mongolian": "Та / Чи (уух)" },
+        { "subject": "We", "verb": "go", "positive": "We go to school.", "negative": "We don't go Sundays.", "question": "Do we go today?", "mongolian": "Бид (явах)" },
+        { "subject": "They", "verb": "sleep", "positive": "They sleep early.", "negative": "They don't sleep late.", "question": "Do they sleep here?", "mongolian": "Тэд (унтах)" }
+      ],
+      "quickPractice": [
+        "1. I _____ breakfast at 8. (eat)",
+        "2. They _____ coffee. (drink)",
+        "3. I _____ up at 7. (wake)",
+        "4. We _____ water. (drink)",
+        "5. We _____ to school. (go)",
+        "6. You _____ English. (study)",
+        "7. They _____ at 10. (sleep)",
+        "8. I _____ every day. (practice)"
+      ],
+      "answerKey": ["1-eat", "2-drink", "3-wake", "4-drink", "5-go", "6-study", "7-sleep", "8-practice"],
+      "commonMistakes": [
+        "I wakes up early. → I wake up early.",
+        "She don't like it. → She doesn't like it.",
+        "Do he work here? → Does he work here?",
+        "I am go to school. → I go to school."
+      ]
+    },
+    "page2": {
+      "readingPassage": "My name is Sarnai. I wake up at seven o'clock every morning. First, I drink a glass of water. Then I eat breakfast with my family. I go to school at eight o'clock. I study English, math, and science. In the afternoon, I eat lunch at school. In the evening, I do my homework. I sleep at ten o'clock every night. I love my daily routine!",
+      "keyPhrases": [
+        { "english": "I wake up at seven", "mongolian": "Би долоон цагт босдог", "note": "wake up + time" },
+        { "english": "I go to school", "mongolian": "Би сургуульд явдаг", "note": "go + to + place" },
+        { "english": "In the morning", "mongolian": "Өглөө", "note": "Time expression" },
+        { "english": "Every day", "mongolian": "Өдөр бүр", "note": "Frequency word" },
+        { "english": "What time do you...?", "mongolian": "Та хэдэн цагт...?", "note": "Asking about routine" },
+        { "english": "I sleep at ten", "mongolian": "Би арван цагт унтдаг", "note": "sleep + at + time" }
+      ],
+      "speakingQuestions": [
+        "1. What time do you wake up? / Та хэдэн цагт босдог вэ?",
+        "2. What do you eat for breakfast?",
+        "3. What time do you go to school or work?",
+        "4. What do you do in the evening? / Та оройдоо юу хийдэг вэ?",
+        "5. What time do you sleep?",
+        "6. Do you study English every day?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "What time do you wake up?" },
+        { "speaker": "B", "text": "I wake up at seven o'clock. And you?" },
+        { "speaker": "A", "text": "I wake up at six thirty. Do you eat breakfast?" },
+        { "speaker": "B", "text": "Yes! I eat breakfast every morning." },
+        { "speaker": "A", "text": "What do you eat?" },
+        { "speaker": "B", "text": "I drink tea and eat bread. Then I go to school." },
+        { "speaker": "A", "text": "Do you study English every day?" },
+        { "speaker": "B", "text": "Yes! I study English every day. I love it!" }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Bat: Good morning, Sarnai! What time do you wake up? Sarnai: I wake up at seven every day. And you, Bat? Bat: I wake up at six thirty. I eat breakfast at seven. Sarnai: What do you eat for breakfast? Bat: I drink tea and eat bread. Then I go to school at eight. Do you study English at school? Sarnai: Yes! I study English every day. I love it! What time do you sleep? Bat: I sleep at ten o'clock. Goodnight, Sarnai! Sarnai: Goodnight! See you tomorrow.",
+      "listeningQuestions": [
+        { "question": "What time does Bat wake up?", "options": ["7:00", "6:30", "8:00"], "answer": "b" },
+        { "question": "What does Bat eat for breakfast?", "options": ["rice", "tea and bread", "eggs"], "answer": "b" },
+        { "question": "What time does Bat go to school?", "options": ["7:00", "9:00", "8:00"], "answer": "c" },
+        { "question": "Does Bat study English?", "options": ["never", "sometimes", "every day"], "answer": "c" },
+        { "question": "What time does Sarnai wake up?", "options": ["6:30", "7:00", "8:00"], "answer": "b" },
+        { "question": "What does Sarnai love?", "options": ["cooking", "sleeping", "studying English"], "answer": "c" },
+        { "question": "Who wakes up earlier?", "options": ["Sarnai", "same time", "Bat"], "answer": "c" },
+        { "question": "What time does Bat sleep?", "options": ["9:00", "11:00", "10:00"], "answer": "c" },
+        { "question": "Do they both study English?", "options": ["only Bat", "only Sarnai", "both of them"], "answer": "c" },
+        { "question": "What do they say at the end?", "options": ["Goodbye", "Goodnight", "Good morning"], "answer": "b" }
+      ],
+      "grammarPractice": [
+        "1. I _____ breakfast at 8 o'clock.",
+        "2. She _____ from Mongolia.",
+        "3. They _____ wake up early.",
+        "4. He _____ to school by bus.",
+        "5. We _____ happy every day.",
+        "6. _____ you drink coffee?"
+      ],
+      "matchingExercise": [
+        { "left": "wake up", "right": "босох" },
+        { "left": "eat breakfast", "right": "өглөөний хоол идэх" },
+        { "left": "go to school", "right": "сургуульд явах" },
+        { "left": "sleep", "right": "унтах" },
+        { "left": "every day", "right": "өдөр бүр" }
+      ],
+      "homework": [
+        "Writing: Write 5 sentences about YOUR daily routine (wake up, eat, go, study, sleep).",
+        "Vocabulary: Write the numbers 1-10 three times each in English.",
+        "Speaking: Ask someone: 'What time do you wake up?' — remember the answer!",
+        "Review: Re-read the listening script aloud before sleeping."
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-eat · 2-is · 3-don't · 4-goes · 5-are · 6-Do",
+        "Matching: 1-C · 2-A · 3-D · 4-B · 5-E",
+        "Listening: 1-b · 2-b · 3-c · 4-c · 5-b · 6-c · 7-c · 8-c · 9-c · 10-b"
+      ],
+      "completionSummary": [
+        "Learned 20 new words (numbers and routines)",
+        "Mastered Present Simple for I/You/We/They",
+        "Practiced daily routine vocabulary",
+        "Completed grammar practice exercises",
+        "Practiced speaking about your routine",
+        "Completed listening comprehension",
+        "Learned numbers 1-10 in English"
+      ]
+    }
+  }
+}

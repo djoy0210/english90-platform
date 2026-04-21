@@ -1,0 +1,153 @@
+{
+  "day": 14,
+  "level": 1,
+  "titleEn": "Day 14: Health & Body",
+  "titleMn": "Өдөр 14: Эрүүл мэнд ба бие",
+  "objectiveEn": "About one hour. Learn 20 health/body words, 'have got' grammar for possession and illness, listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 эрүүл мэндийн үг, 'have got' дүрэм, сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Talk about body parts and illness using 'I've got / She's got + a/an + symptom'.",
+  "contentMn": "Биеийн эрхтэн ба өвчний тухай 'I've got / She's got + a/an + шинж тэмдэг' хэлбэрээр ярина.",
+  "vocabulary": [
+    { "english": "head", "pronunciation": "/hɛd/", "mongolian": "толгой", "example": "My head hurts today." },
+    { "english": "eye", "pronunciation": "/aɪ/", "mongolian": "нүд", "example": "Her eyes are very beautiful." },
+    { "english": "ear", "pronunciation": "/ɪər/", "mongolian": "чих", "example": "I can hear with my ears." },
+    { "english": "nose", "pronunciation": "/noʊz/", "mongolian": "хамар", "example": "My nose is cold." },
+    { "english": "mouth", "pronunciation": "/maʊθ/", "mongolian": "ам", "example": "Open your mouth please." },
+    { "english": "tooth", "pronunciation": "/tuːθ/", "mongolian": "шүд (нэг)", "example": "I have a toothache." },
+    { "english": "teeth", "pronunciation": "/tiːθ/", "mongolian": "шүд (олон)", "example": "Brush your teeth twice a day!" },
+    { "english": "hand", "pronunciation": "/hænd/", "mongolian": "мутар / сарвуу", "example": "Wash your hands before eating." },
+    { "english": "arm", "pronunciation": "/ɑːrm/", "mongolian": "гар", "example": "My arm is very sore today." },
+    { "english": "leg", "pronunciation": "/lɛɡ/", "mongolian": "хөл", "example": "I hurt my leg playing football." },
+    { "english": "back", "pronunciation": "/bæk/", "mongolian": "нуруу", "example": "My back hurts from sitting." },
+    { "english": "stomach", "pronunciation": "/ˈstʌmək/", "mongolian": "гэдэс", "example": "I have a stomachache." },
+    { "english": "sick", "pronunciation": "/sɪk/", "mongolian": "өвчтэй", "example": "I am sick today." },
+    { "english": "headache", "pronunciation": "/ˈhɛdeɪk/", "mongolian": "толгой өвдөх", "example": "I've got a headache." },
+    { "english": "fever", "pronunciation": "/ˈfiːvər/", "mongolian": "халуурах", "example": "She has got a fever." },
+    { "english": "cold", "pronunciation": "/koʊld/", "mongolian": "ханиад", "example": "I've got a cold this week." },
+    { "english": "cough", "pronunciation": "/kɒf/", "mongolian": "ханиах", "example": "He has got a bad cough." },
+    { "english": "medicine", "pronunciation": "/ˈmɛdsɪn/", "mongolian": "эм", "example": "Take this medicine three times a day." },
+    { "english": "doctor", "pronunciation": "/ˈdɒktər/", "mongolian": "эмч", "example": "I need to see a doctor today." },
+    { "english": "rest", "pronunciation": "/rɛst/", "mongolian": "амрах", "example": "Please rest at home today." }
+  ],
+  "quiz": [
+    { "question": "I ___ got a headache.", "options": ["have", "has", "had", "having"], "answer": "have", "explanation": "Use 'have got' for I/you/we/they." },
+    { "question": "She ___ got a fever.", "options": ["have", "has", "haves", "is"], "answer": "has", "explanation": "Use 'has got' for he/she/it." },
+    { "question": "___ you got a pen?", "options": ["Has", "Have", "Do", "Are"], "answer": "Have", "explanation": "Question form: 'Have you got...?'" },
+    { "question": "He ___ medicine.", "options": ["haven't got", "hasn't got", "doesn't got", "isn't got"], "answer": "hasn't got", "explanation": "Negative for he/she/it: 'hasn't got'." },
+    { "question": "Why wasn't Bat at school?", "options": ["he was lazy", "he's got a cold", "he had an exam", "he overslept"], "answer": "he's got a cold", "explanation": "Bat told Sarnai he has a cold." },
+    { "question": "What is Bat's temperature?", "options": ["37°C", "38°C", "39°C", "40°C"], "answer": "38°C", "explanation": "He said his temperature is 38 degrees." },
+    { "question": "Who gave Bat medicine?", "options": ["Sarnai", "the doctor", "his mother", "his teacher"], "answer": "his mother", "explanation": "His mother gave him medicine and hot soup." },
+    { "question": "What does Sarnai advise?", "options": ["sleep more", "drink more water", "see a doctor if not better", "eat more"], "answer": "see a doctor if not better", "explanation": "Sarnai says to see a doctor if he isn't better tomorrow." },
+    { "question": "What tense is 'have got' most similar to?", "options": ["past simple", "present continuous", "present simple have", "future"], "answer": "present simple have", "explanation": "'Have got' = 'have' (present simple) in meaning." },
+    { "question": "Has Bat got a fever?", "options": ["no", "yes, small", "yes, very high", "not mentioned"], "answer": "yes, small", "explanation": "He said he has a small fever (38°C)." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Have got — I've got / She's got — possession and illness",
+      "grammarExplanation": "'Have got' means the same as 'have' — very common in spoken British English. For I/You/We/They use 'have got'; for He/She/It use 'has got'. Short forms: I've got, she's got. Used for possession ('I've got a book.') and illness ('I've got a headache.'). 'Have got' нь 'have'-тай ижил утгатай. I/You/We/They — 'have got'; He/She/It — 'has got'. Эзэмшил болон өвчний тухай хэлэхэд хэрэглэнэ.",
+      "grammarTable": [
+        { "subject": "I've got", "verb": "possession", "positive": "I've got a headache.", "negative": "I haven't got medicine.", "question": "Have you got a cold?", "mongolian": "Надад ... байна" },
+        { "subject": "She's got", "verb": "illness", "positive": "She's got a fever.", "negative": "She hasn't got a cough.", "question": "Has she got a cold?", "mongolian": "Түүнд ... байна" },
+        { "subject": "He's got", "verb": "possession", "positive": "He's got a new book.", "negative": "He hasn't got a car.", "question": "Has he got a pen?", "mongolian": "Түүнд ... байна" },
+        { "subject": "They've got", "verb": "plural", "positive": "They've got a problem.", "negative": "They haven't got time.", "question": "Have they got tickets?", "mongolian": "Тэдэнд ... байна" }
+      ],
+      "quickPractice": [
+        "1. I _____ got a headache. (have)",
+        "2. She _____ got a fever. (has)",
+        "3. They _____ got a problem. (have)",
+        "4. _____ she got a cough? (Has)",
+        "5. _____ you got a pen? (Have)",
+        "6. He _____ got medicine. (hasn't)",
+        "7. I _____ got a cold. (have/I've)",
+        "8. We _____ got enough time. (haven't)"
+      ],
+      "answerKey": ["1-have", "2-has", "3-have", "4-Has", "5-Have", "6-hasn't", "7-I've", "8-haven't"],
+      "commonMistakes": [
+        "She have got a cold. → She HAS GOT a cold.",
+        "I've got headache. → I've got A headache.",
+        "Has she got fever? → Has she got A fever?",
+        "I hasn't got time. → I HAVEN'T got time."
+      ]
+    },
+    "page2": {
+      "readingPassage": "Bat is not at school today. He has got a bad cold. He has also got a headache and a fever. His mother says: 'You have got to rest today!' She gives him hot tea and medicine. His friend Sarnai calls him: 'Have you got a cough too?' 'Yes, I've got a cough,' says Bat. 'You should see a doctor!' says Sarnai. 'I will go tomorrow if I haven't got better,' says Bat.",
+      "keyPhrases": [
+        { "english": "I've got a headache", "mongolian": "Надад толгой өвдөж байна", "note": "I've got + article + illness" },
+        { "english": "She's got a fever", "mongolian": "Тэрт халуун байна", "note": "She's got + article + illness" },
+        { "english": "Have you got medicine?", "mongolian": "Танд эм байна уу?", "note": "Have you got + noun?" },
+        { "english": "I haven't got any medicine", "mongolian": "Надад эм байхгүй", "note": "I haven't got + any + noun" },
+        { "english": "You should see a doctor", "mongolian": "Та эмчид үзүүлэх хэрэгтэй", "note": "You should + verb = advice" },
+        { "english": "I need to rest", "mongolian": "Би амрах хэрэгтэй", "note": "I need to + verb = necessity" }
+      ],
+      "speakingQuestions": [
+        "1. How are you feeling today? / Та өнөөдөр яаж мэдэрч байна?",
+        "2. Have you got a cold this week?",
+        "3. What do you do when you have a headache?",
+        "4. Have you got any medicine at home?",
+        "5. When did you last see a doctor?",
+        "6. What is good for a cold? / Ханиадны хувьд юу сайн вэ?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "You don't look well. What's wrong?" },
+        { "speaker": "B", "text": "I've got a terrible headache and a fever." },
+        { "speaker": "A", "text": "Oh no! Have you got any medicine?" },
+        { "speaker": "B", "text": "Yes, my mother gave me some. But I feel very bad." },
+        { "speaker": "A", "text": "You should see a doctor today." },
+        { "speaker": "B", "text": "I know. My mother is taking me this afternoon." },
+        { "speaker": "A", "text": "Have you got a cough too?" },
+        { "speaker": "B", "text": "Yes, I've got a cough and a sore throat." }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Sarnai: Bat, why weren't you at school today? Bat: I've got a cold. I've also got a headache and a sore throat. Sarnai: That sounds terrible! Have you got a fever too? Bat: Yes, I've got a small fever. My temperature is 38 degrees. Sarnai: Have you got any medicine at home? Bat: Yes. My mother gave me medicine and hot soup. Sarnai: You should see a doctor if you haven't got better by tomorrow. Bat: I will. Thank you for calling, Sarnai!",
+      "listeningQuestions": [
+        { "question": "Why wasn't Bat at school?", "options": ["he was lazy", "he's got a cold", "he had an exam"], "answer": "he's got a cold" },
+        { "question": "What has Bat got? (all of them)", "options": ["cold only", "cold and headache", "cold, headache, sore throat"], "answer": "cold, headache, sore throat" },
+        { "question": "Has Bat got a fever?", "options": ["no", "yes, small", "yes, very high"], "answer": "yes, small" },
+        { "question": "What is his temperature?", "options": ["37°C", "39°C", "38°C"], "answer": "38°C" },
+        { "question": "Has Bat got medicine at home?", "options": ["no", "yes", "not mentioned"], "answer": "yes" },
+        { "question": "Who gave him medicine?", "options": ["Sarnai", "the doctor", "his mother"], "answer": "his mother" },
+        { "question": "What did his mother give him?", "options": ["medicine and water", "medicine and hot soup", "vitamins only"], "answer": "medicine and hot soup" },
+        { "question": "What does Sarnai advise?", "options": ["sleep more", "drink more water", "see a doctor if not better"], "answer": "see a doctor if not better" },
+        { "question": "How does Bat feel about Sarnai calling?", "options": ["annoyed", "grateful", "not mentioned"], "answer": "grateful" },
+        { "question": "What tense is 'have got' most similar to?", "options": ["past simple", "present continuous", "present simple have"], "answer": "present simple have" }
+      ],
+      "grammarPractice": [
+        "1. I _____ a headache. (have got)",
+        "2. She _____ a fever. (has got)",
+        "3. _____ you got a pen? (Have)",
+        "4. He _____ medicine. (hasn't got)",
+        "5. I _____ a cold this week. (have got)",
+        "6. _____ she got a cough? (Has)"
+      ],
+      "matchingExercise": [
+        { "left": "headache", "right": "толгой өвдөх" },
+        { "left": "fever", "right": "халуурах" },
+        { "left": "cough", "right": "ханиах" },
+        { "left": "stomachache", "right": "гэдэс өвдөх" },
+        { "left": "cold", "right": "ханиад" }
+      ],
+      "homework": [
+        "Writing: Write 5 sentences about your health using 'I've got' or 'I haven't got'.",
+        "Vocabulary: Write all body parts from today's lesson 3 times each.",
+        "Speaking: Ask a family member: 'Have you got any medicine at home?'",
+        "Review: Week 2 complete! Review all 140 words from Days 8-14 before sleeping."
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-have got · 2-has got · 3-Have · 4-hasn't got · 5-have got · 6-Has",
+        "Matching: 1-C · 2-D · 3-A · 4-B · 5-E",
+        "Listening: 1-b · 2-c · 3-b · 4-c · 5-b · 6-c · 7-b · 8-c · 9-b · 10-c"
+      ],
+      "completionSummary": [
+        "Learned 20 health and body words",
+        "Mastered 'have got' / 'has got' grammar",
+        "Read about Bat being sick",
+        "Practiced talking about illness",
+        "Listened to a phone call dialog",
+        "Completed Week 2 (Days 8-14)",
+        "Learned medical advice phrases"
+      ]
+    }
+  }
+}

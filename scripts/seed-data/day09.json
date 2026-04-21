@@ -1,0 +1,154 @@
+{
+  "day": 9,
+  "level": 1,
+  "titleEn": "Day 9: The Home & Furniture",
+  "titleMn": "Өдөр 9: Гэр & Тавилга",
+  "objectiveEn": "About one hour. Learn 20 home/furniture words, prepositions of place, listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. Гэр, тавилгын 20 шинэ үг, байршлын угтвар үгс, сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Describe rooms and furniture using prepositions of place: in, on, under, next to, between.",
+  "contentMn": "in / on / under / next to / between угтвар үгсээр өрөө, тавилгын байршлыг тайлбарлахыг сурна.",
+  "vocabulary": [
+    { "english": "living room", "pronunciation": "/ˈlɪvɪŋ ruːm/", "mongolian": "зочны өрөө", "example": "We watch TV in the living room." },
+    { "english": "bedroom", "pronunciation": "/ˈbɛdruːm/", "mongolian": "унтлагын өрөө", "example": "I sleep in my bedroom." },
+    { "english": "kitchen", "pronunciation": "/ˈkɪtʃɪn/", "mongolian": "гал тогоо", "example": "My mother cooks in the kitchen." },
+    { "english": "bathroom", "pronunciation": "/ˈbæθruːm/", "mongolian": "угаалгын өрөө", "example": "I brush my teeth in the bathroom." },
+    { "english": "door", "pronunciation": "/dɔːr/", "mongolian": "хаалга", "example": "The door is open." },
+    { "english": "window", "pronunciation": "/ˈwɪndoʊ/", "mongolian": "цонх", "example": "Please open the window." },
+    { "english": "table", "pronunciation": "/ˈteɪbəl/", "mongolian": "ширээ", "example": "My book is on the table." },
+    { "english": "chair", "pronunciation": "/tʃɛər/", "mongolian": "сандал", "example": "Sit on the chair." },
+    { "english": "bed", "pronunciation": "/bɛd/", "mongolian": "ор", "example": "My cat sleeps on my bed." },
+    { "english": "sofa", "pronunciation": "/ˈsoʊfə/", "mongolian": "буйдан", "example": "We sit on the sofa." },
+    { "english": "television", "pronunciation": "/ˈtɛlɪˌvɪʒən/", "mongolian": "зурагт", "example": "The TV is in the living room." },
+    { "english": "bookshelf", "pronunciation": "/ˈbʊkʃɛlf/", "mongolian": "номын тавиур", "example": "My books are on the bookshelf." },
+    { "english": "lamp", "pronunciation": "/læmp/", "mongolian": "дэнлүү / гэрэл", "example": "The lamp is next to my bed." },
+    { "english": "floor", "pronunciation": "/flɔːr/", "mongolian": "шал", "example": "My shoes are on the floor." },
+    { "english": "wall", "pronunciation": "/wɔːl/", "mongolian": "хана", "example": "The picture is on the wall." },
+    { "english": "in", "pronunciation": "/ɪn/", "mongolian": "дотор", "example": "The cat is in the box." },
+    { "english": "on", "pronunciation": "/ɒn/", "mongolian": "дээр", "example": "The book is on the table." },
+    { "english": "under", "pronunciation": "/ˈʌndər/", "mongolian": "доор", "example": "My bag is under the table." },
+    { "english": "next to", "pronunciation": "/nɛkst tuː/", "mongolian": "хажууд / дэргэд", "example": "The lamp is next to the bed." },
+    { "english": "between", "pronunciation": "/bɪˈtwiːn/", "mongolian": "хооронд", "example": "The table is between two chairs." }
+  ],
+  "quiz": [
+    { "question": "The book is _____ the table.", "options": ["in", "on", "under", "between"], "answer": "on", "explanation": "ON = on a flat surface." },
+    { "question": "She is _____ the kitchen.", "options": ["on", "in", "under", "next to"], "answer": "in", "explanation": "IN = inside an enclosed space." },
+    { "question": "My bag is _____ the chair.", "options": ["under", "between", "on", "in"], "answer": "under", "explanation": "UNDER = below something." },
+    { "question": "The lamp is _____ the bed.", "options": ["between", "next to", "in", "on"], "answer": "next to", "explanation": "NEXT TO = beside / right next to." },
+    { "question": "The table is _____ two chairs.", "options": ["in", "on", "between", "under"], "answer": "between", "explanation": "BETWEEN = in the middle of two things." },
+    { "question": "Where is Bat's English book? (listening)", "options": ["in his bag", "under his desk", "on his desk", "next to the door"], "answer": "on his desk", "explanation": "Bat says his book is on his desk, next to his pencil case." },
+    { "question": "Where is Sarnai's bag?", "options": ["on her chair", "under her chair", "next to her desk", "on the table"], "answer": "under her chair", "explanation": "Sarnai says her bag is under her chair." },
+    { "question": "Where is the clock?", "options": ["on the desk", "in the corner", "on the wall between two windows", "above the door"], "answer": "on the wall between two windows", "explanation": "The clock is on the wall, between the two windows." },
+    { "question": "Which is correct?", "options": ["She is on the bathroom.", "She is in the bathroom.", "She is at the bathroom.", "She is under the bathroom."], "answer": "She is in the bathroom.", "explanation": "Use IN for enclosed spaces like rooms." },
+    { "question": "Which is correct?", "options": ["Sit in the chair.", "Sit on the chair.", "Sit under the chair.", "Sit at the chair."], "answer": "Sit on the chair.", "explanation": "ON the chair (on a surface)." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Prepositions of Place — in / on / under / next to / between",
+      "grammarExplanation": "Prepositions of place tell us WHERE something is located. The most common ones: IN = inside something enclosed (in the room, in the box). ON = on a surface (on the table, on the wall). UNDER = below something (under the bed). NEXT TO = right beside (next to the door). BETWEEN = in the middle of two things (between the chairs). Байршлын угтвар үгс нь ямар нэг зүйл ХААНА байгааг хэлдэг. IN = дотор, ON = дээр, UNDER = доор, NEXT TO = хажуу, дэргэд, BETWEEN = хооронд.",
+      "grammarTable": [
+        { "subject": "in", "verb": "inside", "positive": "The cat is in the box.", "negative": "The cat is NOT in the box.", "question": "Is the cat in the box?", "mongolian": "дотор" },
+        { "subject": "on", "verb": "surface", "positive": "The book is on the table.", "negative": "The book is NOT on the table.", "question": "Is the book on the table?", "mongolian": "дээр" },
+        { "subject": "under", "verb": "below", "positive": "The bag is under the table.", "negative": "The bag is NOT under the table.", "question": "Is the bag under the table?", "mongolian": "доор" },
+        { "subject": "next to", "verb": "beside", "positive": "The lamp is next to the bed.", "negative": "The lamp is NOT next to the bed.", "question": "Is the lamp next to the bed?", "mongolian": "хажуу / дэргэд" },
+        { "subject": "between", "verb": "middle", "positive": "The table is between the chairs.", "negative": "It is NOT between the chairs.", "question": "Is it between the chairs?", "mongolian": "хооронд / дунд" }
+      ],
+      "quickPractice": [
+        "1. The book is _____ the table. (on)",
+        "2. The cat is _____ the box. (in)",
+        "3. My bag is _____ the table. (under)",
+        "4. She is _____ the kitchen. (in)",
+        "5. The lamp is _____ the bed. (next to)",
+        "6. The table is _____ the chairs. (between)",
+        "7. The picture is _____ the wall. (on)",
+        "8. The sofa is _____ the TV. (next to)"
+      ],
+      "answerKey": ["1-on", "2-in", "3-under", "4-in", "5-next to", "6-between", "7-on", "8-next to"],
+      "commonMistakes": [
+        "The book is in the table → The book is ON the table.",
+        "She is on the bathroom → She is IN the bathroom.",
+        "The cat is on under the bed → The cat is UNDER the bed.",
+        "Sit in the chair → Sit ON the chair."
+      ]
+    },
+    "page2": {
+      "readingPassage": "Bat's house has four rooms. The living room has a big sofa and a television. There is a lamp next to the sofa. In the kitchen, there is a table with four chairs. Bat's books are on the bookshelf in his bedroom. His bag is always under his desk. The bathroom is between the bedroom and the kitchen. Bat loves his cozy home!",
+      "keyPhrases": [
+        { "english": "The book is on the table", "mongolian": "Ном ширээний дээр байна", "note": "on = flat surface" },
+        { "english": "The cat is in the box", "mongolian": "Муур хайрцгийн дотор байна", "note": "in = enclosed space" },
+        { "english": "My bag is under the desk", "mongolian": "Цүнх ширээний доор байна", "note": "under = below" },
+        { "english": "The lamp is next to the bed", "mongolian": "Дэнлүү орны хажуу байна", "note": "next to = beside" },
+        { "english": "Where is the...?", "mongolian": "... хаана байна вэ?", "note": "Asking about location" },
+        { "english": "It is between A and B", "mongolian": "Энэ A ба B-ийн хооронд байна", "note": "between = in the middle" }
+      ],
+      "speakingQuestions": [
+        "1. Where is your school bag right now?",
+        "2. What is on your desk?",
+        "3. What is under your bed?",
+        "4. Where is the TV in your house?",
+        "5. What room do you study in?",
+        "6. Describe your bedroom — what is in it?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "Where is my English book?" },
+        { "speaker": "B", "text": "It is on the table, next to your bag." },
+        { "speaker": "A", "text": "And my pen? I can't find it!" },
+        { "speaker": "B", "text": "Look under the table. Is it there?" },
+        { "speaker": "A", "text": "Yes! Here it is. Where is the dictionary?" },
+        { "speaker": "B", "text": "It is on the bookshelf, between the two big books." },
+        { "speaker": "A", "text": "What room do you usually study in?" },
+        { "speaker": "B", "text": "I study in my bedroom. It is very quiet." }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Today we learn prepositions of place. Bat, where is your English book? Bat: My book is on my desk, next to my pencil case. Teacher: Good! Sarnai, where is your bag? Sarnai: My bag is under my chair. Teacher: Excellent! Where is the clock in this classroom? Bat: The clock is on the wall, between the two windows. Teacher: Perfect! And where is my desk? Sarnai: Your desk is in front of the classroom, next to the board. Teacher: Well done, everyone! You all understand prepositions!",
+      "listeningQuestions": [
+        { "question": "What is today's topic?", "options": ["grammar", "prepositions of place", "numbers"], "answer": "prepositions of place" },
+        { "question": "Where is Bat's English book?", "options": ["in his bag", "under his desk", "on his desk"], "answer": "on his desk" },
+        { "question": "What is next to Bat's book?", "options": ["his pen", "his pencil case", "his dictionary"], "answer": "his pencil case" },
+        { "question": "Where is Sarnai's bag?", "options": ["on her chair", "under her chair", "next to her desk"], "answer": "under her chair" },
+        { "question": "Where is the clock?", "options": ["on the wall", "on the desk", "in the corner"], "answer": "on the wall" },
+        { "question": "Where exactly is the clock?", "options": ["above the door", "between two windows", "next to the board"], "answer": "between two windows" },
+        { "question": "Where is the teacher's desk?", "options": ["in the back", "in front, next to board", "between the windows"], "answer": "in front, next to board" },
+        { "question": "Does Sarnai know where the desk is?", "options": ["no", "yes", "not mentioned"], "answer": "yes" },
+        { "question": "How does the teacher feel at the end?", "options": ["disappointed", "proud", "confused"], "answer": "proud" },
+        { "question": "What preposition means 'inside'?", "options": ["on", "under", "in"], "answer": "in" }
+      ],
+      "grammarPractice": [
+        "1. The book is _____ the table.",
+        "2. The cat is _____ the box.",
+        "3. My bag is _____ the chair.",
+        "4. She is _____ the kitchen.",
+        "5. The lamp is _____ the bed.",
+        "6. The table is _____ the chairs."
+      ],
+      "matchingExercise": [
+        { "left": "living room", "right": "зочны өрөө" },
+        { "left": "bedroom", "right": "унтлагын өрөө" },
+        { "left": "kitchen", "right": "гал тогоо" },
+        { "left": "bathroom", "right": "угаалгын өрөө" },
+        { "left": "bookshelf", "right": "номын тавиур" }
+      ],
+      "homework": [
+        "✍ Writing: Draw your room and label 8 objects using 'The ... is on/in/under/next to...'",
+        "📖 Vocabulary: Write 5 sentences describing where things are in your home.",
+        "🗣️ Speaking: Describe your living room to someone using prepositions.",
+        "🔁 Review: Practice: 'Where is the...?' 'It is on/in/under/next to the...'"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-on · 2-in · 3-under · 4-in · 5-next to · 6-between",
+        "Matching: 1-D · 2-A · 3-B · 4-C · 5-E",
+        "Listening: 1-b · 2-c · 3-b · 4-b · 5-a · 6-b · 7-b · 8-b · 9-b · 10-c"
+      ],
+      "completionSummary": [
+        "Learned 20 home & furniture words",
+        "Mastered prepositions of place",
+        "Read about Bat's home",
+        "Completed grammar practice",
+        "Practiced speaking dialogue",
+        "Completed listening practice",
+        "Described locations in English"
+      ]
+    }
+  }
+}

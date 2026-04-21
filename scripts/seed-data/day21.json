@@ -1,0 +1,154 @@
+{
+  "day": 21,
+  "level": 1,
+  "titleEn": "Day 21: Social Media & Technology",
+  "titleMn": "Өдөр 21: Нийгмийн сүлжээ ба технологи",
+  "objectiveEn": "About one hour. Learn 20 technology words, imperatives (Do / Don't / Let's / Please), listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. Технологийн 20 шинэ үг, тушаалын хэлбэр (Do / Don't / Let's / Please), сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Today you learn 20 technology and social media words and how to use imperatives for commands, suggestions, and polite requests.",
+  "contentMn": "Өнөөдөр технологи, нийгмийн сүлжээний 20 үг сурч, тушаал, санал, эелдэг хүсэлт илэрхийлэх тушаалын хэлбэрийг сурна.",
+  "vocabulary": [
+    { "english": "phone", "pronunciation": "/foʊn/", "mongolian": "утас", "example": "I use my phone every day." },
+    { "english": "internet", "pronunciation": "/ˈɪntərnɛt/", "mongolian": "интернэт", "example": "The internet is very useful." },
+    { "english": "website", "pronunciation": "/ˈwɛbsaɪt/", "mongolian": "вэбсайт", "example": "Visit our website." },
+    { "english": "app", "pronunciation": "/æp/", "mongolian": "аппликейшн", "example": "I have many useful apps." },
+    { "english": "message", "pronunciation": "/ˈmɛsɪdʒ/", "mongolian": "зурвас", "example": "Send me a message please." },
+    { "english": "email", "pronunciation": "/ˈiːmeɪl/", "mongolian": "имэйл", "example": "Send me an email." },
+    { "english": "post", "pronunciation": "/poʊst/", "mongolian": "нийтлэх", "example": "Don't post personal information!" },
+    { "english": "share", "pronunciation": "/ʃɛər/", "mongolian": "хуваалцах", "example": "Share this video with friends." },
+    { "english": "like", "pronunciation": "/laɪk/", "mongolian": "like дарах", "example": "I liked her photo." },
+    { "english": "follow", "pronunciation": "/ˈfɒloʊ/", "mongolian": "дагах", "example": "Follow me on social media." },
+    { "english": "video", "pronunciation": "/ˈvɪdiəʊ/", "mongolian": "видео", "example": "Watch this English video every day." },
+    { "english": "photo", "pronunciation": "/ˈfoʊtoʊ/", "mongolian": "зураг", "example": "She posted a beautiful photo." },
+    { "english": "download", "pronunciation": "/ˈdaʊnloʊd/", "mongolian": "татаж авах", "example": "Download the free app now." },
+    { "english": "upload", "pronunciation": "/ˈʌploʊd/", "mongolian": "байршуулах", "example": "Upload your photo here." },
+    { "english": "password", "pronunciation": "/ˈpɑːswɜːrd/", "mongolian": "нууц үг", "example": "Don't share your password!" },
+    { "english": "safe", "pronunciation": "/seɪf/", "mongolian": "аюулгүй", "example": "Stay safe online always." },
+    { "english": "careful", "pronunciation": "/ˈkɛərfəl/", "mongolian": "болгоомжтой", "example": "Be careful on the internet." },
+    { "english": "turn on", "pronunciation": "/tɜːrn ɒn/", "mongolian": "асаах", "example": "Turn on your computer." },
+    { "english": "turn off", "pronunciation": "/tɜːrn ɒf/", "mongolian": "унтраах", "example": "Turn off your phone in class." },
+    { "english": "connect", "pronunciation": "/kəˈnɛkt/", "mongolian": "холбогдох", "example": "Connect to the Wi-Fi." }
+  ],
+  "quiz": [
+    { "question": "Which is a correct imperative?", "options": ["You open the door.", "Open the door!", "Opening the door!", "To open the door."], "answer": "Open the door!", "explanation": "Imperatives use the base verb without a subject." },
+    { "question": "What does 'Don't' short for?", "options": ["do not", "does not", "did not", "don't not"], "answer": "do not", "explanation": "Don't = do not (contraction)." },
+    { "question": "What does 'Let's' mean?", "options": ["let him", "let us", "let them", "let me"], "answer": "let us", "explanation": "Let's = let us, used for suggestions." },
+    { "question": "_____ run in class!", "options": ["Do", "Don't", "Not", "No"], "answer": "Don't", "explanation": "Negative imperative = Don't + base verb." },
+    { "question": "_____ study together!", "options": ["Lets's", "Let", "Let's", "Lets"], "answer": "Let's", "explanation": "Let's + verb = suggestion." },
+    { "question": "What is Rule 1 from the listening?", "options": ["study hard", "don't use phone in class", "watch videos", "be on time"], "answer": "don't use phone in class", "explanation": "Teacher: 'Rule 1: Don't use your phone during class.'" },
+    { "question": "What does the teacher suggest at the end?", "options": ["stop using phones", "use technology to learn English", "buy new phones", "delete apps"], "answer": "use technology to learn English", "explanation": "Teacher: 'Technology can help us learn English!'" },
+    { "question": "Choose the correct imperative:", "options": ["Don't to run!", "Don't run!", "Not run!", "No run!"], "answer": "Don't run!", "explanation": "Don't + base verb (no 'to'!)." },
+    { "question": "Choose the polite imperative:", "options": ["You sit down.", "Sit down you.", "Please sit down.", "Sitting down."], "answer": "Please sit down.", "explanation": "Add 'please' for polite imperatives." },
+    { "question": "_____ careful online.", "options": ["Are", "Be", "Is", "Have"], "answer": "Be", "explanation": "Imperative form of 'to be' is 'Be'." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Imperatives — Do / Don't / Let's — commands and suggestions",
+      "grammarExplanation": "Imperatives are commands, instructions, requests, and suggestions. They use the BASE VERB with NO subject. Positive: 'Open the book.' Negative: Don't + verb → 'Don't run!' Suggestion: Let's + verb → 'Let's study together!' Polite: add 'please' → 'Please sit down.' / Тушаалын хэлбэр нь тушаал, зааварчилгаа, хүсэлт, саналд хэрэглэгддэг. Субьектгүй, зөвхөн ҮНДСЭН ҮЙЛҮГ.",
+      "grammarTable": [
+        { "subject": "Do!", "verb": "positive", "positive": "Open the window!", "negative": "—", "question": "Please open the window.", "mongolian": "...!" },
+        { "subject": "Don't!", "verb": "negative", "positive": "Don't run!", "negative": "—", "question": "Please don't run.", "mongolian": "...гүй! / бүү!" },
+        { "subject": "Let's", "verb": "suggestion", "positive": "Let's study together!", "negative": "Let's not be late.", "question": "Shall we study?", "mongolian": "...цгаая!" },
+        { "subject": "Please", "verb": "polite", "positive": "Please sit down.", "negative": "Please don't shout.", "question": "Could you please?", "mongolian": "...гуйя" },
+        { "subject": "Be + adj", "verb": "command", "positive": "Be careful!", "negative": "Don't be late.", "question": "Please be quiet.", "mongolian": "Болгоомжтой бай!" }
+      ],
+      "quickPractice": [
+        "_____ your book. (Open — command)",
+        "_____ run in class! (Don't — negative)",
+        "_____ study together! (Let's — suggestion)",
+        "_____ sit down please. (Please — polite)",
+        "_____ to music. (Listen — command)",
+        "_____ go to the park! (Let's — suggestion)",
+        "_____ talk during the exam. (Don't — negative)",
+        "_____ your phone off. (Turn — command)"
+      ],
+      "answerKey": ["1-Open", "2-Don't", "3-Let's", "4-Please", "5-Listen", "6-Let's", "7-Don't", "8-Turn"],
+      "commonMistakes": [
+        "You open the door. → Open the door! (imperative)",
+        "Don't to run! → Don't run!",
+        "Let's to study. → Let's study.",
+        "Please you sit down. → Please sit down."
+      ]
+    },
+    "page2": {
+      "readingPassage": "Technology is everywhere today. Here are some important rules for staying safe online: Don't share your password with anyone. Don't post personal information online. Turn off your phone in class. Be careful about what you share. And here is a great tip: Use technology to learn English! Watch English videos every day. Listen to English songs. Technology can be your best English teacher!",
+      "keyPhrases": [
+        { "english": "Don't share your password", "mongolian": "Нууц үгээ хуваалцаж болохгүй", "note": "Don't + verb = warning" },
+        { "english": "Turn off your phone", "mongolian": "Утсаа унтраагаарай", "note": "Turn off = command" },
+        { "english": "Let's study together!", "mongolian": "Хамтдаа судалцгаая!", "note": "Let's + verb = suggestion" },
+        { "english": "Be careful online", "mongolian": "Интернэтэд болгоомжтой байгаарай", "note": "Be + adjective = command" },
+        { "english": "Please sit down", "mongolian": "Суугаарай", "note": "Please + verb = polite command" },
+        { "english": "Listen and repeat", "mongolian": "Сонсоод давтаарай", "note": "Two imperatives in sequence" }
+      ],
+      "speakingQuestions": [
+        "How many hours do you use your phone every day?",
+        "Do you have social media accounts?",
+        "What do you use the internet for?",
+        "Is technology good for learning English?",
+        "What are some internet safety rules?",
+        "Let's make a rule: 'Don't...' — what rule would you make?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "Can I use your phone for a minute?" },
+        { "speaker": "B", "text": "Sure! But don't look at my messages please!" },
+        { "speaker": "A", "text": "Of course not! I just need to call someone." },
+        { "speaker": "B", "text": "OK. But turn it off after — the battery is low." },
+        { "speaker": "A", "text": "Let's take a photo together!" },
+        { "speaker": "B", "text": "Great idea! Stand here and smile." },
+        { "speaker": "A", "text": "Let's share it now!" },
+        { "speaker": "B", "text": "Wait — don't forget to add the hashtag!" }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Today we talk about technology and imperatives. Listen carefully to these rules. Teacher: Rule 1: Don't use your phone during class. Turn it off or put it away. Teacher: Rule 2: Don't share personal information online. Be safe! Teacher: Rule 3: Use technology for learning. Watch English videos every day! Bat: I already do that! I watch English videos every evening. Teacher: Excellent! Let's all do that. Technology can help us learn English! Students: Let's do it! We will watch English videos every day!",
+      "listeningQuestions": [
+        { "question": "What is today's grammar topic?", "options": ["questions", "imperatives", "past tense"], "answer": "imperatives" },
+        { "question": "What is Rule 1?", "options": ["study hard", "don't use phone in class", "watch videos"], "answer": "don't use phone in class" },
+        { "question": "What is Rule 2?", "options": ["don't eat in class", "be on time", "don't share personal info online"], "answer": "don't share personal info online" },
+        { "question": "What is Rule 3?", "options": ["buy more apps", "use technology for learning", "don't use internet"], "answer": "use technology for learning" },
+        { "question": "Does Bat already watch English videos?", "options": ["no", "sometimes", "yes, every evening"], "answer": "yes, every evening" },
+        { "question": "What does the teacher suggest at the end?", "options": ["stop using phones", "use technology to learn English", "buy new phones"], "answer": "use technology to learn English" },
+        { "question": "What do the students decide?", "options": ["to study more", "to watch English videos every day", "to get new phones"], "answer": "to watch English videos every day" },
+        { "question": "What is 'Don't' short for?", "options": ["do not", "does not", "did not"], "answer": "do not" },
+        { "question": "What does 'Let's' mean?", "options": ["let him", "let us", "let them"], "answer": "let us" },
+        { "question": "Which is a correct imperative?", "options": ["You open the door.", "Open the door!", "Opening the door!"], "answer": "Open the door!" }
+      ],
+      "grammarPractice": [
+        "_____ your book. (Open)",
+        "_____ run in class! (Don't)",
+        "_____ study together! (Let's)",
+        "_____ sit down please. (Please)",
+        "_____ your phone off. (Turn)",
+        "_____ careful online. (Be)"
+      ],
+      "matchingExercise": [
+        { "left": "phone", "right": "утас" },
+        { "left": "post", "right": "нийтлэх" },
+        { "left": "download", "right": "татаж авах" },
+        { "left": "follow", "right": "дагах" },
+        { "left": "password", "right": "нууц үг" }
+      ],
+      "homework": [
+        "Writing: Write 5 rules for using a phone at school (use Don't and Please).",
+        "Vocabulary: Write 5 sentences using technology words from today.",
+        "Speaking: Tell someone 3 internet safety rules in English using imperatives.",
+        "Review: Celebrate! 🎉 You completed Week 3 of 'Speak English in 90 Days'!"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-Open · 2-Don't · 3-Let's · 4-Please · 5-Turn · 6-Be",
+        "Matching: 1-B · 2-A · 3-D · 4-C · 5-E",
+        "Listening: 1-b · 2-b · 3-c · 4-b · 5-c · 6-b · 7-b · 8-a · 9-b · 10-b"
+      ],
+      "completionSummary": [
+        "Learned 20 new technology words",
+        "Mastered imperatives: Do / Don't / Let's / Please",
+        "Read about internet safety rules",
+        "Practiced grammar with fill-in exercises",
+        "Practiced speaking with social media role-plays",
+        "Completed listening practice with 10 questions",
+        "🎉 Completed Week 3 of Speak English in 90 Days!"
+      ]
+    }
+  }
+}

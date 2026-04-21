@@ -1,0 +1,154 @@
+{
+  "day": 19,
+  "level": 1,
+  "titleEn": "Day 19: Animals & Nature",
+  "titleMn": "Өдөр 19: Амьтан ба байгаль",
+  "objectiveEn": "About one hour. Learn 20 animal/nature words, plural nouns (regular -s/-es and irregular), listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. Амьтан, байгалийн 20 шинэ үг, олон тооны нэрс (-s/-es ба дүрмийн бус), сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Today you learn 20 animal and nature words and how to form regular and irregular plural nouns in English.",
+  "contentMn": "Өнөөдөр амьтан, байгалийн 20 үг сурч, англи хэлний хэвийн ба дүрмийн бус олон тооны нэрсийг хэрхэн зөв үүсгэхийг сурна.",
+  "vocabulary": [
+    { "english": "dog", "pronunciation": "/dɒɡ/", "mongolian": "нохой", "example": "My dog is very friendly." },
+    { "english": "cat", "pronunciation": "/kæt/", "mongolian": "муур", "example": "She has three cats." },
+    { "english": "horse", "pronunciation": "/hɔːrs/", "mongolian": "морь", "example": "Mongolians love horses." },
+    { "english": "cow", "pronunciation": "/kaʊ/", "mongolian": "үнээ", "example": "The cow gives us milk." },
+    { "english": "sheep", "pronunciation": "/ʃiːp/", "mongolian": "хонь", "example": "Mongolia has many sheep." },
+    { "english": "bird", "pronunciation": "/bɜːrd/", "mongolian": "шувуу", "example": "I can see many birds today." },
+    { "english": "fish", "pronunciation": "/fɪʃ/", "mongolian": "загас", "example": "The fish are in the river." },
+    { "english": "tree", "pronunciation": "/triː/", "mongolian": "мод", "example": "There are many trees in the park." },
+    { "english": "flower", "pronunciation": "/ˈflaʊər/", "mongolian": "цэцэг", "example": "She likes beautiful flowers." },
+    { "english": "river", "pronunciation": "/ˈrɪvər/", "mongolian": "гол", "example": "The river is very long." },
+    { "english": "mountain", "pronunciation": "/ˈmaʊntɪn/", "mongolian": "уул", "example": "Mongolia has high mountains." },
+    { "english": "forest", "pronunciation": "/ˈfɒrɪst/", "mongolian": "ой мод", "example": "The forest is green in summer." },
+    { "english": "sky", "pronunciation": "/skaɪ/", "mongolian": "тэнгэр", "example": "The sky is blue today." },
+    { "english": "grass", "pronunciation": "/ɡrɑːs/", "mongolian": "өвс", "example": "The grass is very green." },
+    { "english": "leaf", "pronunciation": "/liːf/", "mongolian": "навч", "example": "The leaves are falling." },
+    { "english": "child / children", "pronunciation": "/tʃaɪld/ /ˈtʃɪldrən/", "mongolian": "хүүхэд / хүүхдүүд", "example": "The children are playing." },
+    { "english": "man / men", "pronunciation": "/mæn/ /mɛn/", "mongolian": "эрэгтэй / эрэгтэйчүүд", "example": "Two men are running." },
+    { "english": "woman / women", "pronunciation": "/ˈwʊmən/ /ˈwɪmɪn/", "mongolian": "эмэгтэй / эмэгтэйчүүд", "example": "The women are talking." },
+    { "english": "tooth / teeth", "pronunciation": "/tuːθ/ /tiːθ/", "mongolian": "шүд / шүднүүд", "example": "Brush your teeth twice a day!" },
+    { "english": "foot / feet", "pronunciation": "/fʊt/ /fiːt/", "mongolian": "хөл / хөлнүүд", "example": "My feet are tired today." }
+  ],
+  "quiz": [
+    { "question": "What is the plural of 'child'?", "options": ["childs", "children", "childrens", "childs'"], "answer": "children", "explanation": "Child → children (irregular plural)." },
+    { "question": "What is the plural of 'sheep'?", "options": ["sheeps", "sheepies", "sheep", "sheepes"], "answer": "sheep", "explanation": "Sheep stays the same in singular and plural." },
+    { "question": "What is the plural of 'man'?", "options": ["mans", "mens", "men", "manes"], "answer": "men", "explanation": "Man → men (irregular plural)." },
+    { "question": "Which group adds -es to form plural?", "options": ["dog, cat, tree", "bus, box, church", "man, woman, tooth", "city, baby, country"], "answer": "bus, box, church", "explanation": "Words ending in -s/-x/-ch/-sh add -es." },
+    { "question": "One city → many _____", "options": ["citys", "cityes", "cities", "cityies"], "answer": "cities", "explanation": "Consonant + y → change y to ies." },
+    { "question": "What is the plural of 'tooth'?", "options": ["tooths", "teeths", "teeth", "toothes"], "answer": "teeth", "explanation": "Tooth → teeth (irregular plural)." },
+    { "question": "What animals does Bat mention first?", "options": ["dogs and cats", "horses, sheep, cows, dogs", "birds and fish", "wolves and eagles"], "answer": "horses, sheep, cows, dogs", "explanation": "From the listening passage." },
+    { "question": "Are there many sheep in Mongolia?", "options": ["a few", "not many", "millions — more than people!", "only on farms"], "answer": "millions — more than people!", "explanation": "Sarnai says: 'There are millions of sheep! More than people!'" },
+    { "question": "Choose the correct sentence:", "options": ["The childrens are playing.", "Two sheeps are here.", "The children are playing.", "Three mouses are here."], "answer": "The children are playing.", "explanation": "Children is the correct irregular plural of child." },
+    { "question": "One bus → many _____", "options": ["buss", "buses", "busies", "bus"], "answer": "buses", "explanation": "Words ending in -s add -es to form the plural." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Plural nouns — regular (-s/-es) and irregular (child/children)",
+      "grammarExplanation": "Most English nouns form plurals by adding -S: dog→dogs. Nouns ending in -s, -x, -ch, -sh add -ES: bus→buses, box→boxes. Nouns ending in consonant+y change y→IES: city→cities. IRREGULAR plurals must be memorized: child→children, man→men, woman→women, tooth→teeth, foot→feet, sheep→sheep, fish→fish, mouse→mice. / Ихэнх англи нэрс -S нэмж олон тоо үүсгэдэг. -s, -x, -ch, -sh-оор төгссөн нэрс -ES нэмнэ. Гийгүүлэгч+y→IES. ДҮРМИЙН БУС олон тооны үгсийг цээжлэх ёстой.",
+      "grammarTable": [
+        { "subject": "+s", "verb": "most nouns", "positive": "dog → dogs", "negative": "cat → cats", "question": "tree → trees", "mongolian": "... + s" },
+        { "subject": "+es", "verb": "-s/-x/-ch/-sh", "positive": "bus → buses", "negative": "box → boxes", "question": "church → churches", "mongolian": "... + es" },
+        { "subject": "y → ies", "verb": "consonant + y", "positive": "city → cities", "negative": "baby → babies", "question": "country → countries", "mongolian": "y → ies" },
+        { "subject": "irregular", "verb": "must memorize", "positive": "child → children", "negative": "man → men", "question": "tooth → teeth", "mongolian": "өөр хэлбэр" },
+        { "subject": "no change", "verb": "same form", "positive": "sheep → sheep", "negative": "fish → fish", "question": "deer → deer", "mongolian": "өөрчлөгддөггүй" }
+      ],
+      "quickPractice": [
+        "One dog → two _____ (dog+s)",
+        "One bus → many _____ (bus+es)",
+        "One man → two _____ (irregular)",
+        "One woman → many _____ (irregular)",
+        "One city → many _____ (city→ies)",
+        "One child → many _____ (irregular)",
+        "One tooth → many _____ (irregular)",
+        "One sheep → many _____ (same!)"
+      ],
+      "answerKey": ["1-dogs", "2-buses", "3-men", "4-women", "5-cities", "6-children", "7-teeth", "8-sheep"],
+      "commonMistakes": [
+        "The childrens are playing. → The CHILDREN are playing.",
+        "Two sheeps are here. → Two SHEEP are here.",
+        "Three mouses. → Three MICE.",
+        "The womans are here. → The WOMEN are here."
+      ]
+    },
+    "page2": {
+      "readingPassage": "Mongolia has amazing nature. There are beautiful mountains in the north and huge grasslands in the south. Many horses, cows, and sheep live on the steppe. The rivers are full of fish. In the forests, many birds and wild animals live. Mongolian children love nature. They play outside with their families and dogs. Mongolia's nature is truly unique and beautiful!",
+      "keyPhrases": [
+        { "english": "There are many horses", "mongolian": "Тэнд олон морь байна", "note": "There are + plural noun" },
+        { "english": "The children are playing", "mongolian": "Хүүхдүүд тоглож байна", "note": "children = plural of child" },
+        { "english": "Two men are running", "mongolian": "Хоёр эрэгтэй гүйж байна", "note": "men = plural of man" },
+        { "english": "How many sheep are there?", "mongolian": "Хэдэн хонь байна вэ?", "note": "sheep = same singular & plural!" },
+        { "english": "The women are talking", "mongolian": "Эмэгтэйчүүд ярьж байна", "note": "women = plural of woman" },
+        { "english": "My feet are tired", "mongolian": "Миний хөл ядарсан", "note": "feet = plural of foot" }
+      ],
+      "speakingQuestions": [
+        "Do you have any pets? / Та гэрийн тэжээвэр амьтантай юу?",
+        "What animals do you see in Mongolia?",
+        "Do you like nature?",
+        "Have you ever seen a horse?",
+        "What is your favorite animal?",
+        "Are there many trees where you live?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "Do you have any pets at home?" },
+        { "speaker": "B", "text": "Yes! I have two dogs and one cat." },
+        { "speaker": "A", "text": "What are their names?" },
+        { "speaker": "B", "text": "The dogs are Tsagaan and Khar. The cat is Minii." },
+        { "speaker": "A", "text": "What animals do you see in Mongolia?" },
+        { "speaker": "B", "text": "We see horses, sheep, cows, and many birds." },
+        { "speaker": "A", "text": "Are there many horses in Mongolia?" },
+        { "speaker": "B", "text": "Yes! There are more horses than people in Mongolia!" }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Today we talk about animals and nature. Bat, what animals do you see in Mongolia? Bat: We see horses, sheep, cows, and many dogs. There are also wolves and eagles! Teacher: How many sheep are there in Mongolia? Sarnai: There are millions of sheep! More than people! Teacher: What about children? Do Mongolian children spend time outdoors? Bat: Yes! Mongolian children love nature. We play outside with dogs and ride horses. Teacher: Beautiful! Mongolia's nature sounds amazing.",
+      "listeningQuestions": [
+        { "question": "What animals does Bat mention first?", "options": ["dogs and cats", "horses, sheep, cows, dogs", "birds and fish"], "answer": "horses, sheep, cows, dogs" },
+        { "question": "What wild animals does Bat mention?", "options": ["tigers and bears", "wolves and eagles", "lions and elephants"], "answer": "wolves and eagles" },
+        { "question": "Are there many sheep in Mongolia?", "options": ["a few", "not many", "millions — more than people!"], "answer": "millions — more than people!" },
+        { "question": "Who says there are millions of sheep?", "options": ["Bat", "Teacher", "Sarnai"], "answer": "Sarnai" },
+        { "question": "Do Mongolian children like nature?", "options": ["not really", "yes, they love it", "not mentioned"], "answer": "yes, they love it" },
+        { "question": "What do children do outdoors?", "options": ["study", "play with dogs and ride horses", "swim"], "answer": "play with dogs and ride horses" },
+        { "question": "How does the teacher feel about Mongolia?", "options": ["bored", "it sounds amazing", "confused"], "answer": "it sounds amazing" },
+        { "question": "What is the plural of 'sheep'?", "options": ["sheeps", "sheepies", "sheep (same)"], "answer": "sheep (same)" },
+        { "question": "What is the plural of 'child'?", "options": ["childs", "children", "childrens"], "answer": "children" },
+        { "question": "Which group adds -es to make plural?", "options": ["dog, cat, tree", "bus, box, church", "man, woman, tooth"], "answer": "bus, box, church" }
+      ],
+      "grammarPractice": [
+        "One dog → two _____ (dogs)",
+        "One bus → many _____ (buses)",
+        "One man → two _____ (men)",
+        "One child → many _____ (children)",
+        "One tooth → many _____ (teeth)",
+        "One sheep → many _____ (sheep)"
+      ],
+      "matchingExercise": [
+        { "left": "dog", "right": "нохой" },
+        { "left": "horse", "right": "морь" },
+        { "left": "sheep", "right": "хонь" },
+        { "left": "bird", "right": "шувуу" },
+        { "left": "fish", "right": "загас" }
+      ],
+      "homework": [
+        "Writing: Write 5 sentences about animals in Mongolia using correct plural forms.",
+        "Vocabulary: Write 10 irregular plurals 3 times each — memorize them!",
+        "Speaking: Describe your favorite animal in 3-4 sentences.",
+        "Review: child→children · man→men · woman→women · tooth→teeth · sheep→sheep · fish→fish"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-dogs · 2-buses · 3-men · 4-children · 5-teeth · 6-sheep",
+        "Matching: 1-E · 2-C · 3-A · 4-B · 5-D",
+        "Listening: 1-b · 2-b · 3-c · 4-c · 5-b · 6-b · 7-b · 8-c · 9-b · 10-b"
+      ],
+      "completionSummary": [
+        "Learned 20 new animal & nature words",
+        "Mastered regular and irregular plural nouns",
+        "Read about Mongolia's beautiful nature",
+        "Practiced grammar with fill-in exercises",
+        "Practiced speaking about animals",
+        "Completed listening practice with 10 questions",
+        "Learned irregular plurals: child/children, man/men, sheep/sheep"
+      ]
+    }
+  }
+}

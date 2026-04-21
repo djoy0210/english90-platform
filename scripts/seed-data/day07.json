@@ -1,0 +1,153 @@
+{
+  "day": 7,
+  "level": 1,
+  "titleEn": "Day 7: Week 1 Review & Free Time",
+  "titleMn": "Өдөр 7: 7 хоногийн давталт & Чөлөөт цаг",
+  "objectiveEn": "About one hour. Learn 20 free-time words, can/can't grammar for ability and permission, listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. Чөлөөт цагийн 20 шинэ үг, can/can't дүрэм (чадвар ба зөвшөөрөл), сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Review Week 1 vocabulary and learn how to talk about hobbies and abilities using can / can't.",
+  "contentMn": "1-р долоо хоногийн үгсийг давтан, can / can't ашиглан хобби, чадварын тухай ярьж сурна.",
+  "vocabulary": [
+    { "english": "play", "pronunciation": "/pleɪ/", "mongolian": "тоглох", "example": "I play football on weekends." },
+    { "english": "swim", "pronunciation": "/swɪm/", "mongolian": "сэлэх", "example": "Can you swim?" },
+    { "english": "sing", "pronunciation": "/sɪŋ/", "mongolian": "дуулах", "example": "She can sing very well." },
+    { "english": "dance", "pronunciation": "/dɑːns/", "mongolian": "бүжиглэх", "example": "I love to dance." },
+    { "english": "draw", "pronunciation": "/drɔː/", "mongolian": "зурах", "example": "He draws every day." },
+    { "english": "cook", "pronunciation": "/kʊk/", "mongolian": "хоол хийх", "example": "My mother cooks every day." },
+    { "english": "read", "pronunciation": "/riːd/", "mongolian": "унших", "example": "I read books every night." },
+    { "english": "write", "pronunciation": "/raɪt/", "mongolian": "бичих", "example": "I write in English every day." },
+    { "english": "run", "pronunciation": "/rʌn/", "mongolian": "гүйх", "example": "I run in the morning." },
+    { "english": "ride", "pronunciation": "/raɪd/", "mongolian": "унах", "example": "Can you ride a bicycle?" },
+    { "english": "hobby", "pronunciation": "/ˈhɒbi/", "mongolian": "хобби", "example": "My hobby is reading." },
+    { "english": "weekend", "pronunciation": "/ˈwiːkɛnd/", "mongolian": "амралтын өдрүүд", "example": "I relax on weekends." },
+    { "english": "sport", "pronunciation": "/spɔːrt/", "mongolian": "спорт", "example": "I play sport every day." },
+    { "english": "music", "pronunciation": "/ˈmjuːzɪk/", "mongolian": "хөгжим", "example": "I listen to music." },
+    { "english": "movie", "pronunciation": "/ˈmuːvi/", "mongolian": "кино", "example": "I watch movies on weekends." },
+    { "english": "free time", "pronunciation": "/friː taɪm/", "mongolian": "чөлөөт цаг", "example": "What do you do in free time?" },
+    { "english": "tired", "pronunciation": "/taɪərd/", "mongolian": "ядарсан", "example": "I am tired after school." },
+    { "english": "relax", "pronunciation": "/rɪˈlæks/", "mongolian": "амрах", "example": "I relax on Sundays." },
+    { "english": "fun", "pronunciation": "/fʌn/", "mongolian": "хөгжилтэй", "example": "Learning English is fun!" },
+    { "english": "practice", "pronunciation": "/ˈpræktɪs/", "mongolian": "дадлага хийх", "example": "I practice English every day." }
+  ],
+  "quiz": [
+    { "question": "She _____ sing very well.", "options": ["can", "cans", "to can", "is can"], "answer": "can", "explanation": "Can is the same for all subjects — no -s for he/she." },
+    { "question": "Which sentence is correct?", "options": ["I can to swim.", "I can swim.", "I cans swim.", "I am can swim."], "answer": "I can swim.", "explanation": "After 'can' use the base verb without 'to'." },
+    { "question": "Make a question: ___ he sing?", "options": ["Cans", "Do can", "Can", "Is can"], "answer": "Can", "explanation": "For questions, put 'can' at the front." },
+    { "question": "What does 'can' express?", "options": ["only past time", "ability and permission", "future only", "possession"], "answer": "ability and permission", "explanation": "Can = ability (I can swim) and permission (Can I go?)." },
+    { "question": "Negative form of cannot:", "options": ["can not't", "can't", "cant", "can'nt"], "answer": "can't", "explanation": "can't = cannot (contraction)." },
+    { "question": "What CAN Bat play very well? (from listening)", "options": ["basketball", "football", "tennis", "chess"], "answer": "football", "explanation": "Bat says he can play football." },
+    { "question": "Can Bat sing?", "options": ["Yes, very well", "A little", "No, he can't sing at all", "Only on weekends"], "answer": "No, he can't sing at all", "explanation": "Bat says 'I can't sing at all!' in the listening." },
+    { "question": "What can Sarnai do?", "options": ["swim and cook", "draw and dance", "drive a car", "play piano"], "answer": "draw and dance", "explanation": "Sarnai can draw, dance, and speak a little English." },
+    { "question": "Which is a correct negative sentence?", "options": ["He can't swims.", "He can't swim.", "He no can swim.", "He don't can swim."], "answer": "He can't swim.", "explanation": "After can't use the base verb." },
+    { "question": "How do students feel about English?", "options": ["they hate it", "they love it", "it's ok", "they're confused"], "answer": "they love it", "explanation": "Students enthusiastically say 'Yes, we can!'" }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Can / Can't — Ability and Permission",
+      "grammarExplanation": "'Can' expresses ABILITY (what you are able to do) and PERMISSION (what you are allowed to do). CAN is the SAME for ALL subjects — it NEVER changes! No -s for he/she. After 'can' always use the BASE VERB — never add 'to'! Negative: cannot / can't. Question: put 'can' at the front. 'Can' нь чадвар (чадах зүйл) ба зөвшөөрөл (зөвшөөрөгдсөн зүйл)-ийг илэрхийлдэг. Can нь БҮХ субьекттай ИЖИЛ — хэзээ ч өөрчлөгддөггүй! He/She-д -s нэмдэггүй! Can-ы дараа ҮРГЭЛЖ ҮНДСЭН ҮЙЛҮГ хэрэглэ — 'to' нэмдэггүй!",
+      "grammarTable": [
+        { "subject": "I", "verb": "can", "positive": "I can swim.", "negative": "I can't fly.", "question": "Can I help you?", "mongolian": "Би чаддаг" },
+        { "subject": "You", "verb": "can", "positive": "You can sing.", "negative": "You can't run fast.", "question": "Can you dance?", "mongolian": "Та чаддаг" },
+        { "subject": "He/She", "verb": "can", "positive": "She can cook.", "negative": "He can't swim.", "question": "Can she drive?", "mongolian": "Тэр чаддаг" },
+        { "subject": "We/They", "verb": "can", "positive": "We can play.", "negative": "They can't come.", "question": "Can we go now?", "mongolian": "Бид/Тэд чаддаг" }
+      ],
+      "quickPractice": [
+        "1. I _____ speak English. (can)",
+        "2. She _____ dance very well. (can)",
+        "3. They _____ fly. (can't)",
+        "4. _____ he sing? (question)",
+        "5. _____ you swim? (question)",
+        "6. He _____ cook. (can't)",
+        "7. We _____ play football. (can)",
+        "8. I _____ ride a bicycle. (can)"
+      ],
+      "answerKey": ["1-can", "2-can", "3-can't", "4-Can", "5-Can", "6-can't", "7-can", "8-can"],
+      "commonMistakes": [
+        "She cans sing → She can sing",
+        "I can to swim → I can swim (no 'to'!)",
+        "Can he swims? → Can he swim?",
+        "I cannot to dance → I can't dance"
+      ]
+    },
+    "page2": {
+      "readingPassage": "Today is Sunday — Bat's favorite day! He can relax and do what he loves. In the morning, he runs in the park. He can play football very well. In the afternoon, he plays with friends. He can't stay home on sunny days — he loves being outside! In the evening, he reads an English book and practices his vocabulary. He says: 'I can speak more English every day!'",
+      "keyPhrases": [
+        { "english": "I can speak English", "mongolian": "Би англиар ярьж чаддаг", "note": "I + can + base verb" },
+        { "english": "She can sing very well", "mongolian": "Тэр маш сайн дуулж чаддаг", "note": "Subject + can + verb + adverb" },
+        { "english": "I can't swim yet", "mongolian": "Би одоохондоо сэлж чаддаггүй", "note": "can't + verb + yet" },
+        { "english": "Can you dance?", "mongolian": "Та бүжиглэж чаддаг уу?", "note": "Can + subject + verb + ?" },
+        { "english": "What can you do?", "mongolian": "Та юу хийж чаддаг вэ?", "note": "What + can + subject + verb?" },
+        { "english": "Can I go please?", "mongolian": "Явж болох уу? (зөвшөөрөл)", "note": "Can = asking permission" }
+      ],
+      "speakingQuestions": [
+        "1. What can you do well? / Та юуг сайн хийж чаддаг вэ?",
+        "2. Can you swim? / Та сэлж чаддаг уу?",
+        "3. What can't you do? / Та юуг хийж чаддаггүй вэ?",
+        "4. What do you do in your free time?",
+        "5. Can you cook? / Та хоол хийж чаддаг уу?",
+        "6. What sports can you play?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "What can you do in your free time?" },
+        { "speaker": "B", "text": "I can play guitar and draw. What about you?" },
+        { "speaker": "A", "text": "I can swim and run. Can you swim?" },
+        { "speaker": "B", "text": "No, I can't swim but I want to learn!" },
+        { "speaker": "A", "text": "I can teach you! Can you ride a bicycle?" },
+        { "speaker": "B", "text": "Yes! I can ride very well. Can you?" },
+        { "speaker": "A", "text": "Yes! Let's ride bicycles this weekend!" },
+        { "speaker": "B", "text": "Great idea! Can we go to the park?" }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: It's Friday! Let's review Week 1. What did we study? Bat: We studied greetings, numbers, family, colors, food, and places! Teacher: Excellent! And today — can. Bat, what can you do? Bat: I can play football, swim, and cook a little! Teacher: Can you sing? Bat: No, I can't sing at all! (laughs) Teacher: Sarnai, what about you? Sarnai: I can draw, dance, and speak a little English now! Students: Yes, we can! A little, but we CAN!",
+      "listeningQuestions": [
+        { "question": "What day is it?", "options": ["Monday", "Friday", "Sunday"], "answer": "Friday" },
+        { "question": "How many topics in Week 1?", "options": ["4", "5", "6"], "answer": "6" },
+        { "question": "Can Bat play football?", "options": ["yes", "no", "not mentioned"], "answer": "yes" },
+        { "question": "Can Bat swim?", "options": ["no", "yes", "a little"], "answer": "yes" },
+        { "question": "Can Bat sing?", "options": ["yes", "a little", "no"], "answer": "no" },
+        { "question": "What can Sarnai do?", "options": ["swim", "draw and dance", "cook"], "answer": "draw and dance" },
+        { "question": "Can Sarnai speak English?", "options": ["no", "a little", "very well"], "answer": "a little" },
+        { "question": "Can all students speak English?", "options": ["no", "yes, a little", "fluently"], "answer": "yes, a little" },
+        { "question": "What does the teacher say at end?", "options": ["Study more", "Excellent!", "See you Monday"], "answer": "Excellent!" },
+        { "question": "How do students feel about English?", "options": ["they hate it", "they love it", "it's ok"], "answer": "they love it" }
+      ],
+      "grammarPractice": [
+        "1. I _____ speak English. (can)",
+        "2. She _____ dance very well. (can)",
+        "3. They _____ fly. (can't)",
+        "4. _____ he sing? (question)",
+        "5. We _____ play football. (can)",
+        "6. He _____ cook at all. (can't)"
+      ],
+      "matchingExercise": [
+        { "left": "swim", "right": "сэлэх" },
+        { "left": "sing", "right": "дуулах" },
+        { "left": "dance", "right": "бүжиглэх" },
+        { "left": "draw", "right": "зурах" },
+        { "left": "run", "right": "гүйх" }
+      ],
+      "homework": [
+        "✍ Writing: Write 5 sentences 'I can...' and 5 sentences 'I can't...'",
+        "📖 Vocabulary: Review ALL 140 vocabulary words from Week 1 — test yourself!",
+        "🗣️ Speaking: Write a short paragraph about your free time (5-7 sentences).",
+        "🔁 Celebrate: 🎉 You completed Week 1 of 'Speak English in 90 Days'!"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-can · 2-can · 3-can't · 4-Can · 5-can · 6-can't",
+        "Matching: 1-D · 2-C · 3-B · 4-A · 5-E",
+        "Listening: 1-b · 2-c · 3-a · 4-b · 5-c · 6-b · 7-b · 8-b · 9-b · 10-b"
+      ],
+      "completionSummary": [
+        "Learned 20 free time words",
+        "Mastered Can / Can't grammar",
+        "Reviewed Week 1 vocabulary (140 words)",
+        "Completed grammar practice",
+        "Practiced speaking dialogue",
+        "Completed listening practice",
+        "🎉 Finished Week 1 of 'Speak English in 90 Days'!"
+      ]
+    }
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "day": 16,
+  "level": 1,
+  "titleEn": "Day 16: Feelings & Emotions",
+  "titleMn": "Өдөр 16: Мэдрэмж ба сэтгэл хөдлөл",
+  "objectiveEn": "About one hour. Learn 20 feeling words, adjectives + 'because', listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 мэдрэмжийн үг, тэмдэг нэр + 'because' дүрэм, сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Express feelings with 'I am / I feel + adjective' and explain reasons with 'because'.",
+  "contentMn": "Мэдрэмжээ 'I am / I feel + тэмдэг нэр' илэрхийлж, шалтгааныг 'because'-ээр тайлбарлана.",
+  "vocabulary": [
+    { "english": "happy", "pronunciation": "/ˈhæpi/", "mongolian": "баяртай", "example": "I am happy today!" },
+    { "english": "sad", "pronunciation": "/sæd/", "mongolian": "гунигтай", "example": "She is sad because she lost." },
+    { "english": "angry", "pronunciation": "/ˈæŋɡri/", "mongolian": "ууртай", "example": "Don't be angry with me!" },
+    { "english": "scared", "pronunciation": "/skɛrd/", "mongolian": "айсан", "example": "I am scared of big dogs." },
+    { "english": "excited", "pronunciation": "/ɪkˈsaɪtɪd/", "mongolian": "сэтгэл хөдөлж байна", "example": "She is excited about the trip." },
+    { "english": "bored", "pronunciation": "/bɔːrd/", "mongolian": "уйдсан", "example": "He is bored at home today." },
+    { "english": "tired", "pronunciation": "/taɪərd/", "mongolian": "ядарсан", "example": "I am so tired after school." },
+    { "english": "stressed", "pronunciation": "/strɛst/", "mongolian": "стресстэй", "example": "She is stressed about the exam." },
+    { "english": "surprised", "pronunciation": "/səˈpraɪzd/", "mongolian": "гайхсан", "example": "He is surprised by the gift." },
+    { "english": "confused", "pronunciation": "/kənˈfjuːzd/", "mongolian": "эргэлзсэн", "example": "I am confused by this question." },
+    { "english": "proud", "pronunciation": "/praʊd/", "mongolian": "бахархаж байна", "example": "She is proud of her good result." },
+    { "english": "worried", "pronunciation": "/ˈwʌrid/", "mongolian": "санаа зовж байна", "example": "I am worried about my exam." },
+    { "english": "lonely", "pronunciation": "/ˈloʊnli/", "mongolian": "ганцаардаж байна", "example": "He feels lonely without friends." },
+    { "english": "nervous", "pronunciation": "/ˈnɜːrvəs/", "mongolian": "сандарч байна", "example": "I am nervous before the exam." },
+    { "english": "calm", "pronunciation": "/kɑːm/", "mongolian": "тайван", "example": "She is very calm and relaxed." },
+    { "english": "fine", "pronunciation": "/faɪn/", "mongolian": "сайн / зүгээр", "example": "I am fine, thank you." },
+    { "english": "great", "pronunciation": "/ɡreɪt/", "mongolian": "гайхалтай сайн", "example": "I feel great today!" },
+    { "english": "terrible", "pronunciation": "/ˈtɛrɪbəl/", "mongolian": "маш муу", "example": "I feel terrible today." },
+    { "english": "feel", "pronunciation": "/fiːl/", "mongolian": "мэдрэх", "example": "How do you feel today?" },
+    { "english": "because", "pronunciation": "/bɪˈkɒz/", "mongolian": "учир нь / -аас болж", "example": "I am happy because it is Friday." }
+  ],
+  "quiz": [
+    { "question": "I am happy ___ today is Friday.", "options": ["but", "because", "and", "so"], "answer": "because", "explanation": "'Because' introduces the reason." },
+    { "question": "Which is correct?", "options": ["I am feel happy", "I am feeling happy", "I feeling happy", "I am happy feel"], "answer": "I am feeling happy", "explanation": "Present Continuous: am + feeling." },
+    { "question": "Why is Bat nervous?", "options": ["he is sick", "he has an exam", "he is tired", "he is hungry"], "answer": "he has an exam", "explanation": "Bat said he has an exam today." },
+    { "question": "How does Sarnai feel?", "options": ["nervous", "calm", "sad", "excited"], "answer": "calm", "explanation": "Sarnai feels calm because she studied a lot." },
+    { "question": "How does Bat feel after the exam?", "options": ["still nervous", "happy and relieved", "tired", "angry"], "answer": "happy and relieved", "explanation": "Bat said he feels so happy and relieved." },
+    { "question": "Why is Sarnai proud?", "options": ["she got the best score", "she answered all questions", "she helped others", "she finished first"], "answer": "she answered all questions", "explanation": "Sarnai answered all the questions." },
+    { "question": "How does the teacher feel?", "options": ["disappointed", "angry", "happy and proud", "tired"], "answer": "happy and proud", "explanation": "The teacher said she is happy and proud of both." },
+    { "question": "Opposite of 'happy'?", "options": ["bored", "tired", "sad", "scared"], "answer": "sad", "explanation": "Happy ↔ sad are opposite feelings." },
+    { "question": "Opposite of 'excited'?", "options": ["bored", "tired", "happy", "calm"], "answer": "bored", "explanation": "Excited ↔ bored are opposite feelings." },
+    { "question": "How do you ask about someone's feeling?", "options": ["What you feel?", "How do you feel?", "How feel you?", "Are you feel?"], "answer": "How do you feel?", "explanation": "Correct question form: 'How do you feel?'" }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "How do you feel? — Adjectives for feelings + because",
+      "grammarExplanation": "To talk about feelings, use 'I am + adjective' or 'I feel + adjective'. Ask: 'How do you feel?'. Explain reasons with 'because': 'I am happy because today is Friday.' You can also use Present Continuous: 'I am feeling better now.' Opposites: happy↔sad, excited↔bored, calm↔nervous. Мэдрэмжийн тухай: 'I am + тэмдэг нэр' эсвэл 'I feel + тэмдэг нэр'. Шалтгааныг 'because'-ээр илэрхийлнэ.",
+      "grammarTable": [
+        { "subject": "I am", "verb": "feeling", "positive": "I am happy.", "negative": "I am not sad.", "question": "Are you happy?", "mongolian": "Би ... байна" },
+        { "subject": "She is", "verb": "feeling", "positive": "She is excited.", "negative": "She is not bored.", "question": "Is she excited?", "mongolian": "Тэр ... байна" },
+        { "subject": "I feel", "verb": "feeling", "positive": "I feel great.", "negative": "I don't feel well.", "question": "How do you feel?", "mongolian": "Би ... мэдэрч байна" },
+        { "subject": "because", "verb": "reason", "positive": "I'm happy because...", "negative": "—", "question": "Why are you happy?", "mongolian": "...учраас / -аас болж" }
+      ],
+      "quickPractice": [
+        "1. I am _____ today! (happy)",
+        "2. He is _____ because it is Monday. (sad)",
+        "3. She is _____ about the trip! (excited)",
+        "4. He is _____ at home with nothing to do. (bored)",
+        "5. She is _____ about the exam. (nervous)",
+        "6. They are _____ — they need rest. (tired)",
+        "7. I am _____ by this question. (confused)",
+        "8. Why _____ you angry? (are)"
+      ],
+      "answerKey": ["1-happy", "2-sad", "3-excited", "4-bored", "5-nervous", "6-tired", "7-confused", "8-are"],
+      "commonMistakes": [
+        "I am feel happy. → I am happy. / I feel happy.",
+        "She is tiredly. → She is tired.",
+        "I feel boredly. → I feel bored.",
+        "Why you are sad? → Why ARE you sad?"
+      ]
+    },
+    "page2": {
+      "readingPassage": "Today is exam day. Bat is very nervous because the exam is very important. His friend Sarnai is calm because she studied hard. After the exam, Bat is happy and excited because he thinks he did well. Sarnai is proud of herself. Their teacher is happy because all the students tried their best. What a great day!",
+      "keyPhrases": [
+        { "english": "How do you feel?", "mongolian": "Та яаж мэдэрч байна вэ?", "note": "How + do + you + feel?" },
+        { "english": "I feel nervous / happy", "mongolian": "Би сандарч / баяртай байна", "note": "I feel + adjective" },
+        { "english": "I am tired because...", "mongolian": "Би ... -аас болж ядарсан", "note": "I am + adj + because + reason" },
+        { "english": "Why are you sad?", "mongolian": "Та яагаад гунигтай байна вэ?", "note": "Why + are + you + adjective?" },
+        { "english": "Because it is Friday!", "mongolian": "Учир нь баасан гараг!", "note": "because + reason clause" },
+        { "english": "I am feeling better now", "mongolian": "Би одоо илүү дээр мэдэрч байна", "note": "feeling better = improving" }
+      ],
+      "speakingQuestions": [
+        "1. How do you feel today? / Та өнөөдөр яаж мэдэрч байна вэ?",
+        "2. What makes you happy? / Та юунаас баяртай болдог вэ?",
+        "3. Are you ever nervous? When?",
+        "4. What makes you bored?",
+        "5. How do you feel before an exam?",
+        "6. How do you feel when you speak English?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "How do you feel today?" },
+        { "speaker": "B", "text": "I feel a little nervous actually." },
+        { "speaker": "A", "text": "Why are you nervous?" },
+        { "speaker": "B", "text": "Because I have an English test today!" },
+        { "speaker": "A", "text": "Don't worry! You are very good at English." },
+        { "speaker": "B", "text": "Thank you. That makes me feel better." },
+        { "speaker": "A", "text": "How do you feel after the test?" },
+        { "speaker": "B", "text": "I feel happy and relieved! It was not so bad." }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Good morning! How does everyone feel today? Bat: I feel nervous, teacher. We have an exam today! Teacher: That's natural! Sarnai, how do you feel? Sarnai: I feel calm because I studied a lot last night. Teacher: Excellent! After the exam — Bat, how do you feel now? Bat: I feel so happy and relieved! I think I did well! Sarnai: I feel proud of myself! I answered all the questions. Teacher: I am very happy and proud of both of you! Well done!",
+      "listeningQuestions": [
+        { "question": "How does Bat feel at the start?", "options": ["happy", "bored", "nervous"], "answer": "nervous" },
+        { "question": "Why is Bat nervous?", "options": ["he is sick", "he has an exam", "he is tired"], "answer": "he has an exam" },
+        { "question": "How does Sarnai feel?", "options": ["nervous", "calm", "sad"], "answer": "calm" },
+        { "question": "Why is Sarnai calm?", "options": ["she doesn't care", "she studied a lot", "she is always calm"], "answer": "she studied a lot" },
+        { "question": "How does Bat feel after the exam?", "options": ["still nervous", "happy and relieved", "tired"], "answer": "happy and relieved" },
+        { "question": "How does Sarnai feel after the exam?", "options": ["bored", "confused", "proud"], "answer": "proud" },
+        { "question": "Why is Sarnai proud?", "options": ["she got the best score", "she answered all questions", "she helped others"], "answer": "she answered all questions" },
+        { "question": "How does the teacher feel?", "options": ["disappointed", "angry", "happy and proud"], "answer": "happy and proud" },
+        { "question": "What word connects feeling and reason?", "options": ["when", "because", "but"], "answer": "because" },
+        { "question": "Which is correct?", "options": ["I am feel happy", "I am feeling happy", "I feeling happy"], "answer": "I am feeling happy" }
+      ],
+      "grammarPractice": [
+        "1. I am _____ today! (happy)",
+        "2. He is _____ because it is Monday. (sad)",
+        "3. She is _____ about the trip! (excited)",
+        "4. He is _____ at home. (bored)",
+        "5. She is _____ about the exam. (nervous)",
+        "6. They are _____ after work. (tired)"
+      ],
+      "matchingExercise": [
+        { "left": "happy", "right": "баяртай" },
+        { "left": "sad", "right": "гунигтай" },
+        { "left": "nervous", "right": "сандарч байна" },
+        { "left": "tired", "right": "ядарсан" },
+        { "left": "excited", "right": "сэтгэл хөдөлж байна" }
+      ],
+      "homework": [
+        "Writing: Write 5 sentences about how you feel today and WHY (use 'because').",
+        "Vocabulary: Draw 5 emoji faces and write the English feeling word under each.",
+        "Speaking: Ask 3 people 'How do you feel today?' — write their answers.",
+        "Review: Learn the opposite pairs: happy↔sad · excited↔bored · calm↔nervous."
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-happy · 2-sad · 3-excited · 4-bored · 5-nervous · 6-tired",
+        "Matching: 1-C · 2-D · 3-B · 4-A · 5-E",
+        "Listening: 1-c · 2-b · 3-b · 4-b · 5-b · 6-c · 7-b · 8-c · 9-b · 10-b"
+      ],
+      "completionSummary": [
+        "Learned 20 feeling words",
+        "Mastered 'How do you feel?' grammar",
+        "Used 'because' to explain reasons",
+        "Read about exam day feelings",
+        "Practiced expressing emotions",
+        "Listened to a classroom feelings dialog",
+        "Learned opposite-feeling pairs"
+      ]
+    }
+  }
+}

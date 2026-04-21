@@ -1,0 +1,155 @@
+{
+  "day": 26,
+  "level": 1,
+  "titleEn": "Day 26: Future Plans & Dreams",
+  "titleMn": "Өдөр 26: Ирээдүйн төлөвлөгөө ба мөрөөдөл",
+  "objectiveEn": "About one hour. Learn 20 future words, 'going to' grammar for plans and intentions, reading, speaking, listening, and homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 ирээдүйн үг, going to дүрэм, унших, ярих, сонсох, гэрийн даалгавар.",
+  "contentEn": "Learn how to use 'going to' to talk about future plans, intentions and dreams.",
+  "contentMn": "Going to ашиглан ирээдүйн төлөвлөгөө, мөрөөдлөө ярьж сурна.",
+  "vocabulary": [
+    { "english": "plan", "pronunciation": "/plæn/", "mongolian": "төлөвлөгөө / төлөвлөх", "example": "I have a plan for next week." },
+    { "english": "dream", "pronunciation": "/driːm/", "mongolian": "мөрөөдөл", "example": "My dream is to travel the world." },
+    { "english": "hope", "pronunciation": "/hoʊp/", "mongolian": "найдах", "example": "I hope to visit Europe." },
+    { "english": "want", "pronunciation": "/wɒnt/", "mongolian": "хүсэх", "example": "I want to be a doctor." },
+    { "english": "travel", "pronunciation": "/ˈtræv(ə)l/", "mongolian": "аялах", "example": "I am going to travel next summer." },
+    { "english": "visit", "pronunciation": "/ˈvɪzɪt/", "mongolian": "зочлох", "example": "She is going to visit Japan." },
+    { "english": "study", "pronunciation": "/ˈstʌdi/", "mongolian": "суралцах", "example": "I am going to study hard." },
+    { "english": "next week", "pronunciation": "/nɛkst wiːk/", "mongolian": "ирэх долоо хоногт", "example": "I am going to rest next week." },
+    { "english": "next month", "pronunciation": "/nɛkst mʌnθ/", "mongolian": "ирэх сард", "example": "She starts next month." },
+    { "english": "next year", "pronunciation": "/nɛkst jɪər/", "mongolian": "ирэх жил", "example": "He graduates next year." },
+    { "english": "soon", "pronunciation": "/suːn/", "mongolian": "удахгүй", "example": "I am going to call you soon." },
+    { "english": "later", "pronunciation": "/ˈleɪtər/", "mongolian": "дараа", "example": "I am going to do it later." },
+    { "english": "tomorrow", "pronunciation": "/təˈmɒroʊ/", "mongolian": "маргааш", "example": "I am going to study tomorrow." },
+    { "english": "university", "pronunciation": "/ˌjuːnɪˈvɜːrsɪti/", "mongolian": "их дээд сургууль", "example": "I want to go to university." },
+    { "english": "career", "pronunciation": "/kəˈrɪər/", "mongolian": "карьер", "example": "What career do you want?" },
+    { "english": "famous", "pronunciation": "/ˈfeɪməs/", "mongolian": "алдартай", "example": "I want to be famous one day." },
+    { "english": "successful", "pronunciation": "/səkˈsɛsfəl/", "mongolian": "амжилттай", "example": "I want to be successful." },
+    { "english": "earn", "pronunciation": "/ɜːrn/", "mongolian": "олж авах (мөнгө)", "example": "I want to earn a good salary." },
+    { "english": "move", "pronunciation": "/muːv/", "mongolian": "нүүх / хөдлөх", "example": "She is going to move to the city." },
+    { "english": "change", "pronunciation": "/tʃeɪndʒ/", "mongolian": "өөрчлөх", "example": "I am going to change my habits." }
+  ],
+  "quiz": [
+    { "question": "I _____ going to study tomorrow.", "options": ["am", "is", "are", "be"], "answer": "am", "explanation": "Use am with I." },
+    { "question": "She _____ going to visit Japan.", "options": ["am", "is", "are", "be"], "answer": "is", "explanation": "Use is with she/he/it." },
+    { "question": "_____ she going to travel?", "options": ["Are", "Am", "Is", "Do"], "answer": "Is", "explanation": "Question with she uses Is." },
+    { "question": "Which sentence is correct?", "options": ["I going to study.", "I am go to study.", "I am going to study.", "I am going studies."], "answer": "I am going to study.", "explanation": "am/is/are + going to + base verb." },
+    { "question": "'Going to' is used for what?", "options": ["past habits", "decided future plans", "present actions", "wishes"], "answer": "decided future plans", "explanation": "Going to expresses planned future actions." },
+    { "question": "What is Bat going to do this summer?", "options": ["travel to Korea", "study English and visit uncle", "stay home", "work"], "answer": "study English and visit uncle", "explanation": "Bat is going to study English and visit his uncle." },
+    { "question": "Which cities are they going to visit?", "options": ["Tokyo and Osaka", "Seoul and Busan", "Beijing and Shanghai", "Tokyo and Seoul"], "answer": "Seoul and Busan", "explanation": "They are going to visit Seoul and Busan." },
+    { "question": "What food are they going to eat?", "options": ["Japanese food", "Chinese food", "Korean food", "Mongolian food"], "answer": "Korean food", "explanation": "They are going to eat Korean food." },
+    { "question": "We _____ going to be late.", "options": ["isn't", "aren't", "wasn't", "doesn't"], "answer": "aren't", "explanation": "Negative with we uses aren't." },
+    { "question": "When are Bat and Sarnai going to South Korea?", "options": ["this summer", "next year", "next month", "next week"], "answer": "next year", "explanation": "They are going next year." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Going to — plans and intentions for the future",
+      "grammarExplanation": "'Going to' is used to talk about PLANS and INTENTIONS — things you have already decided to do in the future. Form: am/is/are + going to + BASE VERB. 'I am going to study tomorrow.' For negatives: am/is/are + NOT + going to + BASE VERB. For questions: am/is/are + subject + going to + BASE VERB? 'Going to' нь ирээдүйд хийхээр ШИЙДСЭН ЗҮЙЛИЙН ТӨЛӨВЛӨГӨӨ, санаануудын тухай ярихад хэрэглэгддэг. Хэлбэр: am/is/are + going to + ҮНДСЭН ҮЙЛҮГ. Үгүйсгэл: am/is/are + NOT + going to. Асуулт: am/is/are + субьект + going to + үндсэн үйлүг?",
+      "grammarTable": [
+        { "subject": "I", "verb": "am going to study", "positive": "I am going to study.", "negative": "I am not going to.", "question": "Am I going to?", "mongolian": "Би ... хийнэ гэж байна" },
+        { "subject": "She", "verb": "is going to travel", "positive": "She is going to travel.", "negative": "She isn't going to.", "question": "Is she going to travel?", "mongolian": "Тэр ... хийнэ гэж байна" },
+        { "subject": "He", "verb": "is going to work", "positive": "He is going to work.", "negative": "He isn't going to.", "question": "Is he going to work?", "mongolian": "Тэр ... хийнэ гэж байна" },
+        { "subject": "We", "verb": "are going to study", "positive": "We are going to study.", "negative": "We aren't going to.", "question": "Are we going to?", "mongolian": "Бид ... хийнэ гэж байна" },
+        { "subject": "They", "verb": "are going to come", "positive": "They are going to come.", "negative": "They aren't going to.", "question": "Are they going to?", "mongolian": "Тэд ... хийнэ гэж байна" },
+        { "subject": "You", "verb": "are going to learn", "positive": "You are going to learn.", "negative": "You aren't going to.", "question": "Are you going to learn?", "mongolian": "Та ... хийнэ гэж байна" }
+      ],
+      "quickPractice": [
+        "1. I _____ going to study tomorrow. (am)",
+        "2. She _____ going to visit Japan. (is)",
+        "3. They _____ going to come. (are)",
+        "4. He _____ going to work tonight. (isn't)",
+        "5. _____ she going to travel? (Is)",
+        "6. We _____ going to be late. (aren't)",
+        "7. What _____ you going to do? (are)",
+        "8. I am going to _____ hard. (study)"
+      ],
+      "answerKey": ["1-am", "2-is", "3-are", "4-isn't", "5-Is", "6-aren't", "7-are", "8-study"],
+      "commonMistakes": [
+        "I going to study → I AM going to study",
+        "She is going to studies → She is going to STUDY",
+        "I am go to travel → I am GOING TO travel",
+        "Are you going to traveled? → Are you going to TRAVEL?"
+      ]
+    },
+    "page2": {
+      "readingPassage": "Bat has big plans for his future. Next year, he is going to graduate from school. After that, he is going to study computer science at university. His dream is to be a programmer. He is going to work for a big tech company. Sarnai is going to study art. She wants to be a famous artist. This summer, they both are going to travel to South Korea together. They are so excited about their future!",
+      "keyPhrases": [
+        { "english": "I am going to study", "mongolian": "Би суралцах гэж байна", "note": "I am + going to + base verb" },
+        { "english": "She is going to travel", "mongolian": "Тэр аялах гэж байна", "note": "She is + going to + base verb" },
+        { "english": "Are you going to come?", "mongolian": "Та ирэх гэж байна уу?", "note": "Are + you + going to + verb?" },
+        { "english": "I am not going to be late", "mongolian": "Би хоцрохгүй", "note": "am not + going to + base verb" },
+        { "english": "What are you going to do?", "mongolian": "Та юу хийх гэж байна вэ?", "note": "What + are + you + going to + do?" },
+        { "english": "Next year I am going to...", "mongolian": "Ирэх жил би ... хийнэ", "note": "Future time + going to" }
+      ],
+      "speakingQuestions": [
+        "What are you going to do this weekend? / Та энэ долоо хоногийн амралтаар юу хийх гэж байна?",
+        "What are you going to study next year?",
+        "Are you going to travel this summer?",
+        "What job are you going to have in the future?",
+        "What are you going to eat for dinner tonight?",
+        "Are you going to practice English today?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "What are you going to do this weekend?" },
+        { "speaker": "B", "text": "I am going to visit my grandparents." },
+        { "speaker": "A", "text": "Are you going to stay there long?" },
+        { "speaker": "B", "text": "Yes, I am going to stay for two days." },
+        { "speaker": "A", "text": "That sounds wonderful! What about next year?" },
+        { "speaker": "B", "text": "Next year I am going to start university." },
+        { "speaker": "A", "text": "What are you going to study?" },
+        { "speaker": "B", "text": "I am going to study English and business." }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Today we talk about future plans. What are you going to do this summer? Bat? Bat: I am going to study English every day and visit my uncle in the countryside. Teacher: Great! Are you going to travel anywhere? Bat: Yes! Sarnai and I are going to go to South Korea next year! Sarnai: Yes! We are going to visit Seoul and Busan. I am so excited! Teacher: Wonderful! What are you going to do there? Sarnai: We are going to see K-pop concerts, eat Korean food, and visit museums. Teacher: That sounds amazing! English will really help you there!",
+      "listeningQuestions": [
+        { "question": "What is Bat going to do this summer?", "options": ["travel to Korea", "study English and visit uncle", "stay home"], "answer": "study English and visit uncle" },
+        { "question": "Where is Bat's uncle?", "options": ["in the city", "in Korea", "in the countryside"], "answer": "in the countryside" },
+        { "question": "When are Bat and Sarnai going to South Korea?", "options": ["this summer", "next year", "next month"], "answer": "next year" },
+        { "question": "Which cities are they going to visit?", "options": ["Tokyo and Osaka", "Seoul and Busan", "Beijing and Shanghai"], "answer": "Seoul and Busan" },
+        { "question": "What are they going to see?", "options": ["football games", "K-pop concerts", "art exhibitions"], "answer": "K-pop concerts" },
+        { "question": "What food are they going to eat?", "options": ["Japanese food", "Chinese food", "Korean food"], "answer": "Korean food" },
+        { "question": "What else are they going to visit?", "options": ["parks", "museums", "schools"], "answer": "museums" },
+        { "question": "What does the teacher say English will help with?", "options": ["meeting new friends", "their future job", "traveling there"], "answer": "traveling there" },
+        { "question": "Which is correct?", "options": ["I going to study.", "I am go to study.", "I am going to study."], "answer": "I am going to study." },
+        { "question": "'Going to' is used for what?", "options": ["past habits", "decided future plans", "present actions"], "answer": "decided future plans" }
+      ],
+      "grammarPractice": [
+        "1. I _____ going to study tomorrow. (am)",
+        "2. She _____ going to visit Japan. (is)",
+        "3. They _____ going to come. (are)",
+        "4. He _____ going to work tonight. (isn't)",
+        "5. _____ she going to travel? (Is)",
+        "6. We _____ going to be late! (aren't)"
+      ],
+      "matchingExercise": [
+        { "left": "tomorrow", "right": "маргааш" },
+        { "left": "next week", "right": "ирэх долоо хоногт" },
+        { "left": "next year", "right": "ирэх жил" },
+        { "left": "soon", "right": "удахгүй" },
+        { "left": "next month", "right": "ирэх сард" }
+      ],
+      "homework": [
+        "Writing: Write 5 sentences about YOUR plans using 'I am going to...'",
+        "Vocabulary: Write your dream job and 3 things you are going to do to achieve it.",
+        "Speaking: Tell someone: 'I am going to... this weekend / next year.'",
+        "Review: am/is/are + going to + BASE verb · 'gonna' is only spoken — never write it!"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-am · 2-is · 3-are · 4-isn't · 5-Is · 6-aren't",
+        "Matching: 1-C · 2-E · 3-A · 4-B · 5-D",
+        "Listening: 1-b · 2-c · 3-b · 4-b · 5-b · 6-c · 7-b · 8-c · 9-c · 10-b"
+      ],
+      "completionSummary": [
+        "Learned 20 future words",
+        "Mastered 'going to' for future plans",
+        "Read about future dreams",
+        "Practiced grammar exercises",
+        "Practiced speaking",
+        "Practiced listening",
+        "Learned to express future plans"
+      ]
+    }
+  }
+}

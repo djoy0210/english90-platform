@@ -1,0 +1,155 @@
+{
+  "day": 24,
+  "level": 1,
+  "titleEn": "Day 24: Memorable Events",
+  "titleMn": "Өдөр 24: Тод ойд үлдсэн үйл явдлууд",
+  "objectiveEn": "About one hour. Learn 20 irregular past verbs, Past Simple irregular forms, reading, speaking, listening, and homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 дүрмийн бус өнгөрсөн цагийн үйл үг, дүрэм, унших, ярих, сонсох, гэрийн даалгавар.",
+  "contentEn": "Learn common irregular past tense verbs (go/went, eat/ate, see/saw) and talk about memorable events.",
+  "contentMn": "Дүрмийн бус өнгөрсөн цагийн үйл үгсийг (go/went, eat/ate, see/saw) сурч, тод ойд үлдсэн үйл явдлуудаа ярь.",
+  "vocabulary": [
+    { "english": "went", "pronunciation": "/wɛnt/", "mongolian": "явсан (go→went)", "example": "I went to school yesterday." },
+    { "english": "ate", "pronunciation": "/eɪt/", "mongolian": "идсэн (eat→ate)", "example": "She ate pizza last night." },
+    { "english": "saw", "pronunciation": "/sɔː/", "mongolian": "харсан (see→saw)", "example": "I saw a great movie." },
+    { "english": "did", "pronunciation": "/dɪd/", "mongolian": "хийсэн (do→did)", "example": "What did you do yesterday?" },
+    { "english": "had", "pronunciation": "/hæd/", "mongolian": "байсан / авсан (have→had)", "example": "I had a great time." },
+    { "english": "gave", "pronunciation": "/ɡeɪv/", "mongolian": "өгсөн (give→gave)", "example": "She gave me a gift." },
+    { "english": "took", "pronunciation": "/tʊk/", "mongolian": "авсан (take→took)", "example": "I took a photo there." },
+    { "english": "came", "pronunciation": "/keɪm/", "mongolian": "ирсэн (come→came)", "example": "She came to my party." },
+    { "english": "got", "pronunciation": "/ɡɒt/", "mongolian": "авсан (get→got)", "example": "I got a new phone!" },
+    { "english": "made", "pronunciation": "/meɪd/", "mongolian": "хийсэн (make→made)", "example": "My mother made soup." },
+    { "english": "said", "pronunciation": "/sɛd/", "mongolian": "хэлсэн (say→said)", "example": "He said goodbye." },
+    { "english": "told", "pronunciation": "/toʊld/", "mongolian": "хэлсэн (tell→told)", "example": "She told me a story." },
+    { "english": "found", "pronunciation": "/faʊnd/", "mongolian": "олсон (find→found)", "example": "I found my keys!" },
+    { "english": "left", "pronunciation": "/lɛft/", "mongolian": "явсан (leave→left)", "example": "She left at 8 o'clock." },
+    { "english": "met", "pronunciation": "/mɛt/", "mongolian": "уулзсан (meet→met)", "example": "I met my friend yesterday." },
+    { "english": "read", "pronunciation": "/rɛd/", "mongolian": "уншсан (read→read*)", "example": "She read a book last night." },
+    { "english": "ran", "pronunciation": "/ræn/", "mongolian": "гүйсэн (run→ran)", "example": "He ran in the park." },
+    { "english": "wrote", "pronunciation": "/roʊt/", "mongolian": "бичсэн (write→wrote)", "example": "I wrote in my diary." },
+    { "english": "spoke", "pronunciation": "/spoʊk/", "mongolian": "ярьсан (speak→spoke)", "example": "She spoke to the teacher." },
+    { "english": "won", "pronunciation": "/wʌn/", "mongolian": "хожсон (win→won)", "example": "Our team won the match!" }
+  ],
+  "quiz": [
+    { "question": "Which is the correct past form of 'go'?", "options": ["goed", "goes", "went", "going"], "answer": "went", "explanation": "go is irregular: go → went." },
+    { "question": "She _____ pizza last night.", "options": ["eated", "ate", "eat", "eaten"], "answer": "ate", "explanation": "eat → ate (irregular)." },
+    { "question": "After 'didn't', which form do we use?", "options": ["past irregular", "-ing form", "base verb", "to + verb"], "answer": "base verb", "explanation": "Always base verb after didn't." },
+    { "question": "He _____ a photo.", "options": ["taked", "took", "take", "taking"], "answer": "took", "explanation": "take → took." },
+    { "question": "Where did Bat go last summer?", "options": ["a festival", "a concert", "school", "a museum"], "answer": "a concert", "explanation": "Bat went to a big concert." },
+    { "question": "What did Sarnai win?", "options": ["a sports competition", "a painting competition", "a music contest", "a quiz"], "answer": "a painting competition", "explanation": "Sarnai won a painting competition." },
+    { "question": "What prize did Sarnai get?", "options": ["a silver medal", "money", "a gold medal", "a trophy"], "answer": "a gold medal", "explanation": "She got a gold medal." },
+    { "question": "Which sentence is correct?", "options": ["She goed home.", "I eated lunch.", "Did you saw it?", "She didn't go."], "answer": "She didn't go.", "explanation": "After didn't use base verb." },
+    { "question": "We _____ a great movie.", "options": ["seen", "saw", "see", "sawed"], "answer": "saw", "explanation": "see → saw." },
+    { "question": "They _____ the match!", "options": ["winned", "wined", "won", "win"], "answer": "won", "explanation": "win → won." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Past Simple — irregular verbs (go/went, eat/ate, see/saw)",
+      "grammarExplanation": "Many common English verbs have IRREGULAR past tense forms — they do NOT follow the -ed rule and must be memorized! Common patterns: go→went, eat→ate, see→saw, have→had, take→took, give→gave, come→came. KEY RULE for negatives and questions: ALWAYS use DID + BASE VERB, never the irregular past form. 'She didn't GO.' ✅ NOT 'She didn't went.' ❌ Олон нийтлэг үйл үгс -ed дүрмийг дагадаггүй — дүрмийн бус өнгөрсөн цагийн хэлбэртэй. Цээжлэх ёстой! Нийтлэг хэлбэрүүд: go→went, eat→ate, see→saw, have→had. ГОЛ ДҮРЭМ: Үгүйсгэл, асуултад ҮРГЭЛЖ DID + ҮНДСЭН ҮЙЛҮГ.",
+      "grammarTable": [
+        { "subject": "I", "verb": "go → went", "positive": "I went to school.", "negative": "I didn't go.", "question": "Did you go?", "mongolian": "явсан" },
+        { "subject": "She", "verb": "eat → ate", "positive": "She ate pizza.", "negative": "She didn't eat pizza.", "question": "Did she eat?", "mongolian": "идсэн" },
+        { "subject": "I", "verb": "see → saw", "positive": "I saw a movie.", "negative": "I didn't see it.", "question": "Did you see it?", "mongolian": "харсан" },
+        { "subject": "We", "verb": "have → had", "positive": "We had fun.", "negative": "We didn't have fun.", "question": "Did you have fun?", "mongolian": "байсан / авсан" },
+        { "subject": "She", "verb": "come → came", "positive": "She came early.", "negative": "She didn't come.", "question": "Did she come?", "mongolian": "ирсэн" },
+        { "subject": "He", "verb": "take → took", "positive": "He took a photo.", "negative": "He didn't take it.", "question": "Did he take it?", "mongolian": "авсан" }
+      ],
+      "quickPractice": [
+        "1. I _____ to the park yesterday. (go)",
+        "2. She _____ pizza last night. (eat)",
+        "3. He _____ a photo. (take)",
+        "4. They _____ the match! (win)",
+        "5. She _____ to the teacher. (speak)",
+        "6. We _____ a great movie. (see)",
+        "7. I _____ my friend there. (meet)",
+        "8. She _____ me a gift. (give)"
+      ],
+      "answerKey": ["1-went", "2-ate", "3-took", "4-won", "5-spoke", "6-saw", "7-met", "8-gave"],
+      "commonMistakes": [
+        "She goed to school → She WENT to school",
+        "I eated lunch → I ATE lunch",
+        "Did you saw the movie? → Did you SEE the movie?",
+        "She didn't went → She didn't GO"
+      ]
+    },
+    "page2": {
+      "readingPassage": "Last month, Bat had a very memorable day. He went to a big concert in Ulaanbaatar with his family. They saw their favorite singer. Bat took many photos. His mother said it was the best night of her life! After the concert, they ate at a nice restaurant. Bat had beef soup and his sister got pizza. They came home late but very happy!",
+      "keyPhrases": [
+        { "english": "I went to the park", "mongolian": "Би цэцэрлэгт хүрээлэнд очсон", "note": "went = past of go" },
+        { "english": "She saw a great movie", "mongolian": "Тэр гайхалтай кино үзсэн", "note": "saw = past of see" },
+        { "english": "We had a great time", "mongolian": "Бид гайхалтай цагийг өнгөрүүлсэн", "note": "had = past of have" },
+        { "english": "Did you go?", "mongolian": "Та явсан уу?", "note": "Did + subject + BASE verb" },
+        { "english": "I didn't go", "mongolian": "Би яваагүй", "note": "didn't + BASE verb (not went!)" },
+        { "english": "What did you do?", "mongolian": "Та юу хийсэн бэ?", "note": "What + did + you + do?" }
+      ],
+      "speakingQuestions": [
+        "Where did you go last weekend? / Та өнгөрсөн долоо хоногийн амралтаар хаашаа явсан бэ?",
+        "What did you eat yesterday?",
+        "Did you see any good movies recently?",
+        "Did you have a good time last week?",
+        "Who did you meet last weekend?",
+        "What did you do that was memorable?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "Where did you go last weekend?" },
+        { "speaker": "B", "text": "I went to the Naadam festival with my family!" },
+        { "speaker": "A", "text": "Wow! Did you see the wrestling?" },
+        { "speaker": "B", "text": "Yes! We saw the wrestling and the horse racing." },
+        { "speaker": "A", "text": "Did you take photos?" },
+        { "speaker": "B", "text": "Of course! I took hundreds of photos." },
+        { "speaker": "A", "text": "What did you eat there?" },
+        { "speaker": "B", "text": "We ate khuushuur and drank salty tea." }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Tell me about a memorable event. Bat, you first. Bat: Last summer I went to a big concert. I saw my favorite singer and took many photos! Teacher: Did you go alone? Bat: No! I went with my family. We had an amazing time together. Teacher: Sarnai, what was your most memorable event? Sarnai: Last year I won a painting competition! I made a big painting and the judges loved it. Teacher: That's wonderful! Did you get a prize? Sarnai: Yes! I got a gold medal and my school gave me a certificate.",
+      "listeningQuestions": [
+        { "question": "Where did Bat go last summer?", "options": ["a festival", "a concert", "school"], "answer": "a concert" },
+        { "question": "Did Bat go alone?", "options": ["yes", "no, with family", "with friends"], "answer": "no, with family" },
+        { "question": "What did Bat take at the concert?", "options": ["food", "a gift", "many photos"], "answer": "many photos" },
+        { "question": "What did Sarnai win?", "options": ["a sports competition", "a painting competition", "a music contest"], "answer": "a painting competition" },
+        { "question": "What did Sarnai make?", "options": ["a small painting", "a big painting", "a sculpture"], "answer": "a big painting" },
+        { "question": "Did the judges like Sarnai's work?", "options": ["no", "yes, loved it", "not mentioned"], "answer": "yes, loved it" },
+        { "question": "What prize did Sarnai get?", "options": ["a silver medal", "money", "a gold medal"], "answer": "a gold medal" },
+        { "question": "What else did Sarnai's school give her?", "options": ["a trophy", "a certificate", "a book"], "answer": "a certificate" },
+        { "question": "Which is correct past form of 'go'?", "options": ["goed", "goes", "went"], "answer": "went" },
+        { "question": "After 'didn't', which form do we use?", "options": ["past irregular", "-ing form", "base verb"], "answer": "base verb" }
+      ],
+      "grammarPractice": [
+        "1. I _____ to the park. (go→past tense)",
+        "2. She _____ pizza. (eat→past tense)",
+        "3. He _____ a photo. (take→past tense)",
+        "4. They _____ the match. (win→past tense)",
+        "5. She _____ to me. (speak→past tense)",
+        "6. We _____ a great movie. (see→past tense)"
+      ],
+      "matchingExercise": [
+        { "left": "went", "right": "явсан" },
+        { "left": "ate", "right": "идсэн" },
+        { "left": "saw", "right": "харсан" },
+        { "left": "took", "right": "авсан" },
+        { "left": "came", "right": "ирсэн" }
+      ],
+      "homework": [
+        "Writing: Write about a memorable event using 5+ irregular past tense verbs.",
+        "Vocabulary: Memorize all 20 irregular verbs — cover the past form and test yourself!",
+        "Speaking: Tell someone about a memorable day using went, saw, ate, had, got.",
+        "Review: go→went · eat→ate · see→saw · have→had · come→came · take→took"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-went · 2-ate · 3-took · 4-won · 5-spoke · 6-saw",
+        "Matching: 1-E · 2-A · 3-B · 4-C · 5-D",
+        "Listening: 1-b · 2-b · 3-c · 4-b · 5-b · 6-b · 7-c · 8-b · 9-c · 10-c"
+      ],
+      "completionSummary": [
+        "Learned 20 irregular past verbs",
+        "Mastered irregular past simple",
+        "Read about a memorable event",
+        "Practiced grammar exercises",
+        "Practiced speaking",
+        "Practiced listening",
+        "Memorized irregular verbs"
+      ]
+    }
+  }
+}

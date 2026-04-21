@@ -1,0 +1,153 @@
+{
+  "day": 6,
+  "level": 1,
+  "titleEn": "Day 6: Places & Directions",
+  "titleMn": "Өдөр 6: Газар ба Чиглэл",
+  "objectiveEn": "About one hour. Learn 20 place and direction words, There is / There are grammar, reading, listening, speaking, and homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 шинэ үг, There is / There are дүрэм, сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Learn vocabulary for places and directions while practicing 'There is' and 'There are' to describe what exists in a place.",
+  "contentMn": "Газар, чиглэлийн үгсийг сурч, аль нэг газарт юу байгааг тайлбарлахдаа There is / There are хэрэглэхийг дадлагажуулна.",
+  "vocabulary": [
+    { "english": "school", "pronunciation": "/skuːl/", "mongolian": "сургууль", "example": "My school is big." },
+    { "english": "hospital", "pronunciation": "/ˈhɒspɪtəl/", "mongolian": "эмнэлэг", "example": "The hospital is near here." },
+    { "english": "shop", "pronunciation": "/ʃɒp/", "mongolian": "дэлгүүр", "example": "I go to the shop every day." },
+    { "english": "restaurant", "pronunciation": "/ˈrɛstrɒnt/", "mongolian": "ресторан", "example": "The restaurant is expensive." },
+    { "english": "park", "pronunciation": "/pɑːrk/", "mongolian": "цэцэрлэгт хүрээлэн", "example": "The park is beautiful." },
+    { "english": "bank", "pronunciation": "/bæŋk/", "mongolian": "банк", "example": "The bank is near the school." },
+    { "english": "library", "pronunciation": "/ˈlaɪbrəri/", "mongolian": "номын сан", "example": "I study at the library." },
+    { "english": "bus stop", "pronunciation": "/ˈbʌs stɒp/", "mongolian": "автобусны буудал", "example": "The bus stop is near here." },
+    { "english": "street", "pronunciation": "/striːt/", "mongolian": "гудамж", "example": "Our school is on this street." },
+    { "english": "city", "pronunciation": "/ˈsɪti/", "mongolian": "хот", "example": "Ulaanbaatar is a big city." },
+    { "english": "near", "pronunciation": "/nɪər/", "mongolian": "ойр", "example": "The school is near my house." },
+    { "english": "far", "pronunciation": "/fɑːr/", "mongolian": "хол", "example": "The hospital is far from here." },
+    { "english": "left", "pronunciation": "/lɛft/", "mongolian": "зүүн тийш", "example": "Turn left at the corner." },
+    { "english": "right", "pronunciation": "/raɪt/", "mongolian": "баруун тийш", "example": "The bank is on the right." },
+    { "english": "straight", "pronunciation": "/streɪt/", "mongolian": "шулуун / чигээрээ", "example": "Go straight for two minutes." },
+    { "english": "next to", "pronunciation": "/nɛkst tuː/", "mongolian": "хажууд нь", "example": "The park is next to the school." },
+    { "english": "behind", "pronunciation": "/bɪˈhaɪnd/", "mongolian": "ард талд", "example": "The bank is behind the shop." },
+    { "english": "in front of", "pronunciation": "/ɪn frʌnt ɒv/", "mongolian": "урд нь", "example": "The bus stop is in front of us." },
+    { "english": "where", "pronunciation": "/wɛər/", "mongolian": "хаана", "example": "Where is the hospital?" },
+    { "english": "how far", "pronunciation": "/haʊ fɑːr/", "mongolian": "хэр хол", "example": "How far is the bank?" }
+  ],
+  "quiz": [
+    { "question": "Choose the correct sentence:", "options": ["There are a school.", "There is a school.", "There have a school.", "There is two schools."], "answer": "There is a school.", "explanation": "Use 'There is' + singular noun (one thing)." },
+    { "question": "Choose the correct sentence:", "options": ["There is two banks.", "There are two banks.", "There have two banks.", "There be two banks."], "answer": "There are two banks.", "explanation": "Use 'There are' + plural noun." },
+    { "question": "Make a question: '_____ a park near here?'", "options": ["Is there", "Are there", "There is", "There are"], "answer": "Is there", "explanation": "Question form: Is there + singular noun." },
+    { "question": "Are there restaurants near Sarnai's school?", "options": ["no", "yes, one", "yes, two", "yes, three"], "answer": "yes, two", "explanation": "Sarnai says 'There are two restaurants on the next street.'" },
+    { "question": "Which direction does Sarnai tell Bat to turn?", "options": ["left", "straight", "right", "back"], "answer": "right", "explanation": "Sarnai says 'turn right.'" },
+    { "question": "Where is the bank in the listening?", "options": ["far away", "next to restaurant", "behind school", "in front of park"], "answer": "next to restaurant", "explanation": "She says 'there is a bank right next to it.'" },
+    { "question": "How many shops are near Sarnai's house?", "options": ["one", "two", "three", "four"], "answer": "three", "explanation": "Sarnai says 'There are three shops.'" },
+    { "question": "What does 'хол' mean?", "options": ["near", "far", "left", "right"], "answer": "far", "explanation": "хол = far." },
+    { "question": "Make negative: 'There is a hotel.'", "options": ["There isn't a hotel.", "There aren't a hotel.", "There no a hotel.", "There don't a hotel."], "answer": "There isn't a hotel.", "explanation": "Negative singular: There isn't." },
+    { "question": "What is the overall topic of the listening?", "options": ["food", "family", "places & directions", "clothes"], "answer": "places & directions", "explanation": "The dialogue is about finding places and giving directions." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "There is / There are — describing what exists in a place",
+      "grammarExplanation": "'There is' describes ONE thing that exists. 'There are' describes MULTIPLE things. Used to describe places, give directions, and talk about neighborhoods. Short form: There's = There is. Negative: There isn't (singular) / There aren't (plural). Question: Is there? / Are there? 'There is' нэг зүйл байгааг харуулдаг. 'There are' олон зүйл байгааг харуулдаг. Газар байршил, чиглэл өгөхөд хэрэглэгддэг. Үгүйсгэл: There isn't / There aren't. Асуулт: Is there? / Are there?",
+      "grammarTable": [
+        { "subject": "There is", "verb": "singular", "positive": "There is a park.", "negative": "There isn't a hotel.", "question": "Is there a bank?", "mongolian": "... байна (нэг)" },
+        { "subject": "There are", "verb": "plural", "positive": "There are two banks.", "negative": "There aren't shops.", "question": "Are there buses?", "mongolian": "... байна (олон)" },
+        { "subject": "There's", "verb": "contraction", "positive": "There's a school.", "negative": "There's no shop.", "question": "Is there a café?", "mongolian": "... байна (товч)" },
+        { "subject": "There isn't", "verb": "negative", "positive": "—", "negative": "There isn't a park.", "question": "Isn't there a park?", "mongolian": "... байхгүй" }
+      ],
+      "quickPractice": [
+        "1. _____ a school near here. (is)",
+        "2. _____ two banks on this street. (are)",
+        "3. _____ a hospital in the city. (is)",
+        "4. _____ many parks here. (are)",
+        "5. _____ three restaurants. (are)",
+        "6. _____ a library near school. (is)",
+        "7. _____ any shops near here? (question)",
+        "8. _____ a bus stop here. (is)"
+      ],
+      "answerKey": ["1-There is", "2-There are", "3-There is", "4-There are", "5-There are", "6-There is", "7-Are there", "8-There is"],
+      "commonMistakes": [
+        "There are a school. → There is a school.",
+        "There is two banks. → There are two banks.",
+        "Is there banks? → Are there banks?",
+        "There have a park. → There is a park."
+      ]
+    },
+    "page2": {
+      "readingPassage": "My neighborhood is very convenient. There is a big school near my house. Next to the school, there is a beautiful park. There are three shops on my street. There is also a small restaurant with delicious food. The hospital is a little far, but there is a bus stop in front of my house. I love my neighborhood!",
+      "keyPhrases": [
+        { "english": "There is a school near my house", "mongolian": "Миний гэрийн ойролцоо сургууль байна", "note": "There is + noun + near + place" },
+        { "english": "There are three shops", "mongolian": "Тэнд гурван дэлгүүр байна", "note": "There are + number + plural noun" },
+        { "english": "Is there a bank near here?", "mongolian": "Энд ойролцоо банк байна уу?", "note": "Is there + article + noun?" },
+        { "english": "Go straight and turn left", "mongolian": "Чигээрээ яваад зүүн тийш эрг", "note": "Direction giving" },
+        { "english": "Next to the school", "mongolian": "Сургуулийн хажууд", "note": "next to = хажуу, дэргэд" },
+        { "english": "How far is it?", "mongolian": "Хэр хол вэ?", "note": "Asking about distance" }
+      ],
+      "speakingQuestions": [
+        "1. Is there a school near your house?",
+        "2. Are there any shops on your street?",
+        "3. Is there a park in your neighborhood?",
+        "4. How far is the nearest hospital?",
+        "5. Is there a bus stop near here?",
+        "6. Give me directions from your house to your school!"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "Excuse me! Is there a bank near here?" },
+        { "speaker": "B", "text": "Yes! There is a bank on the next street." },
+        { "speaker": "A", "text": "How far is it?" },
+        { "speaker": "B", "text": "It's not far. Go straight and turn left." },
+        { "speaker": "A", "text": "Are there any restaurants near here?" },
+        { "speaker": "B", "text": "Yes! There are two restaurants on this street." },
+        { "speaker": "A", "text": "Thank you so much for your help!" },
+        { "speaker": "B", "text": "You're welcome! Have a nice day!" }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Bat: Sarnai, is there a good restaurant near your school? Sarnai: Yes! There are two restaurants on the next street. Bat: How do I get there? Sarnai: Go straight for two minutes, then turn right. Bat: Is there a bank near the restaurant? Sarnai: Yes, there is a bank right next to it. Very convenient! Bat: Are there any shops near your house? Sarnai: Yes! There are three shops and a beautiful park five minutes away.",
+      "listeningQuestions": [
+        { "question": "Are there restaurants near Sarnai's school?", "options": ["no", "yes, one", "yes, two"], "answer": "c" },
+        { "question": "How long to walk to restaurant?", "options": ["5 minutes", "2 minutes", "10 minutes"], "answer": "b" },
+        { "question": "Which direction to turn?", "options": ["left", "straight", "right"], "answer": "c" },
+        { "question": "Where is the bank?", "options": ["far away", "next to restaurant", "behind school"], "answer": "b" },
+        { "question": "How many shops near Sarnai's house?", "options": ["no", "two", "three"], "answer": "c" },
+        { "question": "Is there a park near her house?", "options": ["no", "yes", "not mentioned"], "answer": "b" },
+        { "question": "How far is the park?", "options": ["2 minutes", "10 minutes", "5 minutes"], "answer": "c" },
+        { "question": "Does Bat want to find a restaurant?", "options": ["no", "yes", "not mentioned"], "answer": "b" },
+        { "question": "What does Sarnai say about the bank?", "options": ["it's far", "it's next to restaurant", "it's expensive"], "answer": "b" },
+        { "question": "What is the overall topic?", "options": ["food", "family", "places & directions"], "answer": "c" }
+      ],
+      "grammarPractice": [
+        "1. _____ a school near my house.",
+        "2. _____ two banks on this street.",
+        "3. _____ a hospital in the city.",
+        "4. _____ many parks here.",
+        "5. _____ a bus stop here? (question)",
+        "6. _____ any shops on that street? (question)"
+      ],
+      "matchingExercise": [
+        { "left": "near", "right": "ойрхон" },
+        { "left": "far", "right": "холхон" },
+        { "left": "left", "right": "зүүн тийш" },
+        { "left": "right", "right": "баруун тийш" },
+        { "left": "behind", "right": "ард" }
+      ],
+      "homework": [
+        "Writing: Draw a simple map of your neighborhood and label 5 places in English.",
+        "Vocabulary: Write 5 sentences using 'There is' and 5 using 'There are'.",
+        "Speaking: Practice giving directions from your house to your school.",
+        "Review: Ask someone: 'Is there a [place] near here?'"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-There is · 2-There are · 3-There is · 4-There are · 5-Is there · 6-Are there",
+        "Matching: 1-C · 2-D · 3-B · 4-E · 5-A",
+        "Listening: 1-c · 2-b · 3-c · 4-b · 5-c · 6-b · 7-c · 8-b · 9-b · 10-c"
+      ],
+      "completionSummary": [
+        "Learned 20 places and directions words",
+        "Mastered There is / There are grammar",
+        "Read about a neighborhood",
+        "Completed grammar practice exercises",
+        "Practiced giving directions",
+        "Completed listening comprehension",
+        "Learned to ask where places are"
+      ]
+    }
+  }
+}

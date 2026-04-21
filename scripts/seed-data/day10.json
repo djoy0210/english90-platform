@@ -1,0 +1,153 @@
+{
+  "day": 10,
+  "level": 1,
+  "titleEn": "Day 10: Shopping & Money",
+  "titleMn": "Өдөр 10: Дэлгүүр хэсэх & Мөнгө",
+  "objectiveEn": "About one hour. Learn 20 shopping/money words, How much / How many grammar, listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. Дэлгүүр, мөнгөний 20 шинэ үг, How much / How many дүрэм, сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Shop in English: ask prices, compare countable and uncountable nouns, and pay using English.",
+  "contentMn": "Англиар дэлгүүр хэсэх: үнэ асуух, тоолж болох/болохгүй нэрсийг ялгах, англиар төлөхийг сурна.",
+  "vocabulary": [
+    { "english": "price", "pronunciation": "/praɪs/", "mongolian": "үнэ", "example": "What is the price of this shirt?" },
+    { "english": "cheap", "pronunciation": "/tʃiːp/", "mongolian": "хямд", "example": "This shirt is very cheap." },
+    { "english": "expensive", "pronunciation": "/ɪkˈspɛnsɪv/", "mongolian": "үнэтэй", "example": "This bag is too expensive." },
+    { "english": "buy", "pronunciation": "/baɪ/", "mongolian": "худалдаж авах", "example": "I want to buy a new book." },
+    { "english": "sell", "pronunciation": "/sɛl/", "mongolian": "зарах", "example": "They sell fruit here." },
+    { "english": "pay", "pronunciation": "/peɪ/", "mongolian": "төлөх", "example": "I pay by cash." },
+    { "english": "change", "pronunciation": "/tʃeɪndʒ/", "mongolian": "хариулт мөнгө", "example": "Here is your change." },
+    { "english": "receipt", "pronunciation": "/rɪˈsiːt/", "mongolian": "баримт", "example": "Can I have a receipt?" },
+    { "english": "money", "pronunciation": "/ˈmʌni/", "mongolian": "мөнгө", "example": "I have some money." },
+    { "english": "coin", "pronunciation": "/kɔɪn/", "mongolian": "зоос", "example": "I have three coins." },
+    { "english": "cash", "pronunciation": "/kæʃ/", "mongolian": "бэлэн мөнгө", "example": "I pay with cash." },
+    { "english": "card", "pronunciation": "/kɑːrd/", "mongolian": "карт", "example": "Can I pay by card?" },
+    { "english": "size", "pronunciation": "/saɪz/", "mongolian": "хэмжээ", "example": "What size do you wear?" },
+    { "english": "small", "pronunciation": "/smɔːl/", "mongolian": "жижиг", "example": "Do you have a small size?" },
+    { "english": "medium", "pronunciation": "/ˈmiːdiəm/", "mongolian": "дунд", "example": "I wear medium size." },
+    { "english": "large", "pronunciation": "/lɑːrdʒ/", "mongolian": "том", "example": "This jacket is too large." },
+    { "english": "discount", "pronunciation": "/ˈdɪskaʊnt/", "mongolian": "хөнгөлөлт", "example": "Is there a discount today?" },
+    { "english": "total", "pronunciation": "/ˈtoʊtəl/", "mongolian": "нийт дүн", "example": "The total is 5000 tugrik." },
+    { "english": "shopping", "pronunciation": "/ˈʃɒpɪŋ/", "mongolian": "дэлгүүр хэсэх", "example": "I love going shopping!" },
+    { "english": "too", "pronunciation": "/tuː/", "mongolian": "хэтэрхий", "example": "This is too expensive." }
+  ],
+  "quiz": [
+    { "question": "How _____ money do you have?", "options": ["many", "much", "a few", "lot"], "answer": "much", "explanation": "Money is uncountable → use much." },
+    { "question": "How _____ apples are there?", "options": ["much", "many", "a little", "any"], "answer": "many", "explanation": "Apples are countable → use many." },
+    { "question": "Which is correct?", "options": ["How many money?", "How much money?", "How any money?", "How few money?"], "answer": "How much money?", "explanation": "Money = uncountable → much." },
+    { "question": "Which is correct?", "options": ["How much apples?", "How many apples?", "How few apples?", "How a many apples?"], "answer": "How many apples?", "explanation": "Apples are countable." },
+    { "question": "Which is correct?", "options": ["How much is it cost?", "How much does it cost?", "How much it costs?", "How does cost much?"], "answer": "How much does it cost?", "explanation": "Use auxiliary 'does' for present simple questions." },
+    { "question": "What does Bat want to buy? (listening)", "options": ["a shirt", "a jacket", "shoes", "a hat"], "answer": "a jacket", "explanation": "Bat asks about a jacket." },
+    { "question": "What is the original price?", "options": ["30,000₮", "25,000₮", "40,000₮", "35,000₮"], "answer": "40,000₮", "explanation": "Assistant says it is 40,000 tugrik." },
+    { "question": "How much is the discount?", "options": ["10%", "20%", "25%", "30%"], "answer": "25%", "explanation": "25% off today." },
+    { "question": "How does Bat pay?", "options": ["cash", "card", "phone", "not mentioned"], "answer": "card", "explanation": "Bat asks 'Can I pay by card?'" },
+    { "question": "Which question word asks about quantity of uncountable things?", "options": ["How many", "How much", "How often", "How long"], "answer": "How much", "explanation": "How much is for uncountable nouns." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "How much / How many — Countable & Uncountable nouns",
+      "grammarExplanation": "'How much' is used with UNCOUNTABLE nouns — things we cannot count individually (money, water, rice, milk, bread) — and to ask about price. 'How many' is used with COUNTABLE nouns — things we CAN count (apples, books, coins, shirts). Key test: Can you say '1 apple, 2 apples'? If yes = COUNTABLE → use 'How many'! 'How much' нь тоолж болохгүй нэрсийг (мөнгө, ус, будаа) болон үнийг асуухад хэрэглэнэ. 'How many' нь тоолж болох нэрсийг (алим, ном, зоос) асуухад хэрэглэнэ.",
+      "grammarTable": [
+        { "subject": "How much", "verb": "uncountable", "positive": "How much money?", "negative": "Not much money.", "question": "How much does it cost?", "mongolian": "Хэр их (тоолшгүй)" },
+        { "subject": "How many", "verb": "countable", "positive": "How many apples?", "negative": "Not many apples.", "question": "How many shirts do you have?", "mongolian": "Хэр олон (тоолж болох)" },
+        { "subject": "A few", "verb": "countable", "positive": "A few coins.", "negative": "Not a few — only one!", "question": "Do you have a few coins?", "mongolian": "Хэдэн (тоолж болох)" },
+        { "subject": "A little", "verb": "uncountable", "positive": "A little water.", "negative": "Not much — a little.", "question": "Can I have a little milk?", "mongolian": "Бага зэрэг (тоолшгүй)" }
+      ],
+      "quickPractice": [
+        "1. How _____ money do you have? (much)",
+        "2. How _____ apples are there? (many)",
+        "3. How _____ coins do you have? (many)",
+        "4. How _____ rice is there? (much)",
+        "5. How _____ does it cost? (much)",
+        "6. How _____ milk do you want? (much)",
+        "7. How _____ shirts do you have? (many)",
+        "8. How _____ bread do you need? (much)"
+      ],
+      "answerKey": ["1-much", "2-many", "3-many", "4-much", "5-much", "6-much", "7-many", "8-much"],
+      "commonMistakes": [
+        "How many money? → How much money?",
+        "How much apples? → How many apples?",
+        "How much is it cost? → How much does it cost?",
+        "I have few money → I have a little money."
+      ]
+    },
+    "page2": {
+      "readingPassage": "Sarnai goes shopping every Saturday. Today she wants to buy a new jacket. She goes to the shop and asks: 'How much is this jacket?' The shop assistant says: 'It is 25,000 tugrik.' Sarnai thinks it is a little expensive. She asks: 'Is there a discount?' 'Yes! 20% off today.' Sarnai smiles. She pays by cash and gets her receipt. She is very happy with her purchase!",
+      "keyPhrases": [
+        { "english": "How much is this?", "mongolian": "Энэ хэр үнэтэй вэ?", "note": "How much + is + this?" },
+        { "english": "It is 5000 tugrik", "mongolian": "Энэ 5000 төгрөг байна", "note": "It is + price" },
+        { "english": "Is there a discount?", "mongolian": "Хөнгөлөлт байна уу?", "note": "Is there + a + noun?" },
+        { "english": "Can I pay by card?", "mongolian": "Картаар төлж болох уу?", "note": "Can I + pay by + method?" },
+        { "english": "Do you have size medium?", "mongolian": "Дунд хэмжээ байна уу?", "note": "Do you have + size + adjective?" },
+        { "english": "Here is your change", "mongolian": "Энд таны хариу мөнгө", "note": "Giving change in a shop" }
+      ],
+      "speakingQuestions": [
+        "1. How much is a coffee in Mongolia?",
+        "2. How many books do you have at home?",
+        "3. Do you like shopping? / Та дэлгүүр хэсэхэд дуртай юу?",
+        "4. Do you usually pay by cash or card?",
+        "5. What is something cheap in Mongolia?",
+        "6. What is something expensive that you want to buy?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "Excuse me, how much is this shirt?" },
+        { "speaker": "B", "text": "It is 15,000 tugrik." },
+        { "speaker": "A", "text": "Is there a discount?" },
+        { "speaker": "B", "text": "Yes, 10% off today. So it is 13,500." },
+        { "speaker": "A", "text": "That's great! Do you have size medium?" },
+        { "speaker": "B", "text": "Yes, here you are. Would you like to try it on?" },
+        { "speaker": "A", "text": "It fits perfectly! Can I pay by card?" },
+        { "speaker": "B", "text": "Yes of course. Here is your receipt. Have a nice day!" }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Bat: Excuse me, how much is this jacket? Assistant: It is 40,000 tugrik. Bat: That is too expensive! Is there a discount? Assistant: Yes, 25% off today. The new price is 30,000 tugrik. Bat: How many colors do you have? Assistant: We have three — black, blue, and green. Bat: I'll take the black one. Can I pay by card? Assistant: Yes of course! Your total is 30,000. Here is your receipt. Thank you!",
+      "listeningQuestions": [
+        { "question": "What does Bat want to buy?", "options": ["a shirt", "a jacket", "shoes"], "answer": "a jacket" },
+        { "question": "What is the original price?", "options": ["30,000₮", "25,000₮", "40,000₮"], "answer": "40,000₮" },
+        { "question": "Does Bat think the price is ok?", "options": ["yes", "too expensive", "very cheap"], "answer": "too expensive" },
+        { "question": "How much is the discount?", "options": ["10%", "20%", "25%"], "answer": "25%" },
+        { "question": "What is the new price after discount?", "options": ["25,000₮", "30,000₮", "35,000₮"], "answer": "30,000₮" },
+        { "question": "How many colors are available?", "options": ["2", "3", "4"], "answer": "3" },
+        { "question": "What color does Bat choose?", "options": ["blue", "green", "black"], "answer": "black" },
+        { "question": "How does Bat pay?", "options": ["cash", "card", "not mentioned"], "answer": "card" },
+        { "question": "What does the assistant give at the end?", "options": ["a discount", "a receipt", "a gift"], "answer": "a receipt" },
+        { "question": "What question word asks about quantity of uncountable things?", "options": ["How many", "How much", "How often"], "answer": "How much" }
+      ],
+      "grammarPractice": [
+        "1. How _____ money do you have?",
+        "2. How _____ apples are there?",
+        "3. How _____ does it cost?",
+        "4. How _____ coins do you have?",
+        "5. How _____ milk do you want?",
+        "6. How _____ shirts do you need?"
+      ],
+      "matchingExercise": [
+        { "left": "cheap", "right": "хямд" },
+        { "left": "expensive", "right": "үнэтэй" },
+        { "left": "discount", "right": "хөнгөлөлт" },
+        { "left": "change", "right": "хариу мөнгө" },
+        { "left": "total", "right": "нийт дүн" }
+      ],
+      "homework": [
+        "✍ Writing: Write 5 sentences using 'How much' and 5 sentences using 'How many'.",
+        "📖 Vocabulary: Go to a shop and ask 'How much is this?' in English — even once!",
+        "🗣️ Speaking: Practice the shopping dialogue with a friend or family member.",
+        "🔁 Review: Remember: money/water/rice = uncountable (much) · apples/books/coins = countable (many)."
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-much · 2-many · 3-much · 4-many · 5-much · 6-many",
+        "Matching: 1-C · 2-A · 3-E · 4-B · 5-D",
+        "Listening: 1-b · 2-c · 3-b · 4-c · 5-b · 6-b · 7-c · 8-b · 9-b · 10-b"
+      ],
+      "completionSummary": [
+        "Learned 20 shopping & money words",
+        "Mastered How much / How many",
+        "Read about shopping for a jacket",
+        "Completed grammar practice",
+        "Practiced speaking dialogue",
+        "Completed listening practice",
+        "Practiced shop conversations"
+      ]
+    }
+  }
+}

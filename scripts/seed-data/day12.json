@@ -1,0 +1,153 @@
+{
+  "day": 12,
+  "level": 1,
+  "titleEn": "Day 12: Jobs & Professions",
+  "titleMn": "Өдөр 12: Мэргэжил ба ажил мэргэжил",
+  "objectiveEn": "About one hour. Learn 20 job words, 'What do you do?' grammar with a/an, listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 мэргэжлийн үг, 'What do you do?' a/an дүрэм, сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Talk about jobs and professions using 'I am a/an + job' and 'I work at + place'.",
+  "contentMn": "Мэргэжлийн тухай 'I am a/an + ажил' ба 'I work at + газар' хэлбэрээр ярина.",
+  "vocabulary": [
+    { "english": "doctor", "pronunciation": "/ˈdɒktər/", "mongolian": "эмч", "example": "The doctor works at the hospital." },
+    { "english": "nurse", "pronunciation": "/nɜːrs/", "mongolian": "сувилагч", "example": "The nurse helps the patients." },
+    { "english": "teacher", "pronunciation": "/ˈtiːtʃər/", "mongolian": "багш", "example": "My teacher is very kind." },
+    { "english": "engineer", "pronunciation": "/ˌɛndʒɪˈnɪər/", "mongolian": "инженер", "example": "My father is an engineer." },
+    { "english": "driver", "pronunciation": "/ˈdraɪvər/", "mongolian": "жолооч", "example": "The driver drives a bus." },
+    { "english": "chef", "pronunciation": "/shef/", "mongolian": "тогооч", "example": "The chef makes delicious food." },
+    { "english": "farmer", "pronunciation": "/ˈfɑːrmər/", "mongolian": "тариачин", "example": "The farmer grows vegetables." },
+    { "english": "artist", "pronunciation": "/ˈɑːrtɪst/", "mongolian": "уран бүтээлч", "example": "She is a talented artist." },
+    { "english": "student", "pronunciation": "/ˈstjuːdənt/", "mongolian": "оюутан / сурагч", "example": "I am a student." },
+    { "english": "office worker", "pronunciation": "/ˈɒfɪs ˌwɜːrkər/", "mongolian": "оффисын ажилтан", "example": "He is an office worker." },
+    { "english": "police officer", "pronunciation": "/pəˈliːs ˈɒfɪsər/", "mongolian": "цагдаа", "example": "The police officer helps people." },
+    { "english": "firefighter", "pronunciation": "/ˈfaɪərˌfaɪtər/", "mongolian": "галын ангийн ажилтан", "example": "Firefighters are very brave." },
+    { "english": "pilot", "pronunciation": "/ˈpaɪlət/", "mongolian": "нисгэгч", "example": "The pilot flies the plane." },
+    { "english": "programmer", "pronunciation": "/ˈproʊɡræmər/", "mongolian": "программист", "example": "She is a programmer." },
+    { "english": "journalist", "pronunciation": "/ˈdʒɜːrnəlɪst/", "mongolian": "сэтгүүлч", "example": "The journalist writes news." },
+    { "english": "work", "pronunciation": "/wɜːrk/", "mongolian": "ажиллах", "example": "I work every day." },
+    { "english": "office", "pronunciation": "/ˈɒfɪs/", "mongolian": "оффис", "example": "He works in an office." },
+    { "english": "hospital", "pronunciation": "/ˈhɒspɪtəl/", "mongolian": "эмнэлэг", "example": "She works at the hospital." },
+    { "english": "company", "pronunciation": "/ˈkʌmpəni/", "mongolian": "компани", "example": "He works for a big company." },
+    { "english": "salary", "pronunciation": "/ˈsæləri/", "mongolian": "цалин", "example": "She has a good salary." }
+  ],
+  "quiz": [
+    { "question": "I am ___ engineer.", "options": ["a", "an", "the", "—"], "answer": "an", "explanation": "Use 'an' before vowel sounds: engineer starts with /e/." },
+    { "question": "She is ___ teacher.", "options": ["a", "an", "the", "—"], "answer": "a", "explanation": "Use 'a' before consonant sounds: teacher starts with /t/." },
+    { "question": "What is the most natural way to ask about job?", "options": ["What is your work?", "What do you do?", "Are you a worker?", "Where job?"], "answer": "What do you do?", "explanation": "'What do you do?' is the most natural job question." },
+    { "question": "What does Bat's father do?", "options": ["doctor", "engineer", "teacher", "pilot"], "answer": "engineer", "explanation": "Bat said his father is an engineer." },
+    { "question": "Where does Sarnai's mother work?", "options": ["hospital", "office", "their school", "company"], "answer": "their school", "explanation": "Sarnai's mother is a teacher at their school." },
+    { "question": "What does Sarnai want to be?", "options": ["a teacher", "a doctor", "an artist", "a nurse"], "answer": "an artist", "explanation": "Sarnai said she wants to be an artist." },
+    { "question": "He ___ at the hospital.", "options": ["work", "works", "working", "is work"], "answer": "works", "explanation": "Third person singular adds -s in present simple." },
+    { "question": "Which job needs 'an'?", "options": ["teacher", "doctor", "artist", "driver"], "answer": "artist", "explanation": "'Artist' starts with vowel sound /a/, so use 'an'." },
+    { "question": "I work ___ a big company.", "options": ["at", "for", "in", "on"], "answer": "for", "explanation": "Use 'work for' with an organization/company." },
+    { "question": "What does Bat want to be?", "options": ["a doctor", "a programmer", "an engineer", "a journalist"], "answer": "a programmer", "explanation": "Bat said he wants to be a programmer." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "What do you do? — Talking about jobs with a / an",
+      "grammarExplanation": "To talk about jobs, use 'I AM A + job' for identity and 'I WORK AS A + job' for function. To ask: 'What do you do?' or 'What is your job?' or 'Where do you work?'. Use 'A' before consonant sounds (a teacher, a doctor) and 'AN' before vowel sounds (an engineer, an artist, an office worker). Ажил мэргэжлийн тухай: 'I am a + ажил' (өөрийгөө тодорхойлохдоо). 'I work as a + ажил' (функцийг хэлэхдээ). Гийгүүлэгчээр эхэлсэн мэргэжлийн өмнө 'a', эгшигээр эхэлсэн мэргэжлийн өмнө 'an' хэрэглэнэ.",
+      "grammarTable": [
+        { "subject": "I am", "verb": "a + job", "positive": "I am a teacher.", "negative": "I am not a doctor.", "question": "Are you a teacher?", "mongolian": "Би ... мэргэжилтэй" },
+        { "subject": "She is", "verb": "an + job", "positive": "She is an engineer.", "negative": "She is not an artist.", "question": "Is she an engineer?", "mongolian": "Тэр ... мэргэжилтэй" },
+        { "subject": "I work", "verb": "at/in", "positive": "I work at the hospital.", "negative": "I don't work at school.", "question": "Where do you work?", "mongolian": "Би ... ажилладаг (газар)" },
+        { "subject": "What do you do?", "verb": "do?", "positive": "I am a programmer.", "negative": "—", "question": "What do you do?", "mongolian": "Та юу хийдэг вэ?" }
+      ],
+      "quickPractice": [
+        "1. I am _____ teacher. (a/an)",
+        "2. He is _____ engineer. (a/an)",
+        "3. She is _____ doctor. (a/an)",
+        "4. He is _____ office worker. (a/an)",
+        "5. She is _____ artist. (a/an)",
+        "6. They work _____ a hospital. (at/in)",
+        "7. What _____ you do? (do)",
+        "8. I work _____ a big company. (for/at)"
+      ],
+      "answerKey": ["1-a", "2-an", "3-a", "4-an", "5-an", "6-at", "7-do", "8-for"],
+      "commonMistakes": [
+        "I am engineer. → I am AN engineer.",
+        "She work as nurse. → She works AS A nurse.",
+        "What you do? → What DO you do?",
+        "He work at hospital. → He works AT the hospital."
+      ]
+    },
+    "page2": {
+      "readingPassage": "Bat's family has many different jobs. His father is an engineer. He works for a big company. His mother is a nurse. She works at the hospital. His older sister is a programmer. She works from home. His uncle is a police officer. He works at the police station. Bat wants to be a doctor one day. He studies very hard every day!",
+      "keyPhrases": [
+        { "english": "What do you do?", "mongolian": "Та юу хийдэг вэ?", "note": "Most natural way to ask about job" },
+        { "english": "I am a teacher", "mongolian": "Би багш", "note": "I am + a/an + job" },
+        { "english": "She is an engineer", "mongolian": "Тэр инженер", "note": "She is + an + vowel job" },
+        { "english": "I work at the hospital", "mongolian": "Би эмнэлэгт ажилладаг", "note": "work + at + place" },
+        { "english": "I work for a company", "mongolian": "Би компанид ажилладаг", "note": "work + for + organization" },
+        { "english": "What is your job?", "mongolian": "Таны ажил мэргэжил юу вэ?", "note": "Alternative job question" }
+      ],
+      "speakingQuestions": [
+        "1. What do you do? / Та юу хийдэг вэ?",
+        "2. What does your mother or father do?",
+        "3. Where does your father or mother work?",
+        "4. What job do you want in the future?",
+        "5. Do you know anyone who is a doctor or engineer?",
+        "6. What is a good job in Mongolia?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "What do you do?" },
+        { "speaker": "B", "text": "I am a student. And you?" },
+        { "speaker": "A", "text": "I am a student too. What does your father do?" },
+        { "speaker": "B", "text": "My father is an engineer. He works for a big company." },
+        { "speaker": "A", "text": "That's great! What about your mother?" },
+        { "speaker": "B", "text": "My mother is a nurse. She works at the hospital." },
+        { "speaker": "A", "text": "Wow, a very important job! What do you want to be?" },
+        { "speaker": "B", "text": "I want to be a doctor. I love helping people." }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Today we talk about jobs. Bat, what does your father do? Bat: My father is an engineer. He works for a big company. Teacher: Good! Sarnai, what about your parents? Sarnai: My mother is a teacher. She works at our school! Teacher: Oh, that's me! And your father? Sarnai: He is a doctor. He works at the city hospital. Teacher: What do you both want to be in the future? Bat: I want to be a programmer! Sarnai: And I want to be an artist!",
+      "listeningQuestions": [
+        { "question": "What does Bat's father do?", "options": ["doctor", "engineer", "teacher"], "answer": "engineer" },
+        { "question": "Where does Bat's father work?", "options": ["hospital", "school", "a big company"], "answer": "a big company" },
+        { "question": "What does Sarnai's mother do?", "options": ["nurse", "teacher", "engineer"], "answer": "teacher" },
+        { "question": "Where does Sarnai's mother work?", "options": ["hospital", "office", "their school"], "answer": "their school" },
+        { "question": "What does Sarnai's father do?", "options": ["engineer", "teacher", "doctor"], "answer": "doctor" },
+        { "question": "Where does Sarnai's father work?", "options": ["city hospital", "company", "school"], "answer": "city hospital" },
+        { "question": "What does Bat want to be?", "options": ["a doctor", "a programmer", "an engineer"], "answer": "a programmer" },
+        { "question": "What does Sarnai want to be?", "options": ["a teacher", "a doctor", "an artist"], "answer": "an artist" },
+        { "question": "Which jobs need 'an' instead of 'a'?", "options": ["doctor, nurse", "engineer, artist", "teacher, driver"], "answer": "engineer, artist" },
+        { "question": "What is the most natural way to ask about job?", "options": ["What is your job?", "What do you do?", "Are you a worker?"], "answer": "What do you do?" }
+      ],
+      "grammarPractice": [
+        "1. I am _____ teacher.",
+        "2. He is _____ engineer.",
+        "3. She is _____ doctor.",
+        "4. He is _____ office worker.",
+        "5. She is _____ artist.",
+        "6. He is _____ police officer."
+      ],
+      "matchingExercise": [
+        { "left": "doctor", "right": "эмч" },
+        { "left": "teacher", "right": "багш" },
+        { "left": "chef", "right": "тогооч" },
+        { "left": "driver", "right": "жолооч" },
+        { "left": "pilot", "right": "нисгэгч" }
+      ],
+      "homework": [
+        "Writing: Write 5 sentences about what jobs your family members have.",
+        "Vocabulary: Practice 'a' vs 'an' with 10 different jobs — write them out.",
+        "Speaking: Ask 3 people 'What do you do?' — write down their answers.",
+        "Review: Remember: an + vowel sound (engineer, artist) · a + consonant sound (teacher, doctor)."
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-a · 2-an · 3-a · 4-an · 5-an · 6-a",
+        "Matching: 1-C · 2-E · 3-A · 4-B · 5-D",
+        "Listening: 1-b · 2-c · 3-b · 4-c · 5-c · 6-a · 7-b · 8-c · 9-b · 10-b"
+      ],
+      "completionSummary": [
+        "Learned 20 job words",
+        "Mastered the a vs an rule",
+        "Read about Bat's family's jobs",
+        "Completed grammar practice",
+        "Practiced speaking about jobs",
+        "Listened to a classroom dialog",
+        "Talked about future career goals"
+      ]
+    }
+  }
+}

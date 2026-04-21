@@ -1,0 +1,153 @@
+{
+  "day": 5,
+  "level": 1,
+  "titleEn": "Day 5: Food & Drinks",
+  "titleMn": "Өдөр 5: Хоол ба Уух зүйлс",
+  "objectiveEn": "About one hour. Learn 20 food and drink words, Present Simple for He/She/It (-s/-es), reading, listening, speaking, and homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 шинэ үг, He/She/It-тай Present Simple (-s/-es), сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Learn food and drink vocabulary while practicing how to add -s or -es to verbs after He, She, and It in Present Simple.",
+  "contentMn": "Хоол, ундааны үгсийг сурч, He/She/It-тай үйл үгэнд -s/-es-г хэрхэн нэмэхийг дадлагажуулна.",
+  "vocabulary": [
+    { "english": "rice", "pronunciation": "/raɪs/", "mongolian": "цагаан будаа", "example": "I eat rice every day." },
+    { "english": "bread", "pronunciation": "/brɛd/", "mongolian": "талх", "example": "I eat bread in the morning." },
+    { "english": "meat", "pronunciation": "/miːt/", "mongolian": "мах", "example": "My father loves meat." },
+    { "english": "fish", "pronunciation": "/fɪʃ/", "mongolian": "загас", "example": "She eats fish on Fridays." },
+    { "english": "egg", "pronunciation": "/ɛɡ/", "mongolian": "өндөг", "example": "I eat two eggs for breakfast." },
+    { "english": "milk", "pronunciation": "/mɪlk/", "mongolian": "сүү", "example": "Children drink milk every day." },
+    { "english": "water", "pronunciation": "/ˈwɔːtər/", "mongolian": "ус", "example": "I drink water, not juice." },
+    { "english": "tea", "pronunciation": "/tiː/", "mongolian": "цай", "example": "Mongolians love tea." },
+    { "english": "coffee", "pronunciation": "/ˈkɒfi/", "mongolian": "кофе", "example": "My mother drinks coffee." },
+    { "english": "juice", "pronunciation": "/dʒuːs/", "mongolian": "шүүс", "example": "I drink orange juice." },
+    { "english": "apple", "pronunciation": "/ˈæpəl/", "mongolian": "алим", "example": "I eat an apple every day." },
+    { "english": "banana", "pronunciation": "/bəˈnɑːnə/", "mongolian": "гадил", "example": "Do you like bananas?" },
+    { "english": "vegetable", "pronunciation": "/ˈvɛdʒtəbəl/", "mongolian": "хүнсний ногоо", "example": "She eats vegetables every day." },
+    { "english": "soup", "pronunciation": "/suːp/", "mongolian": "шөл", "example": "My mother makes delicious soup." },
+    { "english": "pizza", "pronunciation": "/ˈpiːtsə/", "mongolian": "пицца", "example": "I love pizza very much." },
+    { "english": "like", "pronunciation": "/laɪk/", "mongolian": "дуртай байх", "example": "I like tea very much." },
+    { "english": "love", "pronunciation": "/lʌv/", "mongolian": "маш их дуртай", "example": "I love Mongolian food." },
+    { "english": "hate", "pronunciation": "/heɪt/", "mongolian": "үзэн ядах", "example": "I hate spicy food." },
+    { "english": "delicious", "pronunciation": "/dɪˈlɪʃəs/", "mongolian": "амттай", "example": "This soup is delicious!" },
+    { "english": "hungry", "pronunciation": "/ˈhʌŋɡri/", "mongolian": "өлссөн", "example": "I am hungry. Let's eat!" }
+  ],
+  "quiz": [
+    { "question": "Choose the correct sentence:", "options": ["She eat rice.", "She eats rice.", "She eating rice.", "She is eat rice."], "answer": "She eats rice.", "explanation": "Add -s to the verb after He/She/It." },
+    { "question": "What is today's listening topic?", "options": ["clothes", "family", "food", "places"], "answer": "food", "explanation": "Teacher says 'Today's topic is food!'" },
+    { "question": "What does Bat's mother cook?", "options": ["pizza", "tsuivan and soup", "rice", "fish"], "answer": "tsuivan and soup", "explanation": "Bat says 'My mother cooks tsuivan and soup.'" },
+    { "question": "Make this negative: 'He likes fish.'", "options": ["He don't like fish.", "He doesn't likes fish.", "He doesn't like fish.", "He no like fish."], "answer": "He doesn't like fish.", "explanation": "Use doesn't + base verb for He/She/It." },
+    { "question": "Make this a question: 'She drinks coffee.'", "options": ["Do she drink coffee?", "Does she drink coffee?", "Does she drinks coffee?", "Drinks she coffee?"], "answer": "Does she drink coffee?", "explanation": "Use Does + subject + base verb." },
+    { "question": "Choose the correct verb form:", "options": ["He watchs TV.", "He watches TV.", "He watch TV.", "He watching TV."], "answer": "He watches TV.", "explanation": "Verbs ending in -ch take -es (watches)." },
+    { "question": "Choose the correct verb form: 'She _____ English.'", "options": ["studys", "studyes", "studies", "study"], "answer": "studies", "explanation": "Consonant + y → ies (studies)." },
+    { "question": "Does Sarnai's mother like coffee?", "options": ["yes", "she loves it", "no", "sometimes"], "answer": "no", "explanation": "Sarnai says 'No, she doesn't like coffee.'" },
+    { "question": "What does 'амттай' mean?", "options": ["hungry", "delicious", "spicy", "fresh"], "answer": "delicious", "explanation": "амттай = delicious." },
+    { "question": "Who cooks every day in Bat's family?", "options": ["Bat", "his father", "his mother", "his sister"], "answer": "his mother", "explanation": "Bat says his mother cooks every day." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Present Simple — He / She / It (adds -s or -es)",
+      "grammarExplanation": "For He / She / It in Present Simple, ADD -s or -es to the verb. Rules: most verbs add -s (eats, drinks, likes). Verbs ending in -ch, -sh, -x, -o add -es (watches, does). Verbs ending in consonant+y change y→ies (studies, tries). For negatives use DOESN'T + base verb. For questions use DOES + subject + base verb. He / She / It-тай Present Simple-д үйл үгийн төгсгөлд -s эсвэл -es нэмдэг. Үгүйсгэлд DOESN'T + үндсэн үйлүг. Асуултад DOES + субьект + үндсэн үйлүг.",
+      "grammarTable": [
+        { "subject": "He", "verb": "eats", "positive": "He eats rice.", "negative": "He doesn't eat fish.", "question": "Does he eat meat?", "mongolian": "Тэр (эр) иддэг" },
+        { "subject": "She", "verb": "drinks", "positive": "She drinks tea.", "negative": "She doesn't drink coffee.", "question": "Does she drink milk?", "mongolian": "Тэр (эм) уудаг" },
+        { "subject": "It", "verb": "costs", "positive": "It costs 5000₮.", "negative": "It doesn't cost much.", "question": "Does it cost a lot?", "mongolian": "Энэ нь үнэтэй" },
+        { "subject": "She", "verb": "likes", "positive": "She likes pizza.", "negative": "She doesn't like meat.", "question": "Does she like soup?", "mongolian": "Тэр дуртай" }
+      ],
+      "quickPractice": [
+        "1. She _____ rice. (eat)",
+        "2. He _____ tea. (drink)",
+        "3. She _____ pizza. (love)",
+        "4. He _____ at 8. (eat)",
+        "5. _____ she like coffee? (question)",
+        "6. He _____ like fish. (negative)",
+        "7. She _____ English. (study)",
+        "8. It _____ a lot. (cost)"
+      ],
+      "answerKey": ["1-eats", "2-drinks", "3-loves", "4-eats", "5-Does", "6-doesn't", "7-studies", "8-costs"],
+      "commonMistakes": [
+        "She eat rice. → She eats rice.",
+        "He don't like fish. → He doesn't like fish.",
+        "Do she like tea? → Does she like tea?",
+        "He watchs TV. → He watches TV."
+      ]
+    },
+    "page2": {
+      "readingPassage": "Bat loves Mongolian food. He eats rice and meat soup every day. He also drinks tea with milk. He does NOT like vegetables very much. His sister Nara likes vegetables and fruit. She eats an apple every morning. She loves orange juice. Their mother makes delicious food every day. On weekends, the family eats together!",
+      "keyPhrases": [
+        { "english": "He eats rice every day", "mongolian": "Тэр өдөр бүр будаа иддэг", "note": "He/She + verb+s + frequency" },
+        { "english": "She likes tea with milk", "mongolian": "Тэр сүүтэй цай ууна", "note": "She + likes + noun" },
+        { "english": "He doesn't like vegetables", "mongolian": "Тэр ногоонд дургүй", "note": "He + doesn't like + noun" },
+        { "english": "Does she eat fish?", "mongolian": "Тэр загас иддэг үү?", "note": "Does + she + verb + ?" },
+        { "english": "What does he eat?", "mongolian": "Тэр юу иддэг вэ?", "note": "What does + subject + verb?" },
+        { "english": "This is delicious!", "mongolian": "Энэ маш амттай!", "note": "Expressing taste" }
+      ],
+      "speakingQuestions": [
+        "1. What do you eat for breakfast?",
+        "2. Do you like Mongolian food?",
+        "3. What does your mother or father eat?",
+        "4. What is your favorite food? / Таны дуртай хоол юу вэ?",
+        "5. Do you drink coffee or tea?",
+        "6. What food do you hate?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "Do you like Mongolian food?" },
+        { "speaker": "B", "text": "Yes! I love buuz and tsuivan. Do you?" },
+        { "speaker": "A", "text": "I love buuz too! What does your mother cook?" },
+        { "speaker": "B", "text": "She cooks tsuivan and soup every day." },
+        { "speaker": "A", "text": "What do you eat for breakfast?" },
+        { "speaker": "B", "text": "I drink tea and eat bread with egg." },
+        { "speaker": "A", "text": "Does your father drink coffee?" },
+        { "speaker": "B", "text": "No, he doesn't drink coffee. He drinks tea." }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Today's topic is food! Bat, what does your mother cook? Bat: My mother cooks tsuivan and soup. She cooks every day! Teacher: Does she like cooking? Bat: Yes! She loves cooking. My father eats everything she makes. Teacher: Sarnai, what does your family eat for breakfast? Sarnai: My father drinks tea and eats bread. My mother eats an egg. Teacher: Does your mother like coffee? Sarnai: No, she doesn't like coffee. She only drinks tea.",
+      "listeningQuestions": [
+        { "question": "What is today's topic?", "options": ["clothes", "family", "food"], "answer": "c" },
+        { "question": "What does Bat's mother cook?", "options": ["pizza", "tsuivan and soup", "rice"], "answer": "b" },
+        { "question": "Does Bat's mother like cooking?", "options": ["no", "not mentioned", "yes, loves it"], "answer": "c" },
+        { "question": "What does Bat's father eat?", "options": ["only vegetables", "everything she makes", "only meat"], "answer": "b" },
+        { "question": "What does Sarnai's father eat for breakfast?", "options": ["egg", "tea and bread", "soup"], "answer": "b" },
+        { "question": "What does Sarnai's mother eat?", "options": ["bread", "an egg", "soup"], "answer": "b" },
+        { "question": "Does Sarnai's mother like coffee?", "options": ["yes", "she loves it", "no"], "answer": "c" },
+        { "question": "What does Sarnai's mother drink?", "options": ["coffee", "water", "tea"], "answer": "c" },
+        { "question": "Who cooks every day in Bat's family?", "options": ["Bat", "his father", "his mother"], "answer": "c" },
+        { "question": "How does Bat describe his mother?", "options": ["a great cook", "very kind", "a hard worker"], "answer": "a" }
+      ],
+      "grammarPractice": [
+        "1. She _____ rice every day. (eat)",
+        "2. He _____ tea. (drink)",
+        "3. She _____ pizza. (love)",
+        "4. He _____ like fish. (negative)",
+        "5. _____ she like coffee? (question)",
+        "6. My mother _____ soup every day. (cook)"
+      ],
+      "matchingExercise": [
+        { "left": "rice", "right": "будаа" },
+        { "left": "bread", "right": "талх" },
+        { "left": "fish", "right": "загас" },
+        { "left": "milk", "right": "сүү" },
+        { "left": "water", "right": "ус" }
+      ],
+      "homework": [
+        "Writing: Write 5 sentences about foods you and your family like or don't like.",
+        "Vocabulary: Ask a family member: 'Do you like...?' for 5 different foods.",
+        "Speaking: Write your favorite meal in English (breakfast, lunch, or dinner).",
+        "Review: Practice: 'She eats... He drinks... She doesn't like...'"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-eats · 2-drinks · 3-loves · 4-doesn't · 5-Does · 6-cooks",
+        "Matching: 1-C · 2-D · 3-A · 4-B · 5-E",
+        "Listening: 1-c · 2-b · 3-c · 4-b · 5-b · 6-b · 7-c · 8-c · 9-c · 10-a"
+      ],
+      "completionSummary": [
+        "Learned 20 food and drink words",
+        "Mastered He/She/It Present Simple (-s/-es)",
+        "Read a passage about food",
+        "Completed grammar practice exercises",
+        "Practiced speaking about food",
+        "Completed listening comprehension",
+        "Described favorite foods"
+      ]
+    }
+  }
+}

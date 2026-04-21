@@ -1,0 +1,155 @@
+{
+  "day": 25,
+  "level": 1,
+  "titleEn": "Day 25: Talking About the Past",
+  "titleMn": "Өдөр 25: Өнгөрсөний тухай ярих",
+  "objectiveEn": "About one hour. Learn 20 past conversation words, Past Simple questions and negatives with did/didn't, reading, speaking, listening, and homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 өнгөрсөн цагийн ярианы үг, did/didn't асуулт ба үгүйсгэл, унших, ярих, сонсох, гэрийн даалгавар.",
+  "contentEn": "Master past simple questions and negatives with did and didn't to talk about the past.",
+  "contentMn": "Did, didn't ашиглан өнгөрсөн цагийн асуулт, үгүйсгэл хийж сурна.",
+  "vocabulary": [
+    { "english": "did", "pronunciation": "/dɪd/", "mongolian": "хийсэн үү? / хийсэн", "example": "Did you finish your homework?" },
+    { "english": "didn't", "pronunciation": "/ˈdɪdənt/", "mongolian": "хийгээгүй", "example": "I didn't go to school." },
+    { "english": "never", "pronunciation": "/ˈnɛvər/", "mongolian": "хэзээ ч ... биш", "example": "I never ate sushi before." },
+    { "english": "once", "pronunciation": "/wʌns/", "mongolian": "нэг удаа", "example": "I visited China once." },
+    { "english": "twice", "pronunciation": "/twaɪs/", "mongolian": "хоёр удаа", "example": "I watched this movie twice." },
+    { "english": "last time", "pronunciation": "/lɑːst taɪm/", "mongolian": "сүүлийн удаа", "example": "Last time I visited in June." },
+    { "english": "when", "pronunciation": "/wɛn/", "mongolian": "хэзээ", "example": "When did you arrive?" },
+    { "english": "how long", "pronunciation": "/haʊ lɒŋ/", "mongolian": "хэр удаан", "example": "How long did you stay?" },
+    { "english": "where", "pronunciation": "/wɛər/", "mongolian": "хаана", "example": "Where did you go?" },
+    { "english": "what", "pronunciation": "/wɒt/", "mongolian": "юу", "example": "What did you eat?" },
+    { "english": "who", "pronunciation": "/huː/", "mongolian": "хэн", "example": "Who did you see?" },
+    { "english": "why", "pronunciation": "/waɪ/", "mongolian": "яагаад", "example": "Why didn't you come?" },
+    { "english": "remember", "pronunciation": "/rɪˈmɛmbər/", "mongolian": "санах", "example": "Do you remember last year?" },
+    { "english": "forget", "pronunciation": "/fərˈɡɛt/", "mongolian": "мартах", "example": "I forgot my homework!" },
+    { "english": "enjoy", "pronunciation": "/ɪnˈdʒɔɪ/", "mongolian": "таашаах", "example": "Did you enjoy the trip?" },
+    { "english": "tell me", "pronunciation": "/tɛl miː/", "mongolian": "надад хэлнэ үү", "example": "Tell me about your weekend." },
+    { "english": "what was it like?", "pronunciation": "/wɒt wɒz ɪt laɪk/", "mongolian": "ямар байсан бэ?", "example": "What was the food like?" },
+    { "english": "really?", "pronunciation": "/ˈrɪəli/", "mongolian": "үнэхээр үү?", "example": "Really? Tell me more!" },
+    { "english": "that sounds", "pronunciation": "/ðæt saʊndz/", "mongolian": "сонсоход", "example": "That sounds amazing!" },
+    { "english": "interesting", "pronunciation": "/ˈɪntrəstɪŋ/", "mongolian": "сонирхолтой", "example": "That is very interesting." }
+  ],
+  "quiz": [
+    { "question": "_____ you go to school?", "options": ["Do", "Did", "Done", "Does"], "answer": "Did", "explanation": "Past simple question uses Did." },
+    { "question": "I _____ go — I stayed home.", "options": ["didn't", "don't", "wasn't", "weren't"], "answer": "didn't", "explanation": "Past negative uses didn't + base verb." },
+    { "question": "Which is correct?", "options": ["I didn't went.", "Did you went?", "I didn't go.", "You did go?"], "answer": "I didn't go.", "explanation": "After didn't always use base verb." },
+    { "question": "How long did Bat study?", "options": ["one hour", "three hours", "two hours", "four hours"], "answer": "two hours", "explanation": "Bat said he studied for two hours." },
+    { "question": "Why didn't Bat watch videos?", "options": ["he was tired", "he didn't have time", "he forgot", "he was sick"], "answer": "he didn't have time", "explanation": "Bat said he didn't have time." },
+    { "question": "What did Sarnai do last evening?", "options": ["watched TV", "cooked, homework, called grandmother", "went to the park", "studied math"], "answer": "cooked, homework, called grandmother", "explanation": "Sarnai cooked, did homework, and called her grandmother." },
+    { "question": "What time did Sarnai go to bed?", "options": ["10 o'clock", "11 o'clock", "midnight", "9 o'clock"], "answer": "midnight", "explanation": "She went to bed at midnight." },
+    { "question": "Why did Sarnai go to bed late?", "options": ["she watched TV", "she talked on the phone", "the homework was long", "she wasn't tired"], "answer": "the homework was long", "explanation": "Sarnai said the homework was very long." },
+    { "question": "What follows did/didn't?", "options": ["past form", "-ing form", "base verb", "to + verb"], "answer": "base verb", "explanation": "After did/didn't always use base verb." },
+    { "question": "Where _____ they go?", "options": ["did", "do", "done", "didn't"], "answer": "did", "explanation": "Wh-question uses did + base verb." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Past Simple — questions and negatives with did / didn't",
+      "grammarExplanation": "To make QUESTIONS in Past Simple: DID + subject + BASE VERB + ? → 'Did you go?' 'Did she eat?' 'What did he do?' To make NEGATIVES: subject + DIDN'T + BASE VERB → 'I didn't go.' 'She didn't eat.' CRITICAL RULE: After DID or DIDN'T, ALWAYS use the BASE VERB — NEVER the past form! Өнгөрсөн цагийн АСУУЛТ: DID + субьект + ҮНДСЭН ҮЙЛҮГ? ҮГҮЙСГЭЛ: субьект + DIDN'T + ҮНДСЭН ҮЙЛҮГ. ЧУХАЛ ДҮРЭМ: DID/DIDN'T-ийн дараа ҮРГЭЛЖ ҮНДСЭН ҮЙЛҮГ — өнгөрсөн цагийн хэлбэрийг ХЭЗЭЭ Ч хэрэглэдэггүй!",
+      "grammarTable": [
+        { "subject": "Did you?", "verb": "question", "positive": "Did you go?", "negative": "—", "question": "Where did you go?", "mongolian": "Та ...сан уу?" },
+        { "subject": "Didn't", "verb": "negative", "positive": "I didn't go.", "negative": "—", "question": "Why didn't you go?", "mongolian": "Тэр ...сангүй" },
+        { "subject": "What did?", "verb": "wh-question", "positive": "What did you do?", "negative": "—", "question": "Who did you see?", "mongolian": "Та юу хийсэн бэ?" },
+        { "subject": "How long?", "verb": "duration", "positive": "How long did you stay?", "negative": "—", "question": "How long did it take?", "mongolian": "Хэр удаан байсан?" },
+        { "subject": "Where did?", "verb": "place", "positive": "Where did you go?", "negative": "—", "question": "Where did they meet?", "mongolian": "Хаана?" },
+        { "subject": "Why didn't?", "verb": "reason", "positive": "Why didn't you come?", "negative": "—", "question": "Why didn't she eat?", "mongolian": "Яагаад?" }
+      ],
+      "quickPractice": [
+        "1. _____ you go to school? (Did)",
+        "2. I _____ go — I stayed home. (didn't)",
+        "3. Where _____ they go? (did)",
+        "4. He _____ come to class. (didn't)",
+        "5. What _____ you do yesterday? (did)",
+        "6. She _____ eat lunch. (didn't)",
+        "7. _____ she call you? (Did)",
+        "8. What _____ he say? (did)"
+      ],
+      "answerKey": ["1-Did", "2-didn't", "3-did", "4-didn't", "5-did", "6-didn't", "7-Did", "8-did"],
+      "commonMistakes": [
+        "Did you went to school? → Did you GO to school?",
+        "She didn't ate → She didn't EAT",
+        "I not go yesterday → I DIDN'T go yesterday",
+        "You did go? → DID you go?"
+      ]
+    },
+    "page2": {
+      "readingPassage": "Sarnai asked Bat about his weekend. 'Did you go anywhere?' 'Yes! I went to the National Museum.' 'Did you enjoy it?' 'I loved it! But I didn't understand everything.' 'What did you see?' 'I saw old Mongolian art and read about history. I didn't take photos because it wasn't allowed.' 'That sounds amazing! Why didn't I go with you?' said Sarnai.",
+      "keyPhrases": [
+        { "english": "Did you go?", "mongolian": "Та явсан уу?", "note": "Did + subject + base verb?" },
+        { "english": "I didn't go", "mongolian": "Би яваагүй", "note": "didn't + base verb" },
+        { "english": "What did you do?", "mongolian": "Та юу хийсэн бэ?", "note": "What + did + you + base verb?" },
+        { "english": "Where did you go?", "mongolian": "Та хаашаа явсан бэ?", "note": "Where + did + you + go?" },
+        { "english": "Why didn't you come?", "mongolian": "Та яагаад ирээгүй вэ?", "note": "Why + didn't + you + come?" },
+        { "english": "How long did you stay?", "mongolian": "Та хэр удаан байсан бэ?", "note": "How long + did + you + stay?" }
+      ],
+      "speakingQuestions": [
+        "What did you do last weekend? / Та өнгөрсөн долоо хоногийн амралтаар юу хийсэн бэ?",
+        "Did you go anywhere interesting last month?",
+        "What didn't you do this week that you wanted to do?",
+        "Did you enjoy your English lessons this week?",
+        "Why didn't you study yesterday? (practice saying this!)",
+        "How long did you sleep last night?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "What did you do last weekend?" },
+        { "speaker": "B", "text": "I went to the park and met some friends." },
+        { "speaker": "A", "text": "Did you go alone?" },
+        { "speaker": "B", "text": "No, I didn't go alone. I went with my sister." },
+        { "speaker": "A", "text": "Did you stay long?" },
+        { "speaker": "B", "text": "Yes, we stayed for three hours!" },
+        { "speaker": "A", "text": "Why didn't you call me?" },
+        { "speaker": "B", "text": "I'm sorry! I forgot my phone at home." }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Let's practice questions and negatives. Bat, did you do your homework last night? Bat: Yes I did! I studied for two hours. Teacher: Good! Did you watch any English videos? Bat: No, I didn't watch videos. I didn't have time. Teacher: That's OK. Sarnai, what did you do last evening? Sarnai: I cooked dinner, did my homework, and called my grandmother. Teacher: Did you enjoy your evening? Sarnai: Yes! But I didn't sleep enough — I went to bed at midnight! Teacher: Oh no! Why didn't you go to bed earlier? Sarnai: Because the homework was very long!",
+      "listeningQuestions": [
+        { "question": "Did Bat do his homework?", "options": ["no", "yes", "not mentioned"], "answer": "yes" },
+        { "question": "How long did Bat study?", "options": ["one hour", "three hours", "two hours"], "answer": "two hours" },
+        { "question": "Did Bat watch English videos?", "options": ["yes", "no", "not mentioned"], "answer": "no" },
+        { "question": "Why didn't Bat watch videos?", "options": ["he was tired", "he didn't have time", "he forgot"], "answer": "he didn't have time" },
+        { "question": "What did Sarnai do last evening?", "options": ["watched TV", "cooked, homework, called grandmother", "went to the park"], "answer": "cooked, homework, called grandmother" },
+        { "question": "Did Sarnai enjoy her evening?", "options": ["no", "yes", "not mentioned"], "answer": "yes" },
+        { "question": "Did Sarnai sleep enough?", "options": ["yes", "no", "not mentioned"], "answer": "no" },
+        { "question": "What time did Sarnai go to bed?", "options": ["10 o'clock", "11 o'clock", "midnight"], "answer": "midnight" },
+        { "question": "Why did Sarnai go to bed late?", "options": ["she watched TV", "she talked on the phone", "the homework was long"], "answer": "the homework was long" },
+        { "question": "Which is correct?", "options": ["I didn't went.", "Did you went?", "I didn't go."], "answer": "I didn't go." }
+      ],
+      "grammarPractice": [
+        "1. _____ you go to school? (Did)",
+        "2. I _____ go — I stayed home. (didn't)",
+        "3. Where _____ they go? (did)",
+        "4. He _____ come to class. (didn't)",
+        "5. What _____ you do? (did)",
+        "6. _____ she call you? (Did)"
+      ],
+      "matchingExercise": [
+        { "left": "did", "right": "хийсэн үү?" },
+        { "left": "didn't", "right": "хийгээгүй" },
+        { "left": "when", "right": "хэзээ" },
+        { "left": "why", "right": "яагаад" },
+        { "left": "how long", "right": "хэр удаан" }
+      ],
+      "homework": [
+        "Writing: Write 5 questions to ask a friend about their weekend using 'Did you...?'",
+        "Vocabulary: Write 5 sentences: 2 with 'did', 2 with 'didn't', 1 with 'why didn't'.",
+        "Speaking: Ask a family member 3 questions about their day using 'did' — write the answers.",
+        "Review: DID + base verb (question) · DIDN'T + base verb (negative) — NEVER past form after did/didn't!"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-Did · 2-didn't · 3-did · 4-didn't · 5-did · 6-Did",
+        "Matching: 1-C · 2-D · 3-E · 4-B · 5-A",
+        "Listening: 1-b · 2-c · 3-b · 4-b · 5-b · 6-b · 7-b · 8-c · 9-c · 10-c"
+      ],
+      "completionSummary": [
+        "Learned 20 past conversation words",
+        "Mastered Did / Didn't questions and negatives",
+        "Read about the past",
+        "Practiced grammar exercises",
+        "Practiced speaking",
+        "Practiced listening",
+        "Learned past simple questions & negatives"
+      ]
+    }
+  }
+}

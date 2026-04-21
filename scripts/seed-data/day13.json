@@ -1,0 +1,153 @@
+{
+  "day": 13,
+  "level": 1,
+  "titleEn": "Day 13: Transport & Getting Around",
+  "titleMn": "Өдөр 13: Тээвэр ба хот дотуур явах",
+  "objectiveEn": "About one hour. Learn 20 transport words, prepositions by/on/in, listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 тээврийн үг, by/on/in угтвар үгс, сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Talk about transport using by/on/in/on foot and ask 'How do you get to...?'.",
+  "contentMn": "Тээврийн хэрэгслийн тухай by/on/in/on foot ашиглан ярина. 'How do you get to...?' гэж асууна.",
+  "vocabulary": [
+    { "english": "bus", "pronunciation": "/bʌs/", "mongolian": "автобус", "example": "I go to school by bus." },
+    { "english": "taxi", "pronunciation": "/ˈtæksi/", "mongolian": "такси", "example": "She takes a taxi every day." },
+    { "english": "car", "pronunciation": "/kɑːr/", "mongolian": "машин", "example": "My father drives a car." },
+    { "english": "bicycle", "pronunciation": "/ˈbaɪsɪkəl/", "mongolian": "дугуй", "example": "I ride my bicycle to school." },
+    { "english": "train", "pronunciation": "/treɪn/", "mongolian": "галт тэрэг", "example": "We travel by train." },
+    { "english": "plane", "pronunciation": "/pleɪn/", "mongolian": "онгоц", "example": "She flies by plane." },
+    { "english": "walk", "pronunciation": "/wɔːk/", "mongolian": "явган явах", "example": "I walk to school every day." },
+    { "english": "station", "pronunciation": "/ˈsteɪʃən/", "mongolian": "буудал", "example": "The bus station is near here." },
+    { "english": "airport", "pronunciation": "/ˈɛərpɔːrt/", "mongolian": "нисэх онгоцны буудал", "example": "The airport is far from city." },
+    { "english": "ticket", "pronunciation": "/ˈtɪkɪt/", "mongolian": "тасалбар", "example": "I buy a bus ticket every day." },
+    { "english": "journey", "pronunciation": "/ˈdʒɜːrni/", "mongolian": "аялал", "example": "The journey takes 30 minutes." },
+    { "english": "arrive", "pronunciation": "/əˈraɪv/", "mongolian": "хүрэх", "example": "I arrive at school at 8." },
+    { "english": "leave", "pronunciation": "/liːv/", "mongolian": "гарах / явах", "example": "I leave home at 7." },
+    { "english": "take", "pronunciation": "/teɪk/", "mongolian": "унах / авах", "example": "I take the bus to school." },
+    { "english": "get on", "pronunciation": "/ɡɛt ɒn/", "mongolian": "унах (хэрэгслэнд)", "example": "I get on the bus at stop 5." },
+    { "english": "get off", "pronunciation": "/ɡɛt ɒf/", "mongolian": "буух", "example": "I get off at the third stop." },
+    { "english": "stop", "pronunciation": "/stɒp/", "mongolian": "буудал / зогсоол", "example": "The next stop is my school." },
+    { "english": "traffic", "pronunciation": "/ˈtræfɪk/", "mongolian": "замын хөдөлгөөн", "example": "There is heavy traffic today." },
+    { "english": "fast", "pronunciation": "/fɑːst/", "mongolian": "хурдан", "example": "The taxi is faster than the bus." },
+    { "english": "slow", "pronunciation": "/sloʊ/", "mongolian": "удаан", "example": "The bus is slow today." }
+  ],
+  "quiz": [
+    { "question": "I go to school ___ bus.", "options": ["by", "on", "in", "at"], "answer": "by", "explanation": "Use 'by' for the method of transport." },
+    { "question": "She is ___ the car.", "options": ["by", "on", "in", "at"], "answer": "in", "explanation": "Use 'in' for private enclosed vehicles." },
+    { "question": "He is ___ the train right now.", "options": ["by", "on", "in", "at"], "answer": "on", "explanation": "Use 'on' for public transport you board." },
+    { "question": "I go ___ foot every day.", "options": ["by", "on", "in", "at"], "answer": "on", "explanation": "Fixed expression: 'on foot'." },
+    { "question": "How does Bat go to school?", "options": ["by car", "by bus", "on foot", "by bicycle"], "answer": "by bus", "explanation": "Bat said he goes by bus." },
+    { "question": "Where does Bat get on the bus?", "options": ["stop 3", "stop 5", "stop 7", "stop 10"], "answer": "stop 5", "explanation": "Bat gets on at stop number 5." },
+    { "question": "How does Sarnai go to school?", "options": ["by bus", "by car", "on foot / walks", "by taxi"], "answer": "on foot / walks", "explanation": "Sarnai's house is only 5 minutes away, so she walks." },
+    { "question": "How does the teacher come to school?", "options": ["by bus", "on foot", "by car", "by train"], "answer": "by car", "explanation": "The teacher said she comes by car." },
+    { "question": "How do you say 'walk' without preposition?", "options": ["by foot", "on foot", "in foot", "at foot"], "answer": "on foot", "explanation": "Correct fixed expression is 'on foot'." },
+    { "question": "How long does Bat's journey normally take?", "options": ["10 minutes", "20 minutes", "35 minutes", "5 minutes"], "answer": "20 minutes", "explanation": "Bat said about 20 minutes normally." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "How do you get to...? — Transport prepositions by / on / in",
+      "grammarExplanation": "To talk about transport, use prepositions: BY + vehicle = method (I go by bus / by car / by plane). ON + public transport = on a bus, on a train. IN + private vehicle = in a car, in a taxi. Walk needs no preposition: 'I walk to school' or 'I go on foot'. Тээврийн хэрэгслийн угтвар үгс: BY + хэрэгсэл (by bus, by car). ON + нийтийн тээвэр (on a bus, on a train). IN + хувийн тээвэр (in a car, in a taxi). Walk-д угтвар үг хэрэггүй: 'I walk to school' эсвэл 'I go on foot'.",
+      "grammarTable": [
+        { "subject": "by", "verb": "method", "positive": "I go by bus.", "negative": "I don't go by bus.", "question": "Do you go by bus?", "mongolian": "...аар / ...ээр явна" },
+        { "subject": "on", "verb": "public", "positive": "I am on the bus.", "negative": "I am not on the train.", "question": "Are you on the bus?", "mongolian": "...дотор байна" },
+        { "subject": "in", "verb": "private", "positive": "She is in the car.", "negative": "She is not in the taxi.", "question": "Is she in the car?", "mongolian": "...дотор (хувийн)" },
+        { "subject": "on foot", "verb": "walking", "positive": "I go on foot.", "negative": "I don't walk.", "question": "Do you walk to school?", "mongolian": "явган явна" }
+      ],
+      "quickPractice": [
+        "1. I go to school _____ bus. (by)",
+        "2. He is _____ the train. (on)",
+        "3. She goes _____ taxi. (by)",
+        "4. We travel _____ plane. (by)",
+        "5. She is _____ the car. (in)",
+        "6. I go _____ foot every day. (on)",
+        "7. How do you go _____ school? (to)",
+        "8. I _____ the bus at stop 5. (take)"
+      ],
+      "answerKey": ["1-by", "2-on", "3-by", "4-by", "5-in", "6-on", "7-to", "8-take"],
+      "commonMistakes": [
+        "I go in bus. → I go BY bus.",
+        "She is by the car. → She is IN the car.",
+        "I take by taxi. → I take A taxi. / I go by taxi.",
+        "I walk by foot. → I walk. / I go on foot."
+      ]
+    },
+    "page2": {
+      "readingPassage": "Bat lives far from school. He goes to school by bus every morning. He gets on the bus at stop number 5. The journey takes 20 minutes. Sometimes there is heavy traffic and the bus is slow. On those days, Bat arrives late. His teacher goes to school by car. Sarnai lives near school, so she walks. She goes on foot every day. Walking is healthy!",
+      "keyPhrases": [
+        { "english": "How do you get to school?", "mongolian": "Та сургуульдаа яаж явдаг вэ?", "note": "How do you get to + place?" },
+        { "english": "I go by bus", "mongolian": "Би автобусаар явдаг", "note": "go + by + vehicle" },
+        { "english": "It takes 20 minutes", "mongolian": "20 минут зарцуулдаг", "note": "It takes + time" },
+        { "english": "I get on at stop 5", "mongolian": "Би 5-р буудалд унадаг", "note": "get on + at + stop" },
+        { "english": "I go on foot", "mongolian": "Би явганаар явдаг", "note": "go on foot = walk" },
+        { "english": "How long does it take?", "mongolian": "Хэр удаан болдог вэ?", "note": "Asking about journey time" }
+      ],
+      "speakingQuestions": [
+        "1. How do you get to school? / Та сургуульдаа яаж явдаг вэ?",
+        "2. How long does it take? / Хэр удаан болдог вэ?",
+        "3. Do you take the bus or walk?",
+        "4. How does your mother or father get to work?",
+        "5. Is there a bus stop near your house?",
+        "6. What transport do you use most often?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "How do you get to school every day?" },
+        { "speaker": "B", "text": "I go by bus. I take bus number 7." },
+        { "speaker": "A", "text": "How long does it take?" },
+        { "speaker": "B", "text": "It takes about 15 minutes." },
+        { "speaker": "A", "text": "Is the bus always on time?" },
+        { "speaker": "B", "text": "Not always. Sometimes there is heavy traffic." },
+        { "speaker": "A", "text": "How does your teacher get to school?" },
+        { "speaker": "B", "text": "She comes by car. She has a small blue car." }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: How do you get to school every day? Bat, you first. Bat: I go by bus. I get on at stop number 5 near my house. Teacher: How long does the journey take? Bat: It takes about 20 minutes. But in traffic it takes 35 minutes! Teacher: Sarnai, how do you come to school? Sarnai: I walk! My house is only 5 minutes away. Teacher: Lucky you! I come by car. The traffic is sometimes terrible. Bat: Yes, teacher! The bus is slow in traffic too.",
+      "listeningQuestions": [
+        { "question": "How does Bat go to school?", "options": ["by car", "by bus", "on foot"], "answer": "by bus" },
+        { "question": "Where does Bat get on the bus?", "options": ["stop 3", "stop 7", "stop 5"], "answer": "stop 5" },
+        { "question": "How long does Bat's journey normally take?", "options": ["10 minutes", "20 minutes", "35 minutes"], "answer": "20 minutes" },
+        { "question": "How long in traffic?", "options": ["20 minutes", "25 minutes", "35 minutes"], "answer": "35 minutes" },
+        { "question": "How does Sarnai go to school?", "options": ["by bus", "by car", "on foot / walks"], "answer": "on foot / walks" },
+        { "question": "How far is Sarnai's house from school?", "options": ["10 minutes", "5 minutes", "15 minutes"], "answer": "5 minutes" },
+        { "question": "How does the teacher come to school?", "options": ["by bus", "on foot", "by car"], "answer": "by car" },
+        { "question": "Does the teacher like traffic?", "options": ["yes", "no", "not mentioned"], "answer": "no" },
+        { "question": "What preposition means 'the method of travel'?", "options": ["on", "in", "by"], "answer": "by" },
+        { "question": "How do you say 'walk' without preposition?", "options": ["by foot", "on foot", "in foot"], "answer": "on foot" }
+      ],
+      "grammarPractice": [
+        "1. I go to school _____ bus.",
+        "2. He is _____ the train right now.",
+        "3. She goes _____ taxi every day.",
+        "4. We travel _____ plane.",
+        "5. She is _____ the car.",
+        "6. I go _____ foot every day."
+      ],
+      "matchingExercise": [
+        { "left": "bus", "right": "автобус" },
+        { "left": "bicycle", "right": "дугуй" },
+        { "left": "train", "right": "галт тэрэг" },
+        { "left": "plane", "right": "онгоц" },
+        { "left": "taxi", "right": "такси" }
+      ],
+      "homework": [
+        "Writing: Write 5 sentences about how you and your family members get to school/work.",
+        "Vocabulary: Write the journey from your home to school step by step in English.",
+        "Speaking: Ask 3 people: 'How do you get to school/work?' — remember their answers.",
+        "Review: Practice: by bus / on the bus / in the car / on foot — all four!"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-by · 2-on · 3-by · 4-by · 5-in · 6-on",
+        "Matching: 1-C · 2-E · 3-B · 4-A · 5-D",
+        "Listening: 1-b · 2-c · 3-b · 4-c · 5-c · 6-b · 7-c · 8-b · 9-c · 10-b"
+      ],
+      "completionSummary": [
+        "Learned 20 transport words",
+        "Mastered by/on/in transport prepositions",
+        "Read about Bat's bus journey",
+        "Practiced asking 'How do you get to...?'",
+        "Listened to a classroom transport dialog",
+        "Practiced speaking about daily commute",
+        "Learned 'on foot' fixed expression"
+      ]
+    }
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "day": 28,
+  "level": 1,
+  "titleEn": "Day 28: Week 4 Review & Travel",
+  "titleMn": "Өдөр 28: 4-р долоо хоногийн давталт ба Аялал",
+  "objectiveEn": "About one hour. Learn 20 travel words, mixed tenses review (past/present/future), listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 шинэ үг, бүх цагийн давталт (өнгөрсөн/одоо/ирээдүй), сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Review past, present, and future tenses together while learning travel vocabulary.",
+  "contentMn": "Аяллын үгсийг сурахын зэрэгцээ өнгөрсөн, одоо, ирээдүй цагийг хольж давтана.",
+  "vocabulary": [
+    { "english": "passport", "pronunciation": "/ˈpɑːspɔːrt/", "mongolian": "гадаад паспорт", "example": "I need my passport to travel." },
+    { "english": "visa", "pronunciation": "/ˈviːzə/", "mongolian": "виз", "example": "She applied for a visa." },
+    { "english": "hotel", "pronunciation": "/hoʊˈtɛl/", "mongolian": "зочид буудал", "example": "The hotel was very comfortable." },
+    { "english": "luggage", "pronunciation": "/ˈlʌɡɪdʒ/", "mongolian": "тээш / ачаа", "example": "I packed my luggage last night." },
+    { "english": "flight", "pronunciation": "/flaɪt/", "mongolian": "нислэг", "example": "My flight is at 6 AM." },
+    { "english": "airport", "pronunciation": "/ˈɛərpɔːrt/", "mongolian": "нисэх онгоцны буудал", "example": "We arrived at the airport early." },
+    { "english": "check in", "pronunciation": "/tʃɛk ɪn/", "mongolian": "бүртгүүлэх", "example": "I checked in at the hotel." },
+    { "english": "tour", "pronunciation": "/tʊər/", "mongolian": "аялал", "example": "We took a tour of the city." },
+    { "english": "souvenir", "pronunciation": "/ˌsuːvəˈnɪər/", "mongolian": "дурсгалын эд зүйл / сувинер", "example": "I bought souvenirs for my family." },
+    { "english": "currency", "pronunciation": "/ˈkʌrənsi/", "mongolian": "валют / мөнгөн тэмдэгт", "example": "I changed my currency at the bank." },
+    { "english": "map", "pronunciation": "/mæp/", "mongolian": "газрын зураг", "example": "I used a map to find the way." },
+    { "english": "guide", "pronunciation": "/ɡaɪd/", "mongolian": "хөтөч / гарын авлага", "example": "The guide was very helpful." },
+    { "english": "sightseeing", "pronunciation": "/ˈsaɪtˌsiːɪŋ/", "mongolian": "дурсгалт газар үзэх", "example": "We went sightseeing all day." },
+    { "english": "adventure", "pronunciation": "/ədˈvɛntʃər/", "mongolian": "адал явдал", "example": "Traveling is a great adventure." },
+    { "english": "destination", "pronunciation": "/ˌdɛstɪˈneɪʃən/", "mongolian": "очих газар", "example": "What is your destination?" },
+    { "english": "booking", "pronunciation": "/ˈbʊkɪŋ/", "mongolian": "захиалга", "example": "I made a hotel booking online." },
+    { "english": "delay", "pronunciation": "/dɪˈleɪ/", "mongolian": "хойшлуулах", "example": "The flight had a delay." },
+    { "english": "gate", "pronunciation": "/ɡeɪt/", "mongolian": "гарц", "example": "Go to Gate 5 for your flight." },
+    { "english": "boarding", "pronunciation": "/ˈbɔːrdɪŋ/", "mongolian": "онгоцонд суух", "example": "Boarding starts at 6:30." },
+    { "english": "return", "pronunciation": "/rɪˈtɜːrn/", "mongolian": "буцах", "example": "When are you going to return?" }
+  ],
+  "quiz": [
+    { "question": "Yesterday I _____ to the park.", "options": ["go", "went", "going", "goes"], "answer": "went", "explanation": "Past Simple uses 'went' (irregular past of 'go')." },
+    { "question": "Now I _____ English.", "options": ["study", "studied", "am studying", "studies"], "answer": "am studying", "explanation": "Present Continuous for actions happening now." },
+    { "question": "Next year I _____ to travel.", "options": ["went", "go", "am going", "was"], "answer": "am going", "explanation": "Going to + base verb expresses future plans." },
+    { "question": "I _____ to school by bus every day.", "options": ["go", "went", "going", "am go"], "answer": "go", "explanation": "Present Simple for daily habits." },
+    { "question": "What did Bat do last year?", "options": ["traveled abroad", "went to a concert", "won a competition", "graduated"], "answer": "went to a concert", "explanation": "Bat said 'Last year, I went to a concert.'" },
+    { "question": "What is Sarnai going to do next summer?", "options": ["travel", "study abroad", "have an art exhibition", "get married"], "answer": "have an art exhibition", "explanation": "She is going to have her first art exhibition." },
+    { "question": "What tense is 'I am studying'?", "options": ["Past Simple", "Present Continuous", "Going to", "Present Simple"], "answer": "Present Continuous", "explanation": "am/is/are + verb-ing = Present Continuous." },
+    { "question": "What tense is 'I am going to study'?", "options": ["Past Simple", "Present Simple", "Future with going to", "Present Continuous"], "answer": "Future with going to", "explanation": "am/is/are + going to + base verb = future plan." },
+    { "question": "_____ you travel often?", "options": ["Are", "Do", "Did", "Is"], "answer": "Do", "explanation": "Habit questions use 'Do/Does + subject + base verb?'" },
+    { "question": "Last week it _____ very cold.", "options": ["is", "was", "were", "be"], "answer": "was", "explanation": "Past tense of 'is' for singular 'it' is 'was'." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Mixed tenses review — Past / Present / Future together",
+      "grammarExplanation": "In real conversations, we mix ALL tenses together. PAST tells what happened: 'I went to Korea last year.' PRESENT describes now: 'I am studying English now.' FUTURE shows plans: 'I am going to travel next summer.' Key signal words: PAST → yesterday/last year/ago. PRESENT → now/every day. FUTURE → tomorrow/next week/going to. · Өдөр тутмын яриандаа бид БҮХ цагийг хольж хэрэглэдэг. ӨНГӨРСӨН — yesterday/last year. ОДОО — now/every day. ИРЭЭДҮЙ — tomorrow/next week/going to.",
+      "grammarTable": [
+        { "subject": "Past", "verb": "was/were/went", "positive": "I went to Seoul.", "negative": "I didn't go to Tokyo.", "question": "Did you go to Seoul?", "mongolian": "Өнгөрсөн болсон зүйл" },
+        { "subject": "Present Simple", "verb": "go/study", "positive": "I travel every summer.", "negative": "I don't travel in winter.", "question": "Do you travel often?", "mongolian": "Байнга давтагддаг үйл" },
+        { "subject": "Present Continuous", "verb": "am going", "positive": "I am studying now.", "negative": "I am not sleeping.", "question": "Are you studying?", "mongolian": "Яг одоо" },
+        { "subject": "Going to", "verb": "am going to", "positive": "I am going to travel.", "negative": "I am not going to stay.", "question": "Are you going to go?", "mongolian": "Ирээдүйн төлөвлөгөө" }
+      ],
+      "quickPractice": [
+        "1. Yesterday I _____ to the park. (go — past)",
+        "2. Now I _____ English. (study — continuous)",
+        "3. Next year I _____ to travel. (going)",
+        "4. I _____ to school by bus every day. (go — habit)",
+        "5. She _____ to music now. (listen — continuous)",
+        "6. _____ you travel often? (Do — habit)",
+        "7. Last week it _____ very cold. (be — past)",
+        "8. Tomorrow I _____ study. (going to)"
+      ],
+      "answerKey": ["1-went", "2-am studying", "3-am going", "4-go", "5-is listening", "6-Do", "7-was", "8-am going to"],
+      "commonMistakes": [
+        "Yesterday I go to school. → Yesterday I WENT to school.",
+        "Now I study. → Now I AM STUDYING.",
+        "I am going to went. → I am going to GO.",
+        "Last year I am happy. → Last year I WAS happy."
+      ]
+    },
+    "page2": {
+      "readingPassage": "Bat loves travel. Last year, he visited his uncle in the countryside. It was an amazing adventure. Right now, he is saving money every month. He studies English every day because he knows it is important for travel. Next summer, he is going to travel to South Korea with Sarnai. They are going to visit museums, eat great food, and practice their English every day!",
+      "keyPhrases": [
+        { "english": "Last year I went to...", "mongolian": "Өнгөрсөн жил би ...-д явсан", "note": "Past Simple — went" },
+        { "english": "Now I am studying", "mongolian": "Одоо би судалж байна", "note": "Present Continuous — am studying" },
+        { "english": "I study English every day", "mongolian": "Би өдөр бүр англи хэл судалдаг", "note": "Present Simple — habit" },
+        { "english": "Next year I am going to travel", "mongolian": "Ирэх жил би аялах гэж байна", "note": "Going to — future plan" },
+        { "english": "I have been to...", "mongolian": "Би ...-д очиж байсан", "note": "Talking about travel experience" },
+        { "english": "It was an amazing experience!", "mongolian": "Гайхалтай туршлага байсан!", "note": "Describing past travel" }
+      ],
+      "speakingQuestions": [
+        "1. Have you ever traveled outside Mongolia? / Та Монголоос гадна аялж байсан уу?",
+        "2. Where did you go last holiday?",
+        "3. Where are you going to travel in the future?",
+        "4. What country would you like to visit?",
+        "5. What did you do during your last vacation?",
+        "6. Are you going to travel this summer?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "Did you go anywhere interesting last year?" },
+        { "speaker": "B", "text": "Yes! I went to visit my relatives in the countryside." },
+        { "speaker": "A", "text": "What did you do there?" },
+        { "speaker": "B", "text": "We rode horses and saw beautiful mountains." },
+        { "speaker": "A", "text": "That sounds amazing! Where are you going now?" },
+        { "speaker": "B", "text": "I am going to the library to study for my exam." },
+        { "speaker": "A", "text": "What are you going to do this summer?" },
+        { "speaker": "B", "text": "I am going to travel to South Korea! English will really help me!" }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Today we review all tenses. Bat, tell us about your past, present, and future! Bat: OK! Last year, I went to a concert. Right now, I am studying English at school. Next year, I am going to study at university! Teacher: Perfect use of all three tenses! Sarnai, your turn! Sarnai: Last month, I won an art competition. Now, I am working on a new painting. Next summer, I am going to have my first art exhibition! Teacher: Excellent! You both used past, present, and future perfectly. That is what real English sounds like! Students: Thank you, teacher! We love learning English!",
+      "listeningQuestions": [
+        { "question": "What did Bat do last year?", "options": ["traveled abroad", "went to a concert", "won a competition"], "answer": "b" },
+        { "question": "What is Bat doing now?", "options": ["working", "playing sport", "studying English at school"], "answer": "c" },
+        { "question": "What is Bat going to do next year?", "options": ["travel to Korea", "study at university", "get a job"], "answer": "b" },
+        { "question": "What did Sarnai do last month?", "options": ["traveled", "won an art competition", "graduated"], "answer": "b" },
+        { "question": "What is Sarnai doing now?", "options": ["reading", "working on a new painting", "studying math"], "answer": "b" },
+        { "question": "What is Sarnai going to do next summer?", "options": ["travel", "study abroad", "have an art exhibition"], "answer": "c" },
+        { "question": "What does the teacher say about their English?", "options": ["needs improvement", "perfect use of all tenses", "good but not great"], "answer": "b" },
+        { "question": "What tense is used for 'last year I went'?", "options": ["Present Simple", "Future", "Past Simple"], "answer": "c" },
+        { "question": "What tense is 'I am studying'?", "options": ["Past Simple", "Present Continuous", "Going to"], "answer": "b" },
+        { "question": "What tense is 'I am going to study'?", "options": ["Past Simple", "Present Simple", "Future with going to"], "answer": "c" }
+      ],
+      "grammarPractice": [
+        "1. Yesterday I _____ to the park. (go-past)",
+        "2. Now I _____ English. (study-continuous)",
+        "3. Next year I _____ to travel. (going to)",
+        "4. I _____ to school by bus every day. (go-habit)",
+        "5. Last week it _____ very cold. (be-past)",
+        "6. Tomorrow I _____ study hard. (going to)"
+      ],
+      "matchingExercise": [
+        { "left": "yesterday", "right": "өчигдөр" },
+        { "left": "now", "right": "одоо" },
+        { "left": "every day", "right": "өдөр бүр" },
+        { "left": "next year", "right": "ирэх жил" },
+        { "left": "next week", "right": "ирэх долоо хоногт" }
+      ],
+      "homework": [
+        "Writing: Write 3 paragraphs — past (what you did last week), present (what you do every day), future (what you are going to do).",
+        "Vocabulary: Review all 20 travel words and use 5 in sentences.",
+        "Speaking: Tell a friend in English: one past event, one present habit, and one future plan.",
+        "Review: Past = yesterday/last · Present = now/every day · Future = tomorrow/going to."
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-went · 2-am studying · 3-am going · 4-go · 5-was · 6-am going to",
+        "Matching: 1-B · 2-C · 3-E · 4-A · 5-D",
+        "Listening: 1-b · 2-c · 3-b · 4-b · 5-b · 6-c · 7-b · 8-c · 9-b · 10-c"
+      ],
+      "completionSummary": [
+        "Learned 20 travel words",
+        "Reviewed all tenses (past/present/future)",
+        "Read a travel passage",
+        "Practiced grammar exercises",
+        "Practiced speaking and role play",
+        "Completed listening practice",
+        "Finished Week 4!"
+      ]
+    }
+  }
+}

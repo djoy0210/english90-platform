@@ -1,0 +1,155 @@
+{
+  "day": 23,
+  "level": 1,
+  "titleEn": "Day 23: What Did You Do?",
+  "titleMn": "Өдөр 23: Та юу хийсэн бэ?",
+  "objectiveEn": "About one hour. Learn 20 regular past verbs, Past Simple -ed rules, reading, speaking, listening, and homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 ердийн өнгөрсөн цагийн үйл үг, -ed дүрэм, унших, ярих, сонсох, гэрийн даалгавар.",
+  "contentEn": "Learn how to form Past Simple with regular -ed verbs and talk about what you did yesterday.",
+  "contentMn": "Ердийн -ed үйл үгсээр өнгөрсөн цагийг үүсгэж, өчигдөр юу хийсэн тухайгаа ярьж сурна.",
+  "vocabulary": [
+    { "english": "walked", "pronunciation": "/wɔːkt/", "mongolian": "явсан (явган)", "example": "I walked to school yesterday." },
+    { "english": "talked", "pronunciation": "/tɔːkt/", "mongolian": "ярьсан", "example": "We talked for two hours." },
+    { "english": "watched", "pronunciation": "/wɒtʃt/", "mongolian": "үзсэн", "example": "She watched a movie last night." },
+    { "english": "cooked", "pronunciation": "/kʊkt/", "mongolian": "хоол хийсэн", "example": "My mother cooked dinner." },
+    { "english": "cleaned", "pronunciation": "/kliːnd/", "mongolian": "цэвэрлэсэн", "example": "I cleaned my room yesterday." },
+    { "english": "played", "pronunciation": "/pleɪd/", "mongolian": "тоглосон", "example": "He played football yesterday." },
+    { "english": "studied", "pronunciation": "/ˈstʌdid/", "mongolian": "суралцсан", "example": "I studied English last night." },
+    { "english": "listened", "pronunciation": "/ˈlɪsənd/", "mongolian": "сонссон", "example": "She listened to music." },
+    { "english": "called", "pronunciation": "/kɔːld/", "mongolian": "залгасан", "example": "I called my friend yesterday." },
+    { "english": "visited", "pronunciation": "/ˈvɪzɪtɪd/", "mongolian": "зочилсон", "example": "We visited my grandmother." },
+    { "english": "waited", "pronunciation": "/ˈweɪtɪd/", "mongolian": "хүлээсэн", "example": "I waited for the bus." },
+    { "english": "started", "pronunciation": "/ˈstɑːrtɪd/", "mongolian": "эхэлсэн", "example": "The movie started at 7." },
+    { "english": "finished", "pronunciation": "/ˈfɪnɪʃt/", "mongolian": "дуусгасан", "example": "I finished my homework." },
+    { "english": "helped", "pronunciation": "/hɛlpt/", "mongolian": "тусалсан", "example": "She helped her mother." },
+    { "english": "enjoyed", "pronunciation": "/ɪnˈdʒɔɪd/", "mongolian": "таашаасан", "example": "We enjoyed the concert." },
+    { "english": "happened", "pronunciation": "/ˈhæpənd/", "mongolian": "болсон", "example": "What happened yesterday?" },
+    { "english": "looked", "pronunciation": "/lʊkt/", "mongolian": "харсан", "example": "I looked at the photo." },
+    { "english": "worked", "pronunciation": "/wɜːrkt/", "mongolian": "ажилласан", "example": "My father worked late." },
+    { "english": "arrived", "pronunciation": "/əˈraɪvd/", "mongolian": "ирсэн / хүрсэн", "example": "The bus arrived late." },
+    { "english": "decided", "pronunciation": "/dɪˈsaɪdɪd/", "mongolian": "шийдсэн", "example": "She decided to study English." }
+  ],
+  "quiz": [
+    { "question": "I _____ to school yesterday.", "options": ["walk", "walked", "walking", "walks"], "answer": "walked", "explanation": "Past Simple of walk is walked." },
+    { "question": "She _____ English all night.", "options": ["study", "studyed", "studied", "studies"], "answer": "studied", "explanation": "Consonant+y → ied: study → studied." },
+    { "question": "We _____ our grandmother.", "options": ["visit", "visited", "visiting", "visites"], "answer": "visited", "explanation": "Add -ed to visit." },
+    { "question": "Which form follows 'didn't'?", "options": ["past form", "-ing form", "base verb", "to + verb"], "answer": "base verb", "explanation": "After didn't always use the base verb." },
+    { "question": "What sport did Bat play?", "options": ["basketball", "volleyball", "football", "tennis"], "answer": "football", "explanation": "Bat played football." },
+    { "question": "What did Sarnai cook?", "options": ["lunch", "breakfast", "dinner", "soup"], "answer": "dinner", "explanation": "Sarnai cooked dinner with her mother." },
+    { "question": "Which sentence is correct?", "options": ["I study yesterday.", "She walkd to school.", "He stoped running.", "I studied yesterday."], "answer": "I studied yesterday.", "explanation": "Use the regular past form -ed." },
+    { "question": "He _____ football yesterday.", "options": ["play", "playd", "played", "playing"], "answer": "played", "explanation": "Past of play = played." },
+    { "question": "The bus _____ late.", "options": ["arrive", "arrives", "arrived", "arriving"], "answer": "arrived", "explanation": "Verb ending in -e: add -d → arrived." },
+    { "question": "How long did Sarnai study?", "options": ["one hour", "two hours", "three hours", "four hours"], "answer": "two hours", "explanation": "Sarnai studied for two hours." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Past Simple — regular verbs (-ed endings)",
+      "grammarExplanation": "Regular verbs form the Past Simple by adding -ED to the base verb. Rules: 1) Most verbs: just add -ed → walk→walked, talk→talked. 2) Verbs ending in -e: add only -d → arrive→arrived, love→loved. 3) Verbs ending in consonant+y: change y→ied → study→studied, try→tried. 4) Short verbs with vowel+consonant: double the last letter → stop→stopped, plan→planned. For NEGATIVES use DIDN'T + base verb. For QUESTIONS use DID + subject + base verb. Ердийн үйл үгс өнгөрсөн цагт -ED нэмдэг. Дүрэм: 1) Ихэнх үйл үгэнд -ed нэм → walk→walked. 2) -e-ээр төгссөнд -d нэм → arrive→arrived. 3) Гийгүүлэгч+y→ied болгоно → study→studied. 4) Богино үйл үгийн эцсийн гийгүүлэгчийг давтана → stop→stopped. Үгүйсгэлд DIDN'T + үндсэн үйл үг. Асуултад DID + субьект + үндсэн үйл үг.",
+      "grammarTable": [
+        { "subject": "I", "verb": "walk → walked", "positive": "I walked to school.", "negative": "I didn't walk.", "question": "Did you walk?", "mongolian": "явсан" },
+        { "subject": "She", "verb": "study → studied", "positive": "She studied all night.", "negative": "She didn't study.", "question": "Did she study?", "mongolian": "суралцсан" },
+        { "subject": "We", "verb": "arrive → arrived", "positive": "We arrived early.", "negative": "We didn't arrive early.", "question": "Did you arrive?", "mongolian": "ирсэн" },
+        { "subject": "He", "verb": "stop → stopped", "positive": "He stopped running.", "negative": "He didn't stop.", "question": "Did he stop?", "mongolian": "зогссон" },
+        { "subject": "They", "verb": "play → played", "positive": "They played football.", "negative": "They didn't play.", "question": "Did they play?", "mongolian": "тоглосон" },
+        { "subject": "I", "verb": "finish → finished", "positive": "I finished my homework.", "negative": "I didn't finish.", "question": "Did you finish?", "mongolian": "дуусгасан" }
+      ],
+      "quickPractice": [
+        "1. I _____ to school yesterday. (walk)",
+        "2. She _____ English all night. (study)",
+        "3. We _____ our grandmother. (visit)",
+        "4. The bus _____ late. (arrive)",
+        "5. She _____ a movie last night. (watch)",
+        "6. He _____ football yesterday. (play)",
+        "7. I _____ my homework early. (finish)",
+        "8. They _____ the concert. (enjoy)"
+      ],
+      "answerKey": ["1-walked", "2-studied", "3-visited", "4-arrived", "5-watched", "6-played", "7-finished", "8-enjoyed"],
+      "commonMistakes": [
+        "I study yesterday → I STUDIED yesterday",
+        "She walkd to school → She WALKED to school",
+        "He stoped running → He STOPPED running",
+        "I didn't studied → I didn't STUDY (base verb after didn't!)"
+      ]
+    },
+    "page2": {
+      "readingPassage": "Yesterday was a busy day for Bat. He woke up early and walked to school. At school, he studied math and English. After school, he visited his friend Dorj. They played football for an hour. In the evening, Bat cleaned his room and finished his homework. Then he watched an English video and called Sarnai. What a productive day!",
+      "keyPhrases": [
+        { "english": "What did you do yesterday?", "mongolian": "Та өчигдөр юу хийсэн бэ?", "note": "What + did + you + do?" },
+        { "english": "I walked to school", "mongolian": "Би сургуульдаа явган явсан", "note": "walked = past of walk" },
+        { "english": "She studied all night", "mongolian": "Тэр шөнөжин суралцсан", "note": "studied = past of study" },
+        { "english": "Did you enjoy it?", "mongolian": "Та таашаасан уу?", "note": "Did + you + enjoy?" },
+        { "english": "I didn't watch TV", "mongolian": "Би телевиз үзээгүй", "note": "didn't + base verb" },
+        { "english": "What time did you arrive?", "mongolian": "Та хэдэн цагт ирсэн бэ?", "note": "What time + did + you + arrive?" }
+      ],
+      "speakingQuestions": [
+        "What did you do yesterday? / Та өчигдөр юу хийсэн бэ?",
+        "What did you study last week?",
+        "Did you walk to school today?",
+        "What did you watch on TV last night?",
+        "Did you call anyone yesterday?",
+        "What time did you finish school?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "What did you do yesterday?" },
+        { "speaker": "B", "text": "I studied English and played football." },
+        { "speaker": "A", "text": "Did you walk to school?" },
+        { "speaker": "B", "text": "No, I didn't walk. I took the bus." },
+        { "speaker": "A", "text": "Did you enjoy your English lesson?" },
+        { "speaker": "B", "text": "Yes! I loved it. We studied Past Simple." },
+        { "speaker": "A", "text": "What time did you finish your homework?" },
+        { "speaker": "B", "text": "I finished it at 9 o'clock." }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Good morning! What did you do yesterday? Bat, tell us. Bat: I walked to school, studied hard, played football after school, and finished my homework! Teacher: Excellent! Did you watch any English videos? Bat: Yes! I watched an English video about Past Simple verbs. Teacher: Great! Sarnai, what did you do? Sarnai: I cooked dinner with my mother, cleaned my room, and studied for two hours. Teacher: Did you enjoy your evening? Sarnai: Yes! I really enjoyed it. I called my friend too and we talked for an hour.",
+      "listeningQuestions": [
+        { "question": "Did Bat walk to school yesterday?", "options": ["no", "yes", "not mentioned"], "answer": "yes" },
+        { "question": "What sport did Bat play?", "options": ["basketball", "volleyball", "football"], "answer": "football" },
+        { "question": "Did Bat watch an English video?", "options": ["no", "yes", "not mentioned"], "answer": "yes" },
+        { "question": "What was the video about?", "options": ["Present Simple", "Past Simple verbs", "Future tense"], "answer": "Past Simple verbs" },
+        { "question": "What did Sarnai cook?", "options": ["lunch", "breakfast", "dinner"], "answer": "dinner" },
+        { "question": "Who did Sarnai cook with?", "options": ["her friend", "her mother", "her sister"], "answer": "her mother" },
+        { "question": "How long did Sarnai study?", "options": ["one hour", "two hours", "three hours"], "answer": "two hours" },
+        { "question": "Did Sarnai call someone?", "options": ["no", "yes", "not mentioned"], "answer": "yes" },
+        { "question": "How long did they talk on the phone?", "options": ["30 minutes", "two hours", "one hour"], "answer": "one hour" },
+        { "question": "What form follows 'didn't'?", "options": ["past form", "-ing form", "base verb"], "answer": "base verb" }
+      ],
+      "grammarPractice": [
+        "1. I _____ to school yesterday. (walk)",
+        "2. She _____ English all night. (study)",
+        "3. We _____ our grandmother. (visit)",
+        "4. The bus _____ late. (arrive)",
+        "5. She _____ a movie last night. (watch)",
+        "6. I _____ my homework early. (finish)"
+      ],
+      "matchingExercise": [
+        { "left": "walked", "right": "явсан (явган)" },
+        { "left": "studied", "right": "суралцсан" },
+        { "left": "watched", "right": "үзсэн" },
+        { "left": "played", "right": "тоглосон" },
+        { "left": "called", "right": "залгасан" }
+      ],
+      "homework": [
+        "Writing: Write 5 sentences about what you did yesterday using -ed past forms.",
+        "Vocabulary: Write the past form of all 20 verbs from today 3 times each.",
+        "Speaking: Ask a family member: 'What did you do today?' — listen and report back.",
+        "Review: walk→walked · study→studied · arrive→arrived · stop→stopped"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-walked · 2-studied · 3-visited · 4-arrived · 5-watched · 6-finished",
+        "Matching: 1-B · 2-D · 3-A · 4-C · 5-E",
+        "Listening: 1-b · 2-c · 3-b · 4-b · 5-c · 6-b · 7-b · 8-b · 9-c · 10-c"
+      ],
+      "completionSummary": [
+        "Learned 20 regular past verbs",
+        "Mastered -ed past simple rules",
+        "Read about yesterday",
+        "Practiced grammar exercises",
+        "Practiced speaking",
+        "Practiced listening",
+        "Learned regular past simple verbs"
+      ]
+    }
+  }
+}

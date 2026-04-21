@@ -1,0 +1,153 @@
+{
+  "day": 4,
+  "level": 1,
+  "titleEn": "Day 4: Colors, Clothes & Appearance",
+  "titleMn": "Өдөр 4: Өнгө, Хувцас ба Гадаад төрх",
+  "objectiveEn": "About one hour. Learn 20 color and clothing words, adjective position before nouns, reading, listening, speaking, and homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 шинэ үг, тэмдэг нэрийн дараалал, сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Learn colors, clothes, and appearance vocabulary while practicing how adjectives are used before nouns in English.",
+  "contentMn": "Өнгө, хувцас, гадаад төрхийн үгсийг сурч, тэмдэг нэрийг нэрийн өмнө хэрхэн ашиглахыг дадлагажуулна.",
+  "vocabulary": [
+    { "english": "red", "pronunciation": "/rɛd/", "mongolian": "улаан", "example": "I wear a red shirt." },
+    { "english": "blue", "pronunciation": "/bluː/", "mongolian": "цэнхэр", "example": "The sky is blue." },
+    { "english": "green", "pronunciation": "/ɡriːn/", "mongolian": "ногоон", "example": "She has a green bag." },
+    { "english": "black", "pronunciation": "/blæk/", "mongolian": "хар", "example": "His shoes are black." },
+    { "english": "white", "pronunciation": "/waɪt/", "mongolian": "цагаан", "example": "I have a white coat." },
+    { "english": "yellow", "pronunciation": "/ˈjɛloʊ/", "mongolian": "шар", "example": "She wears a yellow dress." },
+    { "english": "shirt", "pronunciation": "/ʃɜːrt/", "mongolian": "цамц", "example": "My shirt is blue and new." },
+    { "english": "dress", "pronunciation": "/drɛs/", "mongolian": "даашинз", "example": "Her dress is beautiful." },
+    { "english": "shoes", "pronunciation": "/ʃuːz/", "mongolian": "гутал", "example": "His shoes are new." },
+    { "english": "bag", "pronunciation": "/bæɡ/", "mongolian": "цүнх", "example": "My bag is big and black." },
+    { "english": "hat", "pronunciation": "/hæt/", "mongolian": "малгай", "example": "She wears a red hat." },
+    { "english": "jacket", "pronunciation": "/ˈdʒækɪt/", "mongolian": "куртк", "example": "My jacket is warm." },
+    { "english": "glasses", "pronunciation": "/ˈɡlæsɪz/", "mongolian": "нүдний шил", "example": "He wears glasses." },
+    { "english": "long", "pronunciation": "/lɔːŋ/", "mongolian": "урт", "example": "She has long hair." },
+    { "english": "short", "pronunciation": "/ʃɔːrt/", "mongolian": "богино", "example": "He has short hair." },
+    { "english": "big", "pronunciation": "/bɪɡ/", "mongolian": "том", "example": "I have a big bag." },
+    { "english": "small", "pronunciation": "/smɔːl/", "mongolian": "жижиг", "example": "My room is small." },
+    { "english": "new", "pronunciation": "/njuː/", "mongolian": "шинэ", "example": "I have new shoes." },
+    { "english": "old", "pronunciation": "/oʊld/", "mongolian": "хуучин", "example": "This is my old jacket." },
+    { "english": "beautiful", "pronunciation": "/ˈbjuːtɪfəl/", "mongolian": "үзэсгэлэнтэй", "example": "She is beautiful." }
+  ],
+  "quiz": [
+    { "question": "Choose the correct order:", "options": ["a dress beautiful", "a beautiful dress", "beautiful a dress", "dress a beautiful"], "answer": "a beautiful dress", "explanation": "In English, adjective comes BEFORE the noun." },
+    { "question": "What is today's listening topic?", "options": ["numbers", "appearance", "family", "food"], "answer": "appearance", "explanation": "The teacher says 'today we describe people's appearance.'" },
+    { "question": "What color jacket does the man wear?", "options": ["blue", "green", "black", "red"], "answer": "black", "explanation": "Bat says 'He wears a black jacket.'" },
+    { "question": "What color dress does the woman wear?", "options": ["blue", "yellow", "red", "white"], "answer": "red", "explanation": "Sarnai says 'She wears a beautiful red dress.'" },
+    { "question": "Choose the correct order: Opinion → Size → Color → Noun", "options": ["a red big beautiful bag", "a beautiful big red bag", "a big red beautiful bag", "a bag beautiful big red"], "answer": "a beautiful big red bag", "explanation": "Order: Opinion → Size → Color → Noun." },
+    { "question": "Fill in: 'She has _____ hair.'", "options": ["long", "longs", "longing", "longed"], "answer": "long", "explanation": "Adjectives don't change form for plural/singular." },
+    { "question": "What color is the woman's hair?", "options": ["black", "yellow", "brown", "red"], "answer": "yellow", "explanation": "Sarnai says 'She has long yellow hair.'" },
+    { "question": "Choose the correct sentence:", "options": ["The shirt is blue new.", "The shirt is new and blue.", "The new blue shirt is.", "Shirt is the blue new."], "answer": "The shirt is new and blue.", "explanation": "Use 'and' to join two adjectives after 'is'." },
+    { "question": "What does 'үзэсгэлэнтэй' mean?", "options": ["small", "new", "beautiful", "old"], "answer": "beautiful", "explanation": "үзэсгэлэнтэй = beautiful." },
+    { "question": "How does the teacher feel?", "options": ["disappointed", "happy", "angry", "tired"], "answer": "happy", "explanation": "The teacher praises both students at the end." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Adjectives — position and usage before nouns",
+      "grammarExplanation": "Adjectives ALWAYS come BEFORE the noun in English: 'a red shirt' ✅ NOT 'a shirt red' ❌. Unlike Mongolian, adjectives NEVER change their form — they are the same for singular/plural, male/female. Order of multiple adjectives: Opinion → Size → Color → Noun ('a beautiful big red bag'). Тэмдэг нэр нь англи хэлэнд үргэлж нэрийн ӨМНӨ ирдэг. Монголоос ялгаатай нь тэмдэг нэр хэзээ ч өөрчлөгддөггүй. Дараалал: дүгнэлт → хэмжээ → өнгө → нэр.",
+      "grammarTable": [
+        { "subject": "Opinion", "verb": "beautiful", "positive": "a beautiful dress", "negative": "NOT a dress beautiful", "question": "Is it beautiful?", "mongolian": "үзэсгэлэнтэй" },
+        { "subject": "Size", "verb": "big / small", "positive": "a big bag", "negative": "NOT a bag big", "question": "Is it big?", "mongolian": "том / жижиг" },
+        { "subject": "Color", "verb": "red / blue", "positive": "a red shirt", "negative": "NOT a shirt red", "question": "Is it red?", "mongolian": "улаан / цэнхэр" },
+        { "subject": "Age", "verb": "new / old", "positive": "a new jacket", "negative": "NOT a jacket new", "question": "Is it new?", "mongolian": "шинэ / хуучин" }
+      ],
+      "quickPractice": [
+        "1. She has _____ hair. (long)",
+        "2. My bag is _____. (big)",
+        "3. His shoes are _____. (new)",
+        "4. The sky is _____. (blue)",
+        "5. He wears a _____ hat. (red)",
+        "6. Her dress is _____. (beautiful)",
+        "7. I have a _____ jacket. (warm)",
+        "8. My room is _____. (small)"
+      ],
+      "answerKey": ["1-long", "2-big", "3-new", "4-blue", "5-red", "6-beautiful", "7-warm", "8-small"],
+      "commonMistakes": [
+        "A dress beautiful. → A beautiful dress.",
+        "Hair long black. → Long black hair.",
+        "The shirt is blue new. → The shirt is new and blue.",
+        "She is beauty. → She is beautiful."
+      ]
+    },
+    "page2": {
+      "readingPassage": "Today is the first day of school. Sarnai wears a white shirt and a blue skirt. She has long black hair and small glasses. Her bag is big and red. Bat wears a green jacket and black shoes. He has short hair. Their teacher, Ms. Bold, wears a beautiful yellow dress. She has long brown hair. Everyone looks great today!",
+      "keyPhrases": [
+        { "english": "She wears a white shirt", "mongolian": "Тэр цагаан цамц өмсдөг", "note": "wear + color + noun" },
+        { "english": "She has long black hair", "mongolian": "Тэр урт хар үстэй", "note": "have + adj + adj + noun" },
+        { "english": "Her bag is big and red", "mongolian": "Түүний цүнх том, улаан", "note": "possessive + noun + is + adj" },
+        { "english": "What color is your...?", "mongolian": "Таны ... ямар өнгөтэй вэ?", "note": "Asking about color" },
+        { "english": "I wear / I am wearing", "mongolian": "Би өмсдөг / өмсөж байна", "note": "wear = describe clothing" },
+        { "english": "He has short hair", "mongolian": "Тэр богино үстэй", "note": "have + adj + noun" }
+      ],
+      "speakingQuestions": [
+        "1. What are you wearing today? / Та өнөөдөр юу өмсөж байна?",
+        "2. What color is your shirt?",
+        "3. Do you have long or short hair?",
+        "4. What is your favorite color?",
+        "5. What color is your school bag?",
+        "6. Describe your teacher's appearance!"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "I like your jacket! What color is it?" },
+        { "speaker": "B", "text": "Thank you! It is dark green." },
+        { "speaker": "A", "text": "Is it new?" },
+        { "speaker": "B", "text": "Yes! My mother bought it yesterday." },
+        { "speaker": "A", "text": "Your shoes are nice too. Are they new?" },
+        { "speaker": "B", "text": "No, they are old but I love them." },
+        { "speaker": "A", "text": "What is your favorite color?" },
+        { "speaker": "B", "text": "My favorite color is blue. And yours?" }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Good morning! Today we describe people's appearance. Bat, describe the man in the picture. Bat: I see a tall man. He wears a black jacket and blue shoes. He has short brown hair and small glasses. Teacher: Excellent! Does he wear glasses? Bat: Yes, he has small glasses. Teacher: Sarnai, describe the woman. Sarnai: The woman is short. She wears a beautiful red dress. She has long yellow hair. Teacher: Perfect! You both did very well today!",
+      "listeningQuestions": [
+        { "question": "What is today's topic?", "options": ["numbers", "appearance", "family"], "answer": "b" },
+        { "question": "Is the man tall or short?", "options": ["tall", "short", "not mentioned"], "answer": "a" },
+        { "question": "What color is the man's jacket?", "options": ["blue", "green", "black"], "answer": "c" },
+        { "question": "What color are the man's shoes?", "options": ["black", "blue", "brown"], "answer": "b" },
+        { "question": "Does the man wear glasses?", "options": ["yes", "no", "not mentioned"], "answer": "a" },
+        { "question": "What color dress does the woman wear?", "options": ["blue", "yellow", "red"], "answer": "c" },
+        { "question": "What color is the woman's hair?", "options": ["black", "yellow", "brown"], "answer": "b" },
+        { "question": "Is the woman tall or short?", "options": ["tall", "short", "not mentioned"], "answer": "b" },
+        { "question": "Who describes the woman?", "options": ["Bat", "Teacher", "Sarnai"], "answer": "c" },
+        { "question": "How does the teacher feel?", "options": ["disappointed", "happy", "angry"], "answer": "b" }
+      ],
+      "grammarPractice": [
+        "1. She has _____ hair. (long)",
+        "2. My bag is _____. (big)",
+        "3. His shoes are _____. (new)",
+        "4. The sky is _____. (blue)",
+        "5. Her dress is _____. (beautiful)",
+        "6. I have a _____ jacket. (warm)"
+      ],
+      "matchingExercise": [
+        { "left": "red", "right": "улаан" },
+        { "left": "blue", "right": "цэнхэр" },
+        { "left": "black", "right": "хар" },
+        { "left": "green", "right": "ногоон" },
+        { "left": "white", "right": "цагаан" }
+      ],
+      "homework": [
+        "Writing: Write 5 sentences describing what you are wearing today.",
+        "Vocabulary: Write 5 adjective + noun combinations (e.g., big red bag).",
+        "Speaking: Ask someone: 'What color is your favorite shirt?'",
+        "Review: Describe a family member's appearance in 3 sentences."
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-long · 2-big · 3-new · 4-blue · 5-beautiful · 6-warm",
+        "Matching: 1-E · 2-D · 3-A · 4-B · 5-C",
+        "Listening: 1-b · 2-a · 3-c · 4-b · 5-a · 6-c · 7-b · 8-b · 9-c · 10-b"
+      ],
+      "completionSummary": [
+        "Learned 20 color, clothes, and appearance words",
+        "Mastered adjective order in English",
+        "Practiced describing people's appearance",
+        "Completed grammar practice exercises",
+        "Practiced speaking about clothes",
+        "Completed listening comprehension",
+        "Described looks using adjectives"
+      ]
+    }
+  }
+}

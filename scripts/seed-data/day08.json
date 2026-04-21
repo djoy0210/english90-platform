@@ -1,0 +1,155 @@
+{
+  "day": 8,
+  "level": 1,
+  "titleEn": "Day 8: Days, Months & Time",
+  "titleMn": "Өдөр 8: Гараг, Сар & Цаг",
+  "objectiveEn": "About one hour. Learn 20 day/month/time words, Wh- question grammar, listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. Гараг, сар, цагийн 20 шинэ үг, Wh- асуултын дүрэм, сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Learn the days of the week, months, and time expressions, and ask Wh- questions about schedules.",
+  "contentMn": "7 хоногийн гараг, сар, цагийн илэрхийлэл сурч, хуваарийн тухай Wh- асуулт асуухыг сурна.",
+  "vocabulary": [
+    { "english": "Monday", "pronunciation": "/ˈmʌndeɪ/", "mongolian": "Даваа гараг", "example": "School starts on Monday." },
+    { "english": "Tuesday", "pronunciation": "/ˈtjuːzdeɪ/", "mongolian": "Мягмар гараг", "example": "I have English on Tuesday." },
+    { "english": "Wednesday", "pronunciation": "/ˈwɛnzdeɪ/", "mongolian": "Лхагва гараг", "example": "Wednesday is in the middle." },
+    { "english": "Thursday", "pronunciation": "/ˈθɜːrzdeɪ/", "mongolian": "Пүрэв гараг", "example": "I play sport on Thursday." },
+    { "english": "Friday", "pronunciation": "/ˈfraɪdeɪ/", "mongolian": "Баасан гараг", "example": "Friday is my favorite day!" },
+    { "english": "Saturday", "pronunciation": "/ˈsætərdeɪ/", "mongolian": "Бямба гараг", "example": "I relax on Saturday." },
+    { "english": "Sunday", "pronunciation": "/ˈsʌndeɪ/", "mongolian": "Ням гараг", "example": "Sunday is a rest day." },
+    { "english": "January", "pronunciation": "/ˈdʒænjuəri/", "mongolian": "Нэгдүгээр сар", "example": "My birthday is in January." },
+    { "english": "June", "pronunciation": "/dʒuːn/", "mongolian": "Зургаадугаар сар", "example": "Summer begins in June." },
+    { "english": "September", "pronunciation": "/sɛpˈtɛmbər/", "mongolian": "Есдүгээр сар", "example": "School starts in September." },
+    { "english": "December", "pronunciation": "/dɪˈsɛmbər/", "mongolian": "Арван хоёрдугаар сар", "example": "New Year is in December." },
+    { "english": "today", "pronunciation": "/təˈdeɪ/", "mongolian": "өнөөдөр", "example": "Today is Monday." },
+    { "english": "tomorrow", "pronunciation": "/təˈmɒroʊ/", "mongolian": "маргааш", "example": "See you tomorrow!" },
+    { "english": "yesterday", "pronunciation": "/ˈjɛstərdeɪ/", "mongolian": "өчигдөр", "example": "Yesterday was Sunday." },
+    { "english": "o'clock", "pronunciation": "/əˈklɒk/", "mongolian": "цаг", "example": "It is seven o'clock." },
+    { "english": "half", "pronunciation": "/hɑːf/", "mongolian": "хагас", "example": "It is half past eight." },
+    { "english": "quarter", "pronunciation": "/ˈkwɔːrtər/", "mongolian": "4 ны 1", "example": "It is quarter to ten." },
+    { "english": "What time", "pronunciation": "/wɒt taɪm/", "mongolian": "Хэдэн цагт", "example": "What time is it?" },
+    { "english": "birthday", "pronunciation": "/ˈbɜːrθdeɪ/", "mongolian": "төрсөн өдөр", "example": "Happy birthday!" },
+    { "english": "year", "pronunciation": "/jɪər/", "mongolian": "жил", "example": "What year is it?" }
+  ],
+  "quiz": [
+    { "question": "_____ do you live?", "options": ["What", "Where", "When", "Who"], "answer": "Where", "explanation": "Where asks about place." },
+    { "question": "_____ is your birthday?", "options": ["Where", "Who", "When", "How"], "answer": "When", "explanation": "When asks about time." },
+    { "question": "Which is correct?", "options": ["Where you live?", "Where do you live?", "Where lives you?", "You where live?"], "answer": "Where do you live?", "explanation": "Wh- + auxiliary (do) + subject + verb." },
+    { "question": "_____ is your teacher?", "options": ["What", "Where", "When", "Who"], "answer": "Who", "explanation": "Who asks about people." },
+    { "question": "_____ do you go to school?", "options": ["Who", "What", "How", "Why"], "answer": "How", "explanation": "How asks about manner/way." },
+    { "question": "What day is the conversation? (listening)", "options": ["Monday", "Tuesday", "Wednesday", "Friday"], "answer": "Tuesday", "explanation": "Bat says 'Today is Tuesday, teacher.'" },
+    { "question": "When does Bat have English class?", "options": ["Mon & Wed", "Tue & Thu", "Mon & Fri", "every day"], "answer": "Tue & Thu", "explanation": "Bat says he has English on Tuesdays and Thursdays." },
+    { "question": "Why does Bat study English?", "options": ["it's fun", "for his future", "his parents want it", "for school"], "answer": "for his future", "explanation": "Bat says English is important for his future." },
+    { "question": "Which is correct?", "options": ["What time it is?", "What time is it?", "Time what is?", "Is what time?"], "answer": "What time is it?", "explanation": "Wh- question word first, then verb, then subject." },
+    { "question": "What's = ?", "options": ["What was", "What is", "What has", "What are"], "answer": "What is", "explanation": "What's is the contraction of What is." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Wh- Questions — What / When / Where / Who / Why / How",
+      "grammarExplanation": "Wh- questions ask for specific information — NOT just yes or no. They begin with: What (юу/ямар), When (хэзээ), Where (хаана), Who (хэн), Why (яагаад), How (яаж). The question word comes FIRST, then the auxiliary verb (do/does/is/are), then the subject. Example: 'Where DO you live?' 'When DOES she wake up?' 'What IS today?' Wh- асуултууд тодорхой мэдээлэл шаарддаг — зөвхөн тийм/үгүй биш. Дараалал: Асуулт үг → туслах үйл үг → субьект → үндсэн үйл үг.",
+      "grammarTable": [
+        { "subject": "What", "verb": "is/do", "positive": "What is today?", "negative": "It is Monday.", "question": "What do you eat?", "mongolian": "Юу / Ямар" },
+        { "subject": "When", "verb": "is/does", "positive": "When is your birthday?", "negative": "It is in June.", "question": "When do you study?", "mongolian": "Хэзээ" },
+        { "subject": "Where", "verb": "is/do", "positive": "Where is the school?", "negative": "It is near here.", "question": "Where do you live?", "mongolian": "Хаана" },
+        { "subject": "Who", "verb": "is", "positive": "Who is your teacher?", "negative": "She is Ms. Bold.", "question": "Who is that person?", "mongolian": "Хэн" },
+        { "subject": "Why", "verb": "do/are", "positive": "Why do you study?", "negative": "Because I like it.", "question": "Why are you late?", "mongolian": "Яагаад" },
+        { "subject": "How", "verb": "do/are", "positive": "How are you?", "negative": "I am fine.", "question": "How do you go to school?", "mongolian": "Яаж" }
+      ],
+      "quickPractice": [
+        "1. _____ is today? (What)",
+        "2. _____ do you live? (Where)",
+        "3. _____ time is it? (What)",
+        "4. _____ do you go to school? (How)",
+        "5. _____ is your birthday? (When)",
+        "6. _____ is your teacher? (Who)",
+        "7. _____ don't you come? (Why)",
+        "8. _____ day is today? (What)"
+      ],
+      "answerKey": ["1-What", "2-Where", "3-What", "4-How", "5-When", "6-Who", "7-Why", "8-What"],
+      "commonMistakes": [
+        "Where you live? → Where do you live?",
+        "What time it is? → What time is it?",
+        "Who you are? → Who are you?",
+        "Why she is late? → Why is she late?"
+      ]
+    },
+    "page2": {
+      "readingPassage": "Sarnai has a very busy week. On Monday and Wednesday, she has English class at nine o'clock. On Tuesday and Thursday, she studies math. On Friday, she plays sport after school. On Saturday, she relaxes and watches movies. On Sunday, she visits her grandmother. Her birthday is in June. What a wonderful life!",
+      "keyPhrases": [
+        { "english": "What day is today?", "mongolian": "Өнөөдөр ямар гараг вэ?", "note": "What + is + today?" },
+        { "english": "When is your birthday?", "mongolian": "Таны төрсөн өдөр хэзээ вэ?", "note": "When + is + noun?" },
+        { "english": "What time is it?", "mongolian": "Хэдэн цаг болж байна?", "note": "What time + is + it?" },
+        { "english": "It is half past eight", "mongolian": "Найм хагас болж байна", "note": "It is + time expression" },
+        { "english": "On Monday / In June", "mongolian": "Даваа гарагт / Зургаадугаар сард", "note": "on + day · in + month" },
+        { "english": "How do you go to school?", "mongolian": "Та сургуульдаа яаж явдаг вэ?", "note": "How + do + subject + verb?" }
+      ],
+      "speakingQuestions": [
+        "1. What day is today? / Өнөөдөр ямар гараг вэ?",
+        "2. When is your birthday? / Таны төрсөн өдөр хэзээ вэ?",
+        "3. What time is it now? / Одоо хэдэн цаг болж байна?",
+        "4. What is your favorite day of the week?",
+        "5. When do you have English class?",
+        "6. How do you go to school — by bus or on foot?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "What day is today?" },
+        { "speaker": "B", "text": "Today is Wednesday." },
+        { "speaker": "A", "text": "When is your English class?" },
+        { "speaker": "B", "text": "I have English on Monday and Wednesday." },
+        { "speaker": "A", "text": "What time does it start?" },
+        { "speaker": "B", "text": "It starts at nine o'clock." },
+        { "speaker": "A", "text": "Who is your English teacher?" },
+        { "speaker": "B", "text": "My teacher is Ms. Bold. She is very kind." }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Good morning! What day is today? Bat: Today is Tuesday, teacher. Teacher: What time is it now? Sarnai: It is nine o'clock. Teacher: Good! When do you have English class, Bat? Bat: I have English on Tuesdays and Thursdays. Teacher: Where do you study in the evenings? Sarnai: I study at home. Sometimes at the library. Teacher: Why do you study English? Bat: Because English is very important for my future!",
+      "listeningQuestions": [
+        { "question": "What day is the conversation?", "options": ["Monday", "Tuesday", "Wednesday"], "answer": "Tuesday" },
+        { "question": "What time is it?", "options": ["8 o'clock", "10 o'clock", "9 o'clock"], "answer": "9 o'clock" },
+        { "question": "When does Bat have English class?", "options": ["Mon & Wed", "Tue & Thu", "Mon & Fri"], "answer": "Tue & Thu" },
+        { "question": "Where does Sarnai study in evenings?", "options": ["school", "café", "home & library"], "answer": "home & library" },
+        { "question": "Why does Bat study English?", "options": ["it's fun", "for his future", "his parents want it"], "answer": "for his future" },
+        { "question": "Who answers the question about time?", "options": ["Bat", "Teacher", "Sarnai"], "answer": "Sarnai" },
+        { "question": "How many days a week does Bat have English?", "options": ["every day", "twice a week", "once a week"], "answer": "twice a week" },
+        { "question": "Does Sarnai always study at home?", "options": ["yes always", "sometimes at library", "never at home"], "answer": "sometimes at library" },
+        { "question": "What subject is the class about?", "options": ["math", "science", "English"], "answer": "English" },
+        { "question": "What question word does teacher use for reason?", "options": ["Where", "When", "Why"], "answer": "Why" }
+      ],
+      "grammarPractice": [
+        "1. _____ is today? (What)",
+        "2. _____ do you live? (Where)",
+        "3. _____ time is it? (What)",
+        "4. _____ is your birthday? (When)",
+        "5. _____ is your teacher? (Who)",
+        "6. _____ don't you come? (Why)"
+      ],
+      "matchingExercise": [
+        { "left": "Monday", "right": "Даваа" },
+        { "left": "Wednesday", "right": "Лхагва" },
+        { "left": "Friday", "right": "Баасан" },
+        { "left": "Saturday", "right": "Бямба" },
+        { "left": "Sunday", "right": "Ням" }
+      ],
+      "homework": [
+        "✍ Writing: Write your weekly schedule in English (Monday to Sunday).",
+        "📖 Vocabulary: Learn all 12 months of the year in English — test yourself!",
+        "🗣️ Speaking: Ask 3 people 'When is your birthday?' — write down their answers.",
+        "🔁 Review: Practice all 6 Wh- question words with example sentences."
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-What · 2-Where · 3-What · 4-When · 5-Who · 6-Why",
+        "Matching: 1-B · 2-D · 3-E · 4-A · 5-C",
+        "Listening: 1-b · 2-c · 3-b · 4-c · 5-b · 6-c · 7-b · 8-b · 9-c · 10-c"
+      ],
+      "completionSummary": [
+        "Learned 20 time, day & month words",
+        "Mastered Wh- questions",
+        "Read about Sarnai's weekly schedule",
+        "Completed grammar practice",
+        "Practiced speaking dialogue",
+        "Completed listening practice",
+        "Learned time expressions"
+      ]
+    }
+  }
+}

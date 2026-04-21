@@ -1,0 +1,153 @@
+{
+  "day": 27,
+  "level": 1,
+  "titleEn": "Day 27: Making Appointments",
+  "titleMn": "Өдөр 27: Цаг товлох",
+  "objectiveEn": "About one hour. Learn 20 appointment words, 'would like to / want to' polite requests, listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 шинэ үг, 'would like to / want to' эелдэг хүсэлт, сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Learn how to politely make, change, and confirm appointments using 'would like to' and 'how about?'.",
+  "contentMn": "'Would like to' болон 'how about?' хэллэг ашиглан эелдэгээр цаг товлох, өөрчлөх, баталгаажуулахыг сурна.",
+  "vocabulary": [
+    { "english": "appointment", "pronunciation": "/əˈpɔɪntmənt/", "mongolian": "цаг товлох / цаг", "example": "I have an appointment at 3." },
+    { "english": "available", "pronunciation": "/əˈveɪləbəl/", "mongolian": "чөлөөтэй", "example": "Are you available on Friday?" },
+    { "english": "schedule", "pronunciation": "/ˈʃɛdjuːl/", "mongolian": "хуваарь", "example": "Let me check my schedule." },
+    { "english": "confirm", "pronunciation": "/kənˈfɜːrm/", "mongolian": "батлах", "example": "Please confirm the appointment." },
+    { "english": "cancel", "pronunciation": "/ˈkænsəl/", "mongolian": "цуцлах", "example": "I need to cancel our meeting." },
+    { "english": "change", "pronunciation": "/tʃeɪndʒ/", "mongolian": "өөрчлөх", "example": "Can we change the time?" },
+    { "english": "postpone", "pronunciation": "/poʊstˈpoʊn/", "mongolian": "хойшлуулах", "example": "Can we postpone until Friday?" },
+    { "english": "remind", "pronunciation": "/rɪˈmaɪnd/", "mongolian": "сануулах", "example": "Please remind me tomorrow." },
+    { "english": "meet", "pronunciation": "/miːt/", "mongolian": "уулзах", "example": "When can we meet?" },
+    { "english": "call", "pronunciation": "/kɔːl/", "mongolian": "залгах", "example": "I will call you tomorrow." },
+    { "english": "convenient", "pronunciation": "/kənˈviːniənt/", "mongolian": "тохиромжтой", "example": "Is 3 o'clock convenient?" },
+    { "english": "prefer", "pronunciation": "/prɪˈfɜːr/", "mongolian": "илүүд үзэх", "example": "I prefer the morning." },
+    { "english": "morning", "pronunciation": "/ˈmɔːrnɪŋ/", "mongolian": "өглөө", "example": "Morning is better for me." },
+    { "english": "afternoon", "pronunciation": "/ˌæftərˈnuːn/", "mongolian": "өдөр", "example": "Afternoon works for me." },
+    { "english": "works for me", "pronunciation": "/wɜːrks fɔːr miː/", "mongolian": "надад тохиромжтой", "example": "Tuesday works for me." },
+    { "english": "how about?", "pronunciation": "/haʊ əˈbaʊt/", "mongolian": "яах вэ?", "example": "How about Wednesday?" },
+    { "english": "let me know", "pronunciation": "/lɛt miː noʊ/", "mongolian": "надад хэлээрэй", "example": "Let me know when you are free." },
+    { "english": "look forward to", "pronunciation": "/lʊk ˈfɔːrwərd tuː/", "mongolian": "тэсэн ядан хүлээх", "example": "I look forward to seeing you." },
+    { "english": "on time", "pronunciation": "/ɒn taɪm/", "mongolian": "цагтаа", "example": "Please be on time." },
+    { "english": "running late", "pronunciation": "/ˈrʌnɪŋ leɪt/", "mongolian": "хоцорч байна", "example": "I am running late — sorry!" }
+  ],
+  "quiz": [
+    { "question": "I _____ like to make an appointment.", "options": ["would", "want", "am", "do"], "answer": "would", "explanation": "'Would like to' is the polite form for requests." },
+    { "question": "_____ you like to come on Friday?", "options": ["Do", "Are", "Would", "Will"], "answer": "Would", "explanation": "Polite question form: Would you like to + verb?" },
+    { "question": "_____ about Thursday at 3 o'clock?", "options": ["What", "How", "When", "Why"], "answer": "How", "explanation": "'How about + time/day?' = polite suggestion." },
+    { "question": "I'd like to ____ an appointment.", "options": ["make", "making", "made", "makes"], "answer": "make", "explanation": "After 'would like to' use the base verb." },
+    { "question": "What does Sarnai want to do?", "options": ["go shopping", "study English together", "watch a movie", "travel"], "answer": "study English together", "explanation": "From the listening script Sarnai invites Bat to study English together." },
+    { "question": "Why can't Bat meet on Thursday?", "options": ["he is sick", "he has football practice", "he is busy at work", "he is travelling"], "answer": "he has football practice", "explanation": "Bat tells Sarnai Thursday doesn't work because of football practice." },
+    { "question": "What time do they agree to meet?", "options": ["3 o'clock", "4 o'clock", "5 o'clock", "6 o'clock"], "answer": "4 o'clock", "explanation": "Bat suggests 4 o'clock and Sarnai agrees." },
+    { "question": "'I'd like to' is the short form of:", "options": ["I did like to", "I would like to", "I do like to", "I had like to"], "answer": "I would like to", "explanation": "'I'd' = 'I would' in this context." },
+    { "question": "Choose the POLITE way to ask:", "options": ["I want to meet.", "Give me an appointment.", "I would like to meet.", "Meet me now."], "answer": "I would like to meet.", "explanation": "'Would like to' sounds polite and respectful." },
+    { "question": "She ____ to meet — she is busy.", "options": ["doesn't want", "don't want", "not want", "isn't want"], "answer": "doesn't want", "explanation": "3rd person singular negative uses 'doesn't + base verb'." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Would like to / Want to — polite requests and desires",
+      "grammarExplanation": "'Would like to' is the POLITE form of 'want to'. Use it for wishes, requests, and invitations in formal or polite situations: 'I would like to make an appointment.' Short form: 'I'd like to'. 'Want to' is less formal: 'I want to meet you.' Use 'would like to' in professional or polite situations — it always sounds more respectful! · 'Would like to' нь 'want to'-ийн ЭЕЛДЭГ хэлбэр. Хүсэл, хүсэлт, урилгад хэрэглэнэ. Товч хэлбэр: 'I'd like to'. Албан ёсны болон зохистой нөхцөлд 'would like to' хэрэглэ — эелдэг сонсогдоно!",
+      "grammarTable": [
+        { "subject": "I'd like to", "verb": "polite wish", "positive": "I'd like to meet.", "negative": "I wouldn't like to wait.", "question": "Would you like to meet?", "mongolian": "Би ... хийх хүсэлтэй" },
+        { "subject": "She'd like to", "verb": "polite wish", "positive": "She'd like to come.", "negative": "She wouldn't like to cancel.", "question": "Would she like to come?", "mongolian": "Тэр ... хийхийг хүсч байна" },
+        { "subject": "I want to", "verb": "desire", "positive": "I want to meet.", "negative": "I don't want to wait.", "question": "Do you want to meet?", "mongolian": "Би ... хийхийг хүсч байна" },
+        { "subject": "How about?", "verb": "suggestion", "positive": "How about Friday?", "negative": "—", "question": "How about 3 o'clock?", "mongolian": "... яах вэ?" }
+      ],
+      "quickPractice": [
+        "1. I _____ like to make an appointment.",
+        "2. She _____ like to meet on Monday.",
+        "3. _____ about Thursday?",
+        "4. What time _____ convenient?",
+        "5. _____ you like to come?",
+        "6. I'd like _____ meet you.",
+        "7. He _____ to meet — he's busy.",
+        "8. I _____ like to cancel."
+      ],
+      "answerKey": ["1-would", "2-would", "3-How", "4-is", "5-Would", "6-to", "7-doesn't want", "8-wouldn't"],
+      "commonMistakes": [
+        "I would like meet you. → I would like TO meet you.",
+        "Would you like to comes? → Would you like to COME?",
+        "I'd like to an appointment. → I'd like TO MAKE an appointment.",
+        "She want to meet. → She WANTS to meet. (3rd person -s!)"
+      ]
+    },
+    "page2": {
+      "readingPassage": "Bat wants to make an appointment with his doctor. He calls the clinic: 'Hello, I would like to make an appointment please.' 'Of course! When would you like to come?' 'I would like to come on Thursday if possible.' 'Is 10 AM convenient?' 'Yes, that works for me perfectly!' 'We look forward to seeing you.' Bat is happy. He doesn't want to be late, so he is going to leave home early!",
+      "keyPhrases": [
+        { "english": "I would like to make an appointment", "mongolian": "Би цаг авмаар байна", "note": "I'd like to + make + noun" },
+        { "english": "When would you like to come?", "mongolian": "Та хэзээ ирэхийг хүсч байна вэ?", "note": "When + would you like to + verb?" },
+        { "english": "Is Thursday convenient?", "mongolian": "Пүрэв гараг тохиромжтой юу?", "note": "Is + day + convenient?" },
+        { "english": "That works for me", "mongolian": "Надад тохиромжтой", "note": "works for me = it suits me" },
+        { "english": "How about 3 o'clock?", "mongolian": "3 цаг яах вэ?", "note": "How about + time = suggestion" },
+        { "english": "I look forward to seeing you", "mongolian": "Та нартай уулзахыг тэсэн ядан хүлээж байна", "note": "Formal closing phrase" }
+      ],
+      "speakingQuestions": [
+        "1. Can you make an appointment for tomorrow? / Та маргааш цаг авч чадах уу?",
+        "2. What time is convenient for you today?",
+        "3. Would you like to meet for lunch this week?",
+        "4. How about studying English together on Saturday?",
+        "5. What would you like to do this weekend?",
+        "6. Would you like to visit a museum together?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "Hello! I would like to make an appointment." },
+        { "speaker": "B", "text": "Of course! When would you like to come?" },
+        { "speaker": "A", "text": "I'd like to come on Wednesday if possible." },
+        { "speaker": "B", "text": "Wednesday is available. Morning or afternoon?" },
+        { "speaker": "A", "text": "I'd prefer the morning please." },
+        { "speaker": "B", "text": "How about 10 o'clock?" },
+        { "speaker": "A", "text": "That works for me perfectly! My name is Bat Gantulga." },
+        { "speaker": "B", "text": "Thank you, Bat! We look forward to seeing you on Wednesday at 10." }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Sarnai: Bat, I'd like to study English together this week. Are you available? Bat: Yes! I'd love that. When would you like to meet? Sarnai: How about Thursday afternoon? Bat: Thursday doesn't work for me. I have football practice. How about Friday? Sarnai: Friday works for me! What time would you like to meet? Bat: I'd like to meet at 4 o'clock. Is that convenient for you? Sarnai: Perfect! 4 o'clock on Friday. I look forward to it! Bat: Me too! Please don't be late — let's start on time.",
+      "listeningQuestions": [
+        { "question": "What does Sarnai want to do?", "options": ["go shopping", "study English together", "watch a movie"], "answer": "b" },
+        { "question": "What day does Sarnai suggest first?", "options": ["Friday", "Wednesday", "Thursday"], "answer": "c" },
+        { "question": "Why can't Bat do Thursday?", "options": ["he is sick", "he has football practice", "he is busy"], "answer": "b" },
+        { "question": "What day do they agree on?", "options": ["Thursday", "Saturday", "Friday"], "answer": "c" },
+        { "question": "What time do they agree to meet?", "options": ["3 o'clock", "4 o'clock", "5 o'clock"], "answer": "b" },
+        { "question": "Is 4 o'clock convenient for Sarnai?", "options": ["no", "yes", "not mentioned"], "answer": "b" },
+        { "question": "What does Sarnai say at the end?", "options": ["See you then!", "I look forward to it!", "That's great!"], "answer": "b" },
+        { "question": "What does Bat remind Sarnai?", "options": ["to bring a book", "to call him", "not to be late"], "answer": "c" },
+        { "question": "Which is the POLITE way to ask?", "options": ["I want to meet.", "Give me an appointment.", "I would like to meet."], "answer": "c" },
+        { "question": "'I'd like to' is a short form of?", "options": ["I did like to", "I would like to", "I do like to"], "answer": "b" }
+      ],
+      "grammarPractice": [
+        "1. I _____ make an appointment.",
+        "2. _____ you like to come?",
+        "3. _____ Thursday? Is that OK?",
+        "4. Friday _____ perfectly!",
+        "5. She _____ meet on Monday.",
+        "6. I _____ cancel."
+      ],
+      "matchingExercise": [
+        { "left": "appointment", "right": "цаг товлох" },
+        { "left": "available", "right": "боломжтой" },
+        { "left": "cancel", "right": "цуцлах" },
+        { "left": "convenient", "right": "тохиромжтой" },
+        { "left": "confirm", "right": "батлах" }
+      ],
+      "homework": [
+        "Writing: Write a short conversation making an appointment (6 lines) using 'would like to'.",
+        "Vocabulary: Practice the dialogue from today with a family member or friend.",
+        "Speaking: Call or message a friend and arrange to meet using 'Would you like to...'.",
+        "Review: I'd like to = polite wish · How about? = suggestion · works for me = I agree."
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-would like to · 2-Would · 3-How about · 4-works for me · 5-would like to · 6-wouldn't like to",
+        "Matching: 1-D · 2-C · 3-A · 4-B · 5-E",
+        "Listening: 1-b · 2-c · 3-b · 4-c · 5-b · 6-b · 7-b · 8-c · 9-c · 10-b"
+      ],
+      "completionSummary": [
+        "Learned 20 appointment words",
+        "Mastered 'would like to / want to' grammar",
+        "Read about making appointments",
+        "Practiced grammar exercises",
+        "Practiced speaking and role play",
+        "Completed listening practice",
+        "Learned to make polite/formal requests"
+      ]
+    }
+  }
+}

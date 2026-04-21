@@ -1,0 +1,154 @@
+{
+  "day": 30,
+  "level": 1,
+  "titleEn": "Day 30: Graduation Day 🎓",
+  "titleMn": "Өдөр 30: Төгсөлтийн өдөр 🎓",
+  "objectiveEn": "About one hour. Learn 20 graduation words, free conversation using all A1 skills, listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. 20 шинэ үг, бүх A1 чадварыг ашиглан чөлөөт яриа, сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Celebrate completing A1 by combining every grammar topic and skill in free conversation.",
+  "contentMn": "A1 түвшинг дуусгасан баяраар бүх дүрэм, чадвараа чөлөөт яриандаа нэгтгэн ашиглана.",
+  "vocabulary": [
+    { "english": "graduation", "pronunciation": "/ˌɡrædʒuˈeɪʃən/", "mongolian": "төгсөлт", "example": "Congratulations on your graduation!" },
+    { "english": "congratulations", "pronunciation": "/kənˌɡrætʃʊˈleɪʃənz/", "mongolian": "баяр хүргэе!", "example": "Congratulations! You did it!" },
+    { "english": "achievement", "pronunciation": "/əˈtʃiːvmənt/", "mongolian": "амжилт", "example": "This is a great achievement." },
+    { "english": "certificate", "pronunciation": "/səˈtɪfɪkɪt/", "mongolian": "гэрчилгээ", "example": "You earned your A1 certificate!" },
+    { "english": "level", "pronunciation": "/ˈlɛvəl/", "mongolian": "түвшин", "example": "You completed A1 level!" },
+    { "english": "complete", "pronunciation": "/kəmˈpliːt/", "mongolian": "дуусгах", "example": "You completed 30 days!" },
+    { "english": "proud", "pronunciation": "/praʊd/", "mongolian": "бахархах", "example": "I am so proud of you!" },
+    { "english": "effort", "pronunciation": "/ˈɛfərt/", "mongolian": "хичээл зүтгэл", "example": "Your effort was amazing." },
+    { "english": "journey", "pronunciation": "/ˈdʒɜːrni/", "mongolian": "аялал / зам", "example": "What an amazing journey!" },
+    { "english": "beginning", "pronunciation": "/bɪˈɡɪnɪŋ/", "mongolian": "эхлэл", "example": "This is just the beginning." },
+    { "english": "continue", "pronunciation": "/kənˈtɪnjuː/", "mongolian": "үргэлжлүүлэх", "example": "Continue to Book 2!" },
+    { "english": "next level", "pronunciation": "/nɛkst ˈlɛvəl/", "mongolian": "дараагийн түвшин", "example": "You are ready for the next level." },
+    { "english": "consistent", "pronunciation": "/kənˈsɪstənt/", "mongolian": "тогтмол", "example": "Be consistent every single day." },
+    { "english": "habit", "pronunciation": "/ˈhæbɪt/", "mongolian": "дадал", "example": "Make English a daily habit." },
+    { "english": "courage", "pronunciation": "/ˈkʌrɪdʒ/", "mongolian": "зориг", "example": "You showed great courage!" },
+    { "english": "inspire", "pronunciation": "/ɪnˈspaɪər/", "mongolian": "урам зориг өгөх", "example": "You inspire others to learn." },
+    { "english": "future", "pronunciation": "/ˈfjuːtʃər/", "mongolian": "ирээдүй", "example": "Your future is bright!" },
+    { "english": "believe", "pronunciation": "/bɪˈliːv/", "mongolian": "итгэх", "example": "Believe in yourself always." },
+    { "english": "amazing", "pronunciation": "/əˈmeɪzɪŋ/", "mongolian": "гайхалтай", "example": "You are truly amazing!" },
+    { "english": "keep going", "pronunciation": "/kiːp ˈɡoʊɪŋ/", "mongolian": "үргэлжлүүлэх", "example": "Keep going — never stop!" }
+  ],
+  "quiz": [
+    { "question": "My name _____ Bat.", "options": ["am", "is", "are", "be"], "answer": "is", "explanation": "3rd person singular of 'to be' is 'is'." },
+    { "question": "I _____ English every day.", "options": ["studies", "studying", "study", "am study"], "answer": "study", "explanation": "Present Simple for daily habits with 'I' uses base verb." },
+    { "question": "Right now I _____ studying English.", "options": ["am", "is", "are", "be"], "answer": "am", "explanation": "Present Continuous: I + am + verb-ing." },
+    { "question": "Yesterday I _____ to school.", "options": ["go", "went", "going", "goes"], "answer": "went", "explanation": "Past Simple irregular form of 'go' is 'went'." },
+    { "question": "I _____ swim — I learned this month!", "options": ["can", "do", "am", "did"], "answer": "can", "explanation": "Ability uses 'can + base verb'." },
+    { "question": "I _____ going to study Book 2.", "options": ["is", "are", "am", "do"], "answer": "am", "explanation": "Future plan with 'I' uses 'am going to + base verb'." },
+    { "question": "How does Bat feel on graduation day?", "options": ["nervous", "amazing", "tired", "sad"], "answer": "amazing", "explanation": "Bat says 'I feel amazing!'" },
+    { "question": "What did Bat enjoy most?", "options": ["grammar exercises", "listening & role plays", "vocabulary tests", "writing"], "answer": "listening & role plays", "explanation": "Bat says he loved the listening scripts and role play dialogues." },
+    { "question": "What is Sarnai going to do next?", "options": ["take a break", "start Book 2 immediately", "travel now", "rest"], "answer": "start Book 2 immediately", "explanation": "Sarnai says she is going to start Book 2 immediately." },
+    { "question": "What is the most important lesson from 30 days?", "options": ["Perfect grammar", "Consistent daily practice", "Memorize all words", "Travel often"], "answer": "Consistent daily practice", "explanation": "Consistent daily practice is the key takeaway." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "Free conversation — all A1 skills",
+      "grammarExplanation": "Congratulations — you completed A1! In 30 days you learned: 600 new words · To Be · Present Simple · Present Continuous · Can/Can't · There is/are · Possessive adjectives · Prepositions · Object pronouns · Past Simple · Going to · Would like to · Imperatives · Plurals · Wh- questions. You can now introduce yourself, describe people and places, talk about the past, and plan for the future. You ARE A1 level English! · Баяр хүргэе! Та A1 дуусгасан! 30 хоногт та БҮХ дүрмийг сурсан. Та одоо өөрийгөө танилцуулж, өнгөрсөн болон ирээдүйн тухай ярьж чаддаг. Та ЖИНХЭНЭ A1!",
+      "grammarTable": [
+        { "subject": "Day 1 — To Be", "verb": "am/is/are/was/were", "positive": "I am Bat.", "negative": "I am not a teacher.", "question": "Are you a student?", "mongolian": "Байх үйл үг" },
+        { "subject": "Days 2-5 — Present Simple", "verb": "study / studies", "positive": "I study every day.", "negative": "I don't study on Sundays.", "question": "Do you study?", "mongolian": "Дадал, баримт" },
+        { "subject": "Days 15/17 — Present Continuous", "verb": "am studying", "positive": "I am studying now.", "negative": "I am not sleeping.", "question": "Are you studying?", "mongolian": "Яг одоо" },
+        { "subject": "Days 22-25 — Past Simple", "verb": "went / walked", "positive": "I went / I walked.", "negative": "I didn't go.", "question": "Did you go?", "mongolian": "Өнгөрсөн" },
+        { "subject": "Days 7/26 — Can / Going to", "verb": "can / am going to", "positive": "I can swim! I am going to study.", "negative": "I can't fly.", "question": "Can you swim? Are you going to study?", "mongolian": "Чадвар ба төлөвлөгөө" }
+      ],
+      "quickPractice": [
+        "1. My name _____ Bat. I _____ from Mongolia.",
+        "2. I _____ English every day.",
+        "3. Right now I _____ studying English.",
+        "4. She _____ a teacher. She _____ very kind.",
+        "5. Yesterday I _____ to school.",
+        "6. I _____ going to study Book 2.",
+        "7. I _____ swim — I learned this month!",
+        "8. Congratulations! You _____ it!"
+      ],
+      "answerKey": ["1-is/am", "2-study", "3-am", "4-is/is", "5-went", "6-am", "7-can", "8-did"],
+      "commonMistakes": [
+        "You made mistakes — that means you LEARNED!",
+        "Every mistake was a step forward.",
+        "You kept going even when it was hard.",
+        "That courage is what makes a great English learner!"
+      ]
+    },
+    "page2": {
+      "readingPassage": "Day 30. Graduation Day. Thirty days ago, Bat couldn't speak any English. Today is completely different. He can introduce himself, describe his family, talk about food, give directions, order at a restaurant, make appointments, and discuss his future — all in English! He studied every single day. He never gave up. Now he is going to continue to Book 2. This journey is just beginning. Congratulations, Bat — and congratulations, YOU! 🎓",
+      "keyPhrases": [
+        { "english": "Congratulations! You did it!", "mongolian": "Баяр хүргэе! Та чадлаа!", "note": "Celebrating achievement" },
+        { "english": "I completed A1 level!", "mongolian": "Би A1 түвшинг дуусгасан!", "note": "completed = past of complete" },
+        { "english": "I can speak basic English", "mongolian": "Би энгийн англи хэлээр ярьж чаддаг", "note": "can + base verb" },
+        { "english": "I am going to continue", "mongolian": "Би үргэлжлүүлнэ", "note": "going to + base verb" },
+        { "english": "This is just the beginning!", "mongolian": "Энэ бол зөвхөн эхлэл!", "note": "Motivational phrase" },
+        { "english": "I am proud of myself!", "mongolian": "Би өөртөө бахарддаг!", "note": "I am + proud of + myself" }
+      ],
+      "speakingQuestions": [
+        "1. Introduce yourself completely — name, age, family, job, hobbies, plans!",
+        "2. What was your favorite day in this book? Why?",
+        "3. What can you do in English now that you couldn't on Day 1?",
+        "4. What are you going to do to keep improving?",
+        "5. Tell me your best memory from the last 30 days.",
+        "6. What is your advice for someone starting Book 1 today?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "Congratulations on finishing Book 1!" },
+        { "speaker": "B", "text": "Thank you! I am so happy and proud!" },
+        { "speaker": "A", "text": "What was the hardest part?" },
+        { "speaker": "B", "text": "The irregular past tense verbs were difficult!" },
+        { "speaker": "A", "text": "What was your favorite topic?" },
+        { "speaker": "B", "text": "I loved Day 20 — ordering food at a restaurant!" },
+        { "speaker": "A", "text": "What are you going to do next?" },
+        { "speaker": "B", "text": "I am going to start Book 2 and keep studying! Study every day, don't fear mistakes, and enjoy it!" }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Class, this is our final day — Graduation Day! Bat, how do you feel? Bat: I feel amazing! One month ago I couldn't speak English. Now I can! Teacher: What did you enjoy most? Bat: I loved the listening scripts and role play dialogues — they felt real! Teacher: Sarnai, what are you going to do after this? Sarnai: I am going to start Book 2 immediately! I want to reach B1 and travel to Korea! Teacher: You are both incredible! I am so proud of you! Congratulations to everyone! Everyone: Thank you, teacher! We love English! See you in Book 2! 🎓",
+      "listeningQuestions": [
+        { "question": "How does Bat feel on graduation day?", "options": ["nervous", "amazing", "tired"], "answer": "b" },
+        { "question": "What couldn't Bat do one month ago?", "options": ["study", "go to school", "speak English"], "answer": "c" },
+        { "question": "What did Bat enjoy most?", "options": ["grammar exercises", "listening & role plays", "vocabulary tests"], "answer": "b" },
+        { "question": "What is Sarnai going to do next?", "options": ["take a break", "start Book 2 immediately", "travel now"], "answer": "b" },
+        { "question": "What is Sarnai's goal?", "options": ["reach A2", "reach B1 and travel to Korea", "become a teacher"], "answer": "b" },
+        { "question": "How does the teacher feel?", "options": ["sad", "so proud", "surprised"], "answer": "b" },
+        { "question": "What does everyone say at the end?", "options": ["Goodbye forever!", "See you in Book 2!", "We hate English."], "answer": "b" },
+        { "question": "How many days did they study?", "options": ["28", "31", "30"], "answer": "c" },
+        { "question": "What level did they complete?", "options": ["B1", "A2", "A1"], "answer": "c" },
+        { "question": "What is the most important lesson from 30 days?", "options": ["Perfect grammar", "Consistent daily practice", "Memorize all words"], "answer": "b" }
+      ],
+      "grammarPractice": [
+        "1. My name _____ Bat. I _____ 16 years old.",
+        "2. I _____ English every day.",
+        "3. Right now I _____ studying.",
+        "4. Yesterday I _____ to school.",
+        "5. I _____ swim now! I learned this month.",
+        "6. I _____ going to study Book 2 tomorrow!"
+      ],
+      "matchingExercise": [
+        { "left": "Congratulations!", "right": "баяр хүргэе" },
+        { "left": "achievement", "right": "амжилт" },
+        { "left": "continue", "right": "үргэлжлүүлэх" },
+        { "left": "proud", "right": "бахархах" },
+        { "left": "believe", "right": "итгэх" }
+      ],
+      "homework": [
+        "Writing: Write a letter to yourself — what did you achieve? What are you going to do next?",
+        "Vocabulary: Teach someone 10 English words from this book — you are already a teacher!",
+        "Speaking: Record yourself in English for 1 minute — listen back and celebrate how far you came!",
+        "Next step: 🚀 Start Book 2 (A2 Level) — Speak English in 90 Days continues!"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-is/am · 2-study · 3-am · 4-went · 5-can · 6-am",
+        "Matching: 1-B · 2-C · 3-A · 4-E · 5-D",
+        "Listening: 1-b · 2-c · 3-b · 4-b · 5-b · 6-b · 7-b · 8-c · 9-c · 10-b"
+      ],
+      "completionSummary": [
+        "Learned 600+ words in 30 days",
+        "Mastered all A1 grammar topics",
+        "Practiced all 4 skills (reading, writing, speaking, listening)",
+        "Completed 30 consecutive days of study",
+        "Can now hold basic English conversations",
+        "Earned your A1 certificate — Level 1 complete! 🏆",
+        "Ready for Book 2 — A2 Level! 🚀"
+      ]
+    }
+  }
+}

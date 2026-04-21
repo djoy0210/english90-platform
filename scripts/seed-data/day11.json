@@ -1,0 +1,153 @@
+{
+  "day": 11,
+  "level": 1,
+  "titleEn": "Day 11: Weather & Seasons",
+  "titleMn": "Өдөр 11: Цаг агаар & Улирал",
+  "objectiveEn": "About one hour. Learn 20 weather/season words, describing weather with It is / It's, listening, speaking, homework.",
+  "objectiveMn": "Ойролцоогоор 1 цаг. Цаг агаар, улирлын 20 шинэ үг, It is / It's-ээр цаг агаар тайлбарлах, сонсох, ярих, гэрийн даалгавар.",
+  "contentEn": "Describe weather and seasons in English using It is + adjective and It is + verb-ing.",
+  "contentMn": "It is + тэмдэг нэр, It is + verb-ing бүтцээр цаг агаар, улирлыг англиар тайлбарлахыг сурна.",
+  "vocabulary": [
+    { "english": "hot", "pronunciation": "/hɒt/", "mongolian": "халуун", "example": "It is very hot today." },
+    { "english": "cold", "pronunciation": "/koʊld/", "mongolian": "хүйтэн", "example": "It is very cold in winter." },
+    { "english": "warm", "pronunciation": "/wɔːrm/", "mongolian": "дулаахан", "example": "Spring is warm and nice." },
+    { "english": "cool", "pronunciation": "/kuːl/", "mongolian": "сэрүүн", "example": "It is cool in autumn." },
+    { "english": "sunny", "pronunciation": "/ˈsʌni/", "mongolian": "нартай", "example": "Today is sunny and beautiful!" },
+    { "english": "cloudy", "pronunciation": "/ˈklaʊdi/", "mongolian": "үүлтэй", "example": "It is cloudy today." },
+    { "english": "rainy", "pronunciation": "/ˈreɪni/", "mongolian": "бороотой", "example": "It is rainy in spring." },
+    { "english": "snowy", "pronunciation": "/ˈsnoʊi/", "mongolian": "цастай", "example": "It is very snowy in winter." },
+    { "english": "windy", "pronunciation": "/ˈwɪndi/", "mongolian": "салхитай", "example": "It is very windy today!" },
+    { "english": "foggy", "pronunciation": "/ˈfɒɡi/", "mongolian": "манантай", "example": "It is foggy this morning." },
+    { "english": "spring", "pronunciation": "/sprɪŋ/", "mongolian": "хавар", "example": "I love spring flowers." },
+    { "english": "summer", "pronunciation": "/ˈsʌmər/", "mongolian": "зун", "example": "Summer is hot and sunny." },
+    { "english": "autumn/Fall", "pronunciation": "/ˈɔːtəm/", "mongolian": "намар", "example": "Autumn leaves are beautiful." },
+    { "english": "winter", "pronunciation": "/ˈwɪntər/", "mongolian": "өвөл", "example": "Winter is very cold in Mongolia." },
+    { "english": "umbrella", "pronunciation": "/ʌmˈbrɛlə/", "mongolian": "шүхэр", "example": "Take your umbrella today!" },
+    { "english": "coat", "pronunciation": "/koʊt/", "mongolian": "пальто / цув", "example": "Wear your coat — it's cold!" },
+    { "english": "temperature", "pronunciation": "/ˈtɛmprɪtʃər/", "mongolian": "температур", "example": "The temperature is -20°C." },
+    { "english": "forecast", "pronunciation": "/ˈfɔːrkɑːst/", "mongolian": "цаг агаарын мэдээ", "example": "The forecast says snow." },
+    { "english": "degree", "pronunciation": "/dɪˈɡriː/", "mongolian": "градус", "example": "It is 30 degrees Celsius." },
+    { "english": "weather", "pronunciation": "/ˈwɛðər/", "mongolian": "цаг агаар", "example": "What is the weather like today?" }
+  ],
+  "quiz": [
+    { "question": "Which structure describes weather correctly?", "options": ["There is + weather", "It is + adjective", "We have + weather", "Weather is + noun"], "answer": "It is + adjective", "explanation": "We use 'It is + adjective' to describe weather: It is hot." },
+    { "question": "Which is correct?", "options": ["It is a cold.", "It is cold.", "It is the cold.", "It cold is."], "answer": "It is cold.", "explanation": "No article needed before weather adjectives." },
+    { "question": "Which is correct?", "options": ["The weather is rain.", "It is raining.", "It rain.", "It rains the weather."], "answer": "It is raining.", "explanation": "Use It is + verb-ing for ongoing weather." },
+    { "question": "What's = ?", "options": ["What was", "What is", "What has", "What are"], "answer": "What is", "explanation": "What's is a contraction of What is." },
+    { "question": "What is the weather like today in the dialogue?", "options": ["hot and sunny", "cold and cloudy", "warm and windy", "rainy"], "answer": "cold and cloudy", "explanation": "Bat says 'It's very cold and cloudy today.'" },
+    { "question": "What is the temperature?", "options": ["-5°C", "+15°C", "-15°C", "0°C"], "answer": "-15°C", "explanation": "Sarnai says it is minus 15 degrees Celsius." },
+    { "question": "What season is it in the dialogue?", "options": ["spring", "autumn", "winter", "summer"], "answer": "winter", "explanation": "Bat says 'It is winter.'" },
+    { "question": "What is Sarnai's favorite season?", "options": ["winter", "spring", "summer", "autumn"], "answer": "summer", "explanation": "Sarnai says her favorite season is summer." },
+    { "question": "Why does Sarnai like summer?", "options": ["it's rainy", "it's hot and sunny", "it's cool", "it's quiet"], "answer": "it's hot and sunny", "explanation": "Sarnai loves summer because it is hot and sunny." },
+    { "question": "Mongolian winter can be as cold as:", "options": ["-10°C", "-20°C", "-40°C", "0°C"], "answer": "-40°C", "explanation": "Reading says winter can drop down to -40°C." }
+  ],
+  "lessonContent": {
+    "page1": {
+      "grammarTopic": "What's the weather like? — Describing weather with It is / It's",
+      "grammarExplanation": "To talk about weather, use 'It is + adjective': It is hot. It is cold. It is sunny. We can also use verb-ing forms: It is raining. It is snowing. To ask about weather: 'What is the weather like today?' or 'How is the weather?' or 'What is the temperature?'. Mongolia is famous for extreme weather — hot summers and very cold winters down to -40°C! Цаг агаарын тухай: 'It is + тэмдэг нэр': It is hot / cold / sunny. Мөн: It is raining / snowing. Асуухдаа: 'What is the weather like today?'",
+      "grammarTable": [
+        { "subject": "It is", "verb": "adjective", "positive": "It is sunny today.", "negative": "It isn't cold.", "question": "Is it cold today?", "mongolian": "Цаг агаар ..." },
+        { "subject": "It is", "verb": "verb-ing", "positive": "It is raining now.", "negative": "It isn't snowing.", "question": "Is it snowing?", "mongolian": "... байна (үйл үг)" },
+        { "subject": "The weather", "verb": "is", "positive": "The weather is nice.", "negative": "It isn't nice.", "question": "What's the weather like?", "mongolian": "Цаг агаар ..." },
+        { "subject": "In summer", "verb": "season is", "positive": "In summer it is hot.", "negative": "In winter it's not hot.", "question": "What season is it?", "mongolian": "...улиралд" }
+      ],
+      "quickPractice": [
+        "1. It _____ very cold today. (is)",
+        "2. It _____ raining now. (is)",
+        "3. The weather _____ nice today. (is)",
+        "4. It _____ sunny. It is summer! (is)",
+        "5. What _____ the weather like? (is)",
+        "6. It _____ snowing outside. (is)",
+        "7. _____ it cold? Yes, it is! (Is)",
+        "8. It _____ warm in spring. (is)"
+      ],
+      "answerKey": ["1-is", "2-is", "3-is", "4-is", "5-is", "6-is", "7-Is", "8-is"],
+      "commonMistakes": [
+        "The weather is rain → It is raining. / It is rainy.",
+        "It is a cold → It is cold.",
+        "Weather is good → The weather is good.",
+        "It is snow outside → It is snowing outside."
+      ]
+    },
+    "page2": {
+      "readingPassage": "Mongolia has four very different seasons. In spring, it is warm and sometimes windy. In summer, it is very hot — up to 40 degrees! In autumn, it is cool and the leaves are beautiful. In winter, it is extremely cold — down to -40°C! Mongolians are very strong people!",
+      "keyPhrases": [
+        { "english": "What's the weather like?", "mongolian": "Цаг агаар ямар байна?", "note": "Most common weather question" },
+        { "english": "It's hot / cold / sunny", "mongolian": "Халуун / хүйтэн / нартай байна", "note": "It's + adjective" },
+        { "english": "It's raining / snowing", "mongolian": "Бороо орж / Цас орж байна", "note": "It's + verb-ing" },
+        { "english": "What's the temperature?", "mongolian": "Температур хэд байна?", "note": "Asking temperature" },
+        { "english": "Take your umbrella!", "mongolian": "Шүхрээ аваарай!", "note": "Giving weather advice" },
+        { "english": "In summer / In winter", "mongolian": "Зун / Өвөл", "note": "Talking about seasons" }
+      ],
+      "speakingQuestions": [
+        "1. What is the weather like today? / Өнөөдөр цаг агаар ямар байна?",
+        "2. What is your favorite season? / Таны дуртай улирал аль вэ?",
+        "3. What is the weather like in Mongolia in winter?",
+        "4. Do you like rainy days? / Та бороотой өдрийг дуртай юу?",
+        "5. What do you wear when it is cold?",
+        "6. What is the temperature today?"
+      ],
+      "rolePlay": [
+        { "speaker": "A", "text": "What's the weather like today?" },
+        { "speaker": "B", "text": "It's cloudy and a little cold." },
+        { "speaker": "A", "text": "Is it going to rain?" },
+        { "speaker": "B", "text": "The forecast says yes — take your umbrella!" },
+        { "speaker": "A", "text": "What's the temperature?" },
+        { "speaker": "B", "text": "It is about 5 degrees Celsius." },
+        { "speaker": "A", "text": "What's the weather like in Mongolia in winter?" },
+        { "speaker": "B", "text": "It's extremely cold — sometimes -30 or -40 degrees!" }
+      ],
+      "speakingTip": "Don't worry about mistakes — just keep talking! Every mistake helps you learn faster. Confidence is more important than perfection at this stage."
+    },
+    "page3": {
+      "listeningScript": "Teacher: Good morning! What's the weather like today? Bat: It's very cold and cloudy today, teacher. Teacher: What is the temperature? Sarnai: It is minus 15 degrees Celsius today! Teacher: What season is this? Bat: It is winter. Winter in Mongolia is very cold. Teacher: What is your favorite season? Sarnai: My favorite season is summer. It is hot and sunny! Bat: Mine too! I love the warm summer weather.",
+      "listeningQuestions": [
+        { "question": "What is the weather like today in the dialogue?", "options": ["hot and sunny", "cold and cloudy", "warm and windy"], "answer": "cold and cloudy" },
+        { "question": "What is the temperature?", "options": ["-5°C", "+15°C", "-15°C"], "answer": "-15°C" },
+        { "question": "What season is it?", "options": ["spring", "autumn", "winter"], "answer": "winter" },
+        { "question": "Is Mongolia's winter cold?", "options": ["not very", "yes, very cold", "not mentioned"], "answer": "yes, very cold" },
+        { "question": "What is Sarnai's favorite season?", "options": ["winter", "spring", "summer"], "answer": "summer" },
+        { "question": "Why does Sarnai like summer?", "options": ["it's rainy", "it's hot and sunny", "it's cool"], "answer": "it's hot and sunny" },
+        { "question": "Does Bat agree with Sarnai?", "options": ["no", "yes", "not mentioned"], "answer": "yes" },
+        { "question": "What does the teacher ask about seasons?", "options": ["which month", "favorite season", "temperature"], "answer": "favorite season" },
+        { "question": "Who answers the temperature question?", "options": ["Bat", "Teacher", "Sarnai"], "answer": "Sarnai" },
+        { "question": "What structure is used for weather?", "options": ["There is + weather", "It is + adjective", "We have + weather"], "answer": "It is + adjective" }
+      ],
+      "grammarPractice": [
+        "1. _____ very cold today. (It is)",
+        "2. _____ raining now. (It is)",
+        "3. _____ the weather like? (What's)",
+        "4. _____ snowing outside. (It is)",
+        "5. _____ it cold? Yes, it is! (Is)",
+        "6. _____ warm in spring. (It is)"
+      ],
+      "matchingExercise": [
+        { "left": "hot", "right": "халуун" },
+        { "left": "cold", "right": "хүйтэн" },
+        { "left": "sunny", "right": "нартай" },
+        { "left": "cloudy", "right": "үүлтэй" },
+        { "left": "snowy", "right": "цастай" }
+      ],
+      "homework": [
+        "✍ Writing: Write 4 sentences about the weather in each season in Mongolia.",
+        "📖 Vocabulary: Write today's weather forecast in English (5 sentences).",
+        "🗣️ Speaking: Ask 3 people 'What's your favorite season?' — remember their answers.",
+        "🔁 Review: Practice: 'It's cold. It's raining. What's the weather like?'"
+      ],
+      "answerKey": [
+        "Fill in blanks: 1-It is · 2-It is · 3-What's · 4-It is · 5-Is · 6-It is",
+        "Matching: 1-C · 2-E · 3-B · 4-A · 5-D",
+        "Listening: 1-b · 2-c · 3-c · 4-b · 5-c · 6-b · 7-b · 8-b · 9-c · 10-b"
+      ],
+      "completionSummary": [
+        "Learned 20 weather words",
+        "Mastered It is/It's + weather grammar",
+        "Read about Mongolia's seasons",
+        "Completed grammar practice",
+        "Practiced speaking dialogue",
+        "Completed listening practice",
+        "Described weather in English"
+      ]
+    }
+  }
+}
