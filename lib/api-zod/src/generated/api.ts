@@ -258,6 +258,7 @@ export const GetFinalTestResponse = zod.object({
   level: zod.number(),
   titleEn: zod.string(),
   titleMn: zod.string(),
+  passingScore: zod.number(),
   questions: zod.array(
     zod.object({
       id: zod.string(),

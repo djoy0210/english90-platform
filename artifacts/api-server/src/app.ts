@@ -38,4 +38,11 @@ app.use(clerkMiddleware());
 
 app.use("/api", router);
 
+app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  const status = typeof err?.status === "number" ? err.status : 500;
+  const message = err?.message || "Internal server error";
+  if (status >= 500) logger.error({ err }, "Unhandled error");
+  res.status(status).json({ error: message });
+});
+
 export default app;

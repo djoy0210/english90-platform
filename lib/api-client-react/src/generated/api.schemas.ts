@@ -145,6 +145,7 @@ export interface FinalTestDetail {
   level: number;
   titleEn: string;
   titleMn: string;
+  passingScore: number;
   questions: QuizQuestion[];
 }
 

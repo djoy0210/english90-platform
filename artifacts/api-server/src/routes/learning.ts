@@ -386,22 +386,57 @@ async function ensureSeeded() {
   await seedPromise;
 }
 
+class HttpError extends Error {
+  constructor(public status: number, message: string) {
+    super(message);
+  }
+}
+
 async function getCurrentUser(req: Request): Promise<User> {
   const auth = getAuth(req);
-  const clerkUserId = auth.userId ?? "demo-user";
-  const email = auth.userId ? `${auth.userId}@learner.local` : "demo@english90.local";
-  const name = auth.userId ? "English Learner" : "Demo Learner";
+  const isProd = process.env.NODE_ENV === "production";
+  const adminEmails = (process.env.ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean);
+
+  if (!auth.userId) {
+    if (isProd) throw new HttpError(401, "Authentication required");
+    // Dev-only fallback for local testing
+    const clerkUserId = "demo-user";
+    const existing = await db.select().from(usersTable).where(eq(usersTable.clerkUserId, clerkUserId)).limit(1);
+    if (existing[0]) {
+      if (existing[0].role !== "admin") {
+        const [u] = await db.update(usersTable).set({ role: "admin" }).where(eq(usersTable.id, existing[0].id)).returning();
+        return u;
+      }
+      return existing[0];
+    }
+    const [u] = await db
+      .insert(usersTable)
+      .values({ id: clerkUserId, clerkUserId, email: "demo@english90.local", name: "Demo Learner", role: "admin", placementCompleted: true })
+      .returning();
+    return u;
+  }
+
+  const clerkUserId = auth.userId;
+  const claims = (auth as any).sessionClaims ?? {};
+  const claimEmail: string | undefined = claims.email ?? claims.primary_email_address ?? claims.user?.email;
+  const claimName: string | undefined = claims.name ?? claims.user?.name ?? claims.full_name;
+  const email = (claimEmail ?? `${clerkUserId}@learner.local`).toLowerCase();
+  const name = claimName ?? email.split("@")[0];
+
   const existing = await db.select().from(usersTable).where(eq(usersTable.clerkUserId, clerkUserId)).limit(1);
   if (existing[0]) {
-    if (process.env.NODE_ENV !== "production" && existing[0].role !== "admin") {
-      const [updated] = await db.update(usersTable).set({ role: "admin" }).where(eq(usersTable.id, existing[0].id)).returning();
-      return updated;
+    // Promote to admin only if email is whitelisted in ADMIN_EMAILS
+    if (adminEmails.includes(existing[0].email.toLowerCase()) && existing[0].role !== "admin") {
+      const [u] = await db.update(usersTable).set({ role: "admin" }).where(eq(usersTable.id, existing[0].id)).returning();
+      return u;
     }
     return existing[0];
   }
 
-  const adminCount = await db.select({ count: sql<number>`count(*)::int` }).from(usersTable).where(eq(usersTable.role, "admin"));
-  const role = process.env.NODE_ENV !== "production" || (adminCount[0]?.count ?? 0) === 0 ? "admin" : "learner";
+  const role = adminEmails.includes(email) ? "admin" : "learner";
   const [user] = await db
     .insert(usersTable)
     .values({ id: clerkUserId, clerkUserId, email, name, role, placementCompleted: role === "admin" })
@@ -410,10 +445,6 @@ async function getCurrentUser(req: Request): Promise<User> {
       set: { clerkUserId, email, name },
     })
     .returning();
-  if (process.env.NODE_ENV !== "production" && user.role !== "admin") {
-    const [updated] = await db.update(usersTable).set({ role: "admin" }).where(eq(usersTable.id, user.id)).returning();
-    return updated;
-  }
   return user;
 }
 
@@ -475,7 +506,12 @@ function toLessonDetail(lesson: Lesson, user: User, progress?: { completed: bool
   };
 }
 
-function grade(questions: StoredQuizQuestion[], answers: { questionId: string; answer: string }[]) {
+const DEFAULT_PASSING_SCORE = 80;
+function grade(
+  questions: StoredQuizQuestion[],
+  answers: { questionId: string; answer: string }[],
+  passingScore: number = DEFAULT_PASSING_SCORE,
+) {
   const answerMap = new Map(answers.map((answer) => [answer.questionId, answer.answer]));
   const correctAnswers = questions.map((question) => {
     const isCorrect = answerMap.get(question.id) === question.correctAnswer;
@@ -484,7 +520,7 @@ function grade(questions: StoredQuizQuestion[], answers: { questionId: string; a
   const score = correctAnswers.filter((answer) => answer.isCorrect).length;
   const total = questions.length;
   const percentage = total === 0 ? 0 : Math.round((score / total) * 100);
-  return { score, total, percentage, passed: percentage >= 70, correctAnswers };
+  return { score, total, percentage, passed: percentage >= passingScore, correctAnswers };
 }
 
 async function historyFor(userId: string) {
@@ -590,7 +626,7 @@ router.use(async (_req, _res, next) => {
     await ensureSeeded();
     next();
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -602,7 +638,7 @@ router.get("/me", async (req, res, next) => {
       .from(lessonProgressTable)
       .where(and(eq(lessonProgressTable.userId, user.id), eq(lessonProgressTable.completed, true)));
     const count = completedCount[0]?.count ?? 0;
-    res.json({
+    return res.json({
       id: user.id,
       email: user.email,
       name: user.name,
@@ -615,7 +651,7 @@ router.get("/me", async (req, res, next) => {
       createdAt: user.createdAt,
     });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -634,7 +670,7 @@ router.patch("/me", async (req, res, next) => {
       .from(lessonProgressTable)
       .where(and(eq(lessonProgressTable.userId, updated.id), eq(lessonProgressTable.completed, true)));
     const count = completedCount[0]?.count ?? 0;
-    res.json({
+    return res.json({
       id: updated.id,
       email: updated.email,
       name: updated.name,
@@ -647,7 +683,7 @@ router.patch("/me", async (req, res, next) => {
       createdAt: updated.createdAt,
     });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -680,13 +716,13 @@ async function loadPlacementQuestions(): Promise<PlacementQuestion[]> {
 router.get("/placement-test", async (_req, res, next) => {
   try {
     const questions = await loadPlacementQuestions();
-    res.json({
+    return res.json({
       titleEn: "English Placement Test",
       titleMn: "Англи хэлний түвшин тогтоох тест",
       questions: questions.map(getQuestionPublic),
     });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -709,7 +745,7 @@ router.post("/placement-test", async (req, res, next) => {
       : 1;
     const startingDay = (level - 1) * 30 + 1;
     await db.update(usersTable).set({ placementCompleted: true, placementLevel: level }).where(eq(usersTable.id, user.id));
-    res.json({
+    return res.json({
       ...result,
       level,
       startingDay,
@@ -717,7 +753,7 @@ router.post("/placement-test", async (req, res, next) => {
       messageMn: `Таны санал болгож буй түвшин ${level}-р түвшин. ${startingDay}-р өдрөөс эхлээрэй.`,
     });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -728,9 +764,9 @@ router.get("/lessons", async (req, res, next) => {
     const lessons = await db.select().from(lessonsTable).orderBy(lessonsTable.day);
     const progress = await db.select().from(lessonProgressTable).where(eq(lessonProgressTable.userId, user.id));
     const progressMap = new Map(progress.map((item) => [item.lessonId, item]));
-    res.json(lessons.map((lesson) => toLessonSummary(lesson, user, progressMap.get(lesson.id), unlocks)));
+    return res.json(lessons.map((lesson) => toLessonSummary(lesson, user, progressMap.get(lesson.id), unlocks)));
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -742,9 +778,9 @@ router.get("/lessons/:lessonId", async (req, res, next) => {
     const [lesson] = await db.select().from(lessonsTable).where(eq(lessonsTable.id, lessonId)).limit(1);
     if (!lesson) return res.status(404).json({ error: "Lesson not found" });
     const [progress] = await db.select().from(lessonProgressTable).where(and(eq(lessonProgressTable.userId, user.id), eq(lessonProgressTable.lessonId, lesson.id))).limit(1);
-    res.json(toLessonDetail(lesson, user, progress, unlocks));
+    return res.json(toLessonDetail(lesson, user, progress, unlocks));
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -772,9 +808,9 @@ router.post("/lessons/:lessonId/quiz-attempts", async (req, res, next) => {
       target: [lessonProgressTable.userId, lessonProgressTable.lessonId],
       set: { completed: result.passed, bestScore: sql`greatest(${lessonProgressTable.bestScore}, ${result.percentage})`, updatedAt: new Date() },
     });
-    res.json({ id: attempt.id, ...result, completedDay: result.passed ? lesson.day : null });
+    return res.json({ id: attempt.id, ...result, completedDay: result.passed ? lesson.day : null });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -793,9 +829,9 @@ router.get("/final-tests/:level", async (req, res, next) => {
     }
     const [test] = await db.select().from(finalTestsTable).where(eq(finalTestsTable.level, level)).limit(1);
     if (!test) return res.status(404).json({ error: "Final test not found" });
-    res.json({ id: test.id, level: test.level, titleEn: test.titleEn, titleMn: test.titleMn, questions: test.questions.map(getQuestionPublic) });
+    return res.json({ id: test.id, level: test.level, titleEn: test.titleEn, titleMn: test.titleMn, passingScore: test.passingScore, questions: test.questions.map(getQuestionPublic) });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -812,18 +848,18 @@ router.post("/final-tests/:level/attempts", async (req, res, next) => {
     if (!test) return res.status(404).json({ error: "Final test not found" });
     const result = grade(test.questions, body.answers);
     const [attempt] = await db.insert(quizAttemptsTable).values({ userId: user.id, finalTestId: test.id, type: "final", titleEn: test.titleEn, titleMn: test.titleMn, level: test.level, ...result }).returning();
-    res.json({ id: attempt.id, ...result, completedDay: null });
+    return res.json({ id: attempt.id, ...result, completedDay: null });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
 router.get("/test-history", async (req, res, next) => {
   try {
     const user = await getCurrentUser(req);
-    res.json(await historyFor(user.id));
+    return res.json(await historyFor(user.id));
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -846,7 +882,7 @@ router.get("/dashboard", async (req, res, next) => {
       1,
       Math.min(3, Math.ceil((nextLesson?.day ?? user.placementLevel * 30) / 30)),
     );
-    res.json({
+    return res.json({
       completedDays: completedIds.size,
       totalDays: 90,
       currentLevel,
@@ -868,7 +904,7 @@ router.get("/dashboard", async (req, res, next) => {
       })),
     });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -876,7 +912,7 @@ router.get("/payments/status", async (req, res, next) => {
   try {
     const user = await getCurrentUser(req);
     const recentInvoices = await db.select().from(paymentInvoicesTable).where(eq(paymentInvoicesTable.userId, user.id)).orderBy(desc(paymentInvoicesTable.createdAt)).limit(10);
-    res.json({
+    return res.json({
       premium: user.premium,
       providerConnected: isQPayConfigured(),
       message: isQPayConfigured() ? "QPay is configured for live invoice creation." : "QPay credentials are not configured yet. Add merchant credentials as environment variables before taking live payments.",
@@ -888,7 +924,7 @@ router.get("/payments/status", async (req, res, next) => {
       ],
     });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -896,9 +932,9 @@ router.post("/payments/checkout", async (req, res, next) => {
   try {
     CreateCheckoutSessionBody.parse(req.body);
     await getCurrentUser(req);
-    res.json({ checkoutUrl: null, providerConnected: isQPayConfigured(), message: "Stripe is not used. Use QPay invoice endpoints for Mongolian payments." });
+    return res.json({ checkoutUrl: null, providerConnected: isQPayConfigured(), message: "Stripe is not used. Use QPay invoice endpoints for Mongolian payments." });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -929,9 +965,9 @@ router.post("/payments/qpay/invoices", async (req, res, next) => {
       providerPayload: qpay.raw,
     }).returning();
 
-    res.json(invoiceToResponse(invoice, qpay.providerConnected, qpay.message));
+    return res.json(invoiceToResponse(invoice, qpay.providerConnected, qpay.message));
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -941,9 +977,9 @@ router.get("/payments/qpay/invoices/:invoiceId", async (req, res, next) => {
     const { invoiceId } = GetQpayInvoiceParams.parse(req.params);
     const [invoice] = await db.select().from(paymentInvoicesTable).where(and(eq(paymentInvoicesTable.id, invoiceId), eq(paymentInvoicesTable.userId, user.id))).limit(1);
     if (!invoice) return res.status(404).json({ error: "Invoice not found" });
-    res.json(invoiceToResponse(invoice));
+    return res.json(invoiceToResponse(invoice));
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -956,9 +992,9 @@ router.post("/payments/qpay/invoices/:invoiceId/check", async (req, res, next) =
 
     const qpayStatus = await checkQPayInvoiceStatus(invoice.qpayInvoiceId ?? "", invoice.invoiceCode);
     const updated = await updateInvoiceStatus(invoice, qpayStatus.status, qpayStatus.raw);
-    res.json(invoiceToResponse(updated, qpayStatus.providerConnected, qpayStatus.message));
+    return res.json(invoiceToResponse(updated, qpayStatus.providerConnected, qpayStatus.message));
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -976,9 +1012,9 @@ router.post("/payments/qpay/callback", async (req, res, next) => {
     if (!invoice) return res.status(404).json({ error: "Invoice not found" });
 
     const updated = await updateInvoiceStatus(invoice, status, req.body);
-    res.json({ success: true, invoice: invoiceToResponse(updated) });
+    return res.json({ success: true, invoice: invoiceToResponse(updated) });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -1010,9 +1046,9 @@ router.get("/payments/requests", async (req, res, next) => {
       .from(paymentRequestsTable)
       .where(eq(paymentRequestsTable.userId, user.id))
       .orderBy(desc(paymentRequestsTable.createdAt));
-    res.json(list.map(paymentRequestToResponse));
+    return res.json(list.map(paymentRequestToResponse));
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -1036,9 +1072,9 @@ router.post("/payments/requests", async (req, res, next) => {
         status: "pending",
       })
       .returning();
-    res.json(paymentRequestToResponse(created));
+    return res.json(paymentRequestToResponse(created));
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -1057,7 +1093,7 @@ router.get("/admin/payment-requests", async (req, res, next) => {
       .leftJoin(usersTable, eq(paymentRequestsTable.userId, usersTable.id))
       .orderBy(desc(paymentRequestsTable.createdAt));
     const filtered = status === "all" ? rows : rows.filter((r) => r.request.status === status);
-    res.json(
+    return res.json(
       filtered.map((row) => ({
         ...paymentRequestToResponse(row.request),
         userId: row.request.userId,
@@ -1066,7 +1102,7 @@ router.get("/admin/payment-requests", async (req, res, next) => {
       })),
     );
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -1118,14 +1154,14 @@ router.post("/admin/payment-requests/:requestId/decide", async (req, res, next) 
       .from(usersTable)
       .where(eq(usersTable.id, updated.userId))
       .limit(1);
-    res.json({
+    return res.json({
       ...paymentRequestToResponse(updated),
       userId: updated.userId,
       userEmail: studentRow?.email ?? "",
       userName: studentRow?.name ?? "",
     });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -1140,7 +1176,7 @@ router.get("/admin/students", async (req, res, next) => {
       .select()
       .from(paymentRequestsTable)
       .where(eq(paymentRequestsTable.status, "pending"));
-    res.json(
+    return res.json(
       allUsers.map((u) => ({
         id: u.id,
         email: u.email,
@@ -1155,7 +1191,7 @@ router.get("/admin/students", async (req, res, next) => {
       })),
     );
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -1172,7 +1208,7 @@ router.get("/admin/students/:userId", async (req, res, next) => {
     const invoices = await db.select().from(paymentInvoicesTable).where(eq(paymentInvoicesTable.userId, userId)).orderBy(desc(paymentInvoicesTable.createdAt));
     const history = await historyFor(userId);
     const pendingPaymentRequests = reqs.filter((r) => r.status === "pending").length;
-    res.json({
+    return res.json({
       id: target.id,
       email: target.email,
       name: target.name,
@@ -1188,7 +1224,7 @@ router.get("/admin/students/:userId", async (req, res, next) => {
       invoices: invoices.map((invoice) => invoiceToResponse(invoice)),
     });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -1201,9 +1237,9 @@ router.post("/admin/students/:userId/unlock", async (req, res, next) => {
     const [target] = await db.select().from(usersTable).where(eq(usersTable.id, userId)).limit(1);
     if (!target) return res.status(404).json({ error: "Student not found" });
     await manualUnlockProduct(userId, body.productId);
-    res.json({ success: true });
+    return res.json({ success: true });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -1215,9 +1251,9 @@ router.post("/admin/students/:userId/reset-progress", async (req, res, next) => 
     await db.delete(lessonProgressTable).where(eq(lessonProgressTable.userId, userId));
     await db.delete(quizAttemptsTable).where(eq(quizAttemptsTable.userId, userId));
     await db.update(usersTable).set({ placementCompleted: false, placementLevel: 1 }).where(eq(usersTable.id, userId));
-    res.json({ success: true });
+    return res.json({ success: true });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -1252,12 +1288,12 @@ router.post("/admin/lessons/:lessonId/duplicate", async (req, res, next) => {
         quiz: source.quiz.map((q, i) => ({ ...q, id: `d${body.day}-q${i + 1}` })),
       })
       .returning();
-    res.json({
+    return res.json({
       ...toLessonDetail(created, user, undefined, new Set(["course:full"])),
       correctAnswers: created.quiz.map((q) => ({ questionId: q.id, answer: q.correctAnswer })),
     });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -1267,9 +1303,9 @@ router.get("/admin/lessons", async (req, res, next) => {
     ensureAdmin(user);
     const unlocks = await getUnlockedProducts(user.id);
     const lessons = await db.select().from(lessonsTable).orderBy(lessonsTable.day);
-    res.json(lessons.map((lesson) => ({ ...toLessonDetail(lesson, user, undefined, unlocks), correctAnswers: lesson.quiz.map((question) => ({ questionId: question.id, answer: question.correctAnswer })) })));
+    return res.json(lessons.map((lesson) => ({ ...toLessonDetail(lesson, user, undefined, unlocks), correctAnswers: lesson.quiz.map((question) => ({ questionId: question.id, answer: question.correctAnswer })) })));
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -1279,9 +1315,9 @@ router.post("/admin/lessons", async (req, res, next) => {
     ensureAdmin(user);
     const body = AdminCreateLessonBody.parse(req.body);
     const [lesson] = await db.insert(lessonsTable).values(body).returning();
-    res.json({ ...toLessonDetail(lesson, user, undefined, new Set(["course:full"])), correctAnswers: lesson.quiz.map((question) => ({ questionId: question.id, answer: question.correctAnswer })) });
+    return res.json({ ...toLessonDetail(lesson, user, undefined, new Set(["course:full"])), correctAnswers: lesson.quiz.map((question) => ({ questionId: question.id, answer: question.correctAnswer })) });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -1293,9 +1329,9 @@ router.put("/admin/lessons/:lessonId", async (req, res, next) => {
     const body = AdminUpdateLessonBody.parse(req.body);
     const [lesson] = await db.update(lessonsTable).set({ ...body, updatedAt: new Date() }).where(eq(lessonsTable.id, lessonId)).returning();
     if (!lesson) return res.status(404).json({ error: "Lesson not found" });
-    res.json({ ...toLessonDetail(lesson, user, undefined, new Set(["course:full"])), correctAnswers: lesson.quiz.map((question) => ({ questionId: question.id, answer: question.correctAnswer })) });
+    return res.json({ ...toLessonDetail(lesson, user, undefined, new Set(["course:full"])), correctAnswers: lesson.quiz.map((question) => ({ questionId: question.id, answer: question.correctAnswer })) });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -1305,9 +1341,9 @@ router.delete("/admin/lessons/:lessonId", async (req, res, next) => {
     ensureAdmin(user);
     const { lessonId } = AdminDeleteLessonParams.parse(req.params);
     await db.delete(lessonsTable).where(eq(lessonsTable.id, lessonId));
-    res.json({ success: true });
+    return res.json({ success: true });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -1317,7 +1353,7 @@ router.get("/admin/placement-questions", async (req, res, next) => {
     ensureAdmin(user);
     await ensurePlacementSeeded();
     const rows = await db.select().from(placementQuestionsTable).orderBy(placementQuestionsTable.position);
-    res.json(rows.map((r) => ({
+    return res.json(rows.map((r) => ({
       id: r.id,
       position: r.position,
       band: r.band,
@@ -1327,7 +1363,7 @@ router.get("/admin/placement-questions", async (req, res, next) => {
       correctAnswer: r.correctAnswer,
     })));
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -1347,13 +1383,13 @@ router.post("/admin/placement-questions", async (req, res, next) => {
       options: body.options,
       correctAnswer: body.correctAnswer,
     }).returning();
-    res.json({
+    return res.json({
       id: row.id, position: row.position, band: row.band,
       promptEn: row.promptEn, promptMn: row.promptMn ?? "",
       options: row.options as string[], correctAnswer: row.correctAnswer,
     });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -1376,13 +1412,13 @@ router.put("/admin/placement-questions/:questionId", async (req, res, next) => {
       updatedAt: new Date(),
     }).where(eq(placementQuestionsTable.id, questionId)).returning();
     if (!row) return res.status(404).json({ error: "Question not found" });
-    res.json({
+    return res.json({
       id: row.id, position: row.position, band: row.band,
       promptEn: row.promptEn, promptMn: row.promptMn ?? "",
       options: row.options as string[], correctAnswer: row.correctAnswer,
     });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
@@ -1392,15 +1428,15 @@ router.delete("/admin/placement-questions/:questionId", async (req, res, next) =
     ensureAdmin(user);
     const { questionId } = AdminDeletePlacementQuestionParams.parse(req.params);
     await db.delete(placementQuestionsTable).where(eq(placementQuestionsTable.id, questionId));
-    res.json({ success: true });
+    return res.json({ success: true });
   } catch (error) {
-    next(error);
+    return next(error);
   }
 });
 
 router.use((error: Error & { status?: number }, req: Request, res: { status: (status: number) => { json: (body: unknown) => void } }, _next: unknown) => {
   req.log.error({ error }, "Learning route error");
-  res.status(error.status ?? 500).json({ error: error.message || "Server error" });
+  return res.status(error.status ?? 500).json({ error: error.message || "Server error" });
 });
 
 export default router;

@@ -792,11 +792,12 @@ components:
         level: { type: integer }
         titleEn: { type: string }
         titleMn: { type: string }
+        passingScore: { type: integer }
         questions:
           type: array
           items:
             $ref: "#/components/schemas/QuizQuestion"
-      required: [id, level, titleEn, titleMn, questions]
+      required: [id, level, titleEn, titleMn, passingScore, questions]
     TestHistoryItem:
       type: object
       properties:
