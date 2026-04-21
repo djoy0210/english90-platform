@@ -193,6 +193,35 @@ export default function FinalTestView() {
         </Card>
       ) : (
         <div className="space-y-8">
+          {(() => {
+            const sections: { title: string; intro?: string; count: number }[] = [];
+            for (const q of test.questions as any[]) {
+              if (q.sectionTitle) sections.push({ title: q.sectionTitle, intro: q.sectionIntro, count: 1 });
+              else if (sections.length > 0) sections[sections.length - 1].count++;
+            }
+            if (sections.length === 0) return null;
+            return (
+              <Card className="border-primary/30 bg-primary/5">
+                <CardContent className="p-5 sm:p-6">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-primary mb-3">Шалгалтын бүтэц · Test outline</p>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {sections.map((s, i) => (
+                      <div key={i} className="flex items-start gap-3 rounded-lg bg-background border p-3">
+                        <div className="w-8 h-8 rounded-full bg-primary/15 text-primary font-bold flex items-center justify-center shrink-0">
+                          {i + 1}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-sm leading-tight">{s.title}</p>
+                          {s.intro && <p className="text-xs text-muted-foreground mt-1 leading-snug">{s.intro}</p>}
+                          <p className="text-xs text-primary mt-1 font-medium">{s.count} асуулт</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })()}
           <Card>
             <CardContent className="p-6 sm:p-8">
               <div className="space-y-10">
@@ -209,12 +238,21 @@ export default function FinalTestView() {
                         </div>
                       )}
                       {question.passage && (
-                        <div className="rounded-lg border-l-4 border-primary bg-muted/30 px-5 py-4">
-                          <p className="text-xs font-semibold text-muted-foreground mb-2 uppercase tracking-wide">
-                            Reading passage · Текстийг анхааралтай уншаарай
-                          </p>
-                          <p className="text-sm leading-7 whitespace-pre-line">{question.passage}</p>
-                        </div>
+                        <details
+                          open
+                          className="sticky top-2 z-10 rounded-lg border-2 border-primary bg-card shadow-md group"
+                        >
+                          <summary className="cursor-pointer list-none px-5 py-3 flex items-center justify-between bg-primary/10 rounded-t-lg">
+                            <span className="text-sm font-semibold text-primary">
+                              📖 Reading passage · Текстийг уншаарай
+                            </span>
+                            <span className="text-xs text-muted-foreground group-open:hidden">Дэлгэх ▾</span>
+                            <span className="text-xs text-muted-foreground hidden group-open:inline">Хураах ▴</span>
+                          </summary>
+                          <div className="px-5 py-4 max-h-72 overflow-y-auto">
+                            <p className="text-sm leading-7 whitespace-pre-line">{question.passage}</p>
+                          </div>
+                        </details>
                       )}
                       <div>
                         <h3 className="text-lg font-medium leading-relaxed">
