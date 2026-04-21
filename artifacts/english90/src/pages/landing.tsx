@@ -37,9 +37,7 @@ export default function Landing() {
                 Англи хэлийг 90 хоногт{" "}
                 <span className="text-primary">өөрийн болго.</span>
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0">
-                Өдөрт ердөө 60 минут. Цэгцтэй 3-түвшинт хөтөлбөр, 20 шинэ үг бүхий хичээл, audio listening, төгсгөлийн шалгалт.
-              </p>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0">Өдөрт ердөө 60 минут. Цэгцтэй 3-түвшинт хөтөлбөр, Өдөр бүр 20 шинэ үг бүхий хичээл, дүрэм, audio listening, шалгалт.</p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2">
                 <Button asChild size="lg" className="h-14 px-8 text-base">
                   <Link href="/sign-up">Үнэгүй бүртгүүлэх <ArrowRight className="ml-2 h-5 w-5" /></Link>
