@@ -336,6 +336,9 @@ function StudentDetailDialog({ studentId, onClose }: { studentId: string | null;
   );
 }
 
+const emptyVocabRow = () => ({ english: "", pronunciation: "", mongolian: "", example: "" });
+const emptyQuizRow = (i: number) => ({ id: `admin-q-${i + 1}-${Math.random().toString(36).slice(2, 6)}`, promptEn: "", promptMn: "", options: ["", "", ""], correctAnswer: "" });
+
 function LessonsPanel() {
   const { data: lessons, isLoading } = useAdminListLessons();
   const deleteLesson = useAdminDeleteLesson();
@@ -351,6 +354,8 @@ function LessonsPanel() {
   const [dupDay, setDupDay] = useState(1);
   const [dupTitleEn, setDupTitleEn] = useState("");
   const [dupTitleMn, setDupTitleMn] = useState("");
+  const [levelFilter, setLevelFilter] = useState<string>("1");
+  const [editorTab, setEditorTab] = useState<string>("basic");
 
   const [formData, setFormData] = useState<any>({
     day: 1, level: 1, titleEn: "", titleMn: "", objectiveEn: "", objectiveMn: "",
@@ -358,9 +363,30 @@ function LessonsPanel() {
     pdfUrl: null, audioUrl: null, durationMinutes: 60, isPremium: false, vocabulary: [], quiz: [],
   });
 
+  const filteredLessons = (lessons ?? [])
+    .filter((l) => levelFilter === "all" || l.level === parseInt(levelFilter))
+    .sort((a, b) => a.level - b.level || a.day - b.day);
+
+  const nextAvailableDay = (level: number) => {
+    const start = (level - 1) * 30 + 1;
+    const end = level * 30;
+    const used = new Set((lessons ?? []).map((l) => l.day));
+    for (let d = start; d <= end; d++) if (!used.has(d)) return d;
+    return end;
+  };
+
   const handleOpenCreate = () => {
-    setFormData({ day: 1, level: 1, titleEn: "", titleMn: "", objectiveEn: "", objectiveMn: "", contentEn: "", contentMn: "", lessonContent: emptyLessonContent, pdfUrl: null, audioUrl: null, durationMinutes: 60, isPremium: false, vocabulary: [], quiz: [] });
+    const lvl = levelFilter === "all" ? 1 : parseInt(levelFilter);
+    setFormData({
+      day: nextAvailableDay(lvl), level: lvl,
+      titleEn: "", titleMn: "", objectiveEn: "", objectiveMn: "",
+      contentEn: "", contentMn: "", lessonContent: emptyLessonContent,
+      pdfUrl: null, audioUrl: null, durationMinutes: 60, isPremium: lvl > 1 || nextAvailableDay(lvl) > 1,
+      vocabulary: Array.from({ length: 20 }, emptyVocabRow),
+      quiz: Array.from({ length: 5 }, (_, i) => emptyQuizRow(i)),
+    });
     setEditingLessonId(null);
+    setEditorTab("basic");
     setIsDialogOpen(true);
   };
   const handleOpenEdit = (lesson: any) => {
@@ -369,6 +395,7 @@ function LessonsPanel() {
     );
     const quizWithAnswers = (lesson.quiz || []).map((q: any) => ({
       ...q,
+      options: Array.isArray(q.options) && q.options.length > 0 ? q.options : ["", "", ""],
       correctAnswer: q.correctAnswer ?? answersByQuestion.get(q.id) ?? "",
     }));
     setFormData({
@@ -382,6 +409,7 @@ function LessonsPanel() {
       vocabulary: lesson.vocabulary || [], quiz: quizWithAnswers,
     });
     setEditingLessonId(lesson.id);
+    setEditorTab("basic");
     setIsDialogOpen(true);
   };
 
@@ -394,15 +422,24 @@ function LessonsPanel() {
   };
 
   const handleSave = () => {
-    const { lessonContentText, ...payload } = formData as any;
+    const { lessonContentText, ...rest } = formData as any;
+    const cleanVocab = (rest.vocabulary || []).filter((v: any) => v.english?.trim() && v.mongolian?.trim() && v.example?.trim());
+    const cleanQuiz = (rest.quiz || [])
+      .map((q: any, i: number) => {
+        const options = (q.options || []).map((o: string) => (o || "").trim()).filter(Boolean);
+        const correctAnswer = (q.correctAnswer || "").trim();
+        return { ...q, id: q.id || `admin-q-${i + 1}`, options, correctAnswer };
+      })
+      .filter((q: any) => q.promptEn?.trim() && q.promptMn?.trim() && q.options.length >= 2 && q.correctAnswer && q.options.includes(q.correctAnswer));
+    const payload = { ...rest, vocabulary: cleanVocab, quiz: cleanQuiz };
     const op = editingLessonId
       ? updateLesson.mutateAsync({ lessonId: editingLessonId, data: payload })
       : createLesson.mutateAsync({ data: payload });
     op.then(() => {
-      toast({ title: editingLessonId ? "Шинэчлэгдлээ" : "Үүслээ" });
+      toast({ title: editingLessonId ? "Шинэчлэгдлээ" : "Үүслээ", description: `${cleanVocab.length} үг · ${cleanQuiz.length} асуулт` });
       setIsDialogOpen(false);
       queryClient.invalidateQueries({ queryKey: getAdminListLessonsQueryKey() });
-    }).catch(() => toast({ title: "Алдаа", variant: "destructive" }));
+    }).catch((err: any) => toast({ title: "Алдаа", description: err?.message ?? "Хадгалж чадсангүй.", variant: "destructive" }));
   };
 
   const handleDuplicate = async () => {
@@ -411,6 +448,17 @@ function LessonsPanel() {
       await duplicate.mutateAsync({ lessonId: duplicatingId, data: { day: dupDay, titleEn: dupTitleEn || undefined, titleMn: dupTitleMn || undefined } });
       toast({ title: "Хуулагдлаа" });
       setDuplicatingId(null);
+      queryClient.invalidateQueries({ queryKey: getAdminListLessonsQueryKey() });
+    } catch (err: any) {
+      toast({ title: "Алдаа", description: err?.message ?? "Хуулж чадсангүй.", variant: "destructive" });
+    }
+  };
+
+  const handleQuickDuplicate = async (lesson: any) => {
+    const targetDay = nextAvailableDay(lesson.level);
+    try {
+      await duplicate.mutateAsync({ lessonId: lesson.id, data: { day: targetDay, titleEn: `${lesson.titleEn} (copy)`, titleMn: `${lesson.titleMn} (хуулбар)` } });
+      toast({ title: `Өдөр ${targetDay} рүү хуулагдлаа` });
       queryClient.invalidateQueries({ queryKey: getAdminListLessonsQueryKey() });
     } catch (err: any) {
       toast({ title: "Алдаа", description: err?.message ?? "Хуулж чадсангүй.", variant: "destructive" });
@@ -428,98 +476,165 @@ function LessonsPanel() {
     reader.readAsDataURL(file);
   };
 
+  const previewUrl = (id: string) => `${import.meta.env.BASE_URL}lessons/${id}`;
+
+  const levelCounts = [1, 2, 3].map((lv) => ({ lv, count: (lessons ?? []).filter((l) => l.level === lv).length }));
+
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
+      <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <CardTitle>Хичээлүүд</CardTitle>
-          <CardDescription>Бүх 90 өдрийн хичээлийн контент.</CardDescription>
+          <CardDescription>
+            {levelCounts.map((c) => `L${c.lv}: ${c.count}/30`).join(" · ")}
+          </CardDescription>
         </div>
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger asChild><Button onClick={handleOpenCreate}><Plus className="w-4 h-4 mr-2" />Шинэ хичээл</Button></DialogTrigger>
-          <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
-            <DialogHeader><DialogTitle>{editingLessonId ? "Хичээл засах" : "Шинэ хичээл"}</DialogTitle></DialogHeader>
-            <div className="grid gap-5 py-2">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1.5"><Label>Өдөр</Label><Input type="number" value={formData.day} onChange={(e) => setFormData({ ...formData, day: parseInt(e.target.value) || 1 })} /></div>
-                <div className="space-y-1.5"><Label>Түвшин</Label><Input type="number" value={formData.level} onChange={(e) => setFormData({ ...formData, level: parseInt(e.target.value) || 1 })} /></div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1.5"><Label>Гарчиг (EN)</Label><Input value={formData.titleEn} onChange={(e) => setFormData({ ...formData, titleEn: e.target.value })} /></div>
-                <div className="space-y-1.5"><Label>Гарчиг (MN)</Label><Input value={formData.titleMn} onChange={(e) => setFormData({ ...formData, titleMn: e.target.value })} /></div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1.5"><Label>Зорилго (EN)</Label><Textarea value={formData.objectiveEn} onChange={(e) => setFormData({ ...formData, objectiveEn: e.target.value })} /></div>
-                <div className="space-y-1.5"><Label>Зорилго (MN)</Label><Textarea value={formData.objectiveMn} onChange={(e) => setFormData({ ...formData, objectiveMn: e.target.value })} /></div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1.5"><Label>Агуулга (EN)</Label><Textarea className="min-h-32" value={formData.contentEn} onChange={(e) => setFormData({ ...formData, contentEn: e.target.value })} /></div>
-                <div className="space-y-1.5"><Label>Агуулга (MN)</Label><Textarea className="min-h-32" value={formData.contentMn} onChange={(e) => setFormData({ ...formData, contentMn: e.target.value })} /></div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1.5"><Label>Хугацаа (минут)</Label><Input type="number" value={formData.durationMinutes} onChange={(e) => setFormData({ ...formData, durationMinutes: parseInt(e.target.value) || 60 })} /></div>
-                <div className="flex items-end gap-2"><Checkbox id="premium" checked={formData.isPremium} onCheckedChange={(c) => setFormData({ ...formData, isPremium: !!c })} /><Label htmlFor="premium">Premium хичээл</Label></div>
-              </div>
-              <div className="space-y-1.5">
-                <Label>20 шинэ үг (мөр бүр: English | pronunciation | Mongolian | example)</Label>
-                <Textarea className="min-h-40 font-mono text-xs" value={formatVocabulary(formData.vocabulary)} onChange={(e) => setFormData({ ...formData, vocabulary: parseVocabulary(e.target.value) })} />
-              </div>
-              <div className="space-y-1.5">
-                <Label>3 хуудаст контент JSON (page1, page2, page3 — page3.listeningQuestions нэмэх боломжтой)</Label>
-                <Textarea className="min-h-72 font-mono text-xs" value={(formData as any).lessonContentText ?? JSON.stringify(formData.lessonContent || emptyLessonContent, null, 2)} onChange={(e) => handleLessonContentChange(e.target.value)} />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <Label>PDF (заавал биш)</Label>
-                  <Input type="file" accept="application/pdf" onChange={(e) => handleFileUpload(e.target.files?.[0], "pdfUrl")} />
-                  {formData.pdfUrl && <div className="flex items-center justify-between rounded-md border p-2 text-xs"><span>PDF хадгалагдсан</span><Button type="button" variant="outline" size="sm" onClick={() => setFormData({ ...formData, pdfUrl: null })}>Устгах</Button></div>}
-                </div>
-                <div className="space-y-1.5">
-                  <Label>Listening аудио (заавал биш)</Label>
-                  <Input type="file" accept="audio/*" onChange={(e) => handleFileUpload(e.target.files?.[0], "audioUrl")} />
-                  {formData.audioUrl && <div className="flex items-center justify-between rounded-md border p-2 text-xs"><span>Аудио хадгалагдсан</span><Button type="button" variant="outline" size="sm" onClick={() => setFormData({ ...formData, audioUrl: null })}>Устгах</Button></div>}
-                </div>
-              </div>
-              <div className="space-y-1.5">
-                <Label>Quiz (мөр бүр: EN | MN | A;B;C | correctAnswer)</Label>
-                <Textarea className="min-h-32 font-mono text-xs" value={formatQuiz(formData.quiz)} onChange={(e) => setFormData({ ...formData, quiz: parseQuiz(e.target.value) })} />
-              </div>
-              <div className="flex justify-end"><Button onClick={handleSave}>{editingLessonId ? "Шинэчлэх" : "Үүсгэх"}</Button></div>
-            </div>
-          </DialogContent>
-        </Dialog>
+        <div className="flex flex-wrap items-center gap-2">
+          <Select value={levelFilter} onValueChange={setLevelFilter}>
+            <SelectTrigger className="w-32"><SelectValue /></SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Бүх түвшин</SelectItem>
+              <SelectItem value="1">Level 1</SelectItem>
+              <SelectItem value="2">Level 2</SelectItem>
+              <SelectItem value="3">Level 3</SelectItem>
+            </SelectContent>
+          </Select>
+          <Button onClick={handleOpenCreate}><Plus className="w-4 h-4 mr-2" />Шинэ хичээл</Button>
+        </div>
       </CardHeader>
       <CardContent>
         {isLoading ? <Skeleton className="h-60 w-full" /> : (
-          <div className="rounded-md border overflow-x-auto">
+          <div className="rounded-md border overflow-auto max-h-[60vh]">
             <Table>
-              <TableHeader><TableRow><TableHead>Өдөр</TableHead><TableHead>Түвшин</TableHead><TableHead>Гарчиг</TableHead><TableHead>Төрөл</TableHead><TableHead className="text-right">Үйлдэл</TableHead></TableRow></TableHeader>
+              <TableHeader className="sticky top-0 bg-card z-10">
+                <TableRow>
+                  <TableHead className="w-16">Өдөр</TableHead>
+                  <TableHead className="w-16">Түвшин</TableHead>
+                  <TableHead>Гарчиг</TableHead>
+                  <TableHead className="w-20">Үг</TableHead>
+                  <TableHead className="w-20">Quiz</TableHead>
+                  <TableHead className="w-24">Төрөл</TableHead>
+                  <TableHead className="text-right w-44">Үйлдэл</TableHead>
+                </TableRow>
+              </TableHeader>
               <TableBody>
-                {(lessons ?? []).map((l) => (
-                  <TableRow key={l.id}>
-                    <TableCell>{l.day}</TableCell>
-                    <TableCell>L{l.level}</TableCell>
-                    <TableCell><div className="font-medium">{l.titleMn}</div><div className="text-xs text-muted-foreground">{l.titleEn}</div></TableCell>
-                    <TableCell><Badge variant={l.isPremium ? "secondary" : "default"}>{l.isPremium ? "Premium" : "Үнэгүй"}</Badge></TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex items-center justify-end gap-1">
-                        <Button variant="outline" size="icon" title="Засах" onClick={() => handleOpenEdit(l)}><Edit className="w-4 h-4" /></Button>
-                        <Button variant="outline" size="icon" title="Хуулах" onClick={() => { setDuplicatingId(l.id); setDupDay(l.day + 1); setDupTitleEn(l.titleEn + " (copy)"); setDupTitleMn(l.titleMn + " (хуулбар)"); }}><Copy className="w-4 h-4" /></Button>
-                        <Button variant="outline" size="icon" className="text-destructive hover:bg-destructive/10" title="Устгах" onClick={() => handleDelete(l.id, l.titleMn)}><Trash2 className="w-4 h-4" /></Button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-                {(lessons ?? []).length === 0 && <TableRow><TableCell colSpan={5} className="text-center text-muted-foreground py-6">Хичээл байхгүй.</TableCell></TableRow>}
+                {filteredLessons.map((l) => {
+                  const vocabCount = (l.vocabulary || []).length;
+                  const quizCount = (l.quiz || []).length;
+                  const incomplete = vocabCount < 20 || quizCount < 5;
+                  return (
+                    <TableRow key={l.id}>
+                      <TableCell className="font-medium">{l.day}</TableCell>
+                      <TableCell>L{l.level}</TableCell>
+                      <TableCell><div className="font-medium">{l.titleMn}</div><div className="text-xs text-muted-foreground">{l.titleEn}</div></TableCell>
+                      <TableCell><span className={vocabCount < 20 ? "text-amber-600 font-mono text-sm" : "font-mono text-sm"}>{vocabCount}/20</span></TableCell>
+                      <TableCell><span className={quizCount < 5 ? "text-amber-600 font-mono text-sm" : "font-mono text-sm"}>{quizCount}</span></TableCell>
+                      <TableCell><Badge variant={l.isPremium ? "secondary" : "default"}>{l.isPremium ? "Premium" : "Үнэгүй"}</Badge>{incomplete && <Badge variant="outline" className="ml-1 text-amber-600 border-amber-600">Дутуу</Badge>}</TableCell>
+                      <TableCell className="text-right">
+                        <div className="flex items-center justify-end gap-1">
+                          <Button variant="outline" size="icon" title="Урьдчилан харах" onClick={() => window.open(previewUrl(l.id), "_blank")}><Eye className="w-4 h-4" /></Button>
+                          <Button variant="outline" size="icon" title="Засах" onClick={() => handleOpenEdit(l)}><Edit className="w-4 h-4" /></Button>
+                          <Button variant="outline" size="icon" title={`Дараагийн хоосон өдөр рүү хуулах (Өдөр ${nextAvailableDay(l.level)})`} onClick={() => handleQuickDuplicate(l)} disabled={duplicate.isPending}><Copy className="w-4 h-4" /></Button>
+                          <Button variant="outline" size="icon" title="Тусгай хуулах…" onClick={() => { setDuplicatingId(l.id); setDupDay(nextAvailableDay(l.level)); setDupTitleEn(l.titleEn + " (copy)"); setDupTitleMn(l.titleMn + " (хуулбар)"); }}><Plus className="w-4 h-4" /></Button>
+                          <Button variant="outline" size="icon" className="text-destructive hover:bg-destructive/10" title="Устгах" onClick={() => handleDelete(l.id, l.titleMn)}><Trash2 className="w-4 h-4" /></Button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+                {filteredLessons.length === 0 && <TableRow><TableCell colSpan={7} className="text-center text-muted-foreground py-6">Хичээл байхгүй.</TableCell></TableRow>}
               </TableBody>
             </Table>
           </div>
         )}
       </CardContent>
 
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="max-w-6xl max-h-[92vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-3">
+              {editingLessonId ? "Хичээл засах" : "Шинэ хичээл"}
+              <Badge variant="outline">L{formData.level} · Өдөр {formData.day}</Badge>
+              {editingLessonId && (
+                <Button variant="outline" size="sm" className="ml-auto" onClick={() => window.open(previewUrl(editingLessonId), "_blank")}>
+                  <Eye className="w-4 h-4 mr-1" />Урьдчилан харах
+                </Button>
+              )}
+            </DialogTitle>
+          </DialogHeader>
+          <Tabs value={editorTab} onValueChange={setEditorTab}>
+            <TabsList className="grid grid-cols-5 w-full">
+              <TabsTrigger value="basic">Үндсэн</TabsTrigger>
+              <TabsTrigger value="vocab">Үг ({(formData.vocabulary || []).filter((v: any) => v.english?.trim()).length}/20)</TabsTrigger>
+              <TabsTrigger value="quiz">Quiz ({(formData.quiz || []).filter((q: any) => q.promptEn?.trim()).length})</TabsTrigger>
+              <TabsTrigger value="content">3 хуудас</TabsTrigger>
+              <TabsTrigger value="files">Файл</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="basic" className="space-y-4 py-4">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div className="space-y-1.5"><Label>Өдөр</Label><Input type="number" value={formData.day} onChange={(e) => setFormData({ ...formData, day: parseInt(e.target.value) || 1 })} /></div>
+                <div className="space-y-1.5"><Label>Түвшин</Label><Input type="number" value={formData.level} onChange={(e) => setFormData({ ...formData, level: parseInt(e.target.value) || 1 })} /></div>
+                <div className="space-y-1.5"><Label>Хугацаа (мин)</Label><Input type="number" value={formData.durationMinutes} onChange={(e) => setFormData({ ...formData, durationMinutes: parseInt(e.target.value) || 60 })} /></div>
+                <div className="flex items-end gap-2 pb-2"><Checkbox id="premium" checked={formData.isPremium} onCheckedChange={(c) => setFormData({ ...formData, isPremium: !!c })} /><Label htmlFor="premium">Premium</Label></div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5"><Label>Гарчиг (EN)</Label><Input value={formData.titleEn} onChange={(e) => setFormData({ ...formData, titleEn: e.target.value })} /></div>
+                <div className="space-y-1.5"><Label>Гарчиг (MN)</Label><Input value={formData.titleMn} onChange={(e) => setFormData({ ...formData, titleMn: e.target.value })} /></div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5"><Label>Зорилго (EN)</Label><Textarea rows={2} value={formData.objectiveEn} onChange={(e) => setFormData({ ...formData, objectiveEn: e.target.value })} /></div>
+                <div className="space-y-1.5"><Label>Зорилго (MN)</Label><Textarea rows={2} value={formData.objectiveMn} onChange={(e) => setFormData({ ...formData, objectiveMn: e.target.value })} /></div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5"><Label>Тойм (EN)</Label><Textarea rows={3} value={formData.contentEn} onChange={(e) => setFormData({ ...formData, contentEn: e.target.value })} /></div>
+                <div className="space-y-1.5"><Label>Тойм (MN)</Label><Textarea rows={3} value={formData.contentMn} onChange={(e) => setFormData({ ...formData, contentMn: e.target.value })} /></div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="vocab" className="space-y-3 py-4">
+              <VocabEditor
+                vocabulary={formData.vocabulary || []}
+                onChange={(v) => setFormData({ ...formData, vocabulary: v })}
+              />
+            </TabsContent>
+
+            <TabsContent value="quiz" className="space-y-3 py-4">
+              <QuizEditor
+                quiz={formData.quiz || []}
+                onChange={(q) => setFormData({ ...formData, quiz: q })}
+              />
+            </TabsContent>
+
+            <TabsContent value="content" className="space-y-2 py-4">
+              <Label>3 хуудаст контент JSON (page1, page2, page3)</Label>
+              <p className="text-xs text-muted-foreground">page1=Дүрэм, page2=Унших+Ярих, page3=Сонсох+Гэрийн даалгавар. listeningQuestions нэмэх боломжтой.</p>
+              <Textarea className="min-h-[60vh] font-mono text-xs" value={(formData as any).lessonContentText ?? JSON.stringify(formData.lessonContent || emptyLessonContent, null, 2)} onChange={(e) => handleLessonContentChange(e.target.value)} />
+            </TabsContent>
+
+            <TabsContent value="files" className="space-y-4 py-4">
+              <div className="space-y-1.5">
+                <Label>PDF (заавал биш)</Label>
+                <Input type="file" accept="application/pdf" onChange={(e) => handleFileUpload(e.target.files?.[0], "pdfUrl")} />
+                {formData.pdfUrl && <div className="flex items-center justify-between rounded-md border p-2 text-xs"><span>PDF хадгалагдсан</span><Button type="button" variant="outline" size="sm" onClick={() => setFormData({ ...formData, pdfUrl: null })}>Устгах</Button></div>}
+              </div>
+              <div className="space-y-1.5">
+                <Label>Listening аудио (заавал биш)</Label>
+                <Input type="file" accept="audio/*" onChange={(e) => handleFileUpload(e.target.files?.[0], "audioUrl")} />
+                {formData.audioUrl && <div className="flex items-center justify-between rounded-md border p-2 text-xs"><span>Аудио хадгалагдсан</span><Button type="button" variant="outline" size="sm" onClick={() => setFormData({ ...formData, audioUrl: null })}>Устгах</Button></div>}
+              </div>
+            </TabsContent>
+          </Tabs>
+          <DialogFooter className="border-t pt-4">
+            <Button variant="outline" onClick={() => setIsDialogOpen(false)}>Болих</Button>
+            <Button onClick={handleSave} disabled={createLesson.isPending || updateLesson.isPending}>{editingLessonId ? "Шинэчлэх" : "Үүсгэх"}</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       <Dialog open={!!duplicatingId} onOpenChange={(o) => !o && setDuplicatingId(null)}>
         <DialogContent>
-          <DialogHeader><DialogTitle>Хичээл хуулах</DialogTitle></DialogHeader>
+          <DialogHeader><DialogTitle>Тусгай хуулах</DialogTitle></DialogHeader>
           <div className="space-y-3 py-2">
             <div className="space-y-1.5"><Label>Шинэ өдөр</Label><Input type="number" value={dupDay} onChange={(e) => setDupDay(parseInt(e.target.value) || 1)} /></div>
             <div className="space-y-1.5"><Label>Гарчиг (EN, заавал биш)</Label><Input value={dupTitleEn} onChange={(e) => setDupTitleEn(e.target.value)} /></div>
@@ -532,6 +647,170 @@ function LessonsPanel() {
         </DialogContent>
       </Dialog>
     </Card>
+  );
+}
+
+function VocabEditor({ vocabulary, onChange }: { vocabulary: any[]; onChange: (v: any[]) => void }) {
+  const [bulkOpen, setBulkOpen] = useState(false);
+  const [bulkText, setBulkText] = useState("");
+
+  const update = (idx: number, key: string, val: string) => {
+    const next = [...vocabulary];
+    next[idx] = { ...next[idx], [key]: val };
+    onChange(next);
+  };
+  const remove = (idx: number) => onChange(vocabulary.filter((_, i) => i !== idx));
+  const add = () => onChange([...vocabulary, emptyVocabRow()]);
+  const fill20 = () => {
+    const needed = 20 - vocabulary.length;
+    if (needed > 0) onChange([...vocabulary, ...Array.from({ length: needed }, emptyVocabRow)]);
+  };
+  const applyBulk = () => {
+    const parsed = parseVocabulary(bulkText);
+    if (parsed.length === 0) return;
+    const filled = vocabulary.filter((v) => v.english?.trim() || v.mongolian?.trim());
+    onChange([...filled, ...parsed]);
+    setBulkText("");
+    setBulkOpen(false);
+  };
+
+  return (
+    <div className="space-y-2">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-xs text-muted-foreground">Зорилго: <strong>20 шинэ үг</strong>. Pronunciation заавал биш.</p>
+        <div className="flex gap-2">
+          <Button type="button" variant="outline" size="sm" onClick={fill20}>20 болгох</Button>
+          <Button type="button" variant="outline" size="sm" onClick={() => setBulkOpen(!bulkOpen)}>{bulkOpen ? "Хаах" : "Бөөнөөр оруулах"}</Button>
+          <Button type="button" variant="outline" size="sm" onClick={add}><Plus className="w-3 h-3 mr-1" />Мөр нэмэх</Button>
+        </div>
+      </div>
+      {bulkOpen && (
+        <div className="space-y-2 rounded-md border p-3 bg-muted/30">
+          <p className="text-xs">Мөр бүр: <code>English | pronunciation | Mongolian | example</code></p>
+          <Textarea className="min-h-32 font-mono text-xs" value={bulkText} onChange={(e) => setBulkText(e.target.value)} placeholder="hello | həˈloʊ | сайн уу | Hello, how are you?" />
+          <div className="flex justify-end"><Button type="button" size="sm" onClick={applyBulk}>Нэмэх</Button></div>
+        </div>
+      )}
+      <div className="rounded-md border max-h-[55vh] overflow-y-auto">
+        <table className="w-full text-sm">
+          <thead className="bg-muted text-xs sticky top-0">
+            <tr>
+              <th className="w-8 p-2">#</th>
+              <th className="p-2 text-left">English</th>
+              <th className="p-2 text-left">Pronunciation</th>
+              <th className="p-2 text-left">Mongolian</th>
+              <th className="p-2 text-left">Example</th>
+              <th className="w-10 p-2"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {vocabulary.map((v, i) => (
+              <tr key={i} className="border-t">
+                <td className="p-1 text-center text-xs text-muted-foreground">{i + 1}</td>
+                <td className="p-1"><Input className="h-8 text-sm" value={v.english || ""} onChange={(e) => update(i, "english", e.target.value)} /></td>
+                <td className="p-1"><Input className="h-8 text-sm" value={v.pronunciation || ""} onChange={(e) => update(i, "pronunciation", e.target.value)} /></td>
+                <td className="p-1"><Input className="h-8 text-sm" value={v.mongolian || ""} onChange={(e) => update(i, "mongolian", e.target.value)} /></td>
+                <td className="p-1"><Input className="h-8 text-sm" value={v.example || ""} onChange={(e) => update(i, "example", e.target.value)} /></td>
+                <td className="p-1 text-center"><Button type="button" variant="ghost" size="icon" className="h-8 w-8 text-destructive" onClick={() => remove(i)}><Trash2 className="w-3 h-3" /></Button></td>
+              </tr>
+            ))}
+            {vocabulary.length === 0 && <tr><td colSpan={6} className="text-center text-muted-foreground p-4">Үг алга. "20 болгох" дарна уу.</td></tr>}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function QuizEditor({ quiz, onChange }: { quiz: any[]; onChange: (q: any[]) => void }) {
+  const [bulkOpen, setBulkOpen] = useState(false);
+  const [bulkText, setBulkText] = useState("");
+
+  const update = (idx: number, key: string, val: any) => {
+    const next = [...quiz];
+    next[idx] = { ...next[idx], [key]: val };
+    onChange(next);
+  };
+  const updateOption = (qi: number, oi: number, val: string) => {
+    const next = [...quiz];
+    const opts = [...(next[qi].options || ["", "", ""])];
+    opts[oi] = val;
+    next[qi] = { ...next[qi], options: opts };
+    onChange(next);
+  };
+  const addOption = (qi: number) => {
+    const next = [...quiz];
+    next[qi] = { ...next[qi], options: [...(next[qi].options || []), ""] };
+    onChange(next);
+  };
+  const removeOption = (qi: number, oi: number) => {
+    const next = [...quiz];
+    const oldOpts = next[qi].options || [];
+    const removed = oldOpts[oi];
+    const opts = oldOpts.filter((_: string, i: number) => i !== oi);
+    const correctAnswer = next[qi].correctAnswer === removed ? "" : next[qi].correctAnswer;
+    next[qi] = { ...next[qi], options: opts, correctAnswer };
+    onChange(next);
+  };
+  const remove = (idx: number) => onChange(quiz.filter((_, i) => i !== idx));
+  const add = (n = 1) => onChange([...quiz, ...Array.from({ length: n }, (_, i) => emptyQuizRow(quiz.length + i))]);
+  const applyBulk = () => {
+    const parsed = parseQuiz(bulkText);
+    if (parsed.length === 0) return;
+    const filled = quiz.filter((q) => q.promptEn?.trim() || q.promptMn?.trim());
+    onChange([...filled, ...parsed]);
+    setBulkText("");
+    setBulkOpen(false);
+  };
+
+  return (
+    <div className="space-y-3">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-xs text-muted-foreground">Тэнцэх оноо: <strong>70%</strong>. Сонголт бүрт зөв хариултаа сонго.</p>
+        <div className="flex gap-2">
+          <Button type="button" variant="outline" size="sm" onClick={() => add(5)}>+5 асуулт</Button>
+          <Button type="button" variant="outline" size="sm" onClick={() => setBulkOpen(!bulkOpen)}>{bulkOpen ? "Хаах" : "Бөөнөөр оруулах"}</Button>
+          <Button type="button" variant="outline" size="sm" onClick={() => add(1)}><Plus className="w-3 h-3 mr-1" />Нэмэх</Button>
+        </div>
+      </div>
+      {bulkOpen && (
+        <div className="space-y-2 rounded-md border p-3 bg-muted/30">
+          <p className="text-xs">Мөр бүр: <code>EN | MN | сонголт1;сонголт2;сонголт3 | зөв хариулт</code></p>
+          <Textarea className="min-h-32 font-mono text-xs" value={bulkText} onChange={(e) => setBulkText(e.target.value)} placeholder="What is 'hello' in Mongolian? | 'hello'-г монголоор юу гэх вэ? | сайн уу;баяртай;баярлалаа | сайн уу" />
+          <div className="flex justify-end"><Button type="button" size="sm" onClick={applyBulk}>Нэмэх</Button></div>
+        </div>
+      )}
+      <div className="space-y-3 max-h-[55vh] overflow-y-auto pr-1">
+        {quiz.map((q, qi) => (
+          <div key={qi} className="rounded-md border p-3 space-y-2 bg-card">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-mono text-muted-foreground">Асуулт #{qi + 1}</span>
+              <Button type="button" variant="ghost" size="icon" className="h-7 w-7 text-destructive" onClick={() => remove(qi)}><Trash2 className="w-3.5 h-3.5" /></Button>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <Input className="h-8 text-sm" placeholder="Question (EN)" value={q.promptEn || ""} onChange={(e) => update(qi, "promptEn", e.target.value)} />
+              <Input className="h-8 text-sm" placeholder="Асуулт (MN)" value={q.promptMn || ""} onChange={(e) => update(qi, "promptMn", e.target.value)} />
+            </div>
+            <div className="space-y-1.5">
+              {(q.options || []).map((opt: string, oi: number) => (
+                <div key={oi} className="flex items-center gap-2">
+                  <input type="radio" name={`correct-${qi}`} checked={q.correctAnswer === opt && opt !== ""} onChange={() => update(qi, "correctAnswer", opt)} title="Зөв хариулт" />
+                  <Input className="h-8 text-sm" placeholder={`Сонголт ${oi + 1}`} value={opt} onChange={(e) => {
+                    const wasCorrect = q.correctAnswer === opt;
+                    updateOption(qi, oi, e.target.value);
+                    if (wasCorrect) update(qi, "correctAnswer", e.target.value);
+                  }} />
+                  <Button type="button" variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground" onClick={() => removeOption(qi, oi)} disabled={(q.options || []).length <= 2}><XCircle className="w-3.5 h-3.5" /></Button>
+                </div>
+              ))}
+              <Button type="button" variant="outline" size="sm" onClick={() => addOption(qi)}><Plus className="w-3 h-3 mr-1" />Сонголт</Button>
+            </div>
+            {!q.correctAnswer && <p className="text-xs text-amber-600">Зөв хариулт сонго.</p>}
+          </div>
+        ))}
+        {quiz.length === 0 && <div className="text-center text-muted-foreground p-4 border rounded-md">Асуулт алга. "+5 асуулт" дарна уу.</div>}
+      </div>
+    </div>
   );
 }
 
