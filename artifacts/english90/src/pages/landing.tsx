@@ -143,7 +143,7 @@ export default function Landing() {
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-3">Үнийн санал</h2>
-              <p className="text-muted-foreground">Хаан Банкаар шилжүүлж, админ баталгаажуулмагц контент автоматаар нээгдэнэ.</p>
+              <p className="text-muted-foreground">Хаан Банкны данс руу шилжүүлж, админ баталгаажуулмагц контент автоматаар нээгдэнэ.</p>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               {PRICING.map((p) => (
