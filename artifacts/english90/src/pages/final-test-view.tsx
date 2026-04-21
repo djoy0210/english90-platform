@@ -104,7 +104,7 @@ export default function FinalTestView() {
           } else {
             toast({
               title: "Дахин оролдоно уу",
-              description: `Оноо хүрсэнгүй (${result.percentage}%). Шаардлагатай оноо: 80%`,
+              description: `Оноо хүрсэнгүй (${result.percentage}%). Шаардлагатай оноо: ${(test as any).passingScore ?? 70}%`,
               variant: "destructive",
             });
           }
@@ -132,7 +132,7 @@ export default function FinalTestView() {
         </div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">{test.titleMn}</h1>
         <p className="text-xl text-muted-foreground mt-2">{test.titleEn}</p>
-        <p className="text-sm mt-4 font-medium text-primary">Нийт {test.questions.length} асуулт • 80%-иас дээш авч тэнцэнэ</p>
+        <p className="text-sm mt-4 font-medium text-primary">Нийт {test.questions.length} асуулт • {(test as any).passingScore ?? 70}%-иас дээш авч тэнцэнэ</p>
       </div>
 
       {testResult ? (
