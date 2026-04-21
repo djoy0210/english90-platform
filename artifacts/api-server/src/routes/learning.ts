@@ -130,19 +130,44 @@ function getLessonTemplateContent() {
   };
 }
 
-const placementQuestions: StoredQuizQuestion[] = [
-  { id: "placement-q1", promptEn: "Choose the correct sentence.", promptMn: "Зөв өгүүлбэрийг сонгоно уу.", options: ["I am a student.", "I is a student.", "I are a student."], correctAnswer: "I am a student." },
-  { id: "placement-q2", promptEn: "What does 'Good morning' mean?", promptMn: "'Good morning' ямар утгатай вэ?", options: ["Өглөөний мэнд", "Оройн мэнд", "Баяртай"], correctAnswer: "Өглөөний мэнд" },
-  { id: "placement-q3", promptEn: "Complete: She _____ from Mongolia.", promptMn: "Гүйцээ: She _____ from Mongolia.", options: ["am", "is", "are"], correctAnswer: "is" },
-  { id: "placement-q4", promptEn: "Choose the best reply: How are you?", promptMn: "Хамгийн зөв хариултыг сонго: How are you?", options: ["I am fine, thank you.", "My name morning.", "Goodbye student."], correctAnswer: "I am fine, thank you." },
-  { id: "placement-q5", promptEn: "Complete: They _____ my friends.", promptMn: "Гүйцээ: They _____ my friends.", options: ["is", "am", "are"], correctAnswer: "are" },
-  { id: "placement-q6", promptEn: "Choose the correct past sentence.", promptMn: "Зөв өнгөрсөн цагийн өгүүлбэрийг сонго.", options: ["Yesterday I went to school.", "Yesterday I go to school.", "Yesterday I going school."], correctAnswer: "Yesterday I went to school." },
-  { id: "placement-q7", promptEn: "Choose the polite request.", promptMn: "Эелдэг хүсэлтийг сонго.", options: ["Could you help me, please?", "Help me now.", "You help."], correctAnswer: "Could you help me, please?" },
-  { id: "placement-q8", promptEn: "Complete: I have lived here _____ 2020.", promptMn: "Гүйцээ: I have lived here _____ 2020.", options: ["for", "since", "during"], correctAnswer: "since" },
-  { id: "placement-q9", promptEn: "Choose the sentence with correct word order.", promptMn: "Үгийн зөв дараалалтай өгүүлбэрийг сонго.", options: ["I usually drink tea in the morning.", "Usually drink I tea morning in.", "Tea morning I usually drink."], correctAnswer: "I usually drink tea in the morning." },
-  { id: "placement-q10", promptEn: "Choose the best meaning: I would rather stay home.", promptMn: "Зөв утгыг сонго: I would rather stay home.", options: ["Би гэртээ байсан нь дээр.", "Би гэр олж чаддаггүй.", "Би гэрээ зарсан."], correctAnswer: "Би гэртээ байсан нь дээр." },
-  { id: "placement-q11", promptEn: "Choose the correct conditional.", promptMn: "Зөв нөхцөл өгүүлбэрийг сонго.", options: ["If I have time, I will call you.", "If I will have time, I call you.", "If time have, I called you."], correctAnswer: "If I have time, I will call you." },
-  { id: "placement-q12", promptEn: "Choose the clearest opinion sentence.", promptMn: "Санал бодлоо зөв илэрхийлсэн өгүүлбэрийг сонго.", options: ["In my opinion, daily practice is the best way to improve.", "Opinion daily best improve.", "I best way practice opinion."], correctAnswer: "In my opinion, daily practice is the best way to improve." },
+type PlacementBand = "a1" | "a2" | "b1";
+type PlacementQuestion = StoredQuizQuestion & { band: PlacementBand };
+
+const placementQuestions: PlacementQuestion[] = [
+  // A1 — Эхлэгч (1-10, very easy)
+  { id: "placement-q1", band: "a1", promptEn: '"Сайн байна уу" гэдгийг англиар юу гэдэг вэ?', promptMn: "", options: ["Goodbye", "Thank you", "Hello", "Sorry"], correctAnswer: "Hello" },
+  { id: "placement-q2", band: "a1", promptEn: "Намайг Бат гэдэг. Англиар хэрхэн хэлэх вэ?", promptMn: "", options: ["My name Bat.", "I am name Bat.", "My name is Bat.", "Name me is Bat."], correctAnswer: "My name is Bat." },
+  { id: "placement-q3", band: "a1", promptEn: "She ___ a student.", promptMn: "Тэр сурагч юм.", options: ["am", "is", "are", "be"], correctAnswer: "is" },
+  { id: "placement-q4", band: "a1", promptEn: "1, 2, 3, 4, ___ , 6", promptMn: "Тав гэдэг тоог олоорой.", options: ["four", "six", "five", "seven"], correctAnswer: "five" },
+  { id: "placement-q5", band: "a1", promptEn: "I ___ from Mongolia.", promptMn: "Би Монголоос.", options: ["is", "are", "am", "be"], correctAnswer: "am" },
+  { id: "placement-q6", band: "a1", promptEn: '"Ном" гэдэг үгийг англиар юу гэдэг вэ?', promptMn: "", options: ["pen", "book", "chair", "table"], correctAnswer: "book" },
+  { id: "placement-q7", band: "a1", promptEn: "They ___ my friends.", promptMn: "Тэд миний найзууд.", options: ["is", "am", "be", "are"], correctAnswer: "are" },
+  { id: "placement-q8", band: "a1", promptEn: '"Баяртай" гэдгийг англиар юу гэдэг вэ?', promptMn: "", options: ["Hello", "Please", "Goodbye", "Sorry"], correctAnswer: "Goodbye" },
+  { id: "placement-q9", band: "a1", promptEn: "This is ___ pen. (Энэ миний үзэг.)", promptMn: "", options: ["I", "me", "my", "mine pen"], correctAnswer: "my" },
+  { id: "placement-q10", band: "a1", promptEn: "Monday, Tuesday, ___ , Thursday", promptMn: "Долоо хоногийн дараалал.", options: ["Friday", "Sunday", "Wednesday", "Saturday"], correctAnswer: "Wednesday" },
+  // A1 — Дунд (11-18, medium)
+  { id: "placement-q11", band: "a1", promptEn: "She ___ English every day.", promptMn: "Тэр өдөр бүр англи хэл сурдаг.", options: ["study", "studying", "studies", "studied"], correctAnswer: "studies" },
+  { id: "placement-q12", band: "a1", promptEn: "___ you speak English?  — Yes, a little.", promptMn: "", options: ["Are", "Is", "Can", "Have"], correctAnswer: "Can" },
+  { id: "placement-q13", band: "a1", promptEn: "There ___ a cat on the sofa.", promptMn: "Диванд муур сууж байна.", options: ["am", "are", "is", "be"], correctAnswer: "is" },
+  { id: "placement-q14", band: "a1", promptEn: "Yesterday I ___ to the market.", promptMn: "Өчигдөр би зах руу явсан.", options: ["go", "goes", "going", "went"], correctAnswer: "went" },
+  { id: "placement-q15", band: "a1", promptEn: "Look! It ___ raining outside.", promptMn: "Гадаа бороо орж байна!", options: ["rains", "rained", "rain", "is raining"], correctAnswer: "is raining" },
+  { id: "placement-q16", band: "a1", promptEn: "How ___ students are in your class?", promptMn: "Таны ангид хэдэн сурагч байдаг вэ?", options: ["much", "many", "more", "most"], correctAnswer: "many" },
+  { id: "placement-q17", band: "a1", promptEn: "She ___ not like coffee. She prefers tea.", promptMn: "Тэр кофе дургүй.", options: ["is", "am", "does", "do"], correctAnswer: "does" },
+  { id: "placement-q18", band: "a1", promptEn: "I am going ___ study English tomorrow.", promptMn: "Би маргааш англи хэл сурна.", options: ["on", "at", "to", "for"], correctAnswer: "to" },
+  // A2 — Суурь (19-24)
+  { id: "placement-q19", band: "a2", promptEn: "I ___ never been to Japan.", promptMn: "Би Японд хэзээ ч очиж байгаагүй.", options: ["did", "was", "have", "had"], correctAnswer: "have" },
+  { id: "placement-q20", band: "a2", promptEn: "She has lived here ___ she was born.", promptMn: "Тэр төрсөн цагаасаа хойш энд амьдарч байна.", options: ["for", "ago", "since", "from"], correctAnswer: "since" },
+  { id: "placement-q21", band: "a2", promptEn: "If it rains tomorrow, I ___ stay at home.", promptMn: "Хэрэв маргааш бороо орвол, гэртээ байна.", options: ["would", "will", "can", "should"], correctAnswer: "will" },
+  { id: "placement-q22", band: "a2", promptEn: "English ___ all over the world.", promptMn: "Англи хэлийг дэлхий даяар ярьдаг.", options: ["speak", "speaks", "is spoken", "are speaking"], correctAnswer: "is spoken" },
+  { id: "placement-q23", band: "a2", promptEn: "The Eiffel Tower ___ in 1889.", promptMn: "Эйффелийн цамхаг 1889 онд баригдсан.", options: ["build", "is built", "was built", "has built"], correctAnswer: "was built" },
+  { id: "placement-q24", band: "a2", promptEn: "She said that she ___ tired.", promptMn: "Тэр ядарсан гэж хэлсэн.", options: ["is", "was", "were", "will be"], correctAnswer: "was" },
+  // B1 — Дунд шат (25-30)
+  { id: "placement-q25", band: "b1", promptEn: "I was reading when suddenly the lights ___ out.", promptMn: "Би уншиж байтал гэнэт гэрэл унтарлаа.", options: ["were going", "have gone", "went", "go"], correctAnswer: "went" },
+  { id: "placement-q26", band: "b1", promptEn: "If I ___ studied harder, I would have passed.", promptMn: "Хэрэв илүү хичээнгүйлэн суралцсан бол тэнцэх байсан.", options: ["would have", "had", "have", "was"], correctAnswer: "had" },
+  { id: "placement-q27", band: "b1", promptEn: "She ___ be exhausted — she has been running since 5 AM!", promptMn: "Тэр ядарсан байх ёстой!", options: ["can't", "might not", "must", "should not"], correctAnswer: "must" },
+  { id: "placement-q28", band: "b1", promptEn: "Could you tell me where the nearest bank ___?", promptMn: "Ойрын банк хаана байгааг хэлж чадах уу?", options: ["is", "was", "it is", "there is"], correctAnswer: "is" },
+  { id: "placement-q29", band: "b1", promptEn: "I enjoy ___ English podcasts every morning.", promptMn: "Өглөө бүр англи хэлний подкаст сонсох надад таалагддаг.", options: ["to listen", "listen", "listened", "listening"], correctAnswer: "listening" },
+  { id: "placement-q30", band: "b1", promptEn: "By next year, I ___ have completed B1 English!", promptMn: "Ирэх жил болоход би B1 дуусгасан байх болно!", options: ["would", "will", "am going to", "should"], correctAnswer: "will" },
 ];
 
 const dayOneLesson = {
@@ -637,7 +662,17 @@ router.post("/placement-test", async (req, res, next) => {
     const user = await getCurrentUser(req);
     const body = SubmitPlacementTestBody.parse(req.body);
     const result = grade(placementQuestions, body.answers);
-    const level = result.score <= 4 ? 1 : result.score <= 8 ? 2 : 3;
+    const correctById = new Map(result.correctAnswers.map((a) => [a.questionId, a.isCorrect]));
+    let a1c = 0, a2c = 0, b1c = 0;
+    for (const q of placementQuestions) {
+      if (!correctById.get(q.id)) continue;
+      if (q.band === "a1") a1c++;
+      else if (q.band === "a2") a2c++;
+      else b1c++;
+    }
+    const level = (b1c >= 4 || (a2c >= 5 && b1c >= 2)) ? 3
+      : (a2c >= 3 || (a1c >= 14 && a2c >= 1)) ? 2
+      : 1;
     const startingDay = (level - 1) * 30 + 1;
     await db.update(usersTable).set({ placementCompleted: true, placementLevel: level }).where(eq(usersTable.id, user.id));
     res.json({
