@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useAdminListLessons,
   useAdminDeleteLesson,
@@ -40,17 +40,11 @@ import { Plus, Edit, Trash2, Copy, CheckCircle2, XCircle, Eye, Unlock, RotateCcw
 import { useToast } from "@/hooks/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
 
-function formatVocabulary(vocabulary: any[]) {
-  return (vocabulary || []).map((item) => [item.english, item.pronunciation || "", item.mongolian, item.example].join(" | ")).join("\n");
-}
 function parseVocabulary(value: string) {
   return value.split("\n").map((l) => l.trim()).filter(Boolean).map((line) => {
     const [english = "", pronunciation = "", mongolian = "", example = ""] = line.split("|").map((p) => p.trim());
     return { english, pronunciation, mongolian, example };
   }).filter((item) => item.english && item.mongolian && item.example);
-}
-function formatQuiz(quiz: any[]) {
-  return (quiz || []).map((item) => [item.promptEn, item.promptMn, (item.options || []).join("; "), item.correctAnswer || ""].join(" | ")).join("\n");
 }
 function parseQuiz(value: string) {
   return value.split("\n").map((l, i) => ({ line: l.trim(), index: i })).filter(({ line }) => line).map(({ line, index }) => {
@@ -66,8 +60,104 @@ const emptyLessonContent = {
   page3: { listeningScript: "", listeningQuestions: [], comprehensionQuestions: [], grammarPractice: [], matchingExercise: [], homework: [], answerKey: [], completionSummary: [], nextLessonPreview: "" },
 };
 
+const lessonJsonTemplate = {
+  titleEn: "Greetings & Introductions",
+  titleMn: "Мэндчилгээ ба танилцах",
+  objectiveEn: "By the end of this lesson, you can greet people and introduce yourself.",
+  objectiveMn: "Энэ хичээлийн төгсгөлд та мэндлэх, өөрийгөө танилцуулж чадна.",
+  contentEn: "Short overview of today's lesson.",
+  contentMn: "Өнөөдрийн хичээлийн товч тойм.",
+  vocabulary: [
+    { english: "hello", pronunciation: "həˈloʊ", mongolian: "сайн уу", example: "Hello, my name is Bat." },
+  ],
+  quiz: [
+    { promptEn: "How do you say 'hello'?", promptMn: "‘hello’ гэж юу гэх вэ?", options: ["сайн уу", "баяртай"], correctAnswer: "сайн уу" },
+  ],
+  lessonContent: {
+    page1: {
+      grammarTopic: "Verb 'to be' — am / is / are",
+      grammarExplanation: "We use am with I, is with he/she/it, are with you/we/they.",
+      grammarTable: [
+        { Subject: "I", Verb: "am", Example: "I am Bat." },
+        { Subject: "He / She", Verb: "is", Example: "She is a teacher." },
+        { Subject: "You / We / They", Verb: "are", Example: "They are students." },
+      ],
+      quickPractice: ["I ___ a student.", "She ___ from Mongolia.", "They ___ teachers."],
+      commonMistakes: ["I is → I am", "She are → She is"],
+      answerKey: ["am", "is", "are"],
+    },
+    page2: {
+      readingPassage: "Hi! My name is Bat. I am from Ulaanbaatar...",
+      keyPhrases: [
+        { english: "Nice to meet you", mongolian: "Танилцахад таатай байна", note: "Use when meeting someone new" },
+      ],
+      speakingQuestions: ["What is your name?", "Where are you from?"],
+      rolePlay: [
+        { speaker: "A", text: "Hi, I'm Bat." },
+        { speaker: "B", text: "Nice to meet you, Bat. I'm Sara." },
+      ],
+      speakingTip: "Speak slowly and smile.",
+    },
+    page3: {
+      listeningScript: "Hello, my name is Sara. I am a student...",
+      listeningQuestions: [
+        { question: "What is her name?", answer: "Sara" },
+      ],
+      grammarPractice: ["He ___ a doctor.", "We ___ from Mongolia."],
+      matchingExercise: [
+        { left: "Hello", right: "Сайн уу" },
+        { left: "Goodbye", right: "Баяртай" },
+      ],
+      homework: ["Write 5 sentences introducing yourself."],
+      answerKey: ["is", "are"],
+      completionSummary: ["Learned 20 new words", "Practiced introductions"],
+      nextLessonPreview: "Tomorrow: numbers & age.",
+    },
+  },
+};
+
 function formatMnt(amount: number) {
   return new Intl.NumberFormat("mn-MN").format(amount) + "₮";
+}
+
+function cleanStringList(arr: any): string[] {
+  return Array.isArray(arr) ? arr.map((s) => (typeof s === "string" ? s : String(s ?? ""))).filter((s) => s.trim()) : [];
+}
+function cleanRowList(arr: any): any[] {
+  return Array.isArray(arr) ? arr.filter((r) => r && typeof r === "object" && Object.values(r).some((v) => String(v ?? "").trim())) : [];
+}
+function cleanLessonContentForSave(lc: any): any {
+  const p1 = lc?.page1 || {};
+  const p2 = lc?.page2 || {};
+  const p3 = lc?.page3 || {};
+  return {
+    page1: {
+      grammarTopic: (p1.grammarTopic || "").trim(),
+      grammarExplanation: (p1.grammarExplanation || "").trim(),
+      grammarTable: cleanRowList(p1.grammarTable),
+      quickPractice: cleanStringList(p1.quickPractice),
+      commonMistakes: cleanStringList(p1.commonMistakes),
+      answerKey: cleanStringList(p1.answerKey),
+    },
+    page2: {
+      readingPassage: (p2.readingPassage || "").trim(),
+      keyPhrases: cleanRowList(p2.keyPhrases),
+      speakingQuestions: cleanStringList(p2.speakingQuestions),
+      rolePlay: cleanRowList(p2.rolePlay),
+      speakingTip: (p2.speakingTip || "").trim(),
+    },
+    page3: {
+      listeningScript: (p3.listeningScript || "").trim(),
+      listeningQuestions: cleanRowList(p3.listeningQuestions),
+      comprehensionQuestions: cleanRowList(p3.comprehensionQuestions),
+      grammarPractice: cleanStringList(p3.grammarPractice),
+      matchingExercise: cleanRowList(p3.matchingExercise),
+      homework: cleanStringList(p3.homework),
+      answerKey: cleanStringList(p3.answerKey),
+      completionSummary: cleanStringList(p3.completionSummary),
+      nextLessonPreview: (p3.nextLessonPreview || "").trim(),
+    },
+  };
 }
 
 export default function Admin() {
@@ -358,6 +448,7 @@ function LessonsPanel() {
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingLessonId, setEditingLessonId] = useState<string | null>(null);
+  const [jsonImportOpen, setJsonImportOpen] = useState(false);
   const [duplicatingId, setDuplicatingId] = useState<string | null>(null);
   const [dupDay, setDupDay] = useState(1);
   const [dupTitleEn, setDupTitleEn] = useState("");
@@ -439,7 +530,8 @@ function LessonsPanel() {
         return { ...q, id: q.id || `admin-q-${i + 1}`, options, correctAnswer };
       })
       .filter((q: any) => q.promptEn?.trim() && q.promptMn?.trim() && q.options.length >= 2 && q.correctAnswer && q.options.includes(q.correctAnswer));
-    const payload = { ...rest, vocabulary: cleanVocab, quiz: cleanQuiz };
+    const cleanLessonContent = cleanLessonContentForSave(rest.lessonContent || emptyLessonContent);
+    const payload = { ...rest, vocabulary: cleanVocab, quiz: cleanQuiz, lessonContent: cleanLessonContent };
     const op = editingLessonId
       ? updateLesson.mutateAsync({ lessonId: editingLessonId, data: payload })
       : createLesson.mutateAsync({ data: payload });
@@ -473,10 +565,6 @@ function LessonsPanel() {
     }
   };
 
-  const handleLessonContentChange = (value: string) => {
-    try { setFormData({ ...formData, lessonContent: JSON.parse(value), lessonContentText: undefined }); }
-    catch { setFormData({ ...formData, lessonContentText: value }); }
-  };
   const handleFileUpload = (file: File | undefined, key: "pdfUrl" | "audioUrl") => {
     if (!file) return;
     const reader = new FileReader();
@@ -560,14 +648,19 @@ function LessonsPanel() {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="max-w-6xl max-h-[92vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-3">
+            <DialogTitle className="flex flex-wrap items-center gap-2">
               {editingLessonId ? "Хичээл засах" : "Шинэ хичээл"}
               <Badge variant="outline">L{formData.level} · Өдөр {formData.day}</Badge>
-              {editingLessonId && (
-                <Button variant="outline" size="sm" className="ml-auto" onClick={() => window.open(previewUrl(editingLessonId), "_blank")}>
-                  <Eye className="w-4 h-4 mr-1" />Урьдчилан харах
+              <div className="ml-auto flex items-center gap-2">
+                <Button variant="outline" size="sm" onClick={() => setJsonImportOpen(true)}>
+                  <Copy className="w-4 h-4 mr-1" />JSON ачаалах
                 </Button>
-              )}
+                {editingLessonId && (
+                  <Button variant="outline" size="sm" onClick={() => window.open(previewUrl(editingLessonId), "_blank")}>
+                    <Eye className="w-4 h-4 mr-1" />Урьдчилан харах
+                  </Button>
+                )}
+              </div>
             </DialogTitle>
           </DialogHeader>
           <Tabs value={editorTab} onValueChange={setEditorTab}>
@@ -615,9 +708,10 @@ function LessonsPanel() {
             </TabsContent>
 
             <TabsContent value="content" className="space-y-2 py-4">
-              <Label>3 хуудаст контент JSON (page1, page2, page3)</Label>
-              <p className="text-xs text-muted-foreground">page1=Дүрэм, page2=Унших+Ярих, page3=Сонсох+Гэрийн даалгавар. listeningQuestions нэмэх боломжтой.</p>
-              <Textarea className="min-h-[60vh] font-mono text-xs" value={(formData as any).lessonContentText ?? JSON.stringify(formData.lessonContent || emptyLessonContent, null, 2)} onChange={(e) => handleLessonContentChange(e.target.value)} />
+              <LessonContentEditor
+                value={formData.lessonContent || emptyLessonContent}
+                onChange={(lc) => setFormData({ ...formData, lessonContent: lc })}
+              />
             </TabsContent>
 
             <TabsContent value="files" className="space-y-4 py-4">
@@ -639,6 +733,42 @@ function LessonsPanel() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <LessonJsonImportDialog
+        open={jsonImportOpen}
+        onOpenChange={setJsonImportOpen}
+        onApply={(data) => {
+          setFormData((prev: any) => {
+            const next = { ...prev };
+            for (const k of ["titleEn","titleMn","objectiveEn","objectiveMn","contentEn","contentMn","durationMinutes","day","level","isPremium","pdfUrl","audioUrl"]) {
+              if (data[k] !== undefined) next[k] = data[k];
+            }
+            if (Array.isArray(data.vocabulary)) {
+              next.vocabulary = data.vocabulary.map((v: any) => ({
+                english: v.english || "", pronunciation: v.pronunciation || "",
+                mongolian: v.mongolian || "", example: v.example || "",
+              }));
+            }
+            if (Array.isArray(data.quiz)) {
+              next.quiz = data.quiz.map((q: any, i: number) => ({
+                id: q.id || `admin-q-${i + 1}-${Math.random().toString(36).slice(2, 6)}`,
+                promptEn: q.promptEn || "", promptMn: q.promptMn || "",
+                options: Array.isArray(q.options) ? q.options : ["", "", ""],
+                correctAnswer: q.correctAnswer || "",
+              }));
+            }
+            if (data.lessonContent && typeof data.lessonContent === "object") {
+              const prevLc = prev.lessonContent || emptyLessonContent;
+              next.lessonContent = {
+                page1: data.lessonContent.page1 ? { ...emptyLessonContent.page1, ...data.lessonContent.page1 } : prevLc.page1,
+                page2: data.lessonContent.page2 ? { ...emptyLessonContent.page2, ...data.lessonContent.page2 } : prevLc.page2,
+                page3: data.lessonContent.page3 ? { ...emptyLessonContent.page3, ...data.lessonContent.page3 } : prevLc.page3,
+              };
+            }
+            return next;
+          });
+        }}
+      />
 
       <Dialog open={!!duplicatingId} onOpenChange={(o) => !o && setDuplicatingId(null)}>
         <DialogContent>
@@ -819,6 +949,262 @@ function QuizEditor({ quiz, onChange }: { quiz: any[]; onChange: (q: any[]) => v
         {quiz.length === 0 && <div className="text-center text-muted-foreground p-4 border rounded-md">Асуулт алга. "+5 асуулт" дарна уу.</div>}
       </div>
     </div>
+  );
+}
+
+function LinesEditor({ label, items, onChange, placeholder, rows = 4 }: { label?: string; items: string[]; onChange: (v: string[]) => void; placeholder?: string; rows?: number }) {
+  return (
+    <div className="space-y-1">
+      {label && <Label className="text-xs">{label}</Label>}
+      <Textarea
+        rows={rows}
+        className="text-sm"
+        placeholder={placeholder}
+        value={(items || []).join("\n")}
+        onChange={(e) => onChange(e.target.value.split("\n"))}
+      />
+      <p className="text-[10px] text-muted-foreground">Мөр тус бүр = нэг зүйл</p>
+    </div>
+  );
+}
+
+function RowsEditor<T extends Record<string, string>>({
+  label, items, onChange, columns, blank,
+}: {
+  label?: string;
+  items: T[];
+  onChange: (v: T[]) => void;
+  columns: { key: keyof T & string; header: string; placeholder?: string; width?: string }[];
+  blank: () => T;
+}) {
+  const update = (idx: number, key: keyof T & string, val: string) => {
+    const next = [...items];
+    next[idx] = { ...next[idx], [key]: val } as T;
+    onChange(next);
+  };
+  const remove = (idx: number) => onChange(items.filter((_, i) => i !== idx));
+  const add = () => onChange([...(items || []), blank()]);
+
+  return (
+    <div className="space-y-1">
+      {label && <Label className="text-xs">{label}</Label>}
+      <div className="rounded-md border overflow-x-auto">
+        <table className="w-full text-xs">
+          <thead className="bg-muted">
+            <tr>
+              {columns.map((c) => <th key={c.key} className="p-1.5 text-left font-medium" style={c.width ? { width: c.width } : undefined}>{c.header}</th>)}
+              <th className="w-8 p-1.5"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {(items || []).map((row, i) => (
+              <tr key={i} className="border-t">
+                {columns.map((c) => (
+                  <td key={c.key} className="p-1">
+                    <Input className="h-7 text-xs" placeholder={c.placeholder} value={(row as any)[c.key] ?? ""} onChange={(e) => update(i, c.key, e.target.value)} />
+                  </td>
+                ))}
+                <td className="p-1 text-center">
+                  <Button type="button" variant="ghost" size="icon" className="h-7 w-7 text-destructive" onClick={() => remove(i)}><Trash2 className="w-3 h-3" /></Button>
+                </td>
+              </tr>
+            ))}
+            {(items || []).length === 0 && <tr><td colSpan={columns.length + 1} className="text-center text-muted-foreground p-2">Хоосон</td></tr>}
+          </tbody>
+        </table>
+      </div>
+      <Button type="button" variant="outline" size="sm" onClick={add}><Plus className="w-3 h-3 mr-1" />Мөр нэмэх</Button>
+    </div>
+  );
+}
+
+function GrammarTableEditor({ items, onChange }: { items: any[]; onChange: (v: any[]) => void }) {
+  const externalText = JSON.stringify(items || [], null, 2);
+  const [text, setText] = useState(externalText);
+  const [error, setError] = useState<string | null>(null);
+  useEffect(() => {
+    try {
+      if (JSON.stringify(JSON.parse(text)) !== JSON.stringify(items || [])) {
+        setText(externalText);
+        setError(null);
+      }
+    } catch {
+      // text is mid-edit and invalid; only sync when items genuinely differ from a valid representation
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [externalText]);
+  const apply = (v: string) => {
+    setText(v);
+    try {
+      const parsed = JSON.parse(v);
+      if (!Array.isArray(parsed)) throw new Error("Массив байх ёстой");
+      setError(null);
+      onChange(parsed);
+    } catch (e: any) {
+      setError(e?.message ?? "JSON алдаатай");
+    }
+  };
+  return (
+    <div className="space-y-1">
+      <Label className="text-xs">Дүрмийн хүснэгт (JSON массив)</Label>
+      <Textarea rows={6} className="text-xs font-mono" value={text} onChange={(e) => apply(e.target.value)} placeholder='[{"Subject":"I","Verb":"am"}]' />
+      {error && <p className="text-[10px] text-destructive">{error}</p>}
+      <p className="text-[10px] text-muted-foreground">Тус бүр row = объект (баганын нэр + утга). Жишээ: {`{"Subject":"I","Verb":"am","Example":"I am Bat."}`}</p>
+    </div>
+  );
+}
+
+function LessonContentEditor({ value, onChange }: { value: any; onChange: (v: any) => void }) {
+  const v = value || emptyLessonContent;
+  const p1 = v.page1 || {};
+  const p2 = v.page2 || {};
+  const p3 = v.page3 || {};
+  const setP1 = (patch: any) => onChange({ ...v, page1: { ...p1, ...patch } });
+  const setP2 = (patch: any) => onChange({ ...v, page2: { ...p2, ...patch } });
+  const setP3 = (patch: any) => onChange({ ...v, page3: { ...p3, ...patch } });
+
+  return (
+    <Tabs defaultValue="p1">
+      <TabsList className="grid grid-cols-3 w-full">
+        <TabsTrigger value="p1">Хуудас 1 — Дүрэм</TabsTrigger>
+        <TabsTrigger value="p2">Хуудас 2 — Унших + Ярих</TabsTrigger>
+        <TabsTrigger value="p3">Хуудас 3 — Сонсох + Гэрийн даалгавар</TabsTrigger>
+      </TabsList>
+
+      <TabsContent value="p1" className="space-y-3 py-3">
+        <div className="grid grid-cols-1 gap-2">
+          <div><Label className="text-xs">Дүрмийн сэдэв</Label><Input className="h-8" value={p1.grammarTopic || ""} onChange={(e) => setP1({ grammarTopic: e.target.value })} /></div>
+          <div><Label className="text-xs">Дүрмийн тайлбар</Label><Textarea rows={4} className="text-sm" value={p1.grammarExplanation || ""} onChange={(e) => setP1({ grammarExplanation: e.target.value })} /></div>
+        </div>
+        <GrammarTableEditor items={p1.grammarTable || []} onChange={(g) => setP1({ grammarTable: g })} />
+        <div className="grid md:grid-cols-3 gap-3">
+          <LinesEditor label="Quick Practice" items={p1.quickPractice || []} onChange={(x) => setP1({ quickPractice: x })} placeholder="I ___ a student." />
+          <LinesEditor label="Common Mistakes" items={p1.commonMistakes || []} onChange={(x) => setP1({ commonMistakes: x })} placeholder="I is → I am" />
+          <LinesEditor label="Answer Key" items={p1.answerKey || []} onChange={(x) => setP1({ answerKey: x })} placeholder="am" />
+        </div>
+      </TabsContent>
+
+      <TabsContent value="p2" className="space-y-3 py-3">
+        <div><Label className="text-xs">Унших текст</Label><Textarea rows={5} className="text-sm" value={p2.readingPassage || ""} onChange={(e) => setP2({ readingPassage: e.target.value })} /></div>
+        <RowsEditor
+          label="Гол хэллэг"
+          items={p2.keyPhrases || []}
+          onChange={(x) => setP2({ keyPhrases: x })}
+          columns={[
+            { key: "english", header: "English", placeholder: "Nice to meet you" },
+            { key: "mongolian", header: "Mongolian", placeholder: "Танилцахад таатай байна" },
+            { key: "note", header: "Note", placeholder: "Use when meeting someone new" },
+          ]}
+          blank={() => ({ english: "", mongolian: "", note: "" })}
+        />
+        <LinesEditor label="Speaking Questions" items={p2.speakingQuestions || []} onChange={(x) => setP2({ speakingQuestions: x })} placeholder="What is your name?" />
+        <RowsEditor
+          label="Role Play"
+          items={p2.rolePlay || []}
+          onChange={(x) => setP2({ rolePlay: x })}
+          columns={[
+            { key: "speaker", header: "Хэн", placeholder: "A", width: "60px" },
+            { key: "text", header: "Юу хэлэх", placeholder: "Hi, I'm Bat." },
+          ]}
+          blank={() => ({ speaker: "A", text: "" })}
+        />
+        <div><Label className="text-xs">Speaking Tip</Label><Input className="h-8" value={p2.speakingTip || ""} onChange={(e) => setP2({ speakingTip: e.target.value })} /></div>
+      </TabsContent>
+
+      <TabsContent value="p3" className="space-y-3 py-3">
+        <div><Label className="text-xs">Сонсох текст (TTS-д хэрэглэгдэнэ)</Label><Textarea rows={5} className="text-sm" value={p3.listeningScript || ""} onChange={(e) => setP3({ listeningScript: e.target.value })} /></div>
+        <RowsEditor
+          label="Сонсох асуултууд"
+          items={p3.listeningQuestions || []}
+          onChange={(x) => setP3({ listeningQuestions: x })}
+          columns={[
+            { key: "question", header: "Question", placeholder: "What is her name?" },
+            { key: "answer", header: "Answer", placeholder: "Sara" },
+          ]}
+          blank={() => ({ question: "", answer: "" })}
+        />
+        <div className="grid md:grid-cols-2 gap-3">
+          <LinesEditor label="Grammar Practice" items={p3.grammarPractice || []} onChange={(x) => setP3({ grammarPractice: x })} placeholder="He ___ a doctor." />
+          <RowsEditor
+            label="Matching Exercise"
+            items={p3.matchingExercise || []}
+            onChange={(x) => setP3({ matchingExercise: x })}
+            columns={[
+              { key: "left", header: "Зүүн", placeholder: "Hello" },
+              { key: "right", header: "Баруун", placeholder: "Сайн уу" },
+            ]}
+            blank={() => ({ left: "", right: "" })}
+          />
+        </div>
+        <div className="grid md:grid-cols-3 gap-3">
+          <LinesEditor label="Homework" items={p3.homework || []} onChange={(x) => setP3({ homework: x })} placeholder="Write 5 sentences..." />
+          <LinesEditor label="Answer Key" items={p3.answerKey || []} onChange={(x) => setP3({ answerKey: x })} placeholder="is" />
+          <LinesEditor label="Lesson Complete (товчоо)" items={p3.completionSummary || []} onChange={(x) => setP3({ completionSummary: x })} placeholder="Learned 20 new words" />
+        </div>
+        <div><Label className="text-xs">Маргаашийн хичээлийн товч</Label><Input className="h-8" value={p3.nextLessonPreview || ""} onChange={(e) => setP3({ nextLessonPreview: e.target.value })} /></div>
+      </TabsContent>
+    </Tabs>
+  );
+}
+
+function LessonJsonImportDialog({ open, onOpenChange, onApply }: { open: boolean; onOpenChange: (b: boolean) => void; onApply: (data: any) => void }) {
+  const [text, setText] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const { toast } = useToast();
+
+  const handleApply = () => {
+    try {
+      const parsed = JSON.parse(text);
+      if (typeof parsed !== "object" || !parsed) throw new Error("Объект байх ёстой");
+      onApply(parsed);
+      toast({ title: "JSON ачаалагдлаа", description: "Талбарууд бөглөгдсөн. Хадгал даран бат болгоно уу." });
+      setText("");
+      setError(null);
+      onOpenChange(false);
+    } catch (e: any) {
+      setError(e?.message ?? "JSON алдаатай");
+    }
+  };
+
+  const copyTemplate = async () => {
+    const tpl = JSON.stringify(lessonJsonTemplate, null, 2);
+    try {
+      await navigator.clipboard.writeText(tpl);
+      toast({ title: "Загвар хуулагдлаа", description: "Засаад буцааж энд буулгана уу." });
+    } catch {
+      setText(tpl);
+    }
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-3xl max-h-[88vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>Бүх хичээлийг JSON-оор ачаалах</DialogTitle>
+        </DialogHeader>
+        <div className="space-y-2 py-2">
+          <p className="text-xs text-muted-foreground">
+            Доорх форматтай бүхэл хичээлийн JSON буулгана уу. Талбар нь заавал бүгд байх албагүй — байсан талбарууд л формыг шинэчилнэ.
+            Vocabulary-ийн pronunciation болон quiz-ийн options/correctAnswer заавал шалгагдана.
+          </p>
+          <div className="flex justify-between gap-2">
+            <Button type="button" size="sm" variant="outline" onClick={copyTemplate}><Copy className="w-3 h-3 mr-1" />Загвар хуулах</Button>
+            <Button type="button" size="sm" variant="outline" onClick={() => setText(JSON.stringify(lessonJsonTemplate, null, 2))}>Загвараар бөглөх</Button>
+          </div>
+          <Textarea
+            className="font-mono text-xs min-h-[55vh]"
+            placeholder='{"titleEn":"...","titleMn":"...","vocabulary":[...],"quiz":[...],"lessonContent":{"page1":{...},"page2":{...},"page3":{...}}}'
+            value={text}
+            onChange={(e) => { setText(e.target.value); setError(null); }}
+          />
+          {error && <p className="text-xs text-destructive">{error}</p>}
+        </div>
+        <DialogFooter>
+          <Button variant="outline" onClick={() => onOpenChange(false)}>Болих</Button>
+          <Button onClick={handleApply} disabled={!text.trim()}>Ачаалах</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
 

@@ -24,6 +24,7 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - New learners take a placement test after signup; the result sets their recommended level and starting day (Level 1 Day 1, Level 2 Day 31, or Level 3 Day 61).
 - Payments use QPay invoice/QR flow for Mongolia. Required environment variables: `QPAY_MERCHANT_USERNAME`, `QPAY_MERCHANT_PASSWORD`, optional `QPAY_MERCHANT_TOKEN`, `QPAY_API_URL`, and `QPAY_WEBHOOK_TOKEN`. When credentials are missing, invoice endpoints return a configuration warning instead of faking success.
 - Lessons support a reusable 3-page JSON template (`lessonContent`) plus optional `pdfUrl`: Page 1 vocabulary/grammar, Page 2 reading/speaking, Page 3 listening/homework.
+- Admin lesson editor: structured row-based editors for vocabulary/quiz/key-phrases/role-play/listening-questions/matching, plus a "JSON ачаалах" button that accepts a single JSON blob (titles, objectives, vocabulary[], quiz[], lessonContent.{page1,page2,page3}) to load an entire lesson at once. Per-page merge preserves untouched pages. A "Загвар хуулах" button copies the canonical template shape.
 
 ## Key Commands
 
