@@ -89,9 +89,9 @@ function parseLesson(slides: string[][], dayNum: number): ParsedLesson {
   // Common mistakes: lines starting with "❌"
   const commonMistakes = s1.filter((s) => /^❌/.test(s.trim())).map((s) => s.trim());
 
-  // Quick practice: "1. ____ ... (answer)" lines (sort by leading number — slides are 2-column so order is 1,5,2,6,...)
+  // Quick practice: lines starting with "1." that contain a blank "_____" anywhere (sort by leading number — 2-column layout)
   const practiceLines = s1
-    .filter((s) => /^\d+\.\s+_+/.test(s.trim()))
+    .filter((s) => /^\d+\./.test(s.trim()) && /_{2,}/.test(s) && /\([^)]+\)\s*$/.test(s.trim()))
     .slice()
     .sort((a, b) => {
       const na = parseInt(a.trim().match(/^(\d+)\./)?.[1] || "0", 10);
@@ -220,11 +220,19 @@ function parseLesson(slides: string[][], dayNum: number): ParsedLesson {
     if (fillIdx >= 0) {
       const matchIdx = findIndex(s3, (s) => /Matching/.test(s), fillIdx + 1);
       const range = s3.slice(fillIdx + 1, matchIdx > 0 ? matchIdx : s3.length);
+      const gpRaw: string[] = [];
       for (const line of range) {
-        if (/^\d+\.\s+_+/.test(line.trim())) {
-          grammarPractice.push(line.replace(/\s*\(.*?\)\s*$/, "").trim());
+        const t = line.trim();
+        if (/^\d+\./.test(t) && /_{2,}/.test(t) && /\([^)]+\)\s*$/.test(t)) {
+          gpRaw.push(t);
         }
       }
+      gpRaw.sort((a, b) => {
+        const na = parseInt(a.match(/^(\d+)\./)?.[1] || "0", 10);
+        const nb = parseInt(b.match(/^(\d+)\./)?.[1] || "0", 10);
+        return na - nb;
+      });
+      grammarPractice = gpRaw.map((s) => s.replace(/\s*\(.*?\)\s*$/, "").trim());
     }
     // Matching: header "Matching — English → Mongolian" (NOT the section heading "Practice & Matching")
     const matchIdx = findIndex(s3, (s) => /^Matching\s*[—-]/.test(s.trim()));
@@ -361,7 +369,7 @@ function parseLesson(slides: string[][], dayNum: number): ParsedLesson {
 }
 
 const out: ParsedLesson[] = [];
-for (let day = 31; day <= 45; day++) {
+for (let day = 31; day <= 60; day++) {
   const file = Object.keys(data).find((k) => new RegExp(`^Day${day}_Book2`).test(k));
   if (!file) {
     console.warn("Missing pptx for day", day);
