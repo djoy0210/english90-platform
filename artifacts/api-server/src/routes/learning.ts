@@ -6,11 +6,13 @@ import {
   lessonProgressTable,
   lessonsTable,
   paymentInvoicesTable,
+  paymentRequestsTable,
   quizAttemptsTable,
   usersTable,
   type FinalTest,
   type Lesson,
   type PaymentInvoice,
+  type PaymentRequest,
   type StoredQuizQuestion,
   type User,
 } from "@workspace/db/schema";
@@ -30,6 +32,10 @@ import {
   SubmitFinalTestParams,
   SubmitLessonQuizBody,
   SubmitLessonQuizParams,
+  CreatePaymentRequestBody,
+  AdminDecidePaymentRequestBody,
+  AdminUnlockStudentProductBody,
+  AdminDuplicateLessonBody,
 } from "@workspace/api-zod";
 import { and, desc, eq, sql } from "drizzle-orm";
 import { Router, type Request } from "express";
@@ -431,6 +437,7 @@ function toLessonDetail(lesson: Lesson, user: User, progress?: { completed: bool
     contentMn: unlocked ? lesson.contentMn : "Энэ хичээлийг нээхийн тулд premium эрх шаардлагатай.",
     lessonContent: unlocked ? (lesson.lessonContent ?? getLessonTemplateContent()) : {},
     pdfUrl: unlocked ? lesson.pdfUrl ?? null : null,
+    audioUrl: unlocked ? lesson.audioUrl ?? null : null,
     vocabulary: unlocked ? lesson.vocabulary : [],
     quiz: unlocked ? lesson.quiz.map(getQuestionPublic) : [],
   };
@@ -558,8 +565,21 @@ router.use(async (_req, _res, next) => {
 router.get("/me", async (req, res, next) => {
   try {
     const user = await getCurrentUser(req);
-    const completed = await db.select({ count: sql<number>`count(*)::int` }).from(lessonProgressTable).where(and(eq(lessonProgressTable.userId, user.id), eq(lessonProgressTable.completed, true)));
-    res.json({ id: user.id, email: user.email, name: user.name, role: user.role, premium: user.premium, currentDay: getCurrentDay(user, completed[0]?.count ?? 0), placementCompleted: user.placementCompleted, placementLevel: user.placementLevel });
+    const completedCount = await db
+      .select({ count: sql<number>`count(*)::int` })
+      .from(lessonProgressTable)
+      .where(and(eq(lessonProgressTable.userId, user.id), eq(lessonProgressTable.completed, true)));
+    const count = completedCount[0]?.count ?? 0;
+    res.json({
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+      premium: user.premium,
+      currentDay: Math.min(90, count + 1),
+      placementCompleted: user.placementCompleted,
+      placementLevel: user.placementLevel,
+    });
   } catch (error) {
     next(error);
   }
@@ -654,9 +674,19 @@ router.post("/lessons/:lessonId/quiz-attempts", async (req, res, next) => {
   }
 });
 
+function hasFinalTestAccess(user: User, unlocks: UnlockSet, level: number) {
+  if (user.role === "admin" || user.premium) return true;
+  return unlocks.has("course:full") || unlocks.has(levelProductId(level));
+}
+
 router.get("/final-tests/:level", async (req, res, next) => {
   try {
     const { level } = GetFinalTestParams.parse(req.params);
+    const user = await getCurrentUser(req);
+    const unlocks = await getUnlockedProducts(user.id);
+    if (!hasFinalTestAccess(user, unlocks, level)) {
+      return res.status(403).json({ error: `Level ${level} final test requires the matching package.` });
+    }
     const [test] = await db.select().from(finalTestsTable).where(eq(finalTestsTable.level, level)).limit(1);
     if (!test) return res.status(404).json({ error: "Final test not found" });
     res.json({ id: test.id, level: test.level, titleEn: test.titleEn, titleMn: test.titleMn, questions: test.questions.map(getQuestionPublic) });
@@ -670,6 +700,10 @@ router.post("/final-tests/:level/attempts", async (req, res, next) => {
     const { level } = SubmitFinalTestParams.parse(req.params);
     const body = SubmitFinalTestBody.parse(req.body);
     const user = await getCurrentUser(req);
+    const unlocks = await getUnlockedProducts(user.id);
+    if (!hasFinalTestAccess(user, unlocks, level)) {
+      return res.status(403).json({ error: `Level ${level} final test requires the matching package.` });
+    }
     const [test] = await db.select().from(finalTestsTable).where(eq(finalTestsTable.level, level)).limit(1);
     if (!test) return res.status(404).json({ error: "Final test not found" });
     const result = grade(test.questions, body.answers);
@@ -697,18 +731,37 @@ router.get("/dashboard", async (req, res, next) => {
     const progress = await db.select().from(lessonProgressTable).where(eq(lessonProgressTable.userId, user.id));
     const history = await historyFor(user.id);
     const completedIds = new Set(progress.filter((item) => item.completed).map((item) => item.lessonId));
-    const startDay = getStartingDay(user);
-    const nextLesson = lessons.find((lesson) => lesson.day >= startDay && !completedIds.has(lesson.id));
-    const averageScore = history.length === 0 ? 0 : Math.round(history.reduce((sum, item) => sum + item.percentage, 0) / history.length);
+    const accessibleLessons = lessons.filter((lesson) => isUnlocked(lesson, user, unlocks));
+    const nextLesson =
+      accessibleLessons.find((lesson) => !completedIds.has(lesson.id)) ?? accessibleLessons[0] ?? lessons[0];
+    const averageScore =
+      history.length === 0 ? 0 : Math.round(history.reduce((sum, item) => sum + item.percentage, 0) / history.length);
+    const completedByLevel = (level: number) =>
+      lessons.filter((lesson) => lesson.level === level && completedIds.has(lesson.id)).length;
+    const currentLevel = Math.max(
+      1,
+      Math.min(3, Math.ceil((nextLesson?.day ?? user.placementLevel * 30) / 30)),
+    );
     res.json({
       completedDays: completedIds.size,
       totalDays: 90,
-      currentLevel: Math.min(3, Math.max(1, Math.ceil(getCurrentDay(user, completedIds.size) / 30))),
+      currentLevel,
       averageScore,
       premium: user.premium,
-      nextLesson: nextLesson ? toLessonSummary(nextLesson, user, progress.find((item) => item.lessonId === nextLesson.id), unlocks) : null,
+      nextLesson: nextLesson
+        ? toLessonSummary(
+            nextLesson,
+            user,
+            progress.find((item) => item.lessonId === nextLesson.id),
+            unlocks,
+          )
+        : null,
       recentHistory: history.slice(0, 5),
-      levelProgress: [1, 2, 3].map((level) => ({ level, completed: lessons.filter((lesson) => lesson.level === level && completedIds.has(lesson.id)).length, total: 30 })),
+      levelProgress: [1, 2, 3].map((level) => ({
+        level,
+        completed: completedByLevel(level),
+        total: 30,
+      })),
     });
   } catch (error) {
     next(error);
@@ -820,6 +873,285 @@ router.post("/payments/qpay/callback", async (req, res, next) => {
 
     const updated = await updateInvoiceStatus(invoice, status, req.body);
     res.json({ success: true, invoice: invoiceToResponse(updated) });
+  } catch (error) {
+    next(error);
+  }
+});
+
+function paymentRequestToResponse(req: PaymentRequest) {
+  return {
+    id: req.id,
+    productId: req.productId,
+    productName: req.productName,
+    amount: req.amount,
+    currency: req.currency,
+    bankName: req.bankName,
+    transactionRef: req.transactionRef,
+    payerName: req.payerName,
+    screenshotUrl: req.screenshotUrl,
+    note: req.note,
+    status: req.status,
+    adminNote: req.adminNote,
+    reviewedAt: req.reviewedAt ? req.reviewedAt.toISOString() : null,
+    createdAt: req.createdAt.toISOString(),
+  };
+}
+
+
+router.get("/payments/requests", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    const list = await db
+      .select()
+      .from(paymentRequestsTable)
+      .where(eq(paymentRequestsTable.userId, user.id))
+      .orderBy(desc(paymentRequestsTable.createdAt));
+    res.json(list.map(paymentRequestToResponse));
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/payments/requests", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    const body = CreatePaymentRequestBody.parse(req.body);
+    const product = await resolveProduct(body.productId);
+    const [created] = await db
+      .insert(paymentRequestsTable)
+      .values({
+        userId: user.id,
+        productId: product.productId,
+        productName: product.productName,
+        amount: product.amount,
+        bankName: "Khan Bank",
+        transactionRef: body.transactionRef,
+        payerName: body.payerName,
+        screenshotUrl: body.screenshotUrl ?? null,
+        note: body.note ?? null,
+        status: "pending",
+      })
+      .returning();
+    res.json(paymentRequestToResponse(created));
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/admin/payment-requests", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    ensureAdmin(user);
+    const status = String(req.query.status ?? "pending");
+    const rows = await db
+      .select({
+        request: paymentRequestsTable,
+        userEmail: usersTable.email,
+        userName: usersTable.name,
+      })
+      .from(paymentRequestsTable)
+      .leftJoin(usersTable, eq(paymentRequestsTable.userId, usersTable.id))
+      .orderBy(desc(paymentRequestsTable.createdAt));
+    const filtered = status === "all" ? rows : rows.filter((r) => r.request.status === status);
+    res.json(
+      filtered.map((row) => ({
+        ...paymentRequestToResponse(row.request),
+        userId: row.request.userId,
+        userEmail: row.userEmail ?? "",
+        userName: row.userName ?? "",
+      })),
+    );
+  } catch (error) {
+    next(error);
+  }
+});
+
+async function manualUnlockProduct(userId: string, productId: string) {
+  const product = await resolveProduct(productId);
+  await db
+    .insert(contentUnlocksTable)
+    .values({
+      userId,
+      productId: product.productId,
+      lessonId: product.lessonId,
+      level: product.level,
+    })
+    .onConflictDoNothing();
+  if (product.productId === "course:full") {
+    await db.update(usersTable).set({ premium: true }).where(eq(usersTable.id, userId));
+  }
+}
+
+router.post("/admin/payment-requests/:requestId/decide", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    ensureAdmin(user);
+    const requestId = String(req.params.requestId);
+    const body = AdminDecidePaymentRequestBody.parse(req.body);
+    const [existing] = await db
+      .select()
+      .from(paymentRequestsTable)
+      .where(eq(paymentRequestsTable.id, requestId))
+      .limit(1);
+    if (!existing) return res.status(404).json({ error: "Payment request not found" });
+    const newStatus = body.decision === "approve" ? "approved" : "rejected";
+    const [updated] = await db
+      .update(paymentRequestsTable)
+      .set({
+        status: newStatus,
+        adminNote: body.adminNote ?? null,
+        reviewedAt: new Date(),
+        reviewedBy: user.id,
+        updatedAt: new Date(),
+      })
+      .where(eq(paymentRequestsTable.id, requestId))
+      .returning();
+    if (newStatus === "approved") {
+      await manualUnlockProduct(updated.userId, updated.productId);
+    }
+    const [studentRow] = await db
+      .select({ email: usersTable.email, name: usersTable.name })
+      .from(usersTable)
+      .where(eq(usersTable.id, updated.userId))
+      .limit(1);
+    res.json({
+      ...paymentRequestToResponse(updated),
+      userId: updated.userId,
+      userEmail: studentRow?.email ?? "",
+      userName: studentRow?.name ?? "",
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/admin/students", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    ensureAdmin(user);
+    const allUsers = await db.select().from(usersTable).orderBy(desc(usersTable.createdAt));
+    const allUnlocks = await db.select().from(contentUnlocksTable);
+    const allProgress = await db.select().from(lessonProgressTable);
+    const pendingReqs = await db
+      .select()
+      .from(paymentRequestsTable)
+      .where(eq(paymentRequestsTable.status, "pending"));
+    res.json(
+      allUsers.map((u) => ({
+        id: u.id,
+        email: u.email,
+        name: u.name,
+        role: u.role,
+        premium: u.premium,
+        placementLevel: u.placementLevel,
+        completedLessons: allProgress.filter((p) => p.userId === u.id && p.completed).length,
+        unlocks: allUnlocks.filter((unlock) => unlock.userId === u.id).map((unlock) => unlock.productId),
+        pendingPaymentRequests: pendingReqs.filter((r) => r.userId === u.id).length,
+        createdAt: u.createdAt.toISOString(),
+      })),
+    );
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/admin/students/:userId", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    ensureAdmin(user);
+    const userId = String(req.params.userId);
+    const [target] = await db.select().from(usersTable).where(eq(usersTable.id, userId)).limit(1);
+    if (!target) return res.status(404).json({ error: "Student not found" });
+    const unlocks = await db.select().from(contentUnlocksTable).where(eq(contentUnlocksTable.userId, userId));
+    const progress = await db.select().from(lessonProgressTable).where(eq(lessonProgressTable.userId, userId));
+    const reqs = await db.select().from(paymentRequestsTable).where(eq(paymentRequestsTable.userId, userId)).orderBy(desc(paymentRequestsTable.createdAt));
+    const invoices = await db.select().from(paymentInvoicesTable).where(eq(paymentInvoicesTable.userId, userId)).orderBy(desc(paymentInvoicesTable.createdAt));
+    const history = await historyFor(userId);
+    const pendingPaymentRequests = reqs.filter((r) => r.status === "pending").length;
+    res.json({
+      id: target.id,
+      email: target.email,
+      name: target.name,
+      role: target.role,
+      premium: target.premium,
+      placementLevel: target.placementLevel,
+      completedLessons: progress.filter((p) => p.completed).length,
+      unlocks: unlocks.map((u) => u.productId),
+      pendingPaymentRequests,
+      createdAt: target.createdAt.toISOString(),
+      history,
+      paymentRequests: reqs.map(paymentRequestToResponse),
+      invoices: invoices.map((invoice) => invoiceToResponse(invoice)),
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/admin/students/:userId/unlock", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    ensureAdmin(user);
+    const userId = String(req.params.userId);
+    const body = AdminUnlockStudentProductBody.parse(req.body);
+    const [target] = await db.select().from(usersTable).where(eq(usersTable.id, userId)).limit(1);
+    if (!target) return res.status(404).json({ error: "Student not found" });
+    await manualUnlockProduct(userId, body.productId);
+    res.json({ success: true });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/admin/students/:userId/reset-progress", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    ensureAdmin(user);
+    const userId = String(req.params.userId);
+    await db.delete(lessonProgressTable).where(eq(lessonProgressTable.userId, userId));
+    await db.delete(quizAttemptsTable).where(eq(quizAttemptsTable.userId, userId));
+    await db.update(usersTable).set({ placementCompleted: false, placementLevel: 1 }).where(eq(usersTable.id, userId));
+    res.json({ success: true });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/admin/lessons/:lessonId/duplicate", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    ensureAdmin(user);
+    const lessonId = String(req.params.lessonId);
+    const body = AdminDuplicateLessonBody.parse(req.body);
+    const [source] = await db.select().from(lessonsTable).where(eq(lessonsTable.id, lessonId)).limit(1);
+    if (!source) return res.status(404).json({ error: "Source lesson not found" });
+    const [existingAtDay] = await db.select().from(lessonsTable).where(eq(lessonsTable.day, body.day)).limit(1);
+    if (existingAtDay) return res.status(409).json({ error: `Day ${body.day} is already used. Pick a different day or delete the existing lesson first.` });
+    const newLevel = Math.ceil(body.day / 30);
+    const [created] = await db
+      .insert(lessonsTable)
+      .values({
+        day: body.day,
+        level: newLevel,
+        titleEn: body.titleEn ?? `Day ${body.day}: (copy of ${source.titleEn})`,
+        titleMn: body.titleMn ?? `${body.day}-р өдөр: (хуулбар)`,
+        objectiveEn: source.objectiveEn,
+        objectiveMn: source.objectiveMn,
+        contentEn: source.contentEn,
+        contentMn: source.contentMn,
+        lessonContent: source.lessonContent ?? null,
+        pdfUrl: source.pdfUrl ?? null,
+        audioUrl: source.audioUrl ?? null,
+        durationMinutes: source.durationMinutes,
+        isPremium: body.day !== 1,
+        vocabulary: source.vocabulary,
+        quiz: source.quiz.map((q, i) => ({ ...q, id: `d${body.day}-q${i + 1}` })),
+      })
+      .returning();
+    res.json({
+      ...toLessonDetail(created, user, undefined, new Set(["course:full"])),
+      correctAnswers: created.quiz.map((q) => ({ questionId: q.id, answer: q.correctAnswer })),
+    });
   } catch (error) {
     next(error);
   }

@@ -302,6 +302,173 @@ paths:
                 properties:
                   success: { type: boolean }
                 required: [success]
+  /payments/requests:
+    get:
+      operationId: listMyPaymentRequests
+      tags: [payments]
+      summary: List my manual payment requests
+      responses:
+        "200":
+          description: Requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PaymentRequest"
+    post:
+      operationId: createPaymentRequest
+      tags: [payments]
+      summary: Submit a manual Khan Bank payment proof
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePaymentRequestPayload"
+      responses:
+        "200":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRequest"
+  /admin/payment-requests:
+    get:
+      operationId: adminListPaymentRequests
+      tags: [admin]
+      summary: Admin list manual payment requests
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema: { type: string, enum: [pending, approved, rejected, all] }
+      responses:
+        "200":
+          description: Requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AdminPaymentRequest"
+  /admin/payment-requests/{requestId}/decide:
+    post:
+      operationId: adminDecidePaymentRequest
+      tags: [admin]
+      summary: Approve or reject a manual payment request
+      parameters:
+        - name: requestId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DecidePaymentRequestPayload"
+      responses:
+        "200":
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminPaymentRequest"
+  /admin/students:
+    get:
+      operationId: adminListStudents
+      tags: [admin]
+      summary: Admin list all students
+      responses:
+        "200":
+          description: Students
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AdminStudentSummary"
+  /admin/students/{userId}:
+    get:
+      operationId: adminGetStudent
+      tags: [admin]
+      summary: Admin student detail
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Student detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminStudentDetail"
+  /admin/students/{userId}/unlock:
+    post:
+      operationId: adminUnlockStudentProduct
+      tags: [admin]
+      summary: Manually unlock a product for a student
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminUnlockStudentPayload"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MutationResult"
+  /admin/students/{userId}/reset-progress:
+    post:
+      operationId: adminResetStudentProgress
+      tags: [admin]
+      summary: Reset a student's lesson progress
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MutationResult"
+  /admin/lessons/{lessonId}/duplicate:
+    post:
+      operationId: adminDuplicateLesson
+      tags: [admin]
+      summary: Duplicate a lesson into a new day
+      parameters:
+        - name: lessonId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminDuplicateLessonPayload"
+      responses:
+        "200":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminLesson"
   /admin/lessons:
     get:
       operationId: adminListLessons
@@ -462,6 +629,7 @@ components:
             lessonContent:
               $ref: "#/components/schemas/LessonTemplateContent"
             pdfUrl: { type: string, nullable: true }
+            audioUrl: { type: string, nullable: true }
             vocabulary:
               type: array
               items:
@@ -470,7 +638,7 @@ components:
               type: array
               items:
                 $ref: "#/components/schemas/QuizQuestion"
-          required: [objectiveEn, objectiveMn, contentEn, contentMn, lessonContent, pdfUrl, vocabulary, quiz]
+          required: [objectiveEn, objectiveMn, contentEn, contentMn, lessonContent, pdfUrl, audioUrl, vocabulary, quiz]
     LessonTemplateContent:
       type: object
       additionalProperties: true
@@ -666,6 +834,7 @@ components:
         lessonContent:
           $ref: "#/components/schemas/LessonTemplateContent"
         pdfUrl: { type: string, nullable: true }
+        audioUrl: { type: string, nullable: true }
         durationMinutes: { type: integer }
         isPremium: { type: boolean }
         vocabulary:
@@ -691,3 +860,91 @@ components:
       properties:
         success: { type: boolean }
       required: [success]
+    PaymentRequest:
+      type: object
+      properties:
+        id: { type: string }
+        productId: { type: string }
+        productName: { type: string }
+        amount: { type: integer }
+        currency: { type: string }
+        bankName: { type: string }
+        transactionRef: { type: string, nullable: true }
+        payerName: { type: string, nullable: true }
+        screenshotUrl: { type: string, nullable: true }
+        note: { type: string, nullable: true }
+        status: { type: string, enum: [pending, approved, rejected] }
+        adminNote: { type: string, nullable: true }
+        reviewedAt: { type: string, nullable: true }
+        createdAt: { type: string }
+      required: [id, productId, productName, amount, currency, bankName, transactionRef, payerName, screenshotUrl, note, status, adminNote, reviewedAt, createdAt]
+    AdminPaymentRequest:
+      allOf:
+        - $ref: "#/components/schemas/PaymentRequest"
+        - type: object
+          properties:
+            userId: { type: string }
+            userEmail: { type: string }
+            userName: { type: string }
+          required: [userId, userEmail, userName]
+    CreatePaymentRequestPayload:
+      type: object
+      properties:
+        productId: { type: string }
+        transactionRef: { type: string }
+        payerName: { type: string }
+        screenshotUrl: { type: string, nullable: true }
+        note: { type: string, nullable: true }
+      required: [productId, transactionRef, payerName]
+    DecidePaymentRequestPayload:
+      type: object
+      properties:
+        decision: { type: string, enum: [approve, reject] }
+        adminNote: { type: string, nullable: true }
+      required: [decision]
+    AdminUnlockStudentPayload:
+      type: object
+      properties:
+        productId: { type: string }
+      required: [productId]
+    AdminDuplicateLessonPayload:
+      type: object
+      properties:
+        day: { type: integer, minimum: 1, maximum: 90 }
+        titleEn: { type: string }
+        titleMn: { type: string }
+      required: [day]
+    AdminStudentSummary:
+      type: object
+      properties:
+        id: { type: string }
+        email: { type: string }
+        name: { type: string }
+        role: { type: string }
+        premium: { type: boolean }
+        placementLevel: { type: integer }
+        completedLessons: { type: integer }
+        unlocks:
+          type: array
+          items: { type: string }
+        pendingPaymentRequests: { type: integer }
+        createdAt: { type: string }
+      required: [id, email, name, role, premium, placementLevel, completedLessons, unlocks, pendingPaymentRequests, createdAt]
+    AdminStudentDetail:
+      allOf:
+        - $ref: "#/components/schemas/AdminStudentSummary"
+        - type: object
+          properties:
+            history:
+              type: array
+              items:
+                $ref: "#/components/schemas/TestHistoryItem"
+            paymentRequests:
+              type: array
+              items:
+                $ref: "#/components/schemas/PaymentRequest"
+            invoices:
+              type: array
+              items:
+                $ref: "#/components/schemas/QpayInvoice"
+          required: [history, paymentRequests, invoices]

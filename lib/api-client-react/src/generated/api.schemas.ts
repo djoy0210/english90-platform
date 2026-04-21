@@ -98,6 +98,7 @@ export type LessonDetail = LessonSummary & {
   contentMn: string;
   lessonContent: LessonTemplateContent;
   pdfUrl: string | null;
+  audioUrl: string | null;
   vocabulary: VocabularyItem[];
   quiz: QuizQuestion[];
 };
@@ -286,6 +287,7 @@ export interface UpsertLessonRequest {
   contentMn: string;
   lessonContent?: LessonTemplateContent;
   pdfUrl?: string | null;
+  audioUrl?: string | null;
   durationMinutes: number;
   isPremium: boolean;
   vocabulary: VocabularyItem[];
@@ -296,6 +298,106 @@ export interface MutationResult {
   success: boolean;
 }
 
+export type PaymentRequestStatus =
+  (typeof PaymentRequestStatus)[keyof typeof PaymentRequestStatus];
+
+export const PaymentRequestStatus = {
+  pending: "pending",
+  approved: "approved",
+  rejected: "rejected",
+} as const;
+
+export interface PaymentRequest {
+  id: string;
+  productId: string;
+  productName: string;
+  amount: number;
+  currency: string;
+  bankName: string;
+  transactionRef: string | null;
+  payerName: string | null;
+  screenshotUrl: string | null;
+  note: string | null;
+  status: PaymentRequestStatus;
+  adminNote: string | null;
+  reviewedAt: string | null;
+  createdAt: string;
+}
+
+export type AdminPaymentRequest = PaymentRequest & {
+  userId: string;
+  userEmail: string;
+  userName: string;
+};
+
+export interface CreatePaymentRequestPayload {
+  productId: string;
+  transactionRef: string;
+  payerName: string;
+  screenshotUrl?: string | null;
+  note?: string | null;
+}
+
+export type DecidePaymentRequestPayloadDecision =
+  (typeof DecidePaymentRequestPayloadDecision)[keyof typeof DecidePaymentRequestPayloadDecision];
+
+export const DecidePaymentRequestPayloadDecision = {
+  approve: "approve",
+  reject: "reject",
+} as const;
+
+export interface DecidePaymentRequestPayload {
+  decision: DecidePaymentRequestPayloadDecision;
+  adminNote?: string | null;
+}
+
+export interface AdminUnlockStudentPayload {
+  productId: string;
+}
+
+export interface AdminDuplicateLessonPayload {
+  /**
+   * @minimum 1
+   * @maximum 90
+   */
+  day: number;
+  titleEn?: string;
+  titleMn?: string;
+}
+
+export interface AdminStudentSummary {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+  premium: boolean;
+  placementLevel: number;
+  completedLessons: number;
+  unlocks: string[];
+  pendingPaymentRequests: number;
+  createdAt: string;
+}
+
+export type AdminStudentDetail = AdminStudentSummary & {
+  history: TestHistoryItem[];
+  paymentRequests: PaymentRequest[];
+  invoices: QpayInvoice[];
+};
+
 export type HandleQpayCallback200 = {
   success: boolean;
 };
+
+export type AdminListPaymentRequestsParams = {
+  status?: AdminListPaymentRequestsStatus;
+};
+
+export type AdminListPaymentRequestsStatus =
+  (typeof AdminListPaymentRequestsStatus)[keyof typeof AdminListPaymentRequestsStatus];
+
+export const AdminListPaymentRequestsStatus = {
+  pending: "pending",
+  approved: "approved",
+  rejected: "rejected",
+  all: "all",
+} as const;

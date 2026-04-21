@@ -42,6 +42,7 @@ export type LessonTemplateContent = {
   };
   page3?: {
     listeningScript?: string;
+    listeningQuestions?: StoredQuizQuestion[];
     comprehensionQuestions?: StoredQuizQuestion[];
     grammarPractice?: string[];
     matchingExercise?: Array<{ left: string; right: string }>;
@@ -80,6 +81,7 @@ export const lessonsTable = pgTable(
     contentMn: text("content_mn").notNull(),
     lessonContent: jsonb("lesson_content").$type<LessonTemplateContent>(),
     pdfUrl: text("pdf_url"),
+    audioUrl: text("audio_url"),
     durationMinutes: integer("duration_minutes").notNull().default(20),
     isPremium: boolean("is_premium").notNull().default(false),
     vocabulary: jsonb("vocabulary").$type<VocabularyItem[]>().notNull(),
@@ -98,9 +100,32 @@ export const finalTestsTable = pgTable(
     titleEn: text("title_en").notNull(),
     titleMn: text("title_mn").notNull(),
     questions: jsonb("questions").$type<StoredQuizQuestion[]>().notNull(),
+    passingScore: integer("passing_score").notNull().default(70),
   },
   (table) => [uniqueIndex("final_tests_level_unique").on(table.level)],
 );
+
+export const paymentRequestsTable = pgTable("payment_requests", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => usersTable.id, { onDelete: "cascade" }),
+  productId: text("product_id").notNull(),
+  productName: text("product_name").notNull(),
+  amount: integer("amount").notNull(),
+  currency: text("currency").notNull().default("MNT"),
+  bankName: text("bank_name").notNull().default("Khan Bank"),
+  transactionRef: text("transaction_ref"),
+  payerName: text("payer_name"),
+  screenshotUrl: text("screenshot_url"),
+  note: text("note"),
+  status: text("status").notNull().default("pending"),
+  adminNote: text("admin_note"),
+  reviewedAt: timestamp("reviewed_at"),
+  reviewedBy: text("reviewed_by"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
 
 export const lessonProgressTable = pgTable(
   "lesson_progress",
@@ -191,3 +216,4 @@ export type User = typeof usersTable.$inferSelect;
 export type Lesson = typeof lessonsTable.$inferSelect;
 export type FinalTest = typeof finalTestsTable.$inferSelect;
 export type PaymentInvoice = typeof paymentInvoicesTable.$inferSelect;
+export type PaymentRequest = typeof paymentRequestsTable.$inferSelect;

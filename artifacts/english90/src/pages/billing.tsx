@@ -1,148 +1,204 @@
-import { useCheckQpayInvoice, useCreateQpayInvoice, useGetPaymentStatus, type QpayInvoice } from "@workspace/api-client-react";
-import { useState } from "react";
+import { useCreatePaymentRequest, useListMyPaymentRequests, type PaymentRequest } from "@workspace/api-client-react";
+import { useMemo, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { CheckCircle2, Clock, CreditCard, QrCode, ShieldCheck, Star, XCircle } from "lucide-react";
+import { CheckCircle2, Clock, Copy, Landmark, Receipt, ShieldCheck, XCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
+const BANK = {
+  name: "Хаан Банк",
+  iban: "05 0005 00 5224574340",
+  account: "5224574340",
+  holder: "ENGLISH90 ACADEMY",
+};
+
+type Product = { id: string; titleMn: string; titleEn: string; amount: number; highlight?: boolean; description: string };
+const PRODUCTS: Product[] = [
+  { id: "lesson:1", titleMn: "Нэг хичээл", titleEn: "Single lesson", amount: 4900, description: "Тухайн нэг premium хичээлийн эрх" },
+  { id: "level:1", titleMn: "Level 1 багц (30 хичээл)", titleEn: "Level 1 pack", amount: 29000, highlight: true, description: "Эхлэгчдэд зориулсан 30 хоногийн бүтэн контент" },
+  { id: "level:2", titleMn: "Level 2 багц (30 хичээл)", titleEn: "Level 2 pack", amount: 29000, description: "Дунд түвшний 30 хоногийн бүтэн контент" },
+  { id: "level:3", titleMn: "Level 3 багц (30 хичээл)", titleEn: "Level 3 pack", amount: 29000, description: "Дээд түвшний 30 хоногийн бүтэн контент" },
+  { id: "course:full", titleMn: "Бүтэн 90 хоногийн курс", titleEn: "Full 90-day course", amount: 79000, description: "Бүх 3 түвшин + бүх шалгалт" },
+];
 
 function formatMnt(amount: number) {
   return new Intl.NumberFormat("mn-MN").format(amount) + "₮";
 }
 
-function getQrImageSrc(invoice?: QpayInvoice | null) {
-  if (!invoice?.qrImage) return null;
-  if (invoice.qrImage.startsWith("http") || invoice.qrImage.startsWith("data:")) return invoice.qrImage;
-  return `data:image/png;base64,${invoice.qrImage}`;
+function StatusBadge({ status }: { status: PaymentRequest["status"] }) {
+  if (status === "approved") return <Badge className="bg-green-600 hover:bg-green-700"><CheckCircle2 className="w-3 h-3 mr-1" />Баталгаажсан</Badge>;
+  if (status === "rejected") return <Badge variant="destructive"><XCircle className="w-3 h-3 mr-1" />Татгалзсан</Badge>;
+  return <Badge variant="secondary"><Clock className="w-3 h-3 mr-1" />Хүлээгдэж байна</Badge>;
 }
 
 export default function Billing() {
-  const { data: paymentStatus, isLoading, refetch } = useGetPaymentStatus();
-  const createInvoice = useCreateQpayInvoice();
-  const checkInvoice = useCheckQpayInvoice();
   const { toast } = useToast();
-  const [activeInvoice, setActiveInvoice] = useState<QpayInvoice | null>(null);
+  const { data: requests, isLoading, refetch } = useListMyPaymentRequests();
+  const createRequest = useCreatePaymentRequest();
+  const [productId, setProductId] = useState<string>("level:1");
+  const [transactionRef, setTransactionRef] = useState("");
+  const [payerName, setPayerName] = useState("");
+  const [screenshotUrl, setScreenshotUrl] = useState("");
+  const [note, setNote] = useState("");
 
-  const handleCreateInvoice = async (productId: string) => {
-    try {
-      const invoice = await createInvoice.mutateAsync({ data: { productId } });
-      setActiveInvoice(invoice);
-      toast({ title: "Нэхэмжлэх үүслээ", description: invoice.providerConnected ? "QR кодоор төлбөрөө төлнө үү." : invoice.message || "QPay тохируулагдаагүй байна." });
-    } catch (err: any) {
-      toast({ title: "Алдаа гарлаа", description: err.message || "QPay нэхэмжлэх үүсгэж чадсангүй.", variant: "destructive" });
-    }
+  const selectedProduct = useMemo(() => PRODUCTS.find((p) => p.id === productId) ?? PRODUCTS[1], [productId]);
+  const hasApproved = (requests ?? []).some((r) => r.status === "approved");
+
+  const copy = (val: string, label: string) => {
+    navigator.clipboard.writeText(val).then(() => toast({ title: `${label} хууллаа`, description: val }));
   };
 
-  const handleCheckInvoice = async () => {
-    if (!activeInvoice) return;
+  const submit = async () => {
+    if (!transactionRef.trim() || !payerName.trim()) {
+      toast({ title: "Дутуу мэдээлэл", description: "Гүйлгээний дугаар болон төлөгчийн нэр шаардлагатай.", variant: "destructive" });
+      return;
+    }
     try {
-      const invoice = await checkInvoice.mutateAsync({ invoiceId: activeInvoice.id });
-      setActiveInvoice(invoice);
+      await createRequest.mutateAsync({
+        data: {
+          productId,
+          transactionRef: transactionRef.trim(),
+          payerName: payerName.trim(),
+          screenshotUrl: screenshotUrl.trim() || undefined,
+          note: note.trim() || undefined,
+        },
+      });
+      toast({ title: "Хүсэлт илгээгдлээ", description: "Админ баталгаажуулсны дараа эрх автоматаар нээгдэнэ." });
+      setTransactionRef("");
+      setPayerName("");
+      setScreenshotUrl("");
+      setNote("");
       await refetch();
-      if (invoice.paymentStatus === "paid") {
-        toast({ title: "Төлбөр амжилттай", description: "Таны худалдан авсан контент нээгдлээ." });
-      } else {
-        toast({ title: "Төлбөр хүлээгдэж байна", description: invoice.message || "Төлбөр баталгаажаагүй байна. Төлсний дараа дахин шалгана уу." });
-      }
     } catch (err: any) {
-      toast({ title: "Шалгах үед алдаа гарлаа", description: err.message || "Төлбөрийн төлөв шалгаж чадсангүй.", variant: "destructive" });
+      toast({ title: "Алдаа", description: err?.message || "Хүсэлт илгээж чадсангүй.", variant: "destructive" });
     }
   };
 
   if (isLoading) {
-    return (
-      <div className="max-w-4xl mx-auto space-y-6">
-        <Skeleton className="h-10 w-1/3 mb-8" />
-        <Skeleton className="h-[400px] w-full" />
-      </div>
-    );
+    return <div className="max-w-5xl mx-auto space-y-6"><Skeleton className="h-10 w-1/3" /><Skeleton className="h-[500px] w-full" /></div>;
   }
 
-  if (!paymentStatus) return null;
-  const qrImage = getQrImageSrc(activeInvoice);
-
   return (
-    <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
-      <div className="text-center md:text-left">
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">Premium эрх · QPay төлбөр</h1>
-        <p className="text-muted-foreground mt-2">Mongolia QPay QR ашиглан хичээл, түвшин эсвэл бүх 90 өдрийн эрхээ нээгээрэй.</p>
+    <div className="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-500">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">Багц авах</h1>
+        <p className="text-muted-foreground mt-2">Хаан банк руу шилжүүлэг хийгээд гүйлгээний мэдээллээ илгээнэ үү. Админ баталгаажуулмагц контент автоматаар нээгдэнэ.</p>
       </div>
 
-      {!paymentStatus.providerConnected && !paymentStatus.premium && (
-        <div className="bg-destructive/10 text-destructive border border-destructive/20 rounded-lg p-4 text-sm">
-          <strong>Анхааруулга:</strong> {paymentStatus.message}
-        </div>
+      {hasApproved && (
+        <Card className="border-green-500/40 bg-green-500/5">
+          <CardContent className="flex items-center gap-3 p-4 text-sm">
+            <ShieldCheck className="w-5 h-5 text-green-600" />
+            <span>Танд баталгаажсан төлбөр байна. Хичээлүүд нээлттэй.</span>
+          </CardContent>
+        </Card>
       )}
 
-      {paymentStatus.premium ? (
-        <Card className="border-2 border-primary bg-primary/5">
-          <CardHeader className="text-center pb-2">
-            <div className="w-20 h-20 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4"><ShieldCheck className="w-10 h-10" /></div>
-            <CardTitle className="text-2xl text-primary">Premium идэвхтэй</CardTitle>
-            <CardDescription className="text-base mt-2">Та хөтөлбөрийн бүх контентыг ашиглах боломжтой боллоо.</CardDescription>
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2"><Landmark className="w-5 h-5 text-primary" /> Шилжүүлэх банк</CardTitle>
+            <CardDescription>Дараах дансанд яг хэрэгтэй дүнг шилжүүлж, гүйлгээний дугаараа доор оруулна уу.</CardDescription>
           </CardHeader>
-          <CardContent className="pt-6 pb-8 px-8">
-            <div className="bg-background rounded-xl p-6 border shadow-sm space-y-4 max-w-md mx-auto">
-              {["Бүх 90 өдрийн хичээл нээлттэй", "Бүх шалгалтууд нээлттэй", "Хязгааргүй давтан үзэх эрх"].map((item) => (
-                <div key={item} className="flex items-center gap-3"><CheckCircle2 className="w-5 h-5 text-primary" /><span>{item}</span></div>
-              ))}
+          <CardContent className="space-y-3 text-sm">
+            <div className="flex justify-between items-center"><span className="text-muted-foreground">Банк</span><span className="font-semibold">{BANK.name}</span></div>
+            <div className="flex justify-between items-center gap-2">
+              <span className="text-muted-foreground">IBAN</span>
+              <button className="font-mono font-semibold flex items-center gap-2 hover:text-primary" onClick={() => copy(BANK.iban, "IBAN")}>{BANK.iban}<Copy className="w-3.5 h-3.5" /></button>
+            </div>
+            <div className="flex justify-between items-center gap-2">
+              <span className="text-muted-foreground">Дансны дугаар</span>
+              <button className="font-mono font-semibold flex items-center gap-2 hover:text-primary" onClick={() => copy(BANK.account, "Дансны дугаар")}>{BANK.account}<Copy className="w-3.5 h-3.5" /></button>
+            </div>
+            <div className="flex justify-between items-center"><span className="text-muted-foreground">Хүлээн авагч</span><span className="font-semibold">{BANK.holder}</span></div>
+            <div className="rounded-lg border bg-muted/30 p-3 text-xs leading-relaxed text-muted-foreground">
+              Гүйлгээний утга дээр өөрийн email хаягийг бичвэл шалгахад хялбар. Шилжүүлгийн дараа гарсан баримтаа зураг хэлбэрээр (хүсвэл) хадгалж URL-аа доор оруулна уу.
             </div>
           </CardContent>
         </Card>
-      ) : (
-        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <Card className="border-border overflow-hidden">
-            <div className="h-2 w-full bg-primary" />
-            <CardHeader className="text-center pb-6 pt-8">
-              <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center mx-auto mb-4"><Star className="w-8 h-8" /></div>
-              <CardTitle className="text-3xl">English90 Premium</CardTitle>
-              <CardDescription className="text-lg mt-2">Өөрт тохирох багцаа сонгоно уу</CardDescription>
-            </CardHeader>
-            <CardContent className="bg-muted/30 pt-8 pb-8 px-6 sm:px-10 border-t space-y-4">
-              <div className="grid gap-4">
-                <div className="rounded-xl border bg-background p-5 flex items-center justify-between gap-4">
-                  <div><p className="font-semibold">Нэг хичээл</p><p className="text-sm text-muted-foreground">Тухайн өдрийн premium хичээл</p></div>
-                  <div className="text-right"><p className="font-bold text-xl">4,900₮</p><Button variant="outline" className="mt-2" onClick={() => toast({ title: "Lesson checkout", description: "Хичээлийн доторх premium товчноос тухайн өдрийг сонгоно уу." })}>Сонгох</Button></div>
-                </div>
-                {[1, 2, 3].map((level) => (
-                  <div key={level} className="rounded-xl border bg-background p-5 flex items-center justify-between gap-4">
-                    <div><p className="font-semibold">Level {level} багц</p><p className="text-sm text-muted-foreground">30 өдрийн хичээл нээгдэнэ</p></div>
-                    <div className="text-right"><p className="font-bold text-xl">29,000₮</p><Button className="mt-2" variant="outline" onClick={() => handleCreateInvoice(`level:${level}`)} disabled={createInvoice.isPending}>QPay</Button></div>
-                  </div>
-                ))}
-                <div className="rounded-xl border-2 border-primary bg-primary/5 p-5 flex items-center justify-between gap-4">
-                  <div><p className="font-semibold text-lg">Бүтэн 90 өдрийн курс</p><p className="text-sm text-muted-foreground">Түвшин 1-3 бүх хичээл, давтлага, шалгалт</p></div>
-                  <div className="text-right"><p className="font-bold text-2xl">79,000₮</p><Button className="mt-2" onClick={() => handleCreateInvoice("course:full")} disabled={createInvoice.isPending}>{createInvoice.isPending ? "Үүсгэж байна..." : "QPay авах"}</Button></div>
-                </div>
-              </div>
-              <p className="text-center text-xs text-muted-foreground"><CreditCard className="inline w-3 h-3 mr-1" /> QPay төлбөр төлөгдсөний дараа эрх автоматаар нээгдэнэ.</p>
-            </CardContent>
-          </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2"><QrCode className="w-5 h-5 text-primary" /> QPay нэхэмжлэх</CardTitle>
-              <CardDescription>QR кодоо банкны апп-аар уншуулаад “Төлбөр шалгах” товч дарна уу.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-5">
-              {!activeInvoice ? (
-                <div className="rounded-xl border border-dashed p-8 text-center text-muted-foreground">Багц сонгоход QPay QR энд гарна.</div>
-              ) : (
-                <>
-                  <div className="rounded-lg border p-4 space-y-2">
-                    <div className="flex items-center justify-between"><span className="text-muted-foreground">Бүтээгдэхүүн</span><span className="font-medium">{activeInvoice.productName}</span></div>
-                    <div className="flex items-center justify-between"><span className="text-muted-foreground">Дүн</span><span className="font-bold">{formatMnt(activeInvoice.amount)}</span></div>
-                    <div className="flex items-center justify-between"><span className="text-muted-foreground">Төлөв</span><span className="font-semibold capitalize flex items-center gap-1">{activeInvoice.paymentStatus === "paid" ? <CheckCircle2 className="w-4 h-4 text-primary" /> : activeInvoice.paymentStatus === "failed" ? <XCircle className="w-4 h-4 text-destructive" /> : <Clock className="w-4 h-4 text-muted-foreground" />}{activeInvoice.paymentStatus}</span></div>
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2"><Receipt className="w-5 h-5 text-primary" /> Төлбөрийн хүсэлт илгээх</CardTitle>
+            <CardDescription>Шилжүүлэг хийсний дараа доорх формыг бөглөнө үү.</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-2">
+              <Label>Багц</Label>
+              <div className="grid gap-2">
+                {PRODUCTS.map((p) => (
+                  <label key={p.id} className={`flex items-start gap-3 rounded-lg border p-3 cursor-pointer transition ${productId === p.id ? "border-primary bg-primary/5" : "hover:bg-muted/40"}`}>
+                    <input type="radio" name="product" value={p.id} checked={productId === p.id} onChange={() => setProductId(p.id)} className="mt-1" />
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between gap-2"><span className="font-medium">{p.titleMn}</span><span className="font-bold">{formatMnt(p.amount)}</span></div>
+                      <p className="text-xs text-muted-foreground">{p.description}</p>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="rounded-lg border bg-muted/30 p-3 text-sm flex items-center justify-between">
+              <span className="text-muted-foreground">Төлөх дүн</span>
+              <span className="font-bold text-lg">{formatMnt(selectedProduct.amount)}</span>
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="ref">Гүйлгээний дугаар *</Label>
+              <Input id="ref" value={transactionRef} onChange={(e) => setTransactionRef(e.target.value)} placeholder="ж: 2026042100123456" />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="payer">Төлөгчийн нэр *</Label>
+              <Input id="payer" value={payerName} onChange={(e) => setPayerName(e.target.value)} placeholder="Гүйлгээ хийсэн хүний бүтэн нэр" />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="ss">Баримтын зургийн URL (заавал биш)</Label>
+              <Input id="ss" value={screenshotUrl} onChange={(e) => setScreenshotUrl(e.target.value)} placeholder="https://..." />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="note">Нэмэлт тайлбар</Label>
+              <Textarea id="note" value={note} onChange={(e) => setNote(e.target.value)} placeholder="Сонголт" rows={2} />
+            </div>
+            <Button className="w-full" onClick={submit} disabled={createRequest.isPending}>
+              {createRequest.isPending ? "Илгээж байна..." : "Төлбөрийн хүсэлт илгээх"}
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Миний хүсэлтүүд</CardTitle>
+          <CardDescription>Илгээсэн хүсэлтийн төлөв.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          {(requests ?? []).length === 0 ? (
+            <p className="text-sm text-muted-foreground">Одоогоор хүсэлт байхгүй.</p>
+          ) : (
+            <div className="space-y-3">
+              {(requests ?? []).map((r) => (
+                <div key={r.id} className="rounded-lg border p-4 space-y-2">
+                  <div className="flex items-center justify-between gap-3 flex-wrap">
+                    <div>
+                      <p className="font-semibold">{r.productName}</p>
+                      <p className="text-xs text-muted-foreground">{new Date(r.createdAt).toLocaleString("mn-MN")}</p>
+                    </div>
+                    <div className="flex items-center gap-2"><span className="font-bold">{formatMnt(r.amount)}</span><StatusBadge status={r.status} /></div>
                   </div>
-                  {qrImage ? <img src={qrImage} alt="QPay QR" className="mx-auto w-64 h-64 object-contain rounded-xl border bg-white p-3" /> : <div className="rounded-xl border p-6 text-center text-sm text-muted-foreground">{activeInvoice.message || "QR мэдээлэл буцаагдаагүй байна."}</div>}
-                  {activeInvoice.paymentUrl && <Button className="w-full" variant="outline" onClick={() => window.open(activeInvoice.paymentUrl || "", "_blank")}>QPay холбоос нээх</Button>}
-                  <Button className="w-full" onClick={handleCheckInvoice} disabled={checkInvoice.isPending}>{checkInvoice.isPending ? "Шалгаж байна..." : "Төлбөр шалгах"}</Button>
-                </>
-              )}
-            </CardContent>
-          </Card>
-        </div>
-      )}
+                  <div className="text-xs text-muted-foreground grid sm:grid-cols-2 gap-1">
+                    <span>Гүйлгээний дугаар: <span className="font-mono text-foreground">{r.transactionRef ?? "-"}</span></span>
+                    <span>Төлөгч: <span className="text-foreground">{r.payerName ?? "-"}</span></span>
+                  </div>
+                  {r.adminNote && <p className="text-sm rounded bg-muted/50 p-2"><span className="text-muted-foreground">Админы тайлбар: </span>{r.adminNote}</p>}
+                </div>
+              ))}
+            </div>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 }

@@ -165,6 +165,7 @@ export const GetLessonResponse = zod
       contentMn: zod.string(),
       lessonContent: zod.record(zod.string(), zod.unknown()),
       pdfUrl: zod.string().nullable(),
+      audioUrl: zod.string().nullable(),
       vocabulary: zod.array(
         zod.object({
           english: zod.string(),
@@ -429,6 +430,317 @@ export const HandleQpayCallbackResponse = zod.object({
 });
 
 /**
+ * @summary List my manual payment requests
+ */
+export const ListMyPaymentRequestsResponseItem = zod.object({
+  id: zod.string(),
+  productId: zod.string(),
+  productName: zod.string(),
+  amount: zod.number(),
+  currency: zod.string(),
+  bankName: zod.string(),
+  transactionRef: zod.string().nullable(),
+  payerName: zod.string().nullable(),
+  screenshotUrl: zod.string().nullable(),
+  note: zod.string().nullable(),
+  status: zod.enum(["pending", "approved", "rejected"]),
+  adminNote: zod.string().nullable(),
+  reviewedAt: zod.string().nullable(),
+  createdAt: zod.string(),
+});
+export const ListMyPaymentRequestsResponse = zod.array(
+  ListMyPaymentRequestsResponseItem,
+);
+
+/**
+ * @summary Submit a manual Khan Bank payment proof
+ */
+export const CreatePaymentRequestBody = zod.object({
+  productId: zod.string(),
+  transactionRef: zod.string(),
+  payerName: zod.string(),
+  screenshotUrl: zod.string().nullish(),
+  note: zod.string().nullish(),
+});
+
+export const CreatePaymentRequestResponse = zod.object({
+  id: zod.string(),
+  productId: zod.string(),
+  productName: zod.string(),
+  amount: zod.number(),
+  currency: zod.string(),
+  bankName: zod.string(),
+  transactionRef: zod.string().nullable(),
+  payerName: zod.string().nullable(),
+  screenshotUrl: zod.string().nullable(),
+  note: zod.string().nullable(),
+  status: zod.enum(["pending", "approved", "rejected"]),
+  adminNote: zod.string().nullable(),
+  reviewedAt: zod.string().nullable(),
+  createdAt: zod.string(),
+});
+
+/**
+ * @summary Admin list manual payment requests
+ */
+export const AdminListPaymentRequestsQueryParams = zod.object({
+  status: zod.enum(["pending", "approved", "rejected", "all"]).optional(),
+});
+
+export const AdminListPaymentRequestsResponseItem = zod
+  .object({
+    id: zod.string(),
+    productId: zod.string(),
+    productName: zod.string(),
+    amount: zod.number(),
+    currency: zod.string(),
+    bankName: zod.string(),
+    transactionRef: zod.string().nullable(),
+    payerName: zod.string().nullable(),
+    screenshotUrl: zod.string().nullable(),
+    note: zod.string().nullable(),
+    status: zod.enum(["pending", "approved", "rejected"]),
+    adminNote: zod.string().nullable(),
+    reviewedAt: zod.string().nullable(),
+    createdAt: zod.string(),
+  })
+  .and(
+    zod.object({
+      userId: zod.string(),
+      userEmail: zod.string(),
+      userName: zod.string(),
+    }),
+  );
+export const AdminListPaymentRequestsResponse = zod.array(
+  AdminListPaymentRequestsResponseItem,
+);
+
+/**
+ * @summary Approve or reject a manual payment request
+ */
+export const AdminDecidePaymentRequestParams = zod.object({
+  requestId: zod.coerce.string(),
+});
+
+export const AdminDecidePaymentRequestBody = zod.object({
+  decision: zod.enum(["approve", "reject"]),
+  adminNote: zod.string().nullish(),
+});
+
+export const AdminDecidePaymentRequestResponse = zod
+  .object({
+    id: zod.string(),
+    productId: zod.string(),
+    productName: zod.string(),
+    amount: zod.number(),
+    currency: zod.string(),
+    bankName: zod.string(),
+    transactionRef: zod.string().nullable(),
+    payerName: zod.string().nullable(),
+    screenshotUrl: zod.string().nullable(),
+    note: zod.string().nullable(),
+    status: zod.enum(["pending", "approved", "rejected"]),
+    adminNote: zod.string().nullable(),
+    reviewedAt: zod.string().nullable(),
+    createdAt: zod.string(),
+  })
+  .and(
+    zod.object({
+      userId: zod.string(),
+      userEmail: zod.string(),
+      userName: zod.string(),
+    }),
+  );
+
+/**
+ * @summary Admin list all students
+ */
+export const AdminListStudentsResponseItem = zod.object({
+  id: zod.string(),
+  email: zod.string(),
+  name: zod.string(),
+  role: zod.string(),
+  premium: zod.boolean(),
+  placementLevel: zod.number(),
+  completedLessons: zod.number(),
+  unlocks: zod.array(zod.string()),
+  pendingPaymentRequests: zod.number(),
+  createdAt: zod.string(),
+});
+export const AdminListStudentsResponse = zod.array(
+  AdminListStudentsResponseItem,
+);
+
+/**
+ * @summary Admin student detail
+ */
+export const AdminGetStudentParams = zod.object({
+  userId: zod.coerce.string(),
+});
+
+export const AdminGetStudentResponse = zod
+  .object({
+    id: zod.string(),
+    email: zod.string(),
+    name: zod.string(),
+    role: zod.string(),
+    premium: zod.boolean(),
+    placementLevel: zod.number(),
+    completedLessons: zod.number(),
+    unlocks: zod.array(zod.string()),
+    pendingPaymentRequests: zod.number(),
+    createdAt: zod.string(),
+  })
+  .and(
+    zod.object({
+      history: zod.array(
+        zod.object({
+          id: zod.string(),
+          type: zod.enum(["lesson", "final"]),
+          titleEn: zod.string(),
+          titleMn: zod.string(),
+          day: zod.number().nullable(),
+          level: zod.number(),
+          score: zod.number(),
+          total: zod.number(),
+          percentage: zod.number(),
+          createdAt: zod.string(),
+        }),
+      ),
+      paymentRequests: zod.array(
+        zod.object({
+          id: zod.string(),
+          productId: zod.string(),
+          productName: zod.string(),
+          amount: zod.number(),
+          currency: zod.string(),
+          bankName: zod.string(),
+          transactionRef: zod.string().nullable(),
+          payerName: zod.string().nullable(),
+          screenshotUrl: zod.string().nullable(),
+          note: zod.string().nullable(),
+          status: zod.enum(["pending", "approved", "rejected"]),
+          adminNote: zod.string().nullable(),
+          reviewedAt: zod.string().nullable(),
+          createdAt: zod.string(),
+        }),
+      ),
+      invoices: zod.array(
+        zod.object({
+          id: zod.string(),
+          invoiceCode: zod.string(),
+          qpayInvoiceId: zod.string().nullish(),
+          paymentStatus: zod.enum(["pending", "paid", "failed", "expired"]),
+          productId: zod.string(),
+          productName: zod.string(),
+          amount: zod.number(),
+          currency: zod.string(),
+          unlockStatus: zod.enum(["locked", "unlocked"]),
+          qrText: zod.string().nullish(),
+          qrImage: zod.string().nullish(),
+          paymentUrl: zod.string().nullish(),
+          providerConnected: zod.boolean(),
+          message: zod.string().nullish(),
+          createdAt: zod.string(),
+          updatedAt: zod.string(),
+        }),
+      ),
+    }),
+  );
+
+/**
+ * @summary Manually unlock a product for a student
+ */
+export const AdminUnlockStudentProductParams = zod.object({
+  userId: zod.coerce.string(),
+});
+
+export const AdminUnlockStudentProductBody = zod.object({
+  productId: zod.string(),
+});
+
+export const AdminUnlockStudentProductResponse = zod.object({
+  success: zod.boolean(),
+});
+
+/**
+ * @summary Reset a student's lesson progress
+ */
+export const AdminResetStudentProgressParams = zod.object({
+  userId: zod.coerce.string(),
+});
+
+export const AdminResetStudentProgressResponse = zod.object({
+  success: zod.boolean(),
+});
+
+/**
+ * @summary Duplicate a lesson into a new day
+ */
+export const AdminDuplicateLessonParams = zod.object({
+  lessonId: zod.coerce.string(),
+});
+
+export const adminDuplicateLessonBodyDayMax = 90;
+
+export const AdminDuplicateLessonBody = zod.object({
+  day: zod.number().min(1).max(adminDuplicateLessonBodyDayMax),
+  titleEn: zod.string().optional(),
+  titleMn: zod.string().optional(),
+});
+
+export const AdminDuplicateLessonResponse = zod
+  .object({
+    id: zod.string(),
+    day: zod.number(),
+    level: zod.number(),
+    titleEn: zod.string(),
+    titleMn: zod.string(),
+    durationMinutes: zod.number(),
+    isPremium: zod.boolean(),
+    isUnlocked: zod.boolean(),
+    completed: zod.boolean(),
+    bestScore: zod.number().nullable(),
+  })
+  .and(
+    zod.object({
+      objectiveEn: zod.string(),
+      objectiveMn: zod.string(),
+      contentEn: zod.string(),
+      contentMn: zod.string(),
+      lessonContent: zod.record(zod.string(), zod.unknown()),
+      pdfUrl: zod.string().nullable(),
+      audioUrl: zod.string().nullable(),
+      vocabulary: zod.array(
+        zod.object({
+          english: zod.string(),
+          pronunciation: zod.string().optional(),
+          mongolian: zod.string(),
+          example: zod.string(),
+        }),
+      ),
+      quiz: zod.array(
+        zod.object({
+          id: zod.string(),
+          promptEn: zod.string(),
+          promptMn: zod.string(),
+          options: zod.array(zod.string()),
+        }),
+      ),
+    }),
+  )
+  .and(
+    zod.object({
+      correctAnswers: zod.array(
+        zod.object({
+          questionId: zod.string(),
+          answer: zod.string(),
+        }),
+      ),
+    }),
+  );
+
+/**
  * @summary Admin list lessons
  */
 export const AdminListLessonsResponseItem = zod
@@ -452,6 +764,7 @@ export const AdminListLessonsResponseItem = zod
       contentMn: zod.string(),
       lessonContent: zod.record(zod.string(), zod.unknown()),
       pdfUrl: zod.string().nullable(),
+      audioUrl: zod.string().nullable(),
       vocabulary: zod.array(
         zod.object({
           english: zod.string(),
@@ -500,6 +813,7 @@ export const AdminCreateLessonBody = zod.object({
   contentMn: zod.string(),
   lessonContent: zod.record(zod.string(), zod.unknown()).optional(),
   pdfUrl: zod.string().nullish(),
+  audioUrl: zod.string().nullish(),
   durationMinutes: zod.number(),
   isPremium: zod.boolean(),
   vocabulary: zod.array(
@@ -542,6 +856,7 @@ export const AdminCreateLessonResponse = zod
       contentMn: zod.string(),
       lessonContent: zod.record(zod.string(), zod.unknown()),
       pdfUrl: zod.string().nullable(),
+      audioUrl: zod.string().nullable(),
       vocabulary: zod.array(
         zod.object({
           english: zod.string(),
@@ -593,6 +908,7 @@ export const AdminUpdateLessonBody = zod.object({
   contentMn: zod.string(),
   lessonContent: zod.record(zod.string(), zod.unknown()).optional(),
   pdfUrl: zod.string().nullish(),
+  audioUrl: zod.string().nullish(),
   durationMinutes: zod.number(),
   isPremium: zod.boolean(),
   vocabulary: zod.array(
@@ -635,6 +951,7 @@ export const AdminUpdateLessonResponse = zod
       contentMn: zod.string(),
       lessonContent: zod.record(zod.string(), zod.unknown()),
       pdfUrl: zod.string().nullable(),
+      audioUrl: zod.string().nullable(),
       vocabulary: zod.array(
         zod.object({
           english: zod.string(),

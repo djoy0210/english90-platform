@@ -1,13 +1,18 @@
-import { useGetDashboard } from "@workspace/api-client-react";
+import { useGetDashboard, useGetMe, useListMyPaymentRequests } from "@workspace/api-client-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
-import { ArrowRight, BookOpen, CheckCircle2, Lock, Medal, PlayCircle, Target, Trophy } from "lucide-react";
+import { BookOpen, CheckCircle2, Clock, GraduationCap, Lock, Medal, PlayCircle, Sparkles, Target, Trophy } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Dashboard() {
   const { data: dashboard, isLoading, error } = useGetDashboard();
+  const { data: me } = useGetMe();
+  const { data: paymentRequests } = useListMyPaymentRequests();
+  const pendingPayment = (paymentRequests ?? []).find((r) => r.status === "pending");
+  const hasApproved = (paymentRequests ?? []).some((r) => r.status === "approved");
 
   if (isLoading) {
     return (
@@ -55,6 +60,54 @@ export default function Dashboard() {
           </Button>
         )}
       </div>
+
+      {(me && !me.placementCompleted) && (
+        <Card className="border-primary/40 bg-primary/5">
+          <CardContent className="p-5 flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex items-center gap-3">
+              <GraduationCap className="w-6 h-6 text-primary" />
+              <div>
+                <p className="font-semibold">Шатлал тогтоох тест өг</p>
+                <p className="text-sm text-muted-foreground">Үнэгүй · Танд тохирох түвшнийг тогтооно</p>
+              </div>
+            </div>
+            <Button asChild><Link href="/placement-test">Тест эхлэх</Link></Button>
+          </CardContent>
+        </Card>
+      )}
+
+      {pendingPayment && (
+        <Card className="border-amber-500/40 bg-amber-500/5">
+          <CardContent className="p-5 flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex items-center gap-3">
+              <Clock className="w-5 h-5 text-amber-600" />
+              <div>
+                <p className="font-semibold">Төлбөрийн хүсэлт хүлээгдэж байна</p>
+                <p className="text-sm text-muted-foreground">{pendingPayment.productName} · {new Intl.NumberFormat("mn-MN").format(pendingPayment.amount)}₮</p>
+              </div>
+            </div>
+            <Badge variant="secondary">Шалгагдаж байна</Badge>
+          </CardContent>
+        </Card>
+      )}
+
+      {!dashboard.premium && !hasApproved && !pendingPayment && (
+        <Card className="border-secondary/40 bg-secondary/5">
+          <CardContent className="p-5 flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex items-center gap-3">
+              <Sparkles className="w-5 h-5 text-secondary-foreground" />
+              <div>
+                <p className="font-semibold">Үнэгүй демо хичээл туршаад үз</p>
+                <p className="text-sm text-muted-foreground">Эхний хичээл бүгдэд нээлттэй. Хэрэгтэй бол Level 1 багц аваарай.</p>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <Button asChild variant="outline"><Link href="/lessons">Үнэгүй хичээл</Link></Button>
+              <Button asChild><Link href="/billing">Багц авах</Link></Button>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       <div className="grid gap-4 md:grid-cols-3">
         <Card className="bg-primary text-primary-foreground border-none">

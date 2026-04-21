@@ -28,6 +28,7 @@ export interface UpsertLessonRequest {
   contentMn: string;
   lessonContent?: LessonTemplateContent;
   pdfUrl?: string | null;
+  audioUrl?: string | null;
   durationMinutes: number;
   isPremium: boolean;
   vocabulary: VocabularyItem[];

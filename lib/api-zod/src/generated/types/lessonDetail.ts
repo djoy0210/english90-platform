@@ -17,6 +17,7 @@ export type LessonDetail = LessonSummary & {
   contentMn: string;
   lessonContent: LessonTemplateContent;
   pdfUrl: string | null;
+  audioUrl: string | null;
   vocabulary: VocabularyItem[];
   quiz: QuizQuestion[];
 };

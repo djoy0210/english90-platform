@@ -59,14 +59,19 @@ export default function LessonView() {
         </div>
         <h1 className="text-3xl font-bold">Premium хичээл</h1>
         <p className="text-muted-foreground text-lg">
-          Энэхүү хичээлийг үзэхийн тулд Premium эрхтэй байх шаардлагатай.
+          Энэхүү хичээлийг үзэхийн тулд Level {lesson.level} багц эсвэл бүтэн курс авсан байх ёстой.
         </p>
-        <Button size="lg" onClick={() => setLocation("/billing")}>
-          Premium идэвхжүүлэх
-        </Button>
-        <Button variant="ghost" onClick={() => setLocation("/lessons")} className="block mx-auto mt-4">
-          Буцах
-        </Button>
+        <div className="rounded-xl border bg-muted/30 p-6 max-w-md mx-auto text-left space-y-2 text-sm">
+          <p className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-primary" /> 30 хоногийн бүх хичээл нээгдэнэ</p>
+          <p className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-primary" /> Level {lesson.level} төгсгөлийн шалгалт нээгдэнэ</p>
+          <p className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-primary" /> Audio listening + бүх дасгал</p>
+        </div>
+        <div className="flex gap-3 justify-center">
+          <Button size="lg" onClick={() => setLocation("/billing")}>
+            Level {lesson.level} багц авах · 29,000₮
+          </Button>
+          <Button size="lg" variant="outline" onClick={() => setLocation("/lessons")}>Буцах</Button>
+        </div>
       </div>
     );
   }
@@ -322,9 +327,32 @@ export default function LessonView() {
             </CardHeader>
             <CardContent className="p-6 space-y-6">
               <div>
-                <h3 className="font-semibold mb-2">Listening Script</h3>
+                <h3 className="font-semibold mb-2 flex items-center gap-2"><PlayCircle className="w-4 h-4 text-primary" /> Listening Script</h3>
                 <div className="rounded-xl bg-muted/40 p-5 leading-8 whitespace-pre-line">{page3.listeningScript}</div>
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {page3.listeningScript && (
+                    <Button type="button" size="sm" variant="outline" onClick={() => speakWord(page3.listeningScript)}>
+                      <Volume2 className="w-4 h-4 mr-2" /> Уншуулах (TTS)
+                    </Button>
+                  )}
+                </div>
+                {(lesson as any).audioUrl && (
+                  <audio controls src={(lesson as any).audioUrl} className="w-full mt-3" />
+                )}
               </div>
+              {Array.isArray(page3.listeningQuestions) && page3.listeningQuestions.length > 0 && (
+                <div className="rounded-lg border p-4">
+                  <h3 className="font-semibold mb-3">Listening Questions</h3>
+                  <ol className="space-y-2 list-decimal pl-5 text-sm">
+                    {page3.listeningQuestions.map((q: any, idx: number) => (
+                      <li key={idx}>
+                        <p>{typeof q === "string" ? q : q.question || q.prompt}</p>
+                        {typeof q !== "string" && q.answer && <p className="text-muted-foreground italic">→ {q.answer}</p>}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              )}
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="rounded-lg border p-4">
                   <h3 className="font-semibold mb-3">Grammar Practice</h3>

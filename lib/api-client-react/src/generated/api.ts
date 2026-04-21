@@ -17,17 +17,26 @@ import type {
 } from "@tanstack/react-query";
 
 import type {
+  AdminDuplicateLessonPayload,
   AdminLesson,
+  AdminListPaymentRequestsParams,
+  AdminPaymentRequest,
+  AdminStudentDetail,
+  AdminStudentSummary,
+  AdminUnlockStudentPayload,
   CheckoutResponse,
   CreateCheckoutRequest,
+  CreatePaymentRequestPayload,
   CreateQpayInvoiceRequest,
   Dashboard,
+  DecidePaymentRequestPayload,
   FinalTestDetail,
   HandleQpayCallback200,
   HealthStatus,
   LessonDetail,
   LessonSummary,
   MutationResult,
+  PaymentRequest,
   PaymentStatus,
   PlacementTestDetail,
   PlacementTestResult,
@@ -1424,6 +1433,784 @@ export const useHandleQpayCallback = <
   TContext
 > => {
   return useMutation(getHandleQpayCallbackMutationOptions(options));
+};
+
+/**
+ * @summary List my manual payment requests
+ */
+export const getListMyPaymentRequestsUrl = () => {
+  return `/api/payments/requests`;
+};
+
+export const listMyPaymentRequests = async (
+  options?: RequestInit,
+): Promise<PaymentRequest[]> => {
+  return customFetch<PaymentRequest[]>(getListMyPaymentRequestsUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getListMyPaymentRequestsQueryKey = () => {
+  return [`/api/payments/requests`] as const;
+};
+
+export const getListMyPaymentRequestsQueryOptions = <
+  TData = Awaited<ReturnType<typeof listMyPaymentRequests>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof listMyPaymentRequests>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getListMyPaymentRequestsQueryKey();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof listMyPaymentRequests>>
+  > = ({ signal }) => listMyPaymentRequests({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof listMyPaymentRequests>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type ListMyPaymentRequestsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof listMyPaymentRequests>>
+>;
+export type ListMyPaymentRequestsQueryError = ErrorType<unknown>;
+
+/**
+ * @summary List my manual payment requests
+ */
+
+export function useListMyPaymentRequests<
+  TData = Awaited<ReturnType<typeof listMyPaymentRequests>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof listMyPaymentRequests>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getListMyPaymentRequestsQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Submit a manual Khan Bank payment proof
+ */
+export const getCreatePaymentRequestUrl = () => {
+  return `/api/payments/requests`;
+};
+
+export const createPaymentRequest = async (
+  createPaymentRequestPayload: CreatePaymentRequestPayload,
+  options?: RequestInit,
+): Promise<PaymentRequest> => {
+  return customFetch<PaymentRequest>(getCreatePaymentRequestUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(createPaymentRequestPayload),
+  });
+};
+
+export const getCreatePaymentRequestMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createPaymentRequest>>,
+    TError,
+    { data: BodyType<CreatePaymentRequestPayload> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof createPaymentRequest>>,
+  TError,
+  { data: BodyType<CreatePaymentRequestPayload> },
+  TContext
+> => {
+  const mutationKey = ["createPaymentRequest"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof createPaymentRequest>>,
+    { data: BodyType<CreatePaymentRequestPayload> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createPaymentRequest(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreatePaymentRequestMutationResult = NonNullable<
+  Awaited<ReturnType<typeof createPaymentRequest>>
+>;
+export type CreatePaymentRequestMutationBody =
+  BodyType<CreatePaymentRequestPayload>;
+export type CreatePaymentRequestMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Submit a manual Khan Bank payment proof
+ */
+export const useCreatePaymentRequest = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createPaymentRequest>>,
+    TError,
+    { data: BodyType<CreatePaymentRequestPayload> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof createPaymentRequest>>,
+  TError,
+  { data: BodyType<CreatePaymentRequestPayload> },
+  TContext
+> => {
+  return useMutation(getCreatePaymentRequestMutationOptions(options));
+};
+
+/**
+ * @summary Admin list manual payment requests
+ */
+export const getAdminListPaymentRequestsUrl = (
+  params?: AdminListPaymentRequestsParams,
+) => {
+  const normalizedParams = new URLSearchParams();
+
+  Object.entries(params || {}).forEach(([key, value]) => {
+    if (value !== undefined) {
+      normalizedParams.append(key, value === null ? "null" : value.toString());
+    }
+  });
+
+  const stringifiedParams = normalizedParams.toString();
+
+  return stringifiedParams.length > 0
+    ? `/api/admin/payment-requests?${stringifiedParams}`
+    : `/api/admin/payment-requests`;
+};
+
+export const adminListPaymentRequests = async (
+  params?: AdminListPaymentRequestsParams,
+  options?: RequestInit,
+): Promise<AdminPaymentRequest[]> => {
+  return customFetch<AdminPaymentRequest[]>(
+    getAdminListPaymentRequestsUrl(params),
+    {
+      ...options,
+      method: "GET",
+    },
+  );
+};
+
+export const getAdminListPaymentRequestsQueryKey = (
+  params?: AdminListPaymentRequestsParams,
+) => {
+  return [`/api/admin/payment-requests`, ...(params ? [params] : [])] as const;
+};
+
+export const getAdminListPaymentRequestsQueryOptions = <
+  TData = Awaited<ReturnType<typeof adminListPaymentRequests>>,
+  TError = ErrorType<unknown>,
+>(
+  params?: AdminListPaymentRequestsParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof adminListPaymentRequests>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey =
+    queryOptions?.queryKey ?? getAdminListPaymentRequestsQueryKey(params);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof adminListPaymentRequests>>
+  > = ({ signal }) =>
+    adminListPaymentRequests(params, { signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof adminListPaymentRequests>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type AdminListPaymentRequestsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof adminListPaymentRequests>>
+>;
+export type AdminListPaymentRequestsQueryError = ErrorType<unknown>;
+
+/**
+ * @summary Admin list manual payment requests
+ */
+
+export function useAdminListPaymentRequests<
+  TData = Awaited<ReturnType<typeof adminListPaymentRequests>>,
+  TError = ErrorType<unknown>,
+>(
+  params?: AdminListPaymentRequestsParams,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof adminListPaymentRequests>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getAdminListPaymentRequestsQueryOptions(params, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Approve or reject a manual payment request
+ */
+export const getAdminDecidePaymentRequestUrl = (requestId: string) => {
+  return `/api/admin/payment-requests/${requestId}/decide`;
+};
+
+export const adminDecidePaymentRequest = async (
+  requestId: string,
+  decidePaymentRequestPayload: DecidePaymentRequestPayload,
+  options?: RequestInit,
+): Promise<AdminPaymentRequest> => {
+  return customFetch<AdminPaymentRequest>(
+    getAdminDecidePaymentRequestUrl(requestId),
+    {
+      ...options,
+      method: "POST",
+      headers: { "Content-Type": "application/json", ...options?.headers },
+      body: JSON.stringify(decidePaymentRequestPayload),
+    },
+  );
+};
+
+export const getAdminDecidePaymentRequestMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof adminDecidePaymentRequest>>,
+    TError,
+    { requestId: string; data: BodyType<DecidePaymentRequestPayload> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof adminDecidePaymentRequest>>,
+  TError,
+  { requestId: string; data: BodyType<DecidePaymentRequestPayload> },
+  TContext
+> => {
+  const mutationKey = ["adminDecidePaymentRequest"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof adminDecidePaymentRequest>>,
+    { requestId: string; data: BodyType<DecidePaymentRequestPayload> }
+  > = (props) => {
+    const { requestId, data } = props ?? {};
+
+    return adminDecidePaymentRequest(requestId, data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type AdminDecidePaymentRequestMutationResult = NonNullable<
+  Awaited<ReturnType<typeof adminDecidePaymentRequest>>
+>;
+export type AdminDecidePaymentRequestMutationBody =
+  BodyType<DecidePaymentRequestPayload>;
+export type AdminDecidePaymentRequestMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Approve or reject a manual payment request
+ */
+export const useAdminDecidePaymentRequest = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof adminDecidePaymentRequest>>,
+    TError,
+    { requestId: string; data: BodyType<DecidePaymentRequestPayload> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof adminDecidePaymentRequest>>,
+  TError,
+  { requestId: string; data: BodyType<DecidePaymentRequestPayload> },
+  TContext
+> => {
+  return useMutation(getAdminDecidePaymentRequestMutationOptions(options));
+};
+
+/**
+ * @summary Admin list all students
+ */
+export const getAdminListStudentsUrl = () => {
+  return `/api/admin/students`;
+};
+
+export const adminListStudents = async (
+  options?: RequestInit,
+): Promise<AdminStudentSummary[]> => {
+  return customFetch<AdminStudentSummary[]>(getAdminListStudentsUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getAdminListStudentsQueryKey = () => {
+  return [`/api/admin/students`] as const;
+};
+
+export const getAdminListStudentsQueryOptions = <
+  TData = Awaited<ReturnType<typeof adminListStudents>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof adminListStudents>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getAdminListStudentsQueryKey();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof adminListStudents>>
+  > = ({ signal }) => adminListStudents({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof adminListStudents>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type AdminListStudentsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof adminListStudents>>
+>;
+export type AdminListStudentsQueryError = ErrorType<unknown>;
+
+/**
+ * @summary Admin list all students
+ */
+
+export function useAdminListStudents<
+  TData = Awaited<ReturnType<typeof adminListStudents>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof adminListStudents>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getAdminListStudentsQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Admin student detail
+ */
+export const getAdminGetStudentUrl = (userId: string) => {
+  return `/api/admin/students/${userId}`;
+};
+
+export const adminGetStudent = async (
+  userId: string,
+  options?: RequestInit,
+): Promise<AdminStudentDetail> => {
+  return customFetch<AdminStudentDetail>(getAdminGetStudentUrl(userId), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getAdminGetStudentQueryKey = (userId: string) => {
+  return [`/api/admin/students/${userId}`] as const;
+};
+
+export const getAdminGetStudentQueryOptions = <
+  TData = Awaited<ReturnType<typeof adminGetStudent>>,
+  TError = ErrorType<unknown>,
+>(
+  userId: string,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof adminGetStudent>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getAdminGetStudentQueryKey(userId);
+
+  const queryFn: QueryFunction<Awaited<ReturnType<typeof adminGetStudent>>> = ({
+    signal,
+  }) => adminGetStudent(userId, { signal, ...requestOptions });
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!userId,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof adminGetStudent>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type AdminGetStudentQueryResult = NonNullable<
+  Awaited<ReturnType<typeof adminGetStudent>>
+>;
+export type AdminGetStudentQueryError = ErrorType<unknown>;
+
+/**
+ * @summary Admin student detail
+ */
+
+export function useAdminGetStudent<
+  TData = Awaited<ReturnType<typeof adminGetStudent>>,
+  TError = ErrorType<unknown>,
+>(
+  userId: string,
+  options?: {
+    query?: UseQueryOptions<
+      Awaited<ReturnType<typeof adminGetStudent>>,
+      TError,
+      TData
+    >;
+    request?: SecondParameter<typeof customFetch>;
+  },
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getAdminGetStudentQueryOptions(userId, options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Manually unlock a product for a student
+ */
+export const getAdminUnlockStudentProductUrl = (userId: string) => {
+  return `/api/admin/students/${userId}/unlock`;
+};
+
+export const adminUnlockStudentProduct = async (
+  userId: string,
+  adminUnlockStudentPayload: AdminUnlockStudentPayload,
+  options?: RequestInit,
+): Promise<MutationResult> => {
+  return customFetch<MutationResult>(getAdminUnlockStudentProductUrl(userId), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(adminUnlockStudentPayload),
+  });
+};
+
+export const getAdminUnlockStudentProductMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof adminUnlockStudentProduct>>,
+    TError,
+    { userId: string; data: BodyType<AdminUnlockStudentPayload> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof adminUnlockStudentProduct>>,
+  TError,
+  { userId: string; data: BodyType<AdminUnlockStudentPayload> },
+  TContext
+> => {
+  const mutationKey = ["adminUnlockStudentProduct"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof adminUnlockStudentProduct>>,
+    { userId: string; data: BodyType<AdminUnlockStudentPayload> }
+  > = (props) => {
+    const { userId, data } = props ?? {};
+
+    return adminUnlockStudentProduct(userId, data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type AdminUnlockStudentProductMutationResult = NonNullable<
+  Awaited<ReturnType<typeof adminUnlockStudentProduct>>
+>;
+export type AdminUnlockStudentProductMutationBody =
+  BodyType<AdminUnlockStudentPayload>;
+export type AdminUnlockStudentProductMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Manually unlock a product for a student
+ */
+export const useAdminUnlockStudentProduct = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof adminUnlockStudentProduct>>,
+    TError,
+    { userId: string; data: BodyType<AdminUnlockStudentPayload> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof adminUnlockStudentProduct>>,
+  TError,
+  { userId: string; data: BodyType<AdminUnlockStudentPayload> },
+  TContext
+> => {
+  return useMutation(getAdminUnlockStudentProductMutationOptions(options));
+};
+
+/**
+ * @summary Reset a student's lesson progress
+ */
+export const getAdminResetStudentProgressUrl = (userId: string) => {
+  return `/api/admin/students/${userId}/reset-progress`;
+};
+
+export const adminResetStudentProgress = async (
+  userId: string,
+  options?: RequestInit,
+): Promise<MutationResult> => {
+  return customFetch<MutationResult>(getAdminResetStudentProgressUrl(userId), {
+    ...options,
+    method: "POST",
+  });
+};
+
+export const getAdminResetStudentProgressMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof adminResetStudentProgress>>,
+    TError,
+    { userId: string },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof adminResetStudentProgress>>,
+  TError,
+  { userId: string },
+  TContext
+> => {
+  const mutationKey = ["adminResetStudentProgress"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof adminResetStudentProgress>>,
+    { userId: string }
+  > = (props) => {
+    const { userId } = props ?? {};
+
+    return adminResetStudentProgress(userId, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type AdminResetStudentProgressMutationResult = NonNullable<
+  Awaited<ReturnType<typeof adminResetStudentProgress>>
+>;
+
+export type AdminResetStudentProgressMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Reset a student's lesson progress
+ */
+export const useAdminResetStudentProgress = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof adminResetStudentProgress>>,
+    TError,
+    { userId: string },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof adminResetStudentProgress>>,
+  TError,
+  { userId: string },
+  TContext
+> => {
+  return useMutation(getAdminResetStudentProgressMutationOptions(options));
+};
+
+/**
+ * @summary Duplicate a lesson into a new day
+ */
+export const getAdminDuplicateLessonUrl = (lessonId: string) => {
+  return `/api/admin/lessons/${lessonId}/duplicate`;
+};
+
+export const adminDuplicateLesson = async (
+  lessonId: string,
+  adminDuplicateLessonPayload: AdminDuplicateLessonPayload,
+  options?: RequestInit,
+): Promise<AdminLesson> => {
+  return customFetch<AdminLesson>(getAdminDuplicateLessonUrl(lessonId), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(adminDuplicateLessonPayload),
+  });
+};
+
+export const getAdminDuplicateLessonMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof adminDuplicateLesson>>,
+    TError,
+    { lessonId: string; data: BodyType<AdminDuplicateLessonPayload> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof adminDuplicateLesson>>,
+  TError,
+  { lessonId: string; data: BodyType<AdminDuplicateLessonPayload> },
+  TContext
+> => {
+  const mutationKey = ["adminDuplicateLesson"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof adminDuplicateLesson>>,
+    { lessonId: string; data: BodyType<AdminDuplicateLessonPayload> }
+  > = (props) => {
+    const { lessonId, data } = props ?? {};
+
+    return adminDuplicateLesson(lessonId, data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type AdminDuplicateLessonMutationResult = NonNullable<
+  Awaited<ReturnType<typeof adminDuplicateLesson>>
+>;
+export type AdminDuplicateLessonMutationBody =
+  BodyType<AdminDuplicateLessonPayload>;
+export type AdminDuplicateLessonMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Duplicate a lesson into a new day
+ */
+export const useAdminDuplicateLesson = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof adminDuplicateLesson>>,
+    TError,
+    { lessonId: string; data: BodyType<AdminDuplicateLessonPayload> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof adminDuplicateLesson>>,
+  TError,
+  { lessonId: string; data: BodyType<AdminDuplicateLessonPayload> },
+  TContext
+> => {
+  return useMutation(getAdminDuplicateLessonMutationOptions(options));
 };
 
 /**
