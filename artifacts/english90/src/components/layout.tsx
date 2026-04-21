@@ -28,7 +28,9 @@ import {
   LogOut,
   ChevronUp,
   User as UserIcon,
-  ShieldCheck
+  ShieldCheck,
+  GraduationCap,
+  ClipboardCheck
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -51,11 +53,6 @@ const mainNavItems = [
     icon: BookOpen,
   },
   {
-    title: "Түвшин тогтоох тест",
-    url: "/placement",
-    icon: Target,
-  },
-  {
     title: "Түүх",
     url: "/history",
     icon: HistoryIcon,
@@ -64,6 +61,32 @@ const mainNavItems = [
     title: "Багц авах",
     url: "/billing",
     icon: CreditCard,
+  },
+];
+
+const placementNavItems = [
+  {
+    title: "Түвшин тогтоох тест",
+    url: "/placement",
+    icon: Target,
+  },
+];
+
+const finalTestNavItems = [
+  {
+    title: "Level 1 шалгалт",
+    url: "/final-tests/1",
+    icon: ClipboardCheck,
+  },
+  {
+    title: "Level 2 шалгалт",
+    url: "/final-tests/2",
+    icon: ClipboardCheck,
+  },
+  {
+    title: "Level 3 шалгалт",
+    url: "/final-tests/3",
+    icon: ClipboardCheck,
   },
 ];
 
@@ -91,6 +114,42 @@ function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {mainNavItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild isActive={location === item.url} tooltip={item.title}>
+                    <Link href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Түвшин тогтоох тест</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {placementNavItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild isActive={location === item.url} tooltip={item.title}>
+                    <Link href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Шалгалт</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {finalTestNavItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild isActive={location === item.url} tooltip={item.title}>
                     <Link href={item.url}>

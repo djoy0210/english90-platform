@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Англи хэлний Түвшин Тест</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Outfit',sans-serif;background:#F8F6F0;min-height:100vh;padding:1.5rem 1rem;}
+.wrap{max-width:660px;margin:0 auto;}
+.hdr{background:linear-gradient(135deg,#0F1E2D,#1A3A5C);border-radius:16px;padding:2rem 1.5rem;text-align:center;color:#fff;margin-bottom:1.5rem;}
+.hdr h1{font-size:1.5rem;font-weight:700;margin-bottom:6px;}
+.hdr span{color:#F2D06A;}
+.hdr p{font-size:0.875rem;opacity:0.72;line-height:1.65;max-width:420px;margin:0 auto;}
+.prog-row{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem;}
+.prog-bar{flex:1;height:8px;background:#E4E4DC;border-radius:4px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#C9A84C,#F2D06A);transition:width .4s;}
+.prog-lbl{font-size:.8rem;color:#9CA3AF;font-weight:500;white-space:nowrap;}
+.card{background:#fff;border:1px solid #E4E4DC;border-radius:14px;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:.875rem;}
+.q-tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:4px;margin-bottom:10px;}
+.a1{background:#DBEAFE;color:#1D4ED8;}.a2{background:#DCFCE7;color:#15803D;}.b1{background:#EDE9FE;color:#6D28D9;}
+.q-text{font-size:1.05rem;font-weight:600;color:#111827;margin-bottom:.5rem;line-height:1.5;}
+.q-mn{font-size:.85rem;color:#6B7280;font-style:italic;margin-bottom:1.1rem;}
+.options{display:flex;flex-direction:column;gap:8px;}
+.opt{display:flex;align-items:center;gap:12px;padding:11px 15px;border:1.5px solid #E4E4DC;border-radius:10px;cursor:pointer;transition:all .18s;background:#fff;}
+.opt:hover{border-color:#C9A84C;background:#FBF3DC;}
+.opt.selected{border-color:#C9A84C;background:#FBF3DC;}
+.opt.correct{border-color:#15803D;background:#DCFCE7;pointer-events:none;}
+.opt.wrong{border-color:#DC2626;background:#FEE2E2;pointer-events:none;}
+.opt.disabled{pointer-events:none;opacity:.7;}
+.opt-letter{width:28px;height:28px;border-radius:50%;border:1.5px solid #D1D5DB;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#6B7280;flex-shrink:0;transition:all .18s;}
+.opt.selected .opt-letter,.opt.correct .opt-letter{background:#C9A84C;border-color:#C9A84C;color:#0F1E2D;}
+.opt.wrong .opt-letter{background:#DC2626;border-color:#DC2626;color:#fff;}
+.opt-txt{font-size:.93rem;color:#1F2937;}
+.opt.correct .opt-txt{color:#15803D;font-weight:600;}
+.opt.wrong .opt-txt{color:#DC2626;}
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:.5rem;}
+.btn-next{padding:11px 28px;background:#0F1E2D;color:#fff;border:none;border-radius:10px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .18s;}
+.btn-next:hover{background:#1A3A5C;}
+.btn-next:disabled{opacity:.35;cursor:not-allowed;}
+.btn-skip{padding:10px 18px;background:transparent;color:#9CA3AF;border:1px solid #E4E4DC;border-radius:10px;font-size:.83rem;cursor:pointer;font-family:'Outfit',sans-serif;}
+.btn-skip:hover{color:#374151;border-color:#9CA3AF;}
+/* start */
+.start{background:#fff;border:1px solid #E4E4DC;border-radius:14px;padding:2.5rem 2rem;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.start h2{font-size:1.4rem;font-weight:700;color:#0F1E2D;margin-bottom:.6rem;}
+.start p{color:#6B7280;font-size:.92rem;line-height:1.75;margin-bottom:1.5rem;max-width:420px;margin-left:auto;margin-right:auto;}
+.stats{display:flex;gap:1rem;justify-content:center;margin-bottom:2rem;flex-wrap:wrap;}
+.stat{background:#F8F6F0;border-radius:10px;padding:.875rem 1.25rem;text-align:center;}
+.stat-n{font-size:1.5rem;font-weight:700;color:#0F1E2D;display:block;}
+.stat-l{font-size:.68rem;color:#9CA3AF;text-transform:uppercase;letter-spacing:.08em;}
+.btn-start{padding:14px 40px;background:#C9A84C;color:#0F1E2D;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .22s;}
+.btn-start:hover{background:#F2D06A;transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,.35);}
+/* divider */
+.divider{text-align:center;margin:.875rem 0;display:flex;align-items:center;gap:10px;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:#E4E4DC;}
+.divider span{font-size:.7rem;font-weight:700;color:#9CA3AF;text-transform:uppercase;letter-spacing:.1em;white-space:nowrap;}
+/* result */
+.result{background:#fff;border:1px solid #E4E4DC;border-radius:14px;padding:2.5rem 2rem;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.1);}
+.lvl-circle{width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:1.7rem;font-weight:700;color:#fff;}
+.lvl-circle.a1-bg{background:linear-gradient(135deg,#1D4ED8,#3B82F6);}
+.lvl-circle.a2-bg{background:linear-gradient(135deg,#15803D,#22C55E);}
+.lvl-circle.b1-bg{background:linear-gradient(135deg,#6D28D9,#A855F7);}
+.result h2{font-size:1.45rem;font-weight:700;color:#0F1E2D;margin-bottom:.3rem;}
+.result .sub{font-size:1rem;color:#6B7280;margin-bottom:1.25rem;}
+.score-row{display:flex;gap:1rem;justify-content:center;margin-bottom:1.5rem;flex-wrap:wrap;}
+.sbox{background:#F8F6F0;border-radius:10px;padding:.75rem 1.25rem;text-align:center;}
+.sn{font-size:1.35rem;font-weight:700;color:#0F1E2D;display:block;}
+.sl{font-size:.68rem;color:#9CA3AF;text-transform:uppercase;letter-spacing:.08em;}
+.desc-box{background:#F8F6F0;border-radius:10px;padding:1.25rem 1.5rem;margin-bottom:1.5rem;text-align:left;}
+.desc-box h3{font-size:.9rem;font-weight:700;color:#0F1E2D;margin-bottom:6px;}
+.desc-box p{font-size:.875rem;color:#4B5563;line-height:1.72;}
+.rec{margin-top:10px;padding:10px 14px;border-radius:8px;font-size:.83rem;font-weight:600;}
+.rec.a1{background:#DBEAFE;color:#1D4ED8;}
+.rec.a2{background:#DCFCE7;color:#15803D;}
+.rec.b1{background:#EDE9FE;color:#6D28D9;}
+.result-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.btn-restart{padding:11px 24px;background:transparent;color:#6B7280;border:1px solid #E4E4DC;border-radius:10px;font-size:.875rem;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;}
+.btn-restart:hover{border-color:#0F1E2D;color:#0F1E2D;}
+.btn-go{padding:11px 28px;background:#C9A84C;color:#0F1E2D;border:none;border-radius:10px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;}
+.btn-go:hover{background:#F2D06A;}
+.correct-feedback{margin-top:8px;padding:8px 12px;border-radius:8px;font-size:.83rem;font-weight:500;display:none;}
+.correct-feedback.show-green{background:#DCFCE7;color:#15803D;display:block;}
+.correct-feedback.show-red{background:#FEE2E2;color:#DC2626;display:block;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <h1>🎯 Англи хэлний <span>Түвшин Тест</span></h1>
+    <p>Таны одоогийн мэдлэгийг тодорхойлж хамгийн тохиромжтой хичээлд хөтөлнө</p>
+  </div>
+
+  <div id="start-screen">
+    <div class="start">
+      <h2>Тавтай морил! 👋</h2>
+      <p>Энэхүү тест 30 асуулттай. Эхний асуултууд маш хялбар — ажөөрийн аажмаар хэцүүрнэ. Тайвширч, чадах чинээгээрээ хариулаарай!</p>
+      <div class="stats">
+        <div class="stat"><span class="stat-n">30</span><span class="stat-l">Асуулт</span></div>
+        <div class="stat"><span class="stat-n">~5</span><span class="stat-l">Минут</span></div>
+        <div class="stat"><span class="stat-n">3</span><span class="stat-l">Түвшин</span></div>
+      </div>
+      <button class="btn-start" onclick="startTest()">Тест эхлүүлэх →</button>
+    </div>
+  </div>
+
+  <div id="test-area" style="display:none;">
+    <div class="prog-row">
+      <div class="prog-bar"><div class="prog-fill" id="prog" style="width:3%"></div></div>
+      <span class="prog-lbl" id="prog-lbl">1 / 30</span>
+    </div>
+    <div id="q-area"></div>
+  </div>
+
+  <div id="result-screen" style="display:none;"></div>
+</div>
+
+<script>
+const Q=[
+  // A1 VERY EASY (1-10)
+  {tag:'a1',q:'"Сайн байна уу" гэдгийг англиар юу гэдэг вэ?',mn:'',o:['Goodbye','Thank you','Hello','Sorry'],a:2},
+  {tag:'a1',q:'Намайг Бат гэдэг. Англиар хэрхэн хэлэх вэ?',mn:'',o:['My name Bat.','I am name Bat.','My name is Bat.','Name me is Bat.'],a:2},
+  {tag:'a1',q:'She ___ a student.',mn:'Тэр сурагч юм.',o:['am','is','are','be'],a:1},
+  {tag:'a1',q:'1, 2, 3, 4, ___ , 6',mn:'Тав гэдэг тоог олоорой.',o:['four','six','five','seven'],a:2},
+  {tag:'a1',q:'I ___ from Mongolia.',mn:'Би Монголоос.',o:['is','are','am','be'],a:2},
+  {tag:'a1',q:'"Ном" гэдэг үгийг англиар юу гэдэг вэ?',mn:'',o:['pen','book','chair','table'],a:1},
+  {tag:'a1',q:'They ___ my friends.',mn:'Тэд миний найзууд.',o:['is','am','be','are'],a:3},
+  {tag:'a1',q:'"Баяртай" гэдгийг англиар юу гэдэг вэ?',mn:'',o:['Hello','Please','Goodbye','Sorry'],a:2},
+  {tag:'a1',q:'This is ___ pen. (Энэ миний үзэг.)',mn:'',o:['I','me','my','mine pen'],a:2},
+  {tag:'a1',q:'Monday, Tuesday, ___ , Thursday',mn:'Долоо хоногийн дараалал.',o:['Friday','Sunday','Wednesday','Saturday'],a:2},
+  // A1 MEDIUM (11-18)
+  {tag:'a1',q:'She ___ English every day.',mn:'Тэр өдөр бүр англи хэл сурдаг.',o:['study','studying','studies','studied'],a:2},
+  {tag:'a1',q:'___ you speak English?  — Yes, a little.',mn:'',o:['Are','Is','Can','Have'],a:2},
+  {tag:'a1',q:'There ___ a cat on the sofa.',mn:'Диванд муур сууж байна.',o:['am','are','is','be'],a:2},
+  {tag:'a1',q:'Yesterday I ___ to the market.',mn:'Өчигдөр би зах руу явсан.',o:['go','goes','going','went'],a:3},
+  {tag:'a1',q:'Look! It ___ raining outside.',mn:'Гадаа бороо орж байна!',o:['rains','rained','rain','is raining'],a:3},
+  {tag:'a1',q:'How ___ students are in your class?',mn:'Таны ангид хэдэн сурагч байдаг вэ?',o:['much','many','more','most'],a:1},
+  {tag:'a1',q:'She ___ not like coffee. She prefers tea.',mn:'Тэр кофе дургүй.',o:['is','am','does','do'],a:2},
+  {tag:'a1',q:'I am going ___ study English tomorrow.',mn:'Би маргааш англи хэл сурна.',o:['on','at','to','for'],a:2},
+  // A2 (19-24)
+  {tag:'a2',q:'I ___ never been to Japan.',mn:'Би Японд хэзээ ч очиж байгаагүй.',o:['did','was','have','had'],a:2},
+  {tag:'a2',q:'She has lived here ___ she was born.',mn:'Тэр төрсөн цагаасаа хойш энд амьдарч байна.',o:['for','ago','since','from'],a:2},
+  {tag:'a2',q:'If it rains tomorrow, I ___ stay at home.',mn:'Хэрэв маргааш бороо орвол, гэртээ байна.',o:['would','will','can','should'],a:1},
+  {tag:'a2',q:'English ___ all over the world.',mn:'Англи хэлийг дэлхий даяар ярьдаг.',o:['speak','speaks','is spoken','are speaking'],a:2},
+  {tag:'a2',q:'The Eiffel Tower ___ in 1889.',mn:'Эйффелийн цамхаг 1889 онд баригдсан.',o:['build','is built','was built','has built'],a:2},
+  {tag:'a2',q:'She said that she ___ tired.',mn:'Тэр ядарсан гэж хэлсэн.',o:['is','was','were','will be'],a:1},
+  // B1 (25-30)
+  {tag:'b1',q:'I was reading when suddenly the lights ___ out.',mn:'Би уншиж байтал гэнэт гэрэл унтарлаа.',o:['were going','have gone','went','go'],a:2},
+  {tag:'b1',q:'If I ___ studied harder, I would have passed.',mn:'Хэрэв илүү хичээнгүйлэн суралцсан бол тэнцэх байсан.',o:['would have','had','have','was'],a:1},
+  {tag:'b1',q:'She ___ be exhausted — she has been running since 5 AM!',mn:'Тэр ядарсан байх ёстой!',o:["can't",'might not','must','should not'],a:2},
+  {tag:'b1',q:'Could you tell me where the nearest bank ___?',mn:'Ойрын банк хаана байгааг хэлж чадах уу?',o:['is','was','it is','there is'],a:2},
+  {tag:'b1',q:'I enjoy ___ English podcasts every morning.',mn:'Тэр өглөө бүр англи хэлний подкаст сонсохыг таашаадаг.',o:['to listen','listen','listened','listening'],a:3},
+  {tag:'b1',q:'By next year, I ___ have completed B1 English!',mn:'Ирэх жил болоход би B1 дуусгасан байх болно!',o:['would','will','am going to','should'],a:1}
+];
+
+const LETTERS=['A','B','C','D'];
+let cur=0,ans=[],answered=false;
+
+function startTest(){
+  cur=0;ans=[];answered=false;
+  document.getElementById('start-screen').style.display='none';
+  document.getElementById('test-area').style.display='block';
+  renderQ();
+}
+
+function renderQ(){
+  answered=ans[cur]!==undefined;
+  const q=Q[cur],total=Q.length;
+  const pct=Math.round((cur+1)/total*100);
+  document.getElementById('prog').style.width=pct+'%';
+  document.getElementById('prog-lbl').textContent=(cur+1)+' / '+total;
+
+  let divider='';
+  if(cur===0) divider='<div class="divider"><span>A1 — Эхлэгч (маш хялбар)</span></div>';
+  else if(cur===10) divider='<div class="divider"><span>A1 — Дунд</span></div>';
+  else if(cur===18) divider='<div class="divider"><span>A2 — Суурь</span></div>';
+  else if(cur===24) divider='<div class="divider"><span>B1 — Дунд шат</span></div>';
+
+  const tagLabel=q.tag==='a1'?'A1 — Эхлэгч':q.tag==='a2'?'A2 — Суурь':'B1 — Дунд шат';
+
+  let feedback='';
+  if(answered){
+    const correct=ans[cur]===q.a;
+    feedback=`<div class="correct-feedback ${correct?'show-green':'show-red'}">${correct?'✅ Зөв хариулт!':'❌ Буруу. Зөв хариулт: '+LETTERS[q.a]+'. '+q.o[q.a]}</div>`;
+  }
+
+  document.getElementById('q-area').innerHTML=`
+    ${divider}
+    <div class="card">
+      <div class="q-tag ${q.tag}">${tagLabel}</div>
+      <div class="q-text">${q.q}</div>
+      ${q.mn?'<div class="q-mn">📌 '+q.mn+'</div>':''}
+      <div class="options">
+        ${q.o.map((o,i)=>{
+          let cls='opt';
+          if(answered){
+            if(i===q.a) cls+=' correct';
+            else if(i===ans[cur]&&i!==q.a) cls+=' wrong';
+            else cls+=' disabled';
+          }
+          return `<div class="${cls}" id="o${i}" onclick="pick(${i})">
+            <div class="opt-letter">${LETTERS[i]}</div>
+            <span class="opt-txt">${o}</span>
+          </div>`;
+        }).join('')}
+      </div>
+      ${feedback}
+    </div>
+    <div class="nav-row">
+      <button class="btn-skip" onclick="skip()" ${cur===total-1?'style="visibility:hidden"':''}>Алгасах</button>
+      <button class="btn-next" id="nb" onclick="next()" ${!answered?'disabled':''}>
+        ${cur===total-1?'📊 Дүн харах':'Дараагийн →'}
+      </button>
+    </div>
+  `;
+}
+
+function pick(i){
+  if(ans[cur]!==undefined) return;
+  ans[cur]=i;
+  answered=true;
+  renderQ();
+}
+
+function skip(){
+  if(ans[cur]===undefined) ans[cur]=-1;
+  next();
+}
+
+function next(){
+  if(cur<Q.length-1){cur++;answered=ans[cur]!==undefined;renderQ();window.scrollTo({top:0,behavior:'smooth'});}
+  else showResult();
+}
+
+function showResult(){
+  document.getElementById('test-area').style.display='none';
+  const rs=document.getElementById('result-screen');
+  rs.style.display='block';
+
+  let correct=0,a1c=0,a2c=0,b1c=0;
+  Q.forEach((q,i)=>{
+    if(ans[i]===q.a){correct++;
+      if(q.tag==='a1')a1c++;
+      else if(q.tag==='a2')a2c++;
+      else b1c++;
+    }
+  });
+
+  const pct=Math.round(correct/Q.length*100);
+  let level,lvlMN,title,sub,dTitle,dBody,rec,recCls,circCls;
+
+  if(b1c>=4||(a2c>=5&&b1c>=2)){
+    level='B1';lvlMN='Дунд шат';circCls='b1-bg';
+    title='Таны түвшин: B1 — Дунд шат 🎓';sub='Дэвшилтэт суралцагч';
+    dTitle='Гайхалтай үр дүн!';
+    dBody='Та өнгөрсөн цаг, нөхцөлт өгүүлбэр, modal үйл үг зэрэг дэвшилтэт дүрмүүдийг мэднэ. Ном 3 (B1) таны хамгийн тохиромжтой эхлэх цэг.';
+    rec='📚 Ном 3 (B1) — Дэвшилтэт шатыг эхлүүлэхийг зөвлөж байна';recCls='b1';
+  } else if(a2c>=3||(a1c>=14&&a2c>=1)){
+    level='A2';lvlMN='Суурь';circCls='a2-bg';
+    title='Таны түвшин: A2 — Суурь 📗';sub='Суурь мэдлэгтэй';
+    dTitle='Сайн үр дүн!';
+    dBody='Та Present Perfect, нөхцөлт өгүүлбэр, идэвхгүй хэлбэр зэрэг зүйлсийг сурвал хурдан дэвших боломжтой. Ном 2 (A2) таны хамгийн тохиромжтой.';
+    rec='📚 Ном 2 (A2) — Суурь шатыг эхлүүлэхийг зөвлөж байна';recCls='a2';
+  } else {
+    level='A1';lvlMN='Эхлэгч';circCls='a1-bg';
+    title='Таны түвшин: A1 — Эхлэгч 📘';sub='Шинээр эхлэгч';
+    dTitle='Таны аялал эндээс эхэлнэ!';
+    dBody='Та англи хэлний суурийг тавих болно. Ном 1 (A1) таны хамгийн тохиромжтой эхлэх цэг. 30 хоногт та 600+ үг, үндсэн дүрэм, ярианы чадварыг эзэмшинэ.';
+    rec='📚 Ном 1 (A1) — Эхлэгч шатыг эхлүүлэхийг зөвлөж байна';recCls='a1';
+  }
+
+  rs.innerHTML=`
+    <div class="result">
+      <div class="lvl-circle ${circCls}">${level}</div>
+      <h2>${title}</h2>
+      <div class="sub">${sub}</div>
+      <div class="score-row">
+        <div class="sbox"><span class="sn">${correct}/30</span><span class="sl">Зөв хариулт</span></div>
+        <div class="sbox"><span class="sn">${pct}%</span><span class="sl">Оноо</span></div>
+        <div class="sbox"><span class="sn">${level}</span><span class="sl">Таны түвшин</span></div>
+      </div>
+      <div class="desc-box">
+        <h3>${dTitle}</h3>
+        <p>${dBody}</p>
+        <div class="rec ${recCls}">${rec}</div>
+      </div>
+      <div class="result-btns">
+        <button class="btn-restart" onclick="location.reload()">🔄 Дахин өгөх</button>
+        <button class="btn-go">${level} хичээлийг эхлүүлэх →</button>
+      </div>
+    </div>
+  `;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
