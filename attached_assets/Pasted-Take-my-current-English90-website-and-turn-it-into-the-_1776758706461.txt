@@ -1,0 +1,497 @@
+Take my current English90 website and turn it into the exact launch-ready platform we planned.
+
+IMPORTANT:
+Do NOT rebuild the whole site from zero unless absolutely necessary.
+Use the current website as the base.
+Keep the current design direction, sidebar layout, and overall visual identity if possible.
+Improve the structure, logic, admin features, payment flow, and launch readiness.
+
+My launch goal:
+- free placement test
+- 1 free lesson to try
+- paid Level 1 with 30 lessons
+- lesson quizzes
+- Level 1 final test
+- student dashboard
+- real admin control
+- payment submission and approval
+- launch-ready trust and conversion flow
+
+This must become a real product I can sell.
+
+==================================================
+1. FIX CURRENT LOGIC PROBLEMS
+==================================================
+
+Audit and fix the current logic issues in the website.
+
+Problems visible now:
+- dashboard progression is confusing
+- current level / next lesson logic appears inconsistent
+- free vs paid lesson access is unclear
+- premium flow is not clean enough
+- QPay area exists but is not launch-ready
+- admin panel is too limited
+
+Fix these rules:
+- beginner user should start at placement test or free lesson
+- if user has not paid, only free content should be accessible
+- free placement test should recommend a starting level
+- free lesson should always be clearly available
+- Level 1 paid purchase should unlock Days 1–30 only
+- Level 2 and Level 3 should stay visually present but not be the main focus for launch
+- next lesson logic must always match actual unlocked progress
+- current level display must reflect real progress, not random placeholder data
+
+==================================================
+2. MAKE THE WEBSITE MATCH MY LAUNCH MODEL
+==================================================
+
+My launch model is:
+
+- Placement test = free
+- 1 lesson = free trial
+- Level 1 = main paid offer
+- Level 1 contains 30 lessons
+- Level 1 final test included
+- Levels 2 and 3 can stay as future structure, but launch focus is Level 1
+
+Make this flow extremely clear throughout the site.
+
+Public CTA flow:
+1. Take free placement test
+2. Try free lesson
+3. Buy Level 1
+4. Study 30 lessons
+5. Take final test
+6. Continue later to Level 2 and 3
+
+==================================================
+3. FULL ADMIN PANEL (MOST IMPORTANT)
+==================================================
+
+The current admin panel is not enough.
+Build a full secure admin dashboard with real control over the business.
+
+Admin must be able to fully manage:
+
+A. Students
+- view all students
+- search students
+- open student detail page
+- see:
+  - full name
+  - email
+  - username
+  - registration date
+  - progress
+  - completed lessons
+  - unlocked lessons
+  - payment history
+  - placement test result
+  - final test result
+  - quiz history
+- manually unlock:
+  - one lesson
+  - Level 1
+  - all access
+- manually reset student progress if needed
+- manually approve or reject access if needed
+
+B. Lessons
+- view all lessons
+- create lesson
+- edit lesson
+- delete lesson
+- reorder lessons
+- mark lesson as free or premium
+- assign lesson to level
+- upload optional lesson PDF
+- duplicate lesson
+- preview lesson
+
+C. Lesson content editing
+For each lesson I need full editing of:
+- day number
+- level number
+- English title
+- Mongolian title
+- duration
+- vocabulary rows
+- pronunciation
+- Mongolian meaning
+- example sentence
+- grammar topic
+- grammar explanation
+- grammar table
+- quick practice
+- common mistakes
+- answer key
+- reading passage
+- key phrases
+- translation
+- speaking questions
+- role play
+- speaking tip
+- listening script
+- listening questions
+- grammar practice
+- matching exercise
+- homework
+- completion summary
+- next lesson preview
+
+D. Quizzes
+- create lesson quiz
+- edit lesson quiz
+- delete lesson quiz
+- view attempts
+- set passing score
+- connect quiz to lesson
+
+E. Placement test
+- create/edit placement test
+- manage questions
+- set scoring logic
+- set recommendation outcome
+- view attempts
+
+F. Final test
+- create/edit Level 1 final test
+- manage questions
+- set pass score
+- view attempts
+
+G. Payments
+- view all payment requests
+- open screenshot/payment proof
+- approve payment
+- reject payment
+- add admin note
+- payment approval should automatically unlock correct content
+
+H. Content/settings
+- edit homepage text if possible
+- edit pricing if possible
+- edit founder/about text if possible
+- manage support/contact info
+
+Create real admin pages:
+- Admin Overview
+- Students
+- Student Detail
+- Lessons
+- Lesson Editor
+- Quizzes
+- Placement Test
+- Final Test
+- Payments
+- Content Settings
+
+==================================================
+4. LEVEL 1 LESSON SYSTEM
+==================================================
+
+For launch, Level 1 is the most important product.
+
+Requirements:
+- Level 1 must contain exactly 30 lessons
+- all 30 lessons should be visible in the structure
+- lesson statuses must be correct:
+  - Free
+  - Locked
+  - Unlocked
+  - Completed
+  - In Progress
+
+Build a reusable lesson editor so I can quickly add all 30 lessons.
+
+Each lesson page must be structured and premium-looking, using real website sections, not only PDF embedding.
+
+Lesson sections:
+- Vocabulary & Grammar
+- Reading & Speaking
+- Listening & Practice
+- Homework & Answers
+
+Allow optional PDF attachment per lesson with:
+- View PDF
+- Download PDF
+
+Add all 30 Level 1 lesson placeholders or starter entries so I can finish content entry quickly.
+
+==================================================
+5. FREE LESSON
+==================================================
+
+Choose one lesson as the Free Trial Lesson.
+
+Requirements:
+- clearly mark it as free
+- allow public access
+- include the full lesson layout
+- include its lesson quiz
+- add strong CTA below it:
+  - Unlock all 30 Level 1 lessons
+  - Buy Level 1 now
+
+The free lesson should feel premium enough to convert people.
+
+==================================================
+6. FREE PLACEMENT TEST
+==================================================
+
+The placement test page already exists, but improve it professionally.
+
+Requirements:
+- clean and trustworthy design
+- better spacing and readability
+- automatic result calculation
+- clear result explanation
+- recommend where user should start
+- if logged in, save result to account
+- after result, show CTA:
+  - Try free lesson
+  - Buy Level 1
+
+Also create admin editing tools for placement test questions and scoring.
+
+==================================================
+7. LEVEL 1 FINAL TEST
+==================================================
+
+Add a real final test for Level 1.
+
+Requirements:
+- available only to users with Level 1 access
+- visible in dashboard
+- clearly marked as final test
+- save score
+- track pass/fail
+- show result summary
+- admin can edit questions and pass score
+
+==================================================
+8. STUDENT DASHBOARD
+==================================================
+
+Improve the dashboard so it feels correct, useful, and premium.
+
+Fix all inconsistent logic.
+
+Dashboard must show:
+- welcome message
+- placement test result
+- free lesson CTA if user has not started
+- current progress in Level 1
+- completed lessons count
+- unlocked lessons count
+- locked lessons count
+- average score
+- latest score
+- best score
+- final test status
+- payment status
+- purchased package
+- correct next lesson button
+
+Dashboard sections:
+- My Progress
+- My Lessons
+- Placement Test
+- Final Test
+- My Quiz Results
+- My Payments
+- Profile Settings
+
+The dashboard should never show confusing progression like:
+- Level 2 while user only completed 1 lesson
+- next lesson as Day 31 for a beginner user
+- inconsistent completion metrics
+
+==================================================
+9. PAYMENT FLOW
+==================================================
+
+For launch, use the simple Mongolia-friendly payment system first.
+
+Keep current flow:
+- user selects product
+- user sees payment instructions
+- user uploads proof or submits payment
+- admin reviews
+- admin approves/rejects
+- system unlocks content automatically after approval
+
+IMPORTANT:
+The QPay section currently exists but shows credentials warning.
+Do NOT present fake live QPay to customers.
+
+Make payment system launch-safe:
+- if QPay is not configured, hide live payment claims
+- show honest “manual review” or “coming soon” logic where needed
+- avoid anything that breaks trust
+
+Products:
+- Single lesson = 4,900 MNT
+- Level 1 = 29,000 MNT
+- Full course = 79,000 MNT
+
+For launch, visually emphasize:
+- Free placement test
+- Free lesson
+- Level 1 = main paid offer
+
+Payment page must include:
+- product selected
+- amount
+- payment instructions
+- transaction reference field
+- screenshot upload if needed
+- status:
+  - Pending
+  - Approved
+  - Rejected
+
+Keep backend code structure ready for future QPay integration:
+- environment variables
+- service files
+- invoice placeholder
+- callback placeholder
+- TODO comments
+
+==================================================
+10. HOMEPAGE / SALES FLOW
+==================================================
+
+Improve the public site so it can actually sell.
+
+Homepage must clearly explain:
+- what the course is
+- who it is for
+- why it works
+- what students get
+- free placement test
+- free trial lesson
+- paid Level 1 with 30 lessons
+- final test
+- how to buy
+- how to start
+
+Homepage sections:
+- strong premium hero
+- clear headline and subheadline
+- CTA buttons:
+  - Take Free Placement Test
+  - Try Free Lesson
+  - Buy Level 1
+- course benefits
+- how it works
+- lesson structure overview
+- Level 1 overview
+- founder story / why I built this
+- testimonials placeholder
+- pricing section
+- support/contact section
+
+The homepage should feel more trustworthy and more conversion-focused.
+
+==================================================
+11. DESIGN POLISH
+==================================================
+
+Keep the current visual identity but improve quality.
+
+Improve:
+- spacing
+- typography
+- card design
+- alignment
+- consistency
+- mobile responsiveness
+- button hierarchy
+- lesson readability
+- premium feel
+- dashboard polish
+- payment page polish
+- admin usability
+
+The result should feel like a real paid learning platform, not a prototype.
+
+==================================================
+12. DATABASE / SYSTEM STRUCTURE
+==================================================
+
+Make sure data architecture supports:
+- users
+- roles
+- lessons
+- lesson content sections
+- vocabulary items
+- quizzes
+- quiz questions
+- quiz attempts
+- placement tests
+- placement test attempts
+- final tests
+- final test attempts
+- progress
+- payments
+- unlocked content
+- uploaded files
+- admin notes
+
+Keep everything organized and scalable.
+
+==================================================
+13. CONTENT ENTRY SPEED
+==================================================
+
+I still need to add all 30 full lessons.
+
+Make content entry easy:
+- duplicate lesson feature
+- structured lesson editor
+- dynamic vocabulary rows
+- dynamic question rows
+- optional PDF upload
+- lesson preview
+- easy save/update flow
+
+This must save me time when adding all 30 lessons.
+
+==================================================
+14. CLEANUP / TRUST
+==================================================
+
+Remove or fix anything that makes the site feel unfinished or fake.
+
+Examples:
+- broken logic
+- unfinished premium claims
+- confusing progression
+- empty states without guidance
+- misleading payment text if QPay is not live
+- inconsistent lesson labels
+- confusing English/Mongolian wording
+
+Make the site trustworthy enough for real customers.
+
+==================================================
+15. FINAL OUTPUT
+==================================================
+
+After finishing, explain:
+1. what was fixed
+2. what admin can now control
+3. how to add all 30 lessons fast
+4. how placement test works
+5. how final test works
+6. how payment approval works
+7. how unlocking works
+8. what is ready for launch
+9. what still needs content entry
+10. how to safely launch to real users
+
+Start now using the existing website as the base.
+Preserve good parts, fix weak parts, and make it launch-ready.
