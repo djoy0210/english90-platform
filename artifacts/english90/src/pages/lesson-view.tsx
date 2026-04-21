@@ -11,6 +11,7 @@ import { ArrowLeft, BookOpen, CheckCircle2, AlertCircle, PlayCircle, Lock, Volum
 import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { AudioPlayer } from "../components/AudioPlayer";
+import { FillInBlanks, MatchingGame, ListeningMcq } from "../components/LessonExercises";
 
 export default function LessonView() {
   const { lessonId } = useParams<{ lessonId: string }>();
@@ -277,18 +278,17 @@ export default function LessonView() {
                   </table>
                 </div>
               )}
-              <div className="grid gap-4 md:grid-cols-3">
+              <div className="grid gap-4 md:grid-cols-2">
+                {Array.isArray(page1.quickPractice) && page1.quickPractice.length > 0 && (
+                  <FillInBlanks
+                    title="Quick Practice · Дасгал"
+                    items={page1.quickPractice}
+                    answerKey={page1.answerKey}
+                  />
+                )}
                 <div className="rounded-lg border p-4">
-                  <h3 className="font-semibold mb-3">Quick Practice</h3>
-                  <ul className="space-y-2 text-sm list-disc pl-5">{(page1.quickPractice || []).map((item: string, idx: number) => <li key={idx}>{item}</li>)}</ul>
-                </div>
-                <div className="rounded-lg border p-4">
-                  <h3 className="font-semibold mb-3">Common Mistakes</h3>
+                  <h3 className="font-semibold mb-3">Common Mistakes · Алдаа</h3>
                   <ul className="space-y-2 text-sm list-disc pl-5">{(page1.commonMistakes || []).map((item: string, idx: number) => <li key={idx}>{item}</li>)}</ul>
-                </div>
-                <div className="rounded-lg border p-4 bg-primary/5">
-                  <h3 className="font-semibold mb-3">Answer Key</h3>
-                  <ul className="space-y-2 text-sm list-disc pl-5">{(page1.answerKey || []).map((item: string, idx: number) => <li key={idx}>{item}</li>)}</ul>
                 </div>
               </div>
             </CardContent>
@@ -342,41 +342,37 @@ export default function LessonView() {
                 )}
               </div>
               {Array.isArray(page3.listeningQuestions) && page3.listeningQuestions.length > 0 && (
-                <div className="rounded-lg border p-4">
-                  <h3 className="font-semibold mb-3">Listening Questions</h3>
-                  <ol className="space-y-2 list-decimal pl-5 text-sm">
-                    {page3.listeningQuestions.map((q: any, idx: number) => (
-                      <li key={idx}>
-                        <p>{typeof q === "string" ? q : q.question || q.prompt}</p>
-                        {typeof q !== "string" && q.answer && <p className="text-muted-foreground italic">→ {q.answer}</p>}
-                      </li>
-                    ))}
-                  </ol>
-                </div>
+                <ListeningMcq
+                  title="Listening Questions · Сонссон зүйлээ шалгах"
+                  questions={page3.listeningQuestions
+                    .filter((q: any) => q && typeof q !== "string" && Array.isArray(q.options))
+                    .map((q: any) => ({ question: q.question || q.prompt || "", options: q.options, answer: q.answer || "" }))}
+                />
               )}
               <div className="grid gap-4 md:grid-cols-2">
-                <div className="rounded-lg border p-4">
-                  <h3 className="font-semibold mb-3">Grammar Practice</h3>
-                  <ol className="space-y-2 list-decimal pl-5">{(page3.grammarPractice || []).map((item: string, idx: number) => <li key={idx}>{item}</li>)}</ol>
-                </div>
-                <div className="rounded-lg border p-4">
-                  <h3 className="font-semibold mb-3">Matching Exercise</h3>
-                  <div className="space-y-2">{(page3.matchingExercise || []).map((item: any, idx: number) => <div key={idx} className="flex justify-between gap-4 text-sm"><span>{item.left}</span><span className="font-medium">{item.right}</span></div>)}</div>
-                </div>
+                {Array.isArray(page3.grammarPractice) && page3.grammarPractice.length > 0 && (
+                  <FillInBlanks
+                    title="Grammar Practice · Дүрмийн дасгал"
+                    items={page3.grammarPractice}
+                    answerKey={page3.answerKey}
+                  />
+                )}
+                {Array.isArray(page3.matchingExercise) && page3.matchingExercise.length > 0 && (
+                  <MatchingGame
+                    title="Matching · Тохируулах"
+                    pairs={page3.matchingExercise}
+                  />
+                )}
               </div>
-              <div className="grid gap-4 md:grid-cols-3">
+              <div className="grid gap-4 md:grid-cols-2">
                 <div className="rounded-lg border p-4">
-                  <h3 className="font-semibold mb-3">Homework</h3>
+                  <h3 className="font-semibold mb-3">Homework · Гэрийн даалгавар</h3>
                   <ul className="space-y-2 list-disc pl-5 text-sm">{(page3.homework || []).map((item: string, idx: number) => <li key={idx}>{item}</li>)}</ul>
                 </div>
-                <div className="rounded-lg border p-4 bg-primary/5">
-                  <h3 className="font-semibold mb-3">Answer Key</h3>
-                  <ul className="space-y-2 list-disc pl-5 text-sm">{(page3.answerKey || []).map((item: string, idx: number) => <li key={idx}>{item}</li>)}</ul>
-                </div>
                 <div className="rounded-lg border p-4">
-                  <h3 className="font-semibold mb-3">Lesson Complete</h3>
+                  <h3 className="font-semibold mb-3">Lesson Complete · Хичээл дууслаа</h3>
                   <ul className="space-y-2 text-sm">{(page3.completionSummary || []).map((item: string, idx: number) => <li key={idx} className="flex gap-2"><CheckCircle2 className="w-4 h-4 text-primary shrink-0" />{item}</li>)}</ul>
-                  <p className="text-sm text-primary mt-4 font-semibold">{page3.nextLessonPreview}</p>
+                  {page3.nextLessonPreview && <p className="text-sm text-primary mt-4 font-semibold">{page3.nextLessonPreview}</p>}
                 </div>
               </div>
             </CardContent>
