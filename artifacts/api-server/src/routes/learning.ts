@@ -507,14 +507,32 @@ function toLessonDetail(lesson: Lesson, user: User, progress?: { completed: bool
 }
 
 const DEFAULT_PASSING_SCORE = 80;
+function normalizeAnswer(s: string) {
+  return String(s ?? "")
+    .toLowerCase()
+    .replace(/[\u2018\u2019\u201B]/g, "'")
+    .replace(/[\u201C\u201D]/g, '"')
+    .replace(/\s+/g, " ")
+    .trim();
+}
 function grade(
   questions: StoredQuizQuestion[],
   answers: { questionId: string; answer: string }[],
   passingScore: number = DEFAULT_PASSING_SCORE,
 ) {
   const answerMap = new Map(answers.map((answer) => [answer.questionId, answer.answer]));
-  const correctAnswers = questions.map((question) => {
-    const isCorrect = answerMap.get(question.id) === question.correctAnswer;
+  const correctAnswers = questions.map((question: any) => {
+    const userAns = answerMap.get(question.id) ?? "";
+    let isCorrect = false;
+    if (question.type === "fill") {
+      const accepted: string[] = Array.isArray(question.acceptedAnswers) && question.acceptedAnswers.length > 0
+        ? question.acceptedAnswers
+        : [question.correctAnswer];
+      const u = normalizeAnswer(userAns);
+      isCorrect = !!u && accepted.some((a: string) => normalizeAnswer(a) === u);
+    } else {
+      isCorrect = normalizeAnswer(userAns) === normalizeAnswer(question.correctAnswer);
+    }
     return { questionId: question.id, correctAnswer: question.correctAnswer, isCorrect };
   });
   const score = correctAnswers.filter((answer) => answer.isCorrect).length;

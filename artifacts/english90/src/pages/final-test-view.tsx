@@ -195,32 +195,63 @@ export default function FinalTestView() {
         <div className="space-y-8">
           <Card>
             <CardContent className="p-6 sm:p-8">
-              <div className="space-y-12">
-                {test.questions.map((question, idx) => (
-                  <div key={question.id} className="space-y-5">
-                    <div>
-                      <h3 className="text-lg font-medium leading-relaxed">
-                        <span className="text-primary mr-2 font-bold">{idx + 1}.</span> 
-                        {question.promptMn}
-                      </h3>
-                      <p className="text-muted-foreground ml-6 mt-1">{question.promptEn}</p>
-                    </div>
-                    <RadioGroup 
-                      value={answers[question.id] || ""} 
-                      onValueChange={(val) => handleAnswerChange(question.id, val)}
-                      className="ml-6 space-y-4"
-                    >
-                      {question.options.map((option, optIdx) => (
-                        <div key={optIdx} className="flex items-center space-x-3">
-                          <RadioGroupItem value={option} id={`${question.id}-opt-${optIdx}`} className="h-5 w-5" />
-                          <Label htmlFor={`${question.id}-opt-${optIdx}`} className="text-base font-normal cursor-pointer leading-tight">
-                            {option}
-                          </Label>
+              <div className="space-y-10">
+                {test.questions.map((question: any, idx: number) => {
+                  const isFill = question.type === "fill" || (Array.isArray(question.options) && question.options.length === 0);
+                  return (
+                    <div key={question.id} className="space-y-5">
+                      {question.sectionTitle && (
+                        <div className="border-l-4 border-primary bg-muted/40 px-4 py-3 rounded-r-md">
+                          <h2 className="font-semibold text-base">{question.sectionTitle}</h2>
+                          {question.sectionIntro && (
+                            <p className="text-sm text-muted-foreground mt-1">{question.sectionIntro}</p>
+                          )}
                         </div>
-                      ))}
-                    </RadioGroup>
-                  </div>
-                ))}
+                      )}
+                      {question.passage && (
+                        <div className="rounded-lg border-l-4 border-primary bg-muted/30 px-5 py-4">
+                          <p className="text-xs font-semibold text-muted-foreground mb-2 uppercase tracking-wide">
+                            Reading passage · Текстийг анхааралтай уншаарай
+                          </p>
+                          <p className="text-sm leading-7 whitespace-pre-line">{question.passage}</p>
+                        </div>
+                      )}
+                      <div>
+                        <h3 className="text-lg font-medium leading-relaxed">
+                          <span className="text-primary mr-2 font-bold">{idx + 1}.</span>
+                          {question.promptEn}
+                        </h3>
+                      </div>
+                      {isFill ? (
+                        <div className="ml-6">
+                          <input
+                            type="text"
+                            value={answers[question.id] || ""}
+                            onChange={(e) => handleAnswerChange(question.id, e.target.value)}
+                            placeholder="Хариултаа бичээрэй..."
+                            className="w-full max-w-md rounded-md border border-input bg-background px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary"
+                          />
+                        </div>
+                      ) : (
+                        <RadioGroup
+                          value={answers[question.id] || ""}
+                          onValueChange={(val) => handleAnswerChange(question.id, val)}
+                          className="ml-6 space-y-4"
+                        >
+                          {question.options.map((option: string, optIdx: number) => (
+                            <div key={optIdx} className="flex items-center space-x-3">
+                              <RadioGroupItem value={option} id={`${question.id}-opt-${optIdx}`} className="h-5 w-5" />
+                              <Label htmlFor={`${question.id}-opt-${optIdx}`} className="text-base font-normal cursor-pointer leading-tight">
+                                <span className="font-mono text-xs text-muted-foreground mr-2">{String.fromCharCode(65 + optIdx)}.</span>
+                                {option}
+                              </Label>
+                            </div>
+                          ))}
+                        </RadioGroup>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </CardContent>
           </Card>
