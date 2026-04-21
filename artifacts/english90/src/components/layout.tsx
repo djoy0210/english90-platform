@@ -123,7 +123,7 @@ function AppSidebar() {
         )}
       </SidebarContent>
 
-      <SidebarFooter className="border-t p-2">
+      <SidebarFooter className="border-t p-2 bg-[#f0ebebf5]">
         <SidebarMenu>
           <SidebarMenuItem>
             <DropdownMenu>
