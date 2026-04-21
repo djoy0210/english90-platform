@@ -119,7 +119,7 @@ export default function Landing() {
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-3">
                 <GraduationCap className="w-4 h-4" /> Level 1 хөтөлбөр
               </div>
-              <h2 className="text-3xl font-bold mb-3">Эхлэгчдэд зориулсан 30 хоног</h2>
+              <h2 className="text-3xl font-bold mb-3">Анхан шатанд зориулсан 30 хоног</h2>
               <p className="text-muted-foreground mb-6">Greeting-ээс эхлээд өөрийгөө бүрэн илэрхийлж сурах хүртэл — өдөр бүр шинэ үг, дүрэм, ярианы дасгал, listening-тай.</p>
               <ul className="space-y-2 text-sm">
                 {["30 өдрийн бүтэн контент (90 хуудас материал)", "Өдөр бүр 20 шинэ үг (нийт 600+ үг)", "Audio listening + TTS дуудлага", "Бүх грамматик дүрмийн дасгал", "Level 1 төгсгөлийн шалгалт", "Хэрвээ тэнцвэл Level 2 руу"].map((x) => (
