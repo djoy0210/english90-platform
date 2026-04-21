@@ -237,6 +237,21 @@ export default function FinalTestView() {
                           )}
                         </div>
                       )}
+                      {question.audioUrl && question.sectionTitle && (
+                        <div className="sticky top-2 z-10 rounded-lg border-2 border-primary bg-card shadow-md">
+                          <div className="px-5 py-3 bg-primary/10 rounded-t-lg flex items-center gap-2">
+                            <span className="text-sm font-semibold text-primary">🎧 Listening audio · Дууг сонсоорой</span>
+                          </div>
+                          <div className="px-5 py-4">
+                            <audio controls preload="metadata" src={question.audioUrl} className="w-full">
+                              Your browser does not support audio playback.
+                            </audio>
+                            <p className="text-xs text-muted-foreground mt-2">
+                              Та шаардлагатай гэж үзвэл олон удаа дахин сонсож болно. / You may replay as many times as you need.
+                            </p>
+                          </div>
+                        </div>
+                      )}
                       {question.passage && (
                         <details
                           open
