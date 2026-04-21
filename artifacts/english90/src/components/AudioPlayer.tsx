@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Button } from "../shared/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Play, Pause, Repeat, RotateCcw, Gauge } from "lucide-react";
 
 interface Props {
