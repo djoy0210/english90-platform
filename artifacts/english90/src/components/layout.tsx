@@ -85,7 +85,7 @@ function AppSidebar() {
         </Link>
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className="bg-[#f7f7f7]">
         <SidebarGroup>
           <SidebarGroupLabel>Хичээл</SidebarGroupLabel>
           <SidebarGroupContent>
