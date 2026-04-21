@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowLeft, BookOpen, CheckCircle2, AlertCircle, PlayCircle, Lock, Volume2, Clock, ClipboardList } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
+import { AudioPlayer } from "../components/AudioPlayer";
 
 export default function LessonView() {
   const { lessonId } = useParams<{ lessonId: string }>();
@@ -337,7 +338,14 @@ export default function LessonView() {
                   )}
                 </div>
                 {(lesson as any).audioUrl && (
-                  <audio controls src={(lesson as any).audioUrl} className="w-full mt-3" />
+                  <AudioPlayer
+                    src={
+                      /^https?:\/\//.test((lesson as any).audioUrl)
+                        ? (lesson as any).audioUrl
+                        : `${import.meta.env.BASE_URL}${(lesson as any).audioUrl.replace(/^\/+/, "")}`
+                    }
+                    title="Жинхэнэ дуу хичээл · Real recorded listening"
+                  />
                 )}
               </div>
               {Array.isArray(page3.listeningQuestions) && page3.listeningQuestions.length > 0 && (
