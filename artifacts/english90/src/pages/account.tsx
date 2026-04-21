@@ -171,11 +171,11 @@ export default function Account() {
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="rounded-xl border p-4">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Target className="w-4 h-4" /> Шатлал
+                <Target className="w-4 h-4" /> Түвшин
               </div>
               <div className="mt-1 font-semibold">{LEVEL_LABEL[user.placementLevel] ?? `Level ${user.placementLevel}`}</div>
               <div className="mt-1 text-xs text-muted-foreground">
-                {user.placementCompleted ? "Шатлалын тест өгсөн" : "Шатлалын тест өгөөгүй"}
+                {user.placementCompleted ? "Түвшин тогтоох тест өгсөн" : "Түвшин тогтоох тест өгөөгүй"}
               </div>
             </div>
 
@@ -215,7 +215,7 @@ export default function Account() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <LogOut className="w-5 h-5" />
-            Сесс
+            С
           </CardTitle>
           <CardDescription>Та одоогийн төхөөрөмжөөс гарах боломжтой.</CardDescription>
         </CardHeader>
