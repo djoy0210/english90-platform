@@ -14,7 +14,7 @@ const BANK = {
   name: "Хаан Банк",
   iban: "05 0005 00 5224574340",
   account: "5224574340",
-  holder: "ENGLISH90 ACADEMY",
+  holder: "Давхарбаяр Алтангэрэл",
 };
 
 type Product = { id: string; titleMn: string; titleEn: string; amount: number; highlight?: boolean; description: string };
