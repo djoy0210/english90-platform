@@ -74,7 +74,7 @@ function AppSidebar() {
 
   return (
     <Sidebar variant="inset" collapsible="icon">
-      <SidebarHeader className="h-16 flex items-center justify-center border-b">
+      <SidebarHeader className="h-16 flex items-center justify-center border-b bg-[#ffffff]">
         <Link href="/dashboard" className="flex items-center gap-2 px-2 py-1.5 w-full">
           <div className="bg-primary text-primary-foreground w-8 h-8 rounded-lg flex items-center justify-center font-bold text-lg">
             90
