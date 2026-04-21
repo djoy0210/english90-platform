@@ -1,0 +1,224 @@
+I already have my final tests in HTML format.
+
+IMPORTANT:
+Do NOT create a brand new generic final test from scratch.
+Use my existing HTML final test files as the source content.
+
+My goal is to integrate my HTML final tests into my current English learning website properly and completely.
+
+Build a real final test system using my HTML test content.
+
+==================================================
+1. MAIN GOAL
+==================================================
+
+I already have final tests in HTML.
+I want those HTML final tests integrated into my website as real working final tests.
+
+There must be:
+- Level 1 Final Test
+- Level 2 Final Test
+- Level 3 Final Test
+
+Use the structure and content from my HTML files.
+
+Do not replace my content with fake placeholder content.
+
+==================================================
+2. WHAT TO DO WITH MY HTML FILES
+==================================================
+
+Take my existing HTML final test files and convert/integrate them into the platform so they work as part of the website.
+
+Requirements:
+- preserve my real test content
+- preserve question text
+- preserve answer options
+- preserve test structure as much as possible
+- preserve styling only if useful, but adapt it to match the website design
+- convert the HTML into a clean, responsive website test experience
+- do not just embed a raw HTML file in an ugly iframe unless absolutely necessary
+
+Preferred result:
+Turn the HTML final tests into native website final test pages that match my platform design.
+
+==================================================
+3. FINAL TEST SYSTEM REQUIREMENTS
+==================================================
+
+Each final test must have:
+- title
+- level assignment
+- instructions
+- start button
+- question list
+- submit button
+- result page
+- score
+- percentage
+- pass/fail
+- saved attempt history
+- dashboard integration
+- admin visibility
+
+==================================================
+4. ACCESS RULES
+==================================================
+
+Build correct access logic:
+- Level 1 Final Test only for users with Level 1 access
+- Level 2 Final Test only for users with Level 2 access
+- Level 3 Final Test only for users with Level 3 access
+
+If possible, make it configurable in admin whether:
+- final test appears only after all lessons in that level are completed
+OR
+- final test appears as soon as the level is purchased/unlocked
+
+==================================================
+5. QUESTION / SCORING LOGIC
+==================================================
+
+Use the questions from my HTML files.
+
+Build real scoring logic:
+- calculate correct answers
+- calculate percentage
+- save score
+- save pass/fail
+- save attempt number
+- keep best score
+- keep latest score
+
+If my HTML files already contain answer logic, reuse it if possible.
+If not, extract the questions and rebuild the scoring in the platform properly.
+
+==================================================
+6. STUDENT EXPERIENCE
+==================================================
+
+Before test:
+- show instructions
+- show level
+- show passing score
+- show start button
+
+During test:
+- clean readable layout
+- answer selection
+- progress indicator if possible
+- submit button
+
+After test:
+- show score
+- show percentage
+- show pass/fail
+- show encouraging result message
+- button to return to dashboard
+- button to review answers if enabled
+
+==================================================
+7. DASHBOARD + HISTORY INTEGRATION
+==================================================
+
+Connect final tests to the existing dashboard and history.
+
+Dashboard must show:
+- Level 1 Final Test status
+- Level 2 Final Test status
+- Level 3 Final Test status
+- locked/unlocked
+- not started/completed/passed/failed
+- latest score
+- best score
+- take test button
+- review result button
+
+History page must show:
+- final test name
+- level
+- date
+- score
+- percentage
+- pass/fail
+- attempt number
+
+==================================================
+8. ADMIN PANEL REQUIREMENTS
+==================================================
+
+Add full final test management to admin.
+
+Admin must be able to:
+- view all final tests
+- assign each final test to the correct level
+- upload or replace HTML source if needed
+- edit title and instructions
+- set passing score
+- view student attempts
+- view scores
+- search results by student
+- reset attempts if needed
+- enable/disable answer review
+
+If possible, create an admin page:
+- Final Tests
+- Final Test Results
+- Final Test Settings
+
+==================================================
+9. HTML IMPORT / INTEGRATION WORKFLOW
+==================================================
+
+Create a proper workflow for using HTML tests.
+
+Requirements:
+- allow admin to upload HTML final test files
+OR
+- import HTML content into the final test system
+- parse or convert questions cleanly if possible
+- keep the system maintainable
+- do not rely on a messy fragile raw embed if a cleaner conversion is possible
+
+If direct conversion is difficult, then:
+- render the HTML test safely
+- connect submission/result logic to the platform
+- still save attempts, score, and pass/fail in the database
+
+==================================================
+10. DESIGN
+==================================================
+
+Adapt the final tests to the current website style:
+- clean
+- responsive
+- premium
+- trustworthy
+- mobile-friendly
+
+The final test should feel like part of the English90 platform, not a separate disconnected page.
+
+==================================================
+11. IMPORTANT
+==================================================
+
+Do not make fake example final tests.
+Do not replace my real HTML test content.
+Use my HTML files as the real source.
+
+If something in the HTML cannot be reused directly, extract the content and rebuild it properly inside the platform.
+
+==================================================
+12. FINAL OUTPUT
+==================================================
+
+After implementation, explain:
+1. how my HTML tests were integrated
+2. whether they were converted or embedded
+3. how scoring works
+4. how results are saved
+5. how dashboard integration works
+6. how admin can manage the final tests
+7. how I can replace or update the HTML tests later
+
+Start using my HTML final tests now and integrate them properly into my website.
