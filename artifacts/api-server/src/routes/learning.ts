@@ -345,9 +345,18 @@ async function ensureSeeded() {
     seedPromise = (async () => {
       const existing = await db.select({ id: lessonsTable.id }).from(lessonsTable).limit(1);
       if (existing.length > 0) {
-        const currentDayOne = await db.select().from(lessonsTable).where(eq(lessonsTable.day, 1)).limit(1);
-        if ((currentDayOne[0]?.vocabulary?.length ?? 0) < 20 || !currentDayOne[0]?.lessonContent) {
-          await db.update(lessonsTable).set({ ...dayOneLesson, updatedAt: new Date() }).where(eq(lessonsTable.day, 1));
+        const all = await db.select().from(lessonsTable);
+        for (const lesson of all) {
+          const needsRefresh =
+            !lesson.lessonContent ||
+            (lesson.vocabulary?.length ?? 0) < 20 ||
+            (lesson.day === 1 && !(lesson as any).objectiveEn);
+          if (needsRefresh) {
+            await db
+              .update(lessonsTable)
+              .set({ ...buildSeedLesson(lesson.day), updatedAt: new Date() })
+              .where(eq(lessonsTable.day, lesson.day));
+          }
         }
         return;
       }
