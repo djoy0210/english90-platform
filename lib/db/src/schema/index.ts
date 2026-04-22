@@ -229,6 +229,13 @@ export const contentUnlocksTable = pgTable(
   (table) => [uniqueIndex("content_unlocks_user_product_unique").on(table.userId, table.productId)],
 );
 
+export const appSettingsTable = pgTable("app_settings", {
+  key: text("key").primaryKey(),
+  value: jsonb("value").notNull().$type<Record<string, unknown>>(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
+export type AppSetting = typeof appSettingsTable.$inferSelect;
 export type User = typeof usersTable.$inferSelect;
 export type Lesson = typeof lessonsTable.$inferSelect;
 export type FinalTest = typeof finalTestsTable.$inferSelect;

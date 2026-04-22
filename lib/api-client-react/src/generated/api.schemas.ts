@@ -9,6 +9,19 @@ export interface HealthStatus {
   status: string;
 }
 
+export interface ContactSettings {
+  adminName: string;
+  phone: string;
+  email: string;
+  messenger: string;
+  facebook: string;
+  workingHours: string;
+  bankName: string;
+  bankIban: string;
+  bankHolder: string;
+  notes: string;
+}
+
 export type UserProfileRole =
   (typeof UserProfileRole)[keyof typeof UserProfileRole];
 

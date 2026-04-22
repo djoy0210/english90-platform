@@ -1,6 +1,7 @@
 import { getAuth } from "@clerk/express";
 import { db } from "@workspace/db";
 import {
+  appSettingsTable,
   finalTestsTable,
   contentUnlocksTable,
   lessonProgressTable,
@@ -1451,6 +1452,49 @@ router.delete("/admin/placement-questions/:questionId", async (req, res, next) =
     const { questionId } = AdminDeletePlacementQuestionParams.parse(req.params);
     await db.delete(placementQuestionsTable).where(eq(placementQuestionsTable.id, questionId));
     return res.json({ success: true });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+const CONTACT_KEY = "contact";
+const DEFAULT_CONTACT = {
+  adminName: "Давхарбаяр Алтангэрэл",
+  phone: "+976 99999999",
+  email: "english90.mn@gmail.com",
+  messenger: "m.me/english90",
+  facebook: "facebook.com/english90",
+  workingHours: "Даваа–Баасан · 09:00–18:00",
+  bankName: "Хаан Банк",
+  bankIban: "05 0005 00 5224574340",
+  bankHolder: "Давхарбаяр Алтангэрэл",
+  notes: "Шилжүүлгийн утга дээр өөрийн нэр, утсыг бичээрэй.",
+};
+
+function mergeContact(value: Record<string, unknown> | null | undefined) {
+  return { ...DEFAULT_CONTACT, ...(value ?? {}) } as typeof DEFAULT_CONTACT;
+}
+
+router.get("/settings/contact", async (_req, res, next) => {
+  try {
+    const [row] = await db.select().from(appSettingsTable).where(eq(appSettingsTable.key, CONTACT_KEY)).limit(1);
+    return res.json(mergeContact(row?.value));
+  } catch (error) {
+    return next(error);
+  }
+});
+
+router.put("/admin/settings/contact", async (req, res, next) => {
+  try {
+    const user = await getCurrentUser(req);
+    ensureAdmin(user);
+    const incoming = mergeContact(req.body && typeof req.body === "object" ? (req.body as Record<string, unknown>) : {});
+    const [saved] = await db
+      .insert(appSettingsTable)
+      .values({ key: CONTACT_KEY, value: incoming, updatedAt: new Date() })
+      .onConflictDoUpdate({ target: appSettingsTable.key, set: { value: incoming, updatedAt: new Date() } })
+      .returning();
+    return res.json(mergeContact(saved.value));
   } catch (error) {
     return next(error);
   }

@@ -18,6 +18,7 @@ export * from "./adminStudentDetail";
 export * from "./adminStudentSummary";
 export * from "./adminUnlockStudentPayload";
 export * from "./checkoutResponse";
+export * from "./contactSettings";
 export * from "./createCheckoutRequest";
 export * from "./createCheckoutRequestPlan";
 export * from "./createPaymentRequestPayload";

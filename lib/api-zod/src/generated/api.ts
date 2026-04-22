@@ -56,6 +56,51 @@ export const UpdateMeResponse = zod.object({
 });
 
 /**
+ * @summary Public contact info
+ */
+export const GetContactSettingsResponse = zod.object({
+  adminName: zod.string(),
+  phone: zod.string(),
+  email: zod.string(),
+  messenger: zod.string(),
+  facebook: zod.string(),
+  workingHours: zod.string(),
+  bankName: zod.string(),
+  bankIban: zod.string(),
+  bankHolder: zod.string(),
+  notes: zod.string(),
+});
+
+/**
+ * @summary Admin update contact info
+ */
+export const AdminUpdateContactSettingsBody = zod.object({
+  adminName: zod.string(),
+  phone: zod.string(),
+  email: zod.string(),
+  messenger: zod.string(),
+  facebook: zod.string(),
+  workingHours: zod.string(),
+  bankName: zod.string(),
+  bankIban: zod.string(),
+  bankHolder: zod.string(),
+  notes: zod.string(),
+});
+
+export const AdminUpdateContactSettingsResponse = zod.object({
+  adminName: zod.string(),
+  phone: zod.string(),
+  email: zod.string(),
+  messenger: zod.string(),
+  facebook: zod.string(),
+  workingHours: zod.string(),
+  bankName: zod.string(),
+  bankIban: zod.string(),
+  bankHolder: zod.string(),
+  notes: zod.string(),
+});
+
+/**
  * @summary Get the signup placement test
  */
 export const GetPlacementTestResponse = zod.object({

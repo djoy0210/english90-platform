@@ -26,6 +26,7 @@ import type {
   AdminStudentSummary,
   AdminUnlockStudentPayload,
   CheckoutResponse,
+  ContactSettings,
   CreateCheckoutRequest,
   CreatePaymentRequestPayload,
   CreateQpayInvoiceRequest,
@@ -284,6 +285,167 @@ export const useUpdateMe = <
   TContext
 > => {
   return useMutation(getUpdateMeMutationOptions(options));
+};
+
+/**
+ * @summary Public contact info
+ */
+export const getGetContactSettingsUrl = () => {
+  return `/api/settings/contact`;
+};
+
+export const getContactSettings = async (
+  options?: RequestInit,
+): Promise<ContactSettings> => {
+  return customFetch<ContactSettings>(getGetContactSettingsUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getGetContactSettingsQueryKey = () => {
+  return [`/api/settings/contact`] as const;
+};
+
+export const getGetContactSettingsQueryOptions = <
+  TData = Awaited<ReturnType<typeof getContactSettings>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof getContactSettings>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetContactSettingsQueryKey();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getContactSettings>>
+  > = ({ signal }) => getContactSettings({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getContactSettings>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetContactSettingsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getContactSettings>>
+>;
+export type GetContactSettingsQueryError = ErrorType<unknown>;
+
+/**
+ * @summary Public contact info
+ */
+
+export function useGetContactSettings<
+  TData = Awaited<ReturnType<typeof getContactSettings>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof getContactSettings>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetContactSettingsQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * @summary Admin update contact info
+ */
+export const getAdminUpdateContactSettingsUrl = () => {
+  return `/api/admin/settings/contact`;
+};
+
+export const adminUpdateContactSettings = async (
+  contactSettings: ContactSettings,
+  options?: RequestInit,
+): Promise<ContactSettings> => {
+  return customFetch<ContactSettings>(getAdminUpdateContactSettingsUrl(), {
+    ...options,
+    method: "PUT",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(contactSettings),
+  });
+};
+
+export const getAdminUpdateContactSettingsMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof adminUpdateContactSettings>>,
+    TError,
+    { data: BodyType<ContactSettings> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof adminUpdateContactSettings>>,
+  TError,
+  { data: BodyType<ContactSettings> },
+  TContext
+> => {
+  const mutationKey = ["adminUpdateContactSettings"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof adminUpdateContactSettings>>,
+    { data: BodyType<ContactSettings> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return adminUpdateContactSettings(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type AdminUpdateContactSettingsMutationResult = NonNullable<
+  Awaited<ReturnType<typeof adminUpdateContactSettings>>
+>;
+export type AdminUpdateContactSettingsMutationBody = BodyType<ContactSettings>;
+export type AdminUpdateContactSettingsMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Admin update contact info
+ */
+export const useAdminUpdateContactSettings = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof adminUpdateContactSettings>>,
+    TError,
+    { data: BodyType<ContactSettings> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof adminUpdateContactSettings>>,
+  TError,
+  { data: BodyType<ContactSettings> },
+  TContext
+> => {
+  return useMutation(getAdminUpdateContactSettingsMutationOptions(options));
 };
 
 /**

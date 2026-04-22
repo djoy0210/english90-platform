@@ -57,6 +57,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserProfile"
+  /settings/contact:
+    get:
+      operationId: getContactSettings
+      tags: [learning]
+      summary: Public contact info
+      responses:
+        "200":
+          description: Contact info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactSettings"
+  /admin/settings/contact:
+    put:
+      operationId: adminUpdateContactSettings
+      tags: [admin]
+      summary: Admin update contact info
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactSettings"
+      responses:
+        "200":
+          description: Updated contact info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactSettings"
   /placement-test:
     get:
       operationId: getPlacementTest
@@ -636,6 +666,20 @@ components:
         status:
           type: string
       required: [status]
+    ContactSettings:
+      type: object
+      properties:
+        adminName: { type: string }
+        phone: { type: string }
+        email: { type: string }
+        messenger: { type: string }
+        facebook: { type: string }
+        workingHours: { type: string }
+        bankName: { type: string }
+        bankIban: { type: string }
+        bankHolder: { type: string }
+        notes: { type: string }
+      required: [adminName, phone, email, messenger, facebook, workingHours, bankName, bankIban, bankHolder, notes]
     UserProfile:
       type: object
       properties:
