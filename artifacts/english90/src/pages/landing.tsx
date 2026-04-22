@@ -52,7 +52,7 @@ export default function Landing() {
               </div>
               <div className="flex items-center gap-4 text-sm text-muted-foreground justify-center lg:justify-start pt-2">
                 <span className="flex items-center gap-1"><CheckCircle2 className="w-4 h-4 text-primary" /> Үнэгүй демо хичээл</span>
-                <span className="flex items-center gap-1"><CheckCircle2 className="w-4 h-4 text-primary" /> Үнэгүй шатлалын тест</span>
+                <span className="flex items-center gap-1"><CheckCircle2 className="w-4 h-4 text-primary" /> Үнэгүй түвшин тогтоох тест</span>
               </div>
             </div>
             <div className="rounded-2xl border bg-card shadow-xl p-6 space-y-4">
@@ -99,7 +99,7 @@ export default function Landing() {
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-3">Хэрхэн ажилладаг вэ?</h2>
-              <p className="text-muted-foreground">Тав тухтай 4 алхамтай явц.</p>
+              <p className="text-muted-foreground">Хүн бүрд тохирсон 4 алхамтай явц.</p>
             </div>
             <div className="grid md:grid-cols-4 gap-6">
               {[
