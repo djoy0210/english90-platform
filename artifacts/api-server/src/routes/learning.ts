@@ -47,6 +47,7 @@ import {
 import { and, desc, eq, sql } from "drizzle-orm";
 import { Router, type Request } from "express";
 import { checkQPayInvoiceStatus, createQPayInvoice, isQPayConfigured, verifyQPayWebhook, type QPayInvoiceStatus } from "../services/qpay";
+import { CURRICULUM_LEVEL1, CURRICULUM_VERSION, type CurriculumDay } from "../data/curriculum/level1-loader";
 
 const router = Router();
 let seedPromise: Promise<void> | null = null;
@@ -273,7 +274,87 @@ function buildVocabulary(focus: string) {
   return words.map(([english, pronunciation, mongolian, example]) => ({ english, pronunciation, mongolian, example }));
 }
 
+function buildLessonFromCurriculum(c: CurriculumDay) {
+  const level = getLevel(c.day);
+  const homeworkLines = c.homeworkEn
+    .split(/\n+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const homeworkLinesMn = c.homeworkMn
+    .split(/\n+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const speakingLines = c.speakingPrompts.length
+    ? c.speakingPrompts
+    : ["Practice today's vocabulary out loud."];
+  return {
+    day: c.day,
+    level,
+    titleEn: c.titleEn,
+    titleMn: c.titleMn,
+    objectiveEn: c.objectiveEn,
+    objectiveMn: c.objectiveMn,
+    contentEn: `60-minute self-study plan:\n1. Vocabulary pronunciation — 15 min. Click each word, listen, repeat 3x, then test yourself.\n2. Grammar — 10 min. ${c.grammarTitleEn}: ${c.grammarExplanationEn}\n3. Reading & speaking — 15 min. ${c.readingPassageEn}\n4. Role play — 10 min.\n5. Listening — 10 min. Listen to today's audio and answer the 10 questions.\n\nHomework:\n${c.homeworkEn}`,
+    contentMn: `60 минутын өөрөө сурах төлөвлөгөө:\n1. Үгийн дуудлага — 15 минут. Үг бүр дээр дарж сонсоод 3 удаа давтана.\n2. Дүрэм — 10 минут. ${c.grammarTitleMn}: ${c.grammarExplanationMn}\n3. Унших ба ярих — 15 минут. Эхийг чангаар уншина.\n4. Дүрд тоглох — 10 минут.\n5. Сонсох — 10 минут. Өнөөдрийн дууг сонсоод 10 асуултад хариулна.\n\nГэрийн даалгавар:\n${c.homeworkMn}`,
+    lessonContent: {
+      page1: {
+        grammarTopic: `${c.grammarTitleEn} · ${c.grammarTitleMn}`,
+        grammarExplanation: `${c.grammarExplanationEn}\n\n${c.grammarExplanationMn}`,
+        grammarTable: [],
+        quickPractice: [],
+        commonMistakes: [],
+        answerKey: [],
+      },
+      page2: {
+        readingPassage: c.readingPassageEn,
+        keyPhrases: [],
+        speakingQuestions: speakingLines,
+        rolePlay: c.rolePlayLines.map((l) => ({ speaker: l.speaker, text: l.en })),
+        speakingTip: "Don't worry about mistakes — just keep talking. Confidence is more important than perfection at this stage.",
+      },
+      page3: {
+        listeningScript: c.listeningScriptEn,
+        listeningQuestions: c.quiz.map((q, i) => ({
+          id: `d${c.day}-l${i + 1}`,
+          question: q.promptEn,
+          options: q.options,
+          answer: q.correctAnswer,
+        })),
+        comprehensionQuestions: [],
+        grammarPractice: [],
+        matchingExercise: [],
+        homework: homeworkLines.length ? homeworkLines : [c.homeworkEn],
+        answerKey: [],
+        completionSummary: [
+          "Learned 20 new words",
+          `Studied: ${c.grammarTitleEn}`,
+          "Read today's passage",
+          "Practiced speaking & role play",
+          "Listened to today's audio",
+          "Completed comprehension quiz",
+        ],
+        nextLessonPreview: c.day < 90 ? `Day ${c.day + 1}` : "Final test for Level 1",
+        homeworkMn: homeworkLinesMn,
+      },
+    },
+    pdfUrl: null,
+    audioUrl: `audio/listening/day${c.day}.mp3`,
+    durationMinutes: 60,
+    isPremium: c.day > 7,
+    vocabulary: c.vocabulary,
+    quiz: c.quiz.map((q, i) => ({
+      id: `d${c.day}-q${i + 1}`,
+      promptEn: q.promptEn,
+      promptMn: q.promptMn,
+      options: q.options,
+      correctAnswer: q.correctAnswer,
+    })),
+  };
+}
+
 function buildSeedLesson(day: number) {
+  const fromCurriculum = CURRICULUM_LEVEL1[day];
+  if (fromCurriculum) return buildLessonFromCurriculum(fromCurriculum);
   if (day === 1) return dayOneLesson;
   const level = getLevel(day);
   const levelName = level === 1 ? "Foundation" : level === 2 ? "Everyday Communication" : "Confident Expression";
@@ -346,17 +427,35 @@ async function ensureSeeded() {
       const existing = await db.select({ id: lessonsTable.id }).from(lessonsTable).limit(1);
       if (existing.length > 0) {
         const all = await db.select().from(lessonsTable);
+        const versionRow = await db
+          .select()
+          .from(appSettingsTable)
+          .where(eq(appSettingsTable.key, "curriculum_version"))
+          .limit(1);
+        const storedVersion = (versionRow[0]?.value as { value?: string } | null)?.value;
+        const versionMatches = storedVersion === CURRICULUM_VERSION;
         for (const lesson of all) {
+          const hasCurriculum = Boolean(CURRICULUM_LEVEL1[lesson.day]);
           const needsRefresh =
             !lesson.lessonContent ||
             (lesson.vocabulary?.length ?? 0) < 20 ||
-            (lesson.day === 1 && !(lesson as any).objectiveEn);
+            (lesson.day === 1 && !(lesson as any).objectiveEn) ||
+            (hasCurriculum && !versionMatches);
           if (needsRefresh) {
             await db
               .update(lessonsTable)
               .set({ ...buildSeedLesson(lesson.day), updatedAt: new Date() })
               .where(eq(lessonsTable.day, lesson.day));
           }
+        }
+        if (!versionMatches) {
+          await db
+            .insert(appSettingsTable)
+            .values({ key: "curriculum_version", value: { value: CURRICULUM_VERSION } })
+            .onConflictDoUpdate({
+              target: appSettingsTable.key,
+              set: { value: { value: CURRICULUM_VERSION }, updatedAt: new Date() },
+            });
         }
         return;
       }
