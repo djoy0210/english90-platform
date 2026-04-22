@@ -20,9 +20,18 @@ export default function LessonView() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const { data: lesson, isLoading } = useGetLesson(lessonId!, {
-    query: { enabled: !!lessonId, queryKey: getGetLessonQueryKey(lessonId!) },
+  const { data: lesson, isLoading } = useGetLesson(lessonId ?? "", {
+    query: { enabled: !!lessonId, queryKey: getGetLessonQueryKey(lessonId ?? "") },
   });
+
+  if (!lessonId) {
+    return (
+      <Card><CardContent className="p-8 text-center">
+        <p className="text-muted-foreground">Хичээл олдсонгүй · Lesson not found</p>
+        <Button onClick={() => setLocation("/lessons")} className="mt-4">Back to Lessons</Button>
+      </CardContent></Card>
+    );
+  }
 
   const submitQuiz = useSubmitLessonQuiz();
 

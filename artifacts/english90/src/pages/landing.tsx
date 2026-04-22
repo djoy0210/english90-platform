@@ -27,7 +27,11 @@ export default function Landing() {
         </div>
       </header>
       <main className="flex-1">
-        <section className="py-20 md:py-28 px-4 md:px-8 max-w-6xl mx-auto">
+        <section className="relative py-20 md:py-28 px-4 md:px-8 overflow-hidden">
+          <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/8 via-background to-amber-100/40 dark:to-amber-500/5" />
+          <div aria-hidden className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-amber-300/20 blur-3xl -z-10" />
+          <div aria-hidden className="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-primary/15 blur-3xl -z-10" />
+          <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
             <div className="space-y-6 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/20 text-secondary-foreground text-sm font-medium">
@@ -65,6 +69,7 @@ export default function Landing() {
                 <p className="text-muted-foreground">Сайн уу! Намайг Бат гэдэг. Танилцсандаа баяртай байна.</p>
               </div>
             </div>
+          </div>
           </div>
         </section>
 

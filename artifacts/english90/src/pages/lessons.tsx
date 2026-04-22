@@ -45,13 +45,21 @@ export default function Lessons() {
         {levels.map((level) => {
           const levelLessons = lessons.filter((l) => l.level === level);
           const completedCount = levelLessons.filter((l) => l.completed).length;
-          
+          const accent = [
+            { chip: "bg-primary/10 text-primary border-primary/20", dot: "bg-primary" },
+            { chip: "bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/30", dot: "bg-amber-500" },
+            { chip: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border-emerald-500/30", dot: "bg-emerald-500" },
+          ][level - 1];
+
           return (
             <TabsContent key={level} value={level.toString()} className="space-y-8 mt-0 focus-visible:outline-none">
-              
+
               <div className="flex items-center justify-between border-b pb-4">
-                <h2 className="text-xl font-semibold">Түвшин {level} (Өдөр {(level-1)*30 + 1} - {level*30})</h2>
-                <span className="text-sm font-medium bg-muted px-3 py-1 rounded-full">
+                <h2 className="text-xl font-semibold flex items-center gap-2">
+                  <span className={`w-2.5 h-2.5 rounded-full ${accent.dot}`} />
+                  Түвшин {level} (Өдөр {(level-1)*30 + 1} - {level*30})
+                </h2>
+                <span className={`text-sm font-medium px-3 py-1 rounded-full border ${accent.chip}`}>
                   {completedCount} / 30 дууссан
                 </span>
               </div>

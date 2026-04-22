@@ -45,6 +45,7 @@ export function TtsPlayer({ text, title, lang = "en-US" }: Props) {
 
   function speak() {
     if (!supported) return;
+    if (!text || !text.trim()) return;
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;

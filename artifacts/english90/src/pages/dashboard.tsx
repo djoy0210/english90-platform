@@ -116,7 +116,7 @@ export default function Dashboard() {
       )}
 
       <div className="grid gap-4 md:grid-cols-3">
-        <Card className="bg-primary text-primary-foreground border-none">
+        <Card className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground border-none shadow-md">
           <CardContent className="p-6 flex items-center justify-between">
             <div>
               <p className="text-primary-foreground/80 font-medium mb-1">Явц</p>
@@ -125,35 +125,35 @@ export default function Dashboard() {
                 <span className="text-lg text-primary-foreground/70">/ {dashboard.totalDays}</span>
               </div>
             </div>
-            <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
-              <Trophy className="w-6 h-6 text-secondary" />
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardContent className="p-6 flex items-center justify-between">
-            <div>
-              <p className="text-muted-foreground font-medium mb-1">Одоогийн түвшин</p>
-              <span className="text-4xl font-bold text-foreground">Түвшин {dashboard.currentLevel}</span>
-            </div>
-            <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center">
-              <Medal className="w-6 h-6 text-foreground" />
+            <div className="w-12 h-12 rounded-full bg-white/15 flex items-center justify-center">
+              <Trophy className="w-6 h-6 text-amber-300" />
             </div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-gradient-to-br from-amber-500 to-orange-500 text-white border-none shadow-md">
           <CardContent className="p-6 flex items-center justify-between">
             <div>
-              <p className="text-muted-foreground font-medium mb-1">Дундаж оноо</p>
+              <p className="text-white/85 font-medium mb-1">Одоогийн түвшин</p>
+              <span className="text-4xl font-bold">Түвшин {dashboard.currentLevel}</span>
+            </div>
+            <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+              <Medal className="w-6 h-6 text-white" />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gradient-to-br from-emerald-500 to-teal-600 text-white border-none shadow-md">
+          <CardContent className="p-6 flex items-center justify-between">
+            <div>
+              <p className="text-white/85 font-medium mb-1">Дундаж оноо</p>
               <div className="flex items-baseline gap-1">
-                <span className="text-4xl font-bold text-foreground">{dashboard.averageScore}</span>
-                <span className="text-muted-foreground">%</span>
+                <span className="text-4xl font-bold">{dashboard.averageScore}</span>
+                <span className="text-white/80">%</span>
               </div>
             </div>
-            <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center">
-              <Target className="w-6 h-6 text-foreground" />
+            <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center">
+              <Target className="w-6 h-6 text-white" />
             </div>
           </CardContent>
         </Card>
@@ -192,15 +192,28 @@ export default function Dashboard() {
             <CardDescription>Нийт 3 түвшин (Түвшин бүр 30 өдөр)</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            {dashboard.levelProgress.map((level) => (
-              <div key={level.level} className="space-y-2">
-                <div className="flex justify-between text-sm font-medium">
-                  <span>Түвшин {level.level}</span>
-                  <span className="text-muted-foreground">{level.completed} / {level.total}</span>
+            {dashboard.levelProgress.map((level) => {
+              const colors = [
+                { dot: "bg-primary", bar: "bg-primary", track: "bg-primary/15" },
+                { dot: "bg-amber-500", bar: "bg-amber-500", track: "bg-amber-500/15" },
+                { dot: "bg-emerald-500", bar: "bg-emerald-500", track: "bg-emerald-500/15" },
+              ][level.level - 1] ?? { dot: "bg-primary", bar: "bg-primary", track: "bg-primary/15" };
+              const pct = (level.completed / level.total) * 100;
+              return (
+                <div key={level.level} className="space-y-2">
+                  <div className="flex justify-between text-sm font-medium">
+                    <span className="flex items-center gap-2">
+                      <span className={`w-2 h-2 rounded-full ${colors.dot}`} />
+                      Түвшин {level.level}
+                    </span>
+                    <span className="text-muted-foreground">{level.completed} / {level.total}</span>
+                  </div>
+                  <div className={`h-2 rounded-full overflow-hidden ${colors.track}`}>
+                    <div className={`h-full ${colors.bar} transition-all`} style={{ width: `${pct}%` }} />
+                  </div>
                 </div>
-                <Progress value={(level.completed / level.total) * 100} className="h-2" />
-              </div>
-            ))}
+              );
+            })}
           </CardContent>
         </Card>
 

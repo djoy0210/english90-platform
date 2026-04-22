@@ -512,6 +512,7 @@ function normalizeAnswer(s: string) {
     .toLowerCase()
     .replace(/[\u2018\u2019\u201B]/g, "'")
     .replace(/[\u201C\u201D]/g, '"')
+    .replace(/[.,!?;:'"()]/g, "")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -1136,6 +1137,9 @@ async function manualUnlockProduct(userId: string, productId: string) {
     })
     .onConflictDoNothing();
   if (product.productId === "course:full") {
+    await db.update(usersTable).set({ premium: true }).where(eq(usersTable.id, userId));
+  } else if (product.level && product.level >= 1) {
+    // Mark premium when any level is unlocked so dashboard reflects access
     await db.update(usersTable).set({ premium: true }).where(eq(usersTable.id, userId));
   }
 }
