@@ -369,7 +369,7 @@ function parseLesson(slides: string[][], dayNum: number): ParsedLesson {
 }
 
 const out: ParsedLesson[] = [];
-for (let day = 61; day <= 75; day++) {
+for (let day = 61; day <= 90; day++) {
   const file = Object.keys(data).find((k) => new RegExp(`^Day${day}_Book3`).test(k));
   if (!file) {
     console.warn("Missing pptx for day", day);
