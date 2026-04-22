@@ -5,8 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Progress } from "@/components/ui/progress";
-import { BookOpen, ArrowRight, RefreshCw, Sparkles } from "lucide-react";
-import { Link } from "wouter";
+import { Sparkles } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -30,10 +29,7 @@ export default function FinalTestView() {
 
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [testResult, setTestResult] = useState<any>(null);
-  const [passageOpen, setPassageOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
-
-  const passageText: string | undefined = (test?.questions as any[] | undefined)?.find((q: any) => q?.passage)?.passage;
 
   if (isLoading) {
     return (
@@ -137,32 +133,6 @@ export default function FinalTestView() {
       <Button variant="ghost" className="mb-2 -ml-4" onClick={() => setLocation("/lessons")}>
         <ArrowLeft className="mr-2 w-4 h-4" /> Хичээлүүд
       </Button>
-
-      {passageText && !testResult && (
-        <>
-          <Button
-            type="button"
-            onClick={() => setPassageOpen(true)}
-            className="fixed bottom-6 right-6 z-50 shadow-lg rounded-full h-14 px-5 gap-2"
-            size="lg"
-          >
-            <BookOpen className="w-5 h-5" />
-            <span className="hidden sm:inline">View passage</span>
-            <span className="sm:hidden">Passage</span>
-          </Button>
-          <Dialog open={passageOpen} onOpenChange={setPassageOpen}>
-            <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
-              <DialogHeader>
-                <DialogTitle className="flex items-center gap-2 text-primary">
-                  <BookOpen className="w-5 h-5" />
-                  Reading passage · Унших текст
-                </DialogTitle>
-              </DialogHeader>
-              <p className="text-sm leading-7 whitespace-pre-line mt-2">{passageText}</p>
-            </DialogContent>
-          </Dialog>
-        </>
-      )}
 
       <div className="text-center mb-4">
         <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
@@ -346,99 +316,145 @@ export default function FinalTestView() {
               </Card>
             );
           })()}
-          <Card>
-            <CardContent className="p-6 sm:p-8">
-              <div className="space-y-10">
-                {test.questions.map((question: any, idx: number) => {
-                  const isFill = question.type === "fill" || (Array.isArray(question.options) && question.options.length === 0);
-                  let sectionAnchor: string | undefined;
-                  if (question.sectionTitle) {
-                    const sectionIdx = (test.questions as any[])
-                      .slice(0, idx + 1)
-                      .filter((q: any) => q.sectionTitle).length;
-                    sectionAnchor = `section-${sectionIdx}`;
-                  }
+          {(() => {
+            type SectionGroup = {
+              anchorId: string;
+              title?: string;
+              intro?: string;
+              passage?: string;
+              audioUrl?: string;
+              questions: { q: any; globalIdx: number }[];
+            };
+            const groups: SectionGroup[] = [];
+            (test.questions as any[]).forEach((q, qIdx) => {
+              if (q.sectionTitle || groups.length === 0) {
+                groups.push({
+                  anchorId: `section-${groups.length + 1}`,
+                  title: q.sectionTitle,
+                  intro: q.sectionIntro,
+                  passage: q.passage,
+                  audioUrl: q.audioUrl,
+                  questions: [{ q, globalIdx: qIdx }],
+                });
+              } else {
+                const g = groups[groups.length - 1];
+                g.questions.push({ q, globalIdx: qIdx });
+                if (!g.passage && q.passage) g.passage = q.passage;
+                if (!g.audioUrl && q.audioUrl) g.audioUrl = q.audioUrl;
+              }
+            });
+            const sectionColors = [
+              { bar: "from-blue-400 to-indigo-500", chip: "bg-blue-500/10 text-blue-700 dark:text-blue-300", border: "border-blue-300/50" },
+              { bar: "from-amber-400 to-orange-500", chip: "bg-amber-500/10 text-amber-700 dark:text-amber-300", border: "border-amber-300/50" },
+              { bar: "from-emerald-400 to-teal-500", chip: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300", border: "border-emerald-300/50" },
+              { bar: "from-fuchsia-400 to-pink-500", chip: "bg-fuchsia-500/10 text-fuchsia-700 dark:text-fuchsia-300", border: "border-fuchsia-300/50" },
+            ];
+            return (
+              <div className="space-y-8">
+                {groups.map((g, gi) => {
+                  const c = sectionColors[gi % sectionColors.length];
                   return (
-                    <div key={question.id} className="space-y-5" id={sectionAnchor}>
-                      {question.sectionTitle && (
-                        <div className="border-l-4 border-primary bg-muted/40 px-4 py-3 rounded-r-md scroll-mt-4">
-                          <h2 className="font-semibold text-base">{question.sectionTitle}</h2>
-                          {question.sectionIntro && (
-                            <p className="text-sm text-muted-foreground mt-1">{question.sectionIntro}</p>
+                    <Card key={g.anchorId} id={g.anchorId} className={`overflow-hidden border-2 ${c.border} scroll-mt-24`}>
+                      <div className={`h-1.5 bg-gradient-to-r ${c.bar}`} />
+                      {g.title && (
+                        <div className="px-5 sm:px-7 pt-5 pb-3">
+                          <div className={`inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full ${c.chip} mb-2`}>
+                            <span>Section {gi + 1}</span>
+                            <span className="opacity-50">•</span>
+                            <span>{g.questions.length} асуулт</span>
+                          </div>
+                          <h2 className="text-xl font-bold leading-tight">{g.title}</h2>
+                          {g.intro && (
+                            <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{g.intro}</p>
                           )}
                         </div>
                       )}
-                      {question.audioUrl && question.sectionTitle && (
-                        <div className="sticky top-2 z-10 rounded-lg border-2 border-primary bg-card shadow-md">
-                          <div className="px-5 py-3 bg-primary/10 rounded-t-lg flex items-center gap-2">
-                            <span className="text-sm font-semibold text-primary">🎧 Listening audio · Дууг сонсоорой</span>
-                          </div>
-                          <div className="px-5 py-4">
-                            <audio controls preload="metadata" src={question.audioUrl} className="w-full">
-                              Your browser does not support audio playback.
-                            </audio>
-                            <p className="text-xs text-muted-foreground mt-2">
-                              Та шаардлагатай гэж үзвэл олон удаа дахин сонсож болно. / You may replay as many times as you need.
-                            </p>
-                          </div>
-                        </div>
-                      )}
-                      {question.passage && (
-                        <details
-                          open
-                          className="sticky top-2 z-10 rounded-lg border-2 border-primary bg-card shadow-md group"
-                        >
-                          <summary className="cursor-pointer list-none px-5 py-3 flex items-center justify-between bg-primary/10 rounded-t-lg">
-                            <span className="text-sm font-semibold text-primary">
-                              📖 Reading passage · Текстийг уншаарай
-                            </span>
-                            <span className="text-xs text-muted-foreground group-open:hidden">Дэлгэх ▾</span>
-                            <span className="text-xs text-muted-foreground hidden group-open:inline">Хураах ▴</span>
-                          </summary>
-                          <div className="px-5 py-4 max-h-72 overflow-y-auto">
-                            <p className="text-sm leading-7 whitespace-pre-line">{question.passage}</p>
-                          </div>
-                        </details>
-                      )}
-                      <div>
-                        <h3 className="text-lg font-medium leading-relaxed">
-                          <span className="text-primary mr-2 font-bold">{idx + 1}.</span>
-                          {question.promptEn}
-                        </h3>
-                      </div>
-                      {isFill ? (
-                        <div className="ml-6">
-                          <input
-                            type="text"
-                            value={answers[question.id] || ""}
-                            onChange={(e) => handleAnswerChange(question.id, e.target.value)}
-                            placeholder="Хариултаа бичээрэй..."
-                            className="w-full max-w-md rounded-md border border-input bg-background px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary"
-                          />
-                        </div>
-                      ) : (
-                        <RadioGroup
-                          value={answers[question.id] || ""}
-                          onValueChange={(val) => handleAnswerChange(question.id, val)}
-                          className="ml-6 space-y-4"
-                        >
-                          {question.options.map((option: string, optIdx: number) => (
-                            <div key={optIdx} className="flex items-center space-x-3">
-                              <RadioGroupItem value={option} id={`${question.id}-opt-${optIdx}`} className="h-5 w-5" />
-                              <Label htmlFor={`${question.id}-opt-${optIdx}`} className="text-base font-normal cursor-pointer leading-tight">
-                                <span className="font-mono text-xs text-muted-foreground mr-2">{String.fromCharCode(65 + optIdx)}.</span>
-                                {option}
-                              </Label>
+
+                      {(g.audioUrl || g.passage) && (
+                        <div className="px-5 sm:px-7 mb-2">
+                          {g.audioUrl && (
+                            <div className={`sticky top-16 z-10 rounded-lg border-2 ${c.border} bg-card shadow-md mb-4`}>
+                              <div className={`px-5 py-3 ${c.chip} rounded-t-lg flex items-center gap-2`}>
+                                <span className="text-sm font-semibold">🎧 Listening audio · Дууг сонсоорой</span>
+                              </div>
+                              <div className="px-5 py-4">
+                                <audio controls preload="metadata" src={g.audioUrl} className="w-full">
+                                  Your browser does not support audio playback.
+                                </audio>
+                                <p className="text-xs text-muted-foreground mt-2">
+                                  Та шаардлагатай гэж үзвэл олон удаа дахин сонсож болно.
+                                </p>
+                              </div>
                             </div>
-                          ))}
-                        </RadioGroup>
+                          )}
+                          {g.passage && (
+                            <details
+                              open
+                              className={`sticky top-16 z-10 rounded-lg border-2 ${c.border} bg-card shadow-md group`}
+                            >
+                              <summary className={`cursor-pointer list-none px-5 py-3 flex items-center justify-between ${c.chip} rounded-t-lg`}>
+                                <span className="text-sm font-semibold flex items-center gap-2">
+                                  📖 Reading passage · Текстийг уншаарай
+                                </span>
+                                <span className="text-xs opacity-70 group-open:hidden">Дэлгэх ▾</span>
+                                <span className="text-xs opacity-70 hidden group-open:inline">Хураах ▴</span>
+                              </summary>
+                              <div className="px-5 py-4 max-h-80 overflow-y-auto">
+                                <p className="text-sm leading-7 whitespace-pre-line">{g.passage}</p>
+                              </div>
+                            </details>
+                          )}
+                        </div>
                       )}
-                    </div>
+
+                      <CardContent className="px-5 sm:px-7 pt-2 pb-7">
+                        <div className="space-y-8">
+                          {g.questions.map(({ q: question, globalIdx }) => {
+                            const isFill = question.type === "fill" || (Array.isArray(question.options) && question.options.length === 0);
+                            return (
+                              <div key={question.id} className="space-y-4 pt-2 border-t first:border-t-0 first:pt-0">
+                                <h3 className="text-base sm:text-lg font-medium leading-relaxed">
+                                  <span className="text-primary mr-2 font-bold">{globalIdx + 1}.</span>
+                                  {question.promptEn}
+                                </h3>
+                                {isFill ? (
+                                  <div className="ml-6">
+                                    <input
+                                      type="text"
+                                      value={answers[question.id] || ""}
+                                      onChange={(e) => handleAnswerChange(question.id, e.target.value)}
+                                      placeholder="Хариултаа бичээрэй..."
+                                      className="w-full max-w-md rounded-md border border-input bg-background px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary"
+                                    />
+                                  </div>
+                                ) : (
+                                  <RadioGroup
+                                    value={answers[question.id] || ""}
+                                    onValueChange={(val) => handleAnswerChange(question.id, val)}
+                                    className="ml-6 space-y-3"
+                                  >
+                                    {question.options.map((option: string, optIdx: number) => (
+                                      <div key={optIdx} className="flex items-center space-x-3">
+                                        <RadioGroupItem value={option} id={`${question.id}-opt-${optIdx}`} className="h-5 w-5" />
+                                        <Label htmlFor={`${question.id}-opt-${optIdx}`} className="text-base font-normal cursor-pointer leading-tight">
+                                          <span className="font-mono text-xs text-muted-foreground mr-2">{String.fromCharCode(65 + optIdx)}.</span>
+                                          {option}
+                                        </Label>
+                                      </div>
+                                    ))}
+                                  </RadioGroup>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </CardContent>
+                    </Card>
                   );
                 })}
               </div>
-            </CardContent>
-          </Card>
+            );
+          })()}
 
           <div className="flex justify-center">
             <Button 

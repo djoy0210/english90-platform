@@ -66,7 +66,7 @@ export default function Contact() {
             { label: "Илгээх", asChild: true, href: `mailto:${CONTACT.email}?subject=${encodeURIComponent("English90 — Хүсэлт")}` },
           ]} accent="text-primary" bg="bg-primary/10" />
 
-          <ContactRow icon={MessageCircle} label="Messenger" value="m.me/english90" actions={[
+          <ContactRow icon={MessageCircle} label="Messenger" value="" actions={[
             { label: "Нээх", asChild: true, href: CONTACT.messenger, external: true },
           ]} accent="text-blue-600" bg="bg-blue-500/10" />
 
