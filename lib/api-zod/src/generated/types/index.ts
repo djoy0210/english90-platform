@@ -48,6 +48,8 @@ export * from "./qpayInvoiceUnlockStatus";
 export * from "./quizAttemptResult";
 export * from "./quizAttemptResultCorrectAnswersItem";
 export * from "./quizQuestion";
+export * from "./selfReportRequest";
+export * from "./selfReportResult";
 export * from "./submitPlacementTestRequest";
 export * from "./submitPlacementTestRequestAnswersItem";
 export * from "./submitQuizRequest";

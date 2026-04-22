@@ -45,6 +45,8 @@ import type {
   QpayCallbackRequest,
   QpayInvoice,
   QuizAttemptResult,
+  SelfReportRequest,
+  SelfReportResult,
   SubmitPlacementTestRequest,
   SubmitQuizRequest,
   TestHistoryItem,
@@ -1104,6 +1106,93 @@ export const useSubmitFinalTest = <
   TContext
 > => {
   return useMutation(getSubmitFinalTestMutationOptions(options));
+};
+
+/**
+ * @summary Self-report a final test score taken on the static page
+ */
+export const getSelfReportFinalTestUrl = (level: number) => {
+  return `/api/final-tests/${level}/self-report`;
+};
+
+export const selfReportFinalTest = async (
+  level: number,
+  selfReportRequest: SelfReportRequest,
+  options?: RequestInit,
+): Promise<SelfReportResult> => {
+  return customFetch<SelfReportResult>(getSelfReportFinalTestUrl(level), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(selfReportRequest),
+  });
+};
+
+export const getSelfReportFinalTestMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof selfReportFinalTest>>,
+    TError,
+    { level: number; data: BodyType<SelfReportRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof selfReportFinalTest>>,
+  TError,
+  { level: number; data: BodyType<SelfReportRequest> },
+  TContext
+> => {
+  const mutationKey = ["selfReportFinalTest"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof selfReportFinalTest>>,
+    { level: number; data: BodyType<SelfReportRequest> }
+  > = (props) => {
+    const { level, data } = props ?? {};
+
+    return selfReportFinalTest(level, data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type SelfReportFinalTestMutationResult = NonNullable<
+  Awaited<ReturnType<typeof selfReportFinalTest>>
+>;
+export type SelfReportFinalTestMutationBody = BodyType<SelfReportRequest>;
+export type SelfReportFinalTestMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Self-report a final test score taken on the static page
+ */
+export const useSelfReportFinalTest = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof selfReportFinalTest>>,
+    TError,
+    { level: number; data: BodyType<SelfReportRequest> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof selfReportFinalTest>>,
+  TError,
+  { level: number; data: BodyType<SelfReportRequest> },
+  TContext
+> => {
+  return useMutation(getSelfReportFinalTestMutationOptions(options));
 };
 
 /**

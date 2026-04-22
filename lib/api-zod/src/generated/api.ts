@@ -349,6 +349,36 @@ export const SubmitFinalTestResponse = zod.object({
 });
 
 /**
+ * @summary Self-report a final test score taken on the static page
+ */
+export const selfReportFinalTestPathLevelMax = 3;
+
+export const SelfReportFinalTestParams = zod.object({
+  level: zod.coerce.number().min(1).max(selfReportFinalTestPathLevelMax),
+});
+
+export const selfReportFinalTestBodyScoreMin = 0;
+export const selfReportFinalTestBodyScoreMax = 50;
+
+export const selfReportFinalTestBodyTotalMax = 50;
+
+export const SelfReportFinalTestBody = zod.object({
+  score: zod
+    .number()
+    .min(selfReportFinalTestBodyScoreMin)
+    .max(selfReportFinalTestBodyScoreMax),
+  total: zod.number().min(1).max(selfReportFinalTestBodyTotalMax),
+});
+
+export const SelfReportFinalTestResponse = zod.object({
+  id: zod.string(),
+  score: zod.number(),
+  total: zod.number(),
+  percentage: zod.number(),
+  passed: zod.boolean(),
+});
+
+/**
  * @summary Get quiz and test history
  */
 export const GetTestHistoryResponseItem = zod.object({

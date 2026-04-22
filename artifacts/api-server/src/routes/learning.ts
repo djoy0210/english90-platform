@@ -874,6 +874,41 @@ router.post("/final-tests/:level/attempts", async (req, res, next) => {
   }
 });
 
+router.post("/final-tests/:level/self-report", async (req, res, next) => {
+  try {
+    const level = parseInt(req.params.level || "0", 10);
+    if (![1, 2, 3].includes(level)) return res.status(400).json({ error: "Invalid level" });
+    const score = Math.max(0, Math.min(50, parseInt(String(req.body?.score ?? 0), 10) || 0));
+    const total = Math.max(1, Math.min(50, parseInt(String(req.body?.total ?? 50), 10) || 50));
+    if (score > total) return res.status(400).json({ error: "Score cannot exceed total" });
+    const user = await getCurrentUser(req);
+    const unlocks = await getUnlockedProducts(user.id);
+    if (!hasFinalTestAccess(user, unlocks, level)) {
+      return res.status(403).json({ error: `Level ${level} final test requires the matching package.` });
+    }
+    const [test] = await db.select().from(finalTestsTable).where(eq(finalTestsTable.level, level)).limit(1);
+    if (!test) return res.status(404).json({ error: "Final test not found" });
+    const percentage = Math.round((score / total) * 100);
+    const passingScore = (test as any).passingScore ?? 70;
+    const passed = percentage >= passingScore;
+    const [attempt] = await db.insert(quizAttemptsTable).values({
+      userId: user.id,
+      finalTestId: test.id,
+      type: "final",
+      titleEn: test.titleEn,
+      titleMn: test.titleMn,
+      level: test.level,
+      score,
+      total,
+      percentage,
+      passed,
+    }).returning();
+    return res.json({ id: attempt.id, score, total, percentage, passed });
+  } catch (error) {
+    return next(error);
+  }
+});
+
 router.get("/test-history", async (req, res, next) => {
   try {
     const user = await getCurrentUser(req);

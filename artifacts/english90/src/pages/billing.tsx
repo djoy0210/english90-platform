@@ -19,9 +19,9 @@ const BANK = {
 
 type Product = { id: string; titleMn: string; titleEn: string; amount: number; highlight?: boolean; description: string };
 const PRODUCTS: Product[] = [
-  { id: "level:1", titleMn: "Level 1 багц (30 хичээл)", titleEn: "Level 1 pack", amount: 29000, highlight: true, description: "Эхлэгчдэд зориулсан 30 хоногийн бүтэн контент" },
-  { id: "level:2", titleMn: "Level 2 багц (30 хичээл)", titleEn: "Level 2 pack", amount: 29000, description: "Дунд түвшний 30 хоногийн бүтэн контент" },
-  { id: "level:3", titleMn: "Level 3 багц (30 хичээл)", titleEn: "Level 3 pack", amount: 29000, description: "Дээд түвшний 30 хоногийн бүтэн контент" },
+  { id: "level:1", titleMn: "Level 1 багц (30 хичээл)", titleEn: "Level 1 pack", amount: 29000, highlight: true, description: "Level 1 30 хоногийн бүтэн контент" },
+  { id: "level:2", titleMn: "Level 2 багц (30 хичээл)", titleEn: "Level 2 pack", amount: 29000, description: "Level 2 30 хоногийн бүтэн контент" },
+  { id: "level:3", titleMn: "Level 3 багц (30 хичээл)", titleEn: "Level 3 pack", amount: 29000, description: "Level 3 30 хоногийн бүтэн контент" },
   { id: "course:full", titleMn: "Бүтэн 90 хоногийн курс", titleEn: "Full 90-day course", amount: 79000, description: "Бүх 3 түвшин + бүх шалгалт" },
 ];
 

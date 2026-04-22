@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation, useParams } from "wouter";
-import { useGetFinalTest, useSubmitFinalTest, getGetFinalTestQueryKey } from "@workspace/api-client-react";
+import { useGetFinalTest, useSelfReportFinalTest, getGetFinalTestQueryKey } from "@workspace/api-client-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
@@ -25,14 +25,10 @@ export default function FinalTestView() {
   });
   const accessDenied = (error as any)?.status === 403 || (error as any)?.response?.status === 403;
 
-  const submitTest = useSubmitFinalTest();
+  const selfReport = useSelfReportFinalTest();
 
-  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [scoreInput, setScoreInput] = useState<string>("");
   const [testResult, setTestResult] = useState<any>(null);
-  const [confirmOpen, setConfirmOpen] = useState(false);
-  const [passageOpen, setPassageOpen] = useState(false);
-
-  const passageText: string | undefined = (test?.questions as any[] | undefined)?.find((q: any) => q?.passage)?.passage;
 
   if (isLoading) {
     return (
@@ -75,57 +71,39 @@ export default function FinalTestView() {
     );
   }
 
-  const handleAnswerChange = (questionId: string, value: string) => {
-    setAnswers((prev) => ({ ...prev, [questionId]: value }));
-  };
-
-  const answeredCount = Object.values(answers).filter((v) => v && v.trim().length > 0).length;
-  const totalQuestions = test.questions.length;
   const passingScore = (test as any).passingScore ?? 70;
+  const TOTAL = 50;
 
-  const handleAttemptSubmit = () => {
-    if (answeredCount < totalQuestions) {
-      setConfirmOpen(true);
+  const handleSelfReport = () => {
+    const score = parseInt(scoreInput, 10);
+    if (isNaN(score) || score < 0 || score > TOTAL) {
+      toast({
+        title: "Буруу оноо",
+        description: `Оноо 0-ээс ${TOTAL}-н хооронд байх ёстой.`,
+        variant: "destructive",
+      });
       return;
     }
-    doSubmit();
-  };
-
-  const doSubmit = () => {
-    setConfirmOpen(false);
-    const formattedAnswers = Object.entries(answers).map(([questionId, answer]) => ({
-      questionId,
-      answer,
-    }));
-
-    submitTest.mutate(
-      { level: levelNum, data: { answers: formattedAnswers } },
+    selfReport.mutate(
+      { level: levelNum, data: { score, total: TOTAL } },
       {
         onSuccess: (result) => {
           setTestResult(result);
           queryClient.invalidateQueries({ queryKey: getGetFinalTestQueryKey(levelNum) });
           queryClient.invalidateQueries({ queryKey: ["/api/lessons"] });
           queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
-          
           if (result.passed) {
-            toast({
-              title: "Баяр хүргэе!",
-              description: `Та түвшин ${levelNum} шалгалтыг амжилттай давлаа!`,
-            });
+            toast({ title: "Баяр хүргэе!", description: `Та Level ${levelNum} шалгалтыг амжилттай давлаа!` });
           } else {
             toast({
               title: "Дахин оролдоно уу",
-              description: `Оноо хүрсэнгүй (${result.percentage}%). Шаардлагатай оноо: ${(test as any).passingScore ?? 70}%`,
+              description: `Оноо хүрсэнгүй (${result.percentage}%). Шаардлагатай: ${passingScore}%`,
               variant: "destructive",
             });
           }
         },
         onError: () => {
-          toast({
-            title: "Алдаа гарлаа",
-            description: "Шалгалт илгээхэд алдаа гарлаа. Дахин оролдоно уу.",
-            variant: "destructive",
-          });
+          toast({ title: "Алдаа гарлаа", description: "Дахин оролдоно уу.", variant: "destructive" });
         },
       }
     );
@@ -166,90 +144,20 @@ export default function FinalTestView() {
         </CardContent>
       </Card>
     )}
-    {passageText && !testResult && (
-      <>
-        <button
-          type="button"
-          onClick={() => setPassageOpen(true)}
-          className="fixed bottom-6 right-6 z-[100] shadow-2xl rounded-full h-16 px-6 flex items-center gap-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold hover:scale-105 active:scale-95 transition border-4 border-white dark:border-background"
-          aria-label="Read passage"
-        >
-          <BookOpen className="w-6 h-6" />
-          <span className="hidden sm:inline">Read passage</span>
-          <span className="sm:hidden">Текст</span>
-        </button>
-        <Dialog open={passageOpen} onOpenChange={setPassageOpen}>
-          <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300">
-                <BookOpen className="w-5 h-5" />
-                Reading passage · Унших текст
-              </DialogTitle>
-              <DialogDescription className="text-xs">
-                Reading section (Q36–Q43) · Энэ текстийг ашиглан асуултуудад хариулна уу.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="rounded-lg bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200/60 dark:border-emerald-800/40 p-4 mt-2">
-              <p className="text-[15px] leading-7 whitespace-pre-line text-foreground">{passageText}</p>
-            </div>
-          </DialogContent>
-        </Dialog>
-      </>
-    )}
-    <div className="space-y-6 animate-in fade-in duration-500 max-w-4xl mx-auto">
-      <Button variant="ghost" className="mb-2 -ml-4" onClick={() => setLocation("/lessons")}>
+
+    <div className="space-y-6 max-w-4xl mx-auto">
+      <Button variant="ghost" className="mb-2 -ml-4" onClick={() => setLocation('/lessons')}>
         <ArrowLeft className="mr-2 w-4 h-4" /> Хичээлүүд
       </Button>
 
-      <div className="text-center mb-4">
-        <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+      <div className="text-center mb-2">
+        <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 text-white rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
           <Trophy className="w-8 h-8" />
         </div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">{test.titleMn}</h1>
-        <p className="text-xl text-muted-foreground mt-2">{test.titleEn}</p>
-        <p className="text-sm mt-4 font-medium text-primary">Нийт {totalQuestions} асуулт • {passingScore}%-иас дээш авч тэнцэнэ</p>
+        <p className="text-lg text-muted-foreground mt-1">{test.titleEn}</p>
+        <p className="text-sm mt-3 font-medium text-primary">{passingScore}%-иас дээш авч тэнцэнэ</p>
       </div>
-
-      {!testResult && (
-        <div className="sticky top-0 z-30 -mx-4 md:-mx-8 px-4 md:px-8 py-3 bg-background/85 backdrop-blur-md border-b">
-          <div className="flex items-center gap-3">
-            <div className="flex-1">
-              <div className="flex items-center justify-between text-xs font-medium mb-1.5">
-                <span className="text-muted-foreground">Хариулсан · Answered</span>
-                <span className="font-bold text-foreground">{answeredCount} / {totalQuestions}</span>
-              </div>
-              <Progress value={(answeredCount / totalQuestions) * 100} className="h-2" />
-            </div>
-            <Button
-              size="sm"
-              onClick={handleAttemptSubmit}
-              disabled={submitTest.isPending}
-              className="shrink-0 bg-gradient-to-r from-primary to-primary/85"
-            >
-              {submitTest.isPending ? "..." : "Илгээх"}
-            </Button>
-          </div>
-        </div>
-      )}
-
-      <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <AlertCircle className="w-5 h-5 text-amber-500" /> Бүх асуултанд хариулаагүй байна
-            </DialogTitle>
-            <DialogDescription>
-              Та {totalQuestions - answeredCount} асуултыг хоосон үлдээж байна. Хоосон үлдээсэн асуултууд буруу гэж тооцогдоно.
-              <br /><br />
-              Үргэлжлүүлэн илгээх үү?
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="gap-2">
-            <Button variant="outline" onClick={() => setConfirmOpen(false)}>Үгүй, буцах</Button>
-            <Button onClick={doSubmit} disabled={submitTest.isPending}>Тийм, илгээх</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
 
       {testResult ? (
         <Card className={`border-2 overflow-hidden ${testResult.passed ? 'border-emerald-500/40' : 'border-amber-500/40'}`}>
@@ -266,7 +174,7 @@ export default function FinalTestView() {
             </CardTitle>
             <CardDescription className="text-xl mt-2">
               Таны оноо: <span className="font-bold text-foreground text-2xl">{testResult.percentage}%</span>
-              <span className="text-sm ml-2 text-muted-foreground">({testResult.score}/{testResult.total} зөв)</span>
+              <span className="text-sm ml-2 text-muted-foreground">({testResult.score}/{testResult.total})</span>
             </CardDescription>
             <div className="max-w-sm mx-auto mt-4">
               <div className="h-3 rounded-full bg-muted overflow-hidden relative">
@@ -297,250 +205,63 @@ export default function FinalTestView() {
               </div>
             )}
           </CardHeader>
-          <CardContent className="pt-6">
-            <div className="space-y-6">
-              <h3 className="font-semibold text-lg border-b pb-2">Дэлгэрэнгүй:</h3>
-              {testResult.correctAnswers.map((ans: any, idx: number) => {
-                const question = test.questions.find(q => q.id === ans.questionId);
-                return (
-                  <div key={ans.questionId} className={`p-4 rounded-lg border ${ans.isCorrect ? 'bg-primary/5 border-primary/20' : 'bg-destructive/5 border-destructive/20'}`}>
-                    <p className="font-medium mb-1">{idx + 1}. {question?.promptMn}</p>
-                    <p className="text-sm text-muted-foreground mb-3">{question?.promptEn}</p>
-                    
-                    <div className="flex items-center gap-2 mt-2">
-                      <span className="text-sm font-medium">Таны хариулт:</span>
-                      <span className={`text-sm ${ans.isCorrect ? 'text-primary font-bold' : 'text-destructive line-through'}`}>
-                        {answers[ans.questionId]}
-                      </span>
-                    </div>
-                    
-                    {!ans.isCorrect && (
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className="text-sm font-medium">Зөв хариулт:</span>
-                        <span className="text-sm text-primary font-bold">{ans.correctAnswer}</span>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-              
-              <div className="flex justify-center gap-4 pt-6">
-                <Button variant="outline" size="lg" onClick={() => {
-                  setTestResult(null);
-                  setAnswers({});
-                }}>
-                  Дахин өгөх
-                </Button>
-                <Button size="lg" onClick={() => setLocation("/lessons")}>
-                  Хичээлүүд рүү буцах
-                </Button>
-              </div>
+          <CardContent className="pt-2">
+            <div className="flex justify-center gap-3 pt-4 flex-wrap">
+              <Button variant="outline" size="lg" onClick={() => { setTestResult(null); setScoreInput(''); }}>
+                Дахин өгөх
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <a href={officialTestUrl} target="_blank" rel="noopener noreferrer">Шалгалтыг дахин нээх</a>
+              </Button>
+              <Button size="lg" onClick={() => setLocation('/lessons')}>Хичээлүүд рүү буцах</Button>
             </div>
           </CardContent>
         </Card>
       ) : (
-        <div className="space-y-8">
-          {(() => {
-            const sections: { title: string; intro?: string; count: number; anchorId: string; firstQ: number }[] = [];
-            (test.questions as any[]).forEach((q, qIdx) => {
-              if (q.sectionTitle) {
-                sections.push({ title: q.sectionTitle, intro: q.sectionIntro, count: 1, anchorId: `section-${sections.length + 1}`, firstQ: qIdx + 1 });
-              } else if (sections.length > 0) {
-                sections[sections.length - 1].count++;
-              }
-            });
-            if (sections.length === 0) return null;
-            const jumpTo = (id: string) => {
-              const el = document.getElementById(id);
-              if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-            };
-            return (
-              <Card className="border-primary/30 bg-primary/5">
-                <CardContent className="p-5 sm:p-6">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-primary mb-3">
-                    Шалгалтын бүтэц · Test outline · <span className="normal-case font-normal text-muted-foreground">tap a section to jump</span>
-                  </p>
-                  <div className="grid sm:grid-cols-2 gap-3">
-                    {sections.map((s, i) => (
-                      <button
-                        key={i}
-                        type="button"
-                        onClick={() => jumpTo(s.anchorId)}
-                        className="text-left flex items-start gap-3 rounded-lg bg-background border p-3 hover:border-primary hover:shadow-sm transition cursor-pointer"
-                      >
-                        <div className="w-8 h-8 rounded-full bg-primary/15 text-primary font-bold flex items-center justify-center shrink-0">
-                          {i + 1}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-sm leading-tight">{s.title}</p>
-                          {s.intro && <p className="text-xs text-muted-foreground mt-1 leading-snug line-clamp-2">{s.intro}</p>}
-                          <p className="text-xs text-primary mt-1 font-medium">{s.count} асуулт · jump ↓</p>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })()}
-          {(() => {
-            type SectionGroup = {
-              anchorId: string;
-              title?: string;
-              intro?: string;
-              passage?: string;
-              audioUrl?: string;
-              questions: { q: any; globalIdx: number }[];
-            };
-            const groups: SectionGroup[] = [];
-            (test.questions as any[]).forEach((q, qIdx) => {
-              if (q.sectionTitle || groups.length === 0) {
-                groups.push({
-                  anchorId: `section-${groups.length + 1}`,
-                  title: q.sectionTitle,
-                  intro: q.sectionIntro,
-                  passage: q.passage,
-                  audioUrl: q.audioUrl,
-                  questions: [{ q, globalIdx: qIdx }],
-                });
-              } else {
-                const g = groups[groups.length - 1];
-                g.questions.push({ q, globalIdx: qIdx });
-                if (!g.passage && q.passage) g.passage = q.passage;
-                if (!g.audioUrl && q.audioUrl) g.audioUrl = q.audioUrl;
-              }
-            });
-            const sectionColors = [
-              { bar: "from-blue-400 to-indigo-500", chip: "bg-blue-500/10 text-blue-700 dark:text-blue-300", border: "border-blue-300/50" },
-              { bar: "from-amber-400 to-orange-500", chip: "bg-amber-500/10 text-amber-700 dark:text-amber-300", border: "border-amber-300/50" },
-              { bar: "from-emerald-400 to-teal-500", chip: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300", border: "border-emerald-300/50" },
-              { bar: "from-fuchsia-400 to-pink-500", chip: "bg-fuchsia-500/10 text-fuchsia-700 dark:text-fuchsia-300", border: "border-fuchsia-300/50" },
-            ];
-            return (
-              <div className="space-y-8">
-                {groups.map((g, gi) => {
-                  const c = sectionColors[gi % sectionColors.length];
-                  return (
-                    <div key={g.anchorId} id={g.anchorId} className="space-y-5 scroll-mt-24">
-                    {g.passage && (
-                      <Card className="border-2 border-emerald-300/60">
-                        <div className="h-1.5 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-t-md" />
-                        <div className="px-5 sm:px-7 pt-5 pb-3">
-                          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 mb-2">
-                            <span>📖 Reading passage</span>
-                            <span className="opacity-50">•</span>
-                            <span>Унших текст</span>
-                          </div>
-                          <h2 className="text-xl font-bold leading-tight">Read the passage carefully</h2>
-                          <p className="text-sm text-muted-foreground mt-1">Текстийг анхааралтай уншаад дараах асуултуудад хариулаарай.</p>
-                        </div>
-                        <div className="px-5 sm:px-7 pb-6">
-                          <div className="border-l-4 border-emerald-500 bg-card pl-5 pr-2 py-4">
-                            <p className="font-semibold text-[15px] mb-3">Reading passage</p>
-                            <p className="text-[15px] leading-7 whitespace-pre-line text-foreground">
-                              {g.passage}
-                            </p>
-                          </div>
-                        </div>
-                      </Card>
-                    )}
-                    <Card className={`border-2 ${c.border}`}>
-                      <div className={`h-1.5 bg-gradient-to-r ${c.bar} rounded-t-md`} />
-                      {g.title && (
-                        <div className="px-5 sm:px-7 pt-5 pb-3">
-                          <div className={`inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full ${c.chip} mb-2`}>
-                            <span>Section {gi + 1}</span>
-                            <span className="opacity-50">•</span>
-                            <span>{g.questions.length} асуулт</span>
-                          </div>
-                          <h2 className="text-xl font-bold leading-tight">{g.title}</h2>
-                          {g.intro && (
-                            <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{g.intro}</p>
-                          )}
-                        </div>
-                      )}
-
-                      {(g.audioUrl || g.passage) && (
-                        <div className="px-5 sm:px-7 mb-2">
-                          {g.audioUrl && (
-                            <div className={`sticky top-16 z-10 rounded-lg border-2 ${c.border} bg-card shadow-md mb-4`}>
-                              <div className={`px-5 py-3 ${c.chip} rounded-t-lg flex items-center gap-2`}>
-                                <span className="text-sm font-semibold">🎧 Listening audio · Дууг сонсоорой</span>
-                              </div>
-                              <div className="px-5 py-4">
-                                <audio controls preload="metadata" src={g.audioUrl} className="w-full">
-                                  Your browser does not support audio playback.
-                                </audio>
-                                <p className="text-xs text-muted-foreground mt-2">
-                                  Та шаардлагатай гэж үзвэл олон удаа дахин сонсож болно.
-                                </p>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      )}
-
-                      <CardContent className="px-5 sm:px-7 pt-2 pb-7">
-                        <div className="space-y-8">
-                          {g.questions.map(({ q: question, globalIdx }) => {
-                            const isFill = question.type === "fill" || (Array.isArray(question.options) && question.options.length === 0);
-                            return (
-                              <div key={question.id} className="space-y-4 pt-2 border-t first:border-t-0 first:pt-0">
-                                <h3 className="text-base sm:text-lg font-medium leading-relaxed">
-                                  <span className="text-primary mr-2 font-bold">{globalIdx + 1}.</span>
-                                  {question.promptEn}
-                                </h3>
-                                {isFill ? (
-                                  <div className="ml-6">
-                                    <input
-                                      type="text"
-                                      value={answers[question.id] || ""}
-                                      onChange={(e) => handleAnswerChange(question.id, e.target.value)}
-                                      placeholder="Хариултаа бичээрэй..."
-                                      className="w-full max-w-md rounded-md border border-input bg-background px-3 py-2 text-base focus:outline-none focus:ring-2 focus:ring-primary"
-                                    />
-                                  </div>
-                                ) : (
-                                  <RadioGroup
-                                    value={answers[question.id] || ""}
-                                    onValueChange={(val) => handleAnswerChange(question.id, val)}
-                                    className="ml-6 space-y-3"
-                                  >
-                                    {question.options.map((option: string, optIdx: number) => (
-                                      <div key={optIdx} className="flex items-center space-x-3">
-                                        <RadioGroupItem value={option} id={`${question.id}-opt-${optIdx}`} className="h-5 w-5" />
-                                        <Label htmlFor={`${question.id}-opt-${optIdx}`} className="text-base font-normal cursor-pointer leading-tight">
-                                          <span className="font-mono text-xs text-muted-foreground mr-2">{String.fromCharCode(65 + optIdx)}.</span>
-                                          {option}
-                                        </Label>
-                                      </div>
-                                    ))}
-                                  </RadioGroup>
-                                )}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </CardContent>
-                    </Card>
-                    </div>
-                  );
-                })}
+        <Card className="border-2 border-primary/20">
+          <CardHeader>
+            <CardTitle className="text-xl">Шалгалтын оноогоо илгээх · Submit your score</CardTitle>
+            <CardDescription className="text-base leading-relaxed mt-2">
+              Албан ёсны шалгалтыг өгсөний дараа гарсан оноогоо доор оруулна уу. Систем таны оноог хадгалж, тэнцсэн эсэхийг шалгана.
+              <br />
+              <span className="text-xs italic text-muted-foreground">After completing the official test above, enter the final score it showed you (out of 50).</span>
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-5">
+            <div className="rounded-lg border bg-muted/30 p-4 text-sm space-y-1.5">
+              <p><span className="font-semibold">Pass:</span> 35 / 50 (70%) — Level {levelNum} тэнцсэн</p>
+              <p><span className="font-semibold">Distinction:</span> 45 / 50 (90%) — Outstanding!</p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3 sm:items-end">
+              <div className="flex-1">
+                <Label htmlFor="score-input" className="text-sm font-semibold mb-1.5 block">
+                  Таны оноо · Your score (0–50)
+                </Label>
+                <input
+                  id="score-input"
+                  type="number"
+                  min={0}
+                  max={50}
+                  value={scoreInput}
+                  onChange={(e) => setScoreInput(e.target.value)}
+                  placeholder="e.g. 38"
+                  className="w-full h-12 rounded-md border border-input bg-background px-4 text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-primary"
+                />
               </div>
-            );
-          })()}
-
-          <div className="flex justify-center">
-            <Button 
-              size="lg" 
-              onClick={handleAttemptSubmit}
-              disabled={submitTest.isPending}
-              className="px-12 h-14 text-lg w-full max-w-md"
-            >
-              {submitTest.isPending ? "Илгээж байна..." : "Шалгалт илгээх"}
-            </Button>
-          </div>
-        </div>
+              <Button
+                size="lg"
+                onClick={handleSelfReport}
+                disabled={selfReport.isPending || !scoreInput}
+                className="h-12 px-8 shrink-0"
+              >
+                {selfReport.isPending ? 'Илгээж байна...' : 'Илгээх · Submit'}
+              </Button>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              ⚠️ Шударгаар оруулна уу. Багш админ оноог шалгах боломжтой.
+            </p>
+          </CardContent>
+        </Card>
       )}
     </div>
     </>

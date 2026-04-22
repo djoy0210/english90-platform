@@ -230,6 +230,32 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/QuizAttemptResult"
+  /final-tests/{level}/self-report:
+    post:
+      operationId: selfReportFinalTest
+      tags: [learning]
+      summary: Self-report a final test score taken on the static page
+      parameters:
+        - name: level
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 3
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SelfReportRequest"
+      responses:
+        "200":
+          description: Self-reported result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SelfReportResult"
   /test-history:
     get:
       operationId: getTestHistory
@@ -829,6 +855,21 @@ components:
               isCorrect: { type: boolean }
             required: [questionId, correctAnswer, isCorrect]
       required: [id, score, total, percentage, passed, completedDay, correctAnswers]
+    SelfReportRequest:
+      type: object
+      properties:
+        score: { type: integer, minimum: 0, maximum: 50 }
+        total: { type: integer, minimum: 1, maximum: 50 }
+      required: [score, total]
+    SelfReportResult:
+      type: object
+      properties:
+        id: { type: string }
+        score: { type: integer }
+        total: { type: integer }
+        percentage: { type: integer }
+        passed: { type: boolean }
+      required: [id, score, total, percentage, passed]
     FinalTestDetail:
       type: object
       properties:

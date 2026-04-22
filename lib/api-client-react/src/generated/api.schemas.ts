@@ -153,6 +153,27 @@ export interface QuizAttemptResult {
   correctAnswers: QuizAttemptResultCorrectAnswersItem[];
 }
 
+export interface SelfReportRequest {
+  /**
+   * @minimum 0
+   * @maximum 50
+   */
+  score: number;
+  /**
+   * @minimum 1
+   * @maximum 50
+   */
+  total: number;
+}
+
+export interface SelfReportResult {
+  id: string;
+  score: number;
+  total: number;
+  percentage: number;
+  passed: boolean;
+}
+
 export interface FinalTestDetail {
   id: string;
   level: number;
