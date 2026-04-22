@@ -30,7 +30,8 @@ import {
   User as UserIcon,
   ShieldCheck,
   GraduationCap,
-  ClipboardCheck
+  ClipboardCheck,
+  MessageCircle
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -61,6 +62,11 @@ const mainNavItems = [
     title: "Багц авах",
     url: "/billing",
     icon: CreditCard,
+  },
+  {
+    title: "Холбоо барих",
+    url: "/contact",
+    icon: MessageCircle,
   },
 ];
 

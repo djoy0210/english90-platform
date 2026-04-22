@@ -15,6 +15,7 @@ import Billing from "./pages/billing";
 import Admin from "./pages/admin";
 import Account from "./pages/account";
 import PlacementTest from "./pages/placement-test";
+import Contact from "./pages/contact";
 import NotFound from "./pages/not-found";
 import Layout from "./components/layout";
 import { useGetMe } from "@workspace/api-client-react";
@@ -214,6 +215,7 @@ function App() {
               <Route path="/history" component={() => <ProtectedRoute component={History} />} />
               <Route path="/billing" component={() => <ProtectedRoute component={Billing} />} />
               <Route path="/account" component={() => <ProtectedRoute component={Account} />} />
+              <Route path="/contact" component={() => <ProtectedRoute component={Contact} />} />
               <Route path="/admin" component={() => <ProtectedRoute component={Admin} adminOnly />} />
               
               <Route component={NotFound} />

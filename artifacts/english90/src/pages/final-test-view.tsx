@@ -3,8 +3,10 @@ import { useLocation, useParams } from "wouter";
 import { useGetFinalTest, useSubmitFinalTest, getGetFinalTestQueryKey } from "@workspace/api-client-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { BookOpen } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import { Progress } from "@/components/ui/progress";
+import { BookOpen, ArrowRight, RefreshCw, Sparkles } from "lucide-react";
+import { Link } from "wouter";
 import { Skeleton } from "@/components/ui/skeleton";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -29,6 +31,7 @@ export default function FinalTestView() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [testResult, setTestResult] = useState<any>(null);
   const [passageOpen, setPassageOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const passageText: string | undefined = (test?.questions as any[] | undefined)?.find((q: any) => q?.passage)?.passage;
 
@@ -77,16 +80,20 @@ export default function FinalTestView() {
     setAnswers((prev) => ({ ...prev, [questionId]: value }));
   };
 
-  const handleSubmitTest = () => {
-    if (Object.keys(answers).length < test.questions.length) {
-      toast({
-        title: "Анхааруулга",
-        description: "Бүх асуултад хариулна уу.",
-        variant: "destructive",
-      });
+  const answeredCount = Object.values(answers).filter((v) => v && v.trim().length > 0).length;
+  const totalQuestions = test.questions.length;
+  const passingScore = (test as any).passingScore ?? 70;
+
+  const handleAttemptSubmit = () => {
+    if (answeredCount < totalQuestions) {
+      setConfirmOpen(true);
       return;
     }
+    doSubmit();
+  };
 
+  const doSubmit = () => {
+    setConfirmOpen(false);
     const formattedAnswers = Object.entries(answers).map(([questionId, answer]) => ({
       questionId,
       answer,
@@ -157,29 +164,101 @@ export default function FinalTestView() {
         </>
       )}
 
-      <div className="text-center mb-8">
-        <div className="w-16 h-16 bg-secondary/20 text-secondary-foreground rounded-full flex items-center justify-center mx-auto mb-4">
+      <div className="text-center mb-4">
+        <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
           <Trophy className="w-8 h-8" />
         </div>
         <h1 className="text-3xl font-bold tracking-tight text-foreground">{test.titleMn}</h1>
         <p className="text-xl text-muted-foreground mt-2">{test.titleEn}</p>
-        <p className="text-sm mt-4 font-medium text-primary">Нийт {test.questions.length} асуулт • {(test as any).passingScore ?? 70}%-иас дээш авч тэнцэнэ</p>
+        <p className="text-sm mt-4 font-medium text-primary">Нийт {totalQuestions} асуулт • {passingScore}%-иас дээш авч тэнцэнэ</p>
       </div>
 
-      {testResult ? (
-        <Card className={`border-2 ${testResult.passed ? 'border-primary' : 'border-destructive'}`}>
-          <CardHeader className="text-center pb-2">
-            <div className={`w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-4 ${
-              testResult.passed ? 'bg-primary/20 text-primary' : 'bg-destructive/20 text-destructive'
-            }`}>
-              {testResult.passed ? <CheckCircle2 className="w-10 h-10" /> : <AlertCircle className="w-10 h-10" />}
+      {!testResult && (
+        <div className="sticky top-0 z-30 -mx-4 md:-mx-8 px-4 md:px-8 py-3 bg-background/85 backdrop-blur-md border-b">
+          <div className="flex items-center gap-3">
+            <div className="flex-1">
+              <div className="flex items-center justify-between text-xs font-medium mb-1.5">
+                <span className="text-muted-foreground">Хариулсан · Answered</span>
+                <span className="font-bold text-foreground">{answeredCount} / {totalQuestions}</span>
+              </div>
+              <Progress value={(answeredCount / totalQuestions) * 100} className="h-2" />
             </div>
-            <CardTitle className="text-3xl">
+            <Button
+              size="sm"
+              onClick={handleAttemptSubmit}
+              disabled={submitTest.isPending}
+              className="shrink-0 bg-gradient-to-r from-primary to-primary/85"
+            >
+              {submitTest.isPending ? "..." : "Илгээх"}
+            </Button>
+          </div>
+        </div>
+      )}
+
+      <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <AlertCircle className="w-5 h-5 text-amber-500" /> Бүх асуултанд хариулаагүй байна
+            </DialogTitle>
+            <DialogDescription>
+              Та {totalQuestions - answeredCount} асуултыг хоосон үлдээж байна. Хоосон үлдээсэн асуултууд буруу гэж тооцогдоно.
+              <br /><br />
+              Үргэлжлүүлэн илгээх үү?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="gap-2">
+            <Button variant="outline" onClick={() => setConfirmOpen(false)}>Үгүй, буцах</Button>
+            <Button onClick={doSubmit} disabled={submitTest.isPending}>Тийм, илгээх</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {testResult ? (
+        <Card className={`border-2 overflow-hidden ${testResult.passed ? 'border-emerald-500/40' : 'border-amber-500/40'}`}>
+          <div className={`h-2 ${testResult.passed ? 'bg-gradient-to-r from-emerald-400 to-teal-500' : 'bg-gradient-to-r from-amber-400 to-orange-500'}`} />
+          <CardHeader className="text-center pb-2">
+            <div className={`w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-4 shadow-lg ${
+              testResult.passed ? 'bg-gradient-to-br from-emerald-400 to-teal-500 text-white' : 'bg-gradient-to-br from-amber-400 to-orange-500 text-white'
+            }`}>
+              {testResult.passed ? <Trophy className="w-10 h-10" /> : <AlertCircle className="w-10 h-10" />}
+            </div>
+            <CardTitle className="text-3xl flex items-center justify-center gap-2">
+              {testResult.passed && <Sparkles className="w-7 h-7 text-amber-500" />}
               {testResult.passed ? 'Амжилттай тэнцлээ!' : 'Харамсалтай нь тэнцсэнгүй'}
             </CardTitle>
             <CardDescription className="text-xl mt-2">
-              Таны оноо: <span className="font-bold text-foreground">{testResult.percentage}%</span> ({testResult.score}/{testResult.total})
+              Таны оноо: <span className="font-bold text-foreground text-2xl">{testResult.percentage}%</span>
+              <span className="text-sm ml-2 text-muted-foreground">({testResult.score}/{testResult.total} зөв)</span>
             </CardDescription>
+            <div className="max-w-sm mx-auto mt-4">
+              <div className="h-3 rounded-full bg-muted overflow-hidden relative">
+                <div
+                  className={`h-full transition-all ${testResult.passed ? 'bg-gradient-to-r from-emerald-400 to-teal-500' : 'bg-gradient-to-r from-amber-400 to-orange-500'}`}
+                  style={{ width: `${testResult.percentage}%` }}
+                />
+                <div
+                  className="absolute top-0 bottom-0 w-px bg-foreground/40"
+                  style={{ left: `${passingScore}%` }}
+                  title={`Pass: ${passingScore}%`}
+                />
+              </div>
+              <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                <span>0%</span>
+                <span>Pass: {passingScore}%</span>
+                <span>100%</span>
+              </div>
+            </div>
+            {testResult.passed && levelNum < 3 && (
+              <div className="mt-4 inline-flex items-center gap-2 mx-auto px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-sm font-semibold">
+                <Sparkles className="w-4 h-4" /> Level {levelNum + 1} нээгдэх боломжтой
+              </div>
+            )}
+            {testResult.passed && levelNum === 3 && (
+              <div className="mt-4 inline-flex items-center gap-2 mx-auto px-4 py-2 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-400 text-sm font-semibold">
+                <Trophy className="w-4 h-4" /> 90 хоногийн аялалаа дуусгалаа!
+              </div>
+            )}
           </CardHeader>
           <CardContent className="pt-6">
             <div className="space-y-6">
@@ -364,7 +443,7 @@ export default function FinalTestView() {
           <div className="flex justify-center">
             <Button 
               size="lg" 
-              onClick={handleSubmitTest}
+              onClick={handleAttemptSubmit}
               disabled={submitTest.isPending}
               className="px-12 h-14 text-lg w-full max-w-md"
             >
