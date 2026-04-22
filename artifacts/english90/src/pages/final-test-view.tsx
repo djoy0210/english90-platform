@@ -422,21 +422,12 @@ export default function FinalTestView() {
                             </div>
                           )}
                           {g.passage && (
-                            <details
-                              open
-                              className={`sticky top-16 z-10 rounded-lg border-2 ${c.border} bg-card shadow-md group`}
-                            >
-                              <summary className={`cursor-pointer list-none px-5 py-3 flex items-center justify-between ${c.chip} rounded-t-lg`}>
-                                <span className="text-sm font-semibold flex items-center gap-2">
-                                  📖 Reading passage · Текстийг уншаарай
-                                </span>
-                                <span className="text-xs opacity-70 group-open:hidden">Дэлгэх ▾</span>
-                                <span className="text-xs opacity-70 hidden group-open:inline">Хураах ▴</span>
-                              </summary>
-                              <div className="px-5 py-4 max-h-80 overflow-y-auto">
-                                <p className="text-sm leading-7 whitespace-pre-line">{g.passage}</p>
-                              </div>
-                            </details>
+                            <div className="border-l-4 border-emerald-500 bg-card pl-5 pr-2 py-4 mb-2">
+                              <p className="font-semibold text-[15px] mb-3">Reading passage</p>
+                              <p className="text-[15px] leading-7 whitespace-pre-line text-foreground">
+                                {g.passage}
+                              </p>
+                            </div>
                           )}
                         </div>
                       )}
