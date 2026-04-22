@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Progress } from "@/components/ui/progress";
-import { Sparkles } from "lucide-react";
+import { Sparkles, BookOpen } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
@@ -30,6 +30,9 @@ export default function FinalTestView() {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [testResult, setTestResult] = useState<any>(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [passageOpen, setPassageOpen] = useState(false);
+
+  const passageText: string | undefined = (test?.questions as any[] | undefined)?.find((q: any) => q?.passage)?.passage;
 
   if (isLoading) {
     return (
@@ -133,6 +136,37 @@ export default function FinalTestView() {
       <Button variant="ghost" className="mb-2 -ml-4" onClick={() => setLocation("/lessons")}>
         <ArrowLeft className="mr-2 w-4 h-4" /> Хичээлүүд
       </Button>
+
+      {passageText && !testResult && (
+        <>
+          <button
+            type="button"
+            onClick={() => setPassageOpen(true)}
+            className="fixed bottom-6 right-6 z-50 shadow-2xl rounded-full h-16 px-6 flex items-center gap-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold hover:scale-105 active:scale-95 transition border-4 border-white dark:border-background"
+            aria-label="Read passage"
+          >
+            <BookOpen className="w-6 h-6" />
+            <span className="hidden sm:inline">Read passage</span>
+            <span className="sm:hidden">Текст</span>
+          </button>
+          <Dialog open={passageOpen} onOpenChange={setPassageOpen}>
+            <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300">
+                  <BookOpen className="w-5 h-5" />
+                  Reading passage · Унших текст
+                </DialogTitle>
+                <DialogDescription className="text-xs">
+                  Reading section (Q36–Q43) · Энэ текстийг ашиглан асуултуудад хариулна уу.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="rounded-lg bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200/60 dark:border-emerald-800/40 p-4 mt-2">
+                <p className="text-[15px] leading-7 whitespace-pre-line text-foreground">{passageText}</p>
+              </div>
+            </DialogContent>
+          </Dialog>
+        </>
+      )}
 
       <div className="text-center mb-4">
         <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
