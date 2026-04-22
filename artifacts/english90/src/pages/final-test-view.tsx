@@ -354,8 +354,8 @@ export default function FinalTestView() {
                 {groups.map((g, gi) => {
                   const c = sectionColors[gi % sectionColors.length];
                   return (
-                    <Card key={g.anchorId} id={g.anchorId} className={`overflow-hidden border-2 ${c.border} scroll-mt-24`}>
-                      <div className={`h-1.5 bg-gradient-to-r ${c.bar}`} />
+                    <Card key={g.anchorId} id={g.anchorId} className={`border-2 ${c.border} scroll-mt-24`}>
+                      <div className={`h-1.5 bg-gradient-to-r ${c.bar} rounded-t-md`} />
                       {g.title && (
                         <div className="px-5 sm:px-7 pt-5 pb-3">
                           <div className={`inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full ${c.chip} mb-2`}>
