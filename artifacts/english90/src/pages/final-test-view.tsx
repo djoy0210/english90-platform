@@ -388,7 +388,30 @@ export default function FinalTestView() {
                 {groups.map((g, gi) => {
                   const c = sectionColors[gi % sectionColors.length];
                   return (
-                    <Card key={g.anchorId} id={g.anchorId} className={`border-2 ${c.border} scroll-mt-24`}>
+                    <div key={g.anchorId} id={g.anchorId} className="space-y-5 scroll-mt-24">
+                    {g.passage && (
+                      <Card className="border-2 border-emerald-300/60">
+                        <div className="h-1.5 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-t-md" />
+                        <div className="px-5 sm:px-7 pt-5 pb-3">
+                          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 mb-2">
+                            <span>📖 Reading passage</span>
+                            <span className="opacity-50">•</span>
+                            <span>Унших текст</span>
+                          </div>
+                          <h2 className="text-xl font-bold leading-tight">Read the passage carefully</h2>
+                          <p className="text-sm text-muted-foreground mt-1">Текстийг анхааралтай уншаад дараах асуултуудад хариулаарай.</p>
+                        </div>
+                        <div className="px-5 sm:px-7 pb-6">
+                          <div className="border-l-4 border-emerald-500 bg-card pl-5 pr-2 py-4">
+                            <p className="font-semibold text-[15px] mb-3">Reading passage</p>
+                            <p className="text-[15px] leading-7 whitespace-pre-line text-foreground">
+                              {g.passage}
+                            </p>
+                          </div>
+                        </div>
+                      </Card>
+                    )}
+                    <Card className={`border-2 ${c.border}`}>
                       <div className={`h-1.5 bg-gradient-to-r ${c.bar} rounded-t-md`} />
                       {g.title && (
                         <div className="px-5 sm:px-7 pt-5 pb-3">
@@ -419,14 +442,6 @@ export default function FinalTestView() {
                                   Та шаардлагатай гэж үзвэл олон удаа дахин сонсож болно.
                                 </p>
                               </div>
-                            </div>
-                          )}
-                          {g.passage && (
-                            <div className="border-l-4 border-emerald-500 bg-card pl-5 pr-2 py-4 mb-2">
-                              <p className="font-semibold text-[15px] mb-3">Reading passage</p>
-                              <p className="text-[15px] leading-7 whitespace-pre-line text-foreground">
-                                {g.passage}
-                              </p>
                             </div>
                           )}
                         </div>
@@ -475,6 +490,7 @@ export default function FinalTestView() {
                         </div>
                       </CardContent>
                     </Card>
+                    </div>
                   );
                 })}
               </div>
