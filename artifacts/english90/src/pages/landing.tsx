@@ -104,9 +104,9 @@ export default function Landing() {
             <div className="grid md:grid-cols-4 gap-6">
               {[
                 { n: "1", t: "Бүртгүүлэх", d: "Имэйлээр бүртгүүлж 1 минутад эхлэнэ." },
-                { n: "2", t: "Шатлал тогтоох", d: "Үнэгүй тестээр өөрт тохирох түвшнээ олно." },
-                { n: "3", t: "Багц авах", d: "Хаан Банкаар Level 1 эсвэл бүтэн курсаа авна." },
-                { n: "4", t: "Өдөр бүр 60 мин", d: "60 минутын хичээл + сорил + шалгалт." },
+                { n: "2", t: "Түвшин тогтоох", d: "Үнэгүй тестээр өөрт тохирох түвшнээ олно." },
+                { n: "3", t: "Багц авах", d: "Level 1 эсвэл бүтэн курсаа авна." },
+                { n: "4", t: "Өдөр бүр 60 минут", d: "60 минутын хичээл + сорил + шалгалт." },
               ].map((s) => (
                 <div key={s.n} className="rounded-2xl border p-6 bg-card">
                   <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground font-bold flex items-center justify-center mb-3">{s.n}</div>
