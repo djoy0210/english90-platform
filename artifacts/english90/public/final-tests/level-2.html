@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+  <title>A2 Final Test · English90</title>
+  <link rel='preconnect' href='https://fonts.googleapis.com'>
+  <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+  <link href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'>
+  <style>
+    :root {
+      --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #475569;
+      --color-text-tertiary: #94a3b8;
+      --color-background-primary: #ffffff;
+      --color-background-secondary: #f1f5f9;
+      --color-border-tertiary: #e2e8f0;
+      --border-radius-md: 8px;
+      --border-radius-lg: 12px;
+    }
+    html, body { background: #f8fafc; color: var(--color-text-primary); font-family: var(--font-sans); }
+    .topbar { background: #fff; border-bottom: 1px solid var(--color-border-tertiary); padding: 12px 16px; display: flex; align-items: center; gap: 12px; position: sticky; top: 0; z-index: 50; }
+    .topbar a { color: #1D9E75; text-decoration: none; font-weight: 600; font-size: 14px; }
+    .topbar a:hover { text-decoration: underline; }
+    .topbar .brand { font-size: 13px; color: var(--color-text-secondary); margin-left: auto; }
+  </style>
+</head>
+<body>
+  <div class='topbar'>
+    <a href='/'>← Буцах · Back to dashboard</a>
+    <span class='brand'>English90 · Level 2 Final Test</span>
+  </div>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+.test-wrap{max-width:760px;margin:0 auto;padding:1.5rem 1rem;}
+.test-header{text-align:center;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:0.5px solid var(--color-border-tertiary);}
+.test-header h1{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px;}
+.test-header p{font-size:14px;color:var(--color-text-secondary);}
+.meta-row{display:flex;gap:12px;justify-content:center;margin-top:1rem;flex-wrap:wrap;}
+.meta-chip{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:6px 14px;font-size:13px;color:var(--color-text-secondary);}
+.section-header{margin:2rem 0 1rem;padding:10px 16px;background:var(--color-background-secondary);border-left:3px solid #1D9E75;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;}
+.section-header h2{font-size:15px;font-weight:500;color:var(--color-text-primary);}
+.section-header p{font-size:12px;color:var(--color-text-secondary);margin-top:2px;}
+.question{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:12px;}
+.q-num{font-size:11px;color:var(--color-text-tertiary);font-weight:500;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px;}
+.q-text{font-size:15px;color:var(--color-text-primary);margin-bottom:12px;line-height:1.5;}
+.options{display:flex;flex-direction:column;gap:6px;}
+.opt{display:flex;align-items:center;gap:10px;padding:8px 12px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);cursor:pointer;transition:background .15s;}
+.opt:hover{background:var(--color-background-secondary);}
+.opt input{accent-color:#1D9E75;width:16px;height:16px;flex-shrink:0;}
+.opt label{font-size:14px;color:var(--color-text-primary);cursor:pointer;flex:1;}
+.opt.correct{border-color:#3B6D11;background:#EAF3DE;}
+.opt.correct label{color:#3B6D11;}
+.opt.wrong{border-color:#A32D2D;background:#FCEBEB;}
+.opt.wrong label{color:#A32D2D;}
+.fill-input{width:100%;padding:8px 12px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);font-size:14px;background:var(--color-background-primary);color:var(--color-text-primary);margin-top:4px;}
+.fill-input.correct{border-color:#3B6D11;background:#EAF3DE;}
+.fill-input.wrong{border-color:#A32D2D;background:#FCEBEB;}
+.answer-key{font-size:12px;color:var(--color-text-secondary);margin-top:6px;display:none;}
+.passage-box{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:1rem;border-left:3px solid #1D9E75;}
+.submit-area{margin:2rem 0;text-align:center;}
+.submit-btn{padding:12px 40px;background:#1D9E75;color:#fff;border:none;border-radius:var(--border-radius-lg);font-size:16px;font-weight:500;cursor:pointer;}
+.submit-btn:hover{background:#0F6E56;}
+.submit-btn:disabled{opacity:.6;cursor:default;}
+.score-card{display:none;margin:2rem 0;padding:2rem;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);text-align:center;}
+.score-big{font-size:48px;font-weight:500;margin-bottom:8px;}
+.score-pct{font-size:18px;color:var(--color-text-secondary);margin-bottom:1rem;}
+.score-badge{display:inline-block;padding:6px 20px;border-radius:20px;font-size:14px;font-weight:500;margin-bottom:1rem;}
+.pass{background:#EAF3DE;color:#3B6D11;}
+.distinction{background:#E6F1FB;color:#0C447C;}
+.fail{background:#FCEBEB;color:#A32D2D;}
+.score-breakdown{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:1.5rem;}
+.breakdown-item{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px;}
+.breakdown-num{font-size:20px;font-weight:500;color:var(--color-text-primary);}
+.breakdown-label{color:var(--color-text-secondary);font-size:12px;margin-top:2px;}
+.progress-bar{width:100%;height:8px;background:var(--color-background-secondary);border-radius:4px;margin:1rem 0;}
+.progress-fill{height:100%;border-radius:4px;transition:width .3s;}
+.timer-bar{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;padding:10px 16px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);}
+.timer-num{font-size:20px;font-weight:500;color:var(--color-text-primary);min-width:60px;}
+.timer-label{font-size:13px;color:var(--color-text-secondary);}
+.answered-count{margin-left:auto;font-size:13px;color:var(--color-text-secondary);}
+</style>
+
+<div class="test-wrap">
+  <h2 class="sr-only">A2 level final English test — 50 questions covering intermediate vocabulary, grammar, reading, and writing</h2>
+
+  <div class="test-header">
+    <h1>A2 Final Test — Speak English in 90 Days</h1>
+    <p>Book 2 complete · Test your A2 intermediate knowledge</p>
+    <div class="meta-row">
+      <span class="meta-chip">50 questions</span>
+      <span class="meta-chip">50 minutes</span>
+      <span class="meta-chip">Pass: 35/50 (70%)</span>
+      <span class="meta-chip">Distinction: 45/50 (90%)</span>
+    </div>
+  </div>
+
+  <div class="timer-bar">
+    <span style="font-size:16px;">⏱</span>
+    <div>
+      <div class="timer-num" id="timer">50:00</div>
+      <div class="timer-label">time remaining</div>
+    </div>
+    <div class="answered-count" id="answered-count">0 / 50 answered</div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%;background:#1D9E75;"></div></div>
+
+  <div id="test-form">
+
+  <!-- SECTION 1: VOCABULARY -->
+  <div class="section-header">
+    <h2>Section 1 — Vocabulary (Questions 1–12)</h2>
+    <p>Choose the best word or phrase. / Хамгийн тохирох үгийг сонгоорой.</p>
+  </div>
+
+  <div class="question" data-q="1" data-answer="c">
+    <div class="q-num">Question 1</div>
+    <div class="q-text">She got a great mark on her exam. She was _____ with her result.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q1" value="a" id="q1a"><label for="q1a">A. disappointed</label></div>
+      <div class="opt"><input type="radio" name="q1" value="b" id="q1b"><label for="q1b">B. worried</label></div>
+      <div class="opt"><input type="radio" name="q1" value="c" id="q1c"><label for="q1c">C. delighted</label></div>
+      <div class="opt"><input type="radio" name="q1" value="d" id="q1d"><label for="q1d">D. confused</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="2" data-answer="b">
+    <div class="q-num">Question 2</div>
+    <div class="q-text">I need to _____ money each month so I can travel next year.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q2" value="a" id="q2a"><label for="q2a">A. borrow</label></div>
+      <div class="opt"><input type="radio" name="q2" value="b" id="q2b"><label for="q2b">B. save</label></div>
+      <div class="opt"><input type="radio" name="q2" value="c" id="q2c"><label for="q2c">C. spend</label></div>
+      <div class="opt"><input type="radio" name="q2" value="d" id="q2d"><label for="q2d">D. waste</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="3" data-answer="a">
+    <div class="q-num">Question 3</div>
+    <div class="q-text">He has a lot of _____ in IT — he has worked in the field for ten years.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q3" value="a" id="q3a"><label for="q3a">A. experience</label></div>
+      <div class="opt"><input type="radio" name="q3" value="b" id="q3b"><label for="q3b">B. education</label></div>
+      <div class="opt"><input type="radio" name="q3" value="c" id="q3c"><label for="q3c">C. knowledge</label></div>
+      <div class="opt"><input type="radio" name="q3" value="d" id="q3d"><label for="q3d">D. ability</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="4" data-answer="d">
+    <div class="q-num">Question 4</div>
+    <div class="q-text">The mountain is _____ than the hill — it takes three days to climb.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q4" value="a" id="q4a"><label for="q4a">A. more high</label></div>
+      <div class="opt"><input type="radio" name="q4" value="b" id="q4b"><label for="q4b">B. highest</label></div>
+      <div class="opt"><input type="radio" name="q4" value="c" id="q4c"><label for="q4c">C. more higher</label></div>
+      <div class="opt"><input type="radio" name="q4" value="d" id="q4d"><label for="q4d">D. higher</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="5" data-answer="b">
+    <div class="q-num">Question 5</div>
+    <div class="q-text">She is the _____ student in our class — nobody gets better marks.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q5" value="a" id="q5a"><label for="q5a">A. more intelligent</label></div>
+      <div class="opt"><input type="radio" name="q5" value="b" id="q5b"><label for="q5b">B. most intelligent</label></div>
+      <div class="opt"><input type="radio" name="q5" value="c" id="q5c"><label for="q5c">C. intelligenter</label></div>
+      <div class="opt"><input type="radio" name="q5" value="d" id="q5d"><label for="q5d">D. intelligent</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="6" data-answer="c">
+    <div class="q-num">Question 6</div>
+    <div class="q-text">I _____ rather stay at home tonight than go to the party.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q6" value="a" id="q6a"><label for="q6a">A. prefer</label></div>
+      <div class="opt"><input type="radio" name="q6" value="b" id="q6b"><label for="q6b">B. want</label></div>
+      <div class="opt"><input type="radio" name="q6" value="c" id="q6c"><label for="q6c">C. would</label></div>
+      <div class="opt"><input type="radio" name="q6" value="d" id="q6d"><label for="q6d">D. should</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="7" data-answer="a">
+    <div class="q-num">Question 7</div>
+    <div class="q-text">He runs very _____ . He always wins every race.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q7" value="a" id="q7a"><label for="q7a">A. quickly</label></div>
+      <div class="opt"><input type="radio" name="q7" value="b" id="q7b"><label for="q7b">B. quick</label></div>
+      <div class="opt"><input type="radio" name="q7" value="c" id="q7c"><label for="q7c">C. quicker</label></div>
+      <div class="opt"><input type="radio" name="q7" value="d" id="q7d"><label for="q7d">D. quickest</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="8" data-answer="d">
+    <div class="q-num">Question 8</div>
+    <div class="q-text">There are _____ people in the queue — we'll be waiting for an hour!</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q8" value="a" id="q8a"><label for="q8a">A. too much</label></div>
+      <div class="opt"><input type="radio" name="q8" value="b" id="q8b"><label for="q8b">B. enough</label></div>
+      <div class="opt"><input type="radio" name="q8" value="c" id="q8c"><label for="q8c">C. not enough</label></div>
+      <div class="opt"><input type="radio" name="q8" value="d" id="q8d"><label for="q8d">D. too many</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="9" data-answer="b">
+    <div class="q-num">Question 9</div>
+    <div class="q-text">She _____ herself when she cut the vegetables — she needed a bandage.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q9" value="a" id="q9a"><label for="q9a">A. hurt him</label></div>
+      <div class="opt"><input type="radio" name="q9" value="b" id="q9b"><label for="q9b">B. hurt herself</label></div>
+      <div class="opt"><input type="radio" name="q9" value="c" id="q9c"><label for="q9c">C. hurt her</label></div>
+      <div class="opt"><input type="radio" name="q9" value="d" id="q9d"><label for="q9d">D. hurt itself</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="10" data-answer="c">
+    <div class="q-num">Question 10</div>
+    <div class="q-text">You _____ eat more vegetables — it's very important for your health!</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q10" value="a" id="q10a"><label for="q10a">A. can</label></div>
+      <div class="opt"><input type="radio" name="q10" value="b" id="q10b"><label for="q10b">B. would</label></div>
+      <div class="opt"><input type="radio" name="q10" value="c" id="q10c"><label for="q10c">C. should</label></div>
+      <div class="opt"><input type="radio" name="q10" value="d" id="q10d"><label for="q10d">D. must to</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="11" data-answer="a">
+    <div class="q-num">Question 11</div>
+    <div class="q-text">Do you have _____ sugar? I'd like to make some tea.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q11" value="a" id="q11a"><label for="q11a">A. any</label></div>
+      <div class="opt"><input type="radio" name="q11" value="b" id="q11b"><label for="q11b">B. some</label></div>
+      <div class="opt"><input type="radio" name="q11" value="c" id="q11c"><label for="q11c">C. many</label></div>
+      <div class="opt"><input type="radio" name="q11" value="d" id="q11d"><label for="q11d">D. much</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="12" data-answer="d">
+    <div class="q-num">Question 12</div>
+    <div class="q-text">The phone _____ in Korea — it is a Samsung.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q12" value="a" id="q12a"><label for="q12a">A. make</label></div>
+      <div class="opt"><input type="radio" name="q12" value="b" id="q12b"><label for="q12b">B. making</label></div>
+      <div class="opt"><input type="radio" name="q12" value="c" id="q12c"><label for="q12c">C. made</label></div>
+      <div class="opt"><input type="radio" name="q12" value="d" id="q12d"><label for="q12d">D. is made</label></div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: GRAMMAR -->
+  <div class="section-header">
+    <h2>Section 2 — Grammar (Questions 13–35)</h2>
+    <p>Choose the grammatically correct answer. / Дүрмийн хувьд зөв хариуг сонгоорой.</p>
+  </div>
+
+  <div class="question" data-q="13" data-answer="b">
+    <div class="q-num">Question 13</div>
+    <div class="q-text">I _____ never been to Japan, but I really want to visit someday.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q13" value="a" id="q13a"><label for="q13a">A. did</label></div>
+      <div class="opt"><input type="radio" name="q13" value="b" id="q13b"><label for="q13b">B. have</label></div>
+      <div class="opt"><input type="radio" name="q13" value="c" id="q13c"><label for="q13c">C. was</label></div>
+      <div class="opt"><input type="radio" name="q13" value="d" id="q13d"><label for="q13d">D. had</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="14" data-answer="c">
+    <div class="q-num">Question 14</div>
+    <div class="q-text">She has lived in Ulaanbaatar _____ she was born.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q14" value="a" id="q14a"><label for="q14a">A. for</label></div>
+      <div class="opt"><input type="radio" name="q14" value="b" id="q14b"><label for="q14b">B. ago</label></div>
+      <div class="opt"><input type="radio" name="q14" value="c" id="q14c"><label for="q14c">C. since</label></div>
+      <div class="opt"><input type="radio" name="q14" value="d" id="q14d"><label for="q14d">D. from</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="15" data-answer="a">
+    <div class="q-num">Question 15</div>
+    <div class="q-text">He has worked at this company _____ five years.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q15" value="a" id="q15a"><label for="q15a">A. for</label></div>
+      <div class="opt"><input type="radio" name="q15" value="b" id="q15b"><label for="q15b">B. since</label></div>
+      <div class="opt"><input type="radio" name="q15" value="c" id="q15c"><label for="q15c">C. during</label></div>
+      <div class="opt"><input type="radio" name="q15" value="d" id="q15d"><label for="q15d">D. when</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="16" data-answer="d">
+    <div class="q-num">Question 16</div>
+    <div class="q-text">_____ you ever eaten traditional Mongolian tsuivan?</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q16" value="a" id="q16a"><label for="q16a">A. Did</label></div>
+      <div class="opt"><input type="radio" name="q16" value="b" id="q16b"><label for="q16b">B. Do</label></div>
+      <div class="opt"><input type="radio" name="q16" value="c" id="q16c"><label for="q16c">C. Are</label></div>
+      <div class="opt"><input type="radio" name="q16" value="d" id="q16d"><label for="q16d">D. Have</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="17" data-answer="b">
+    <div class="q-num">Question 17</div>
+    <div class="q-text">If I study hard, I _____ pass the exam next week.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q17" value="a" id="q17a"><label for="q17a">A. would</label></div>
+      <div class="opt"><input type="radio" name="q17" value="b" id="q17b"><label for="q17b">B. will</label></div>
+      <div class="opt"><input type="radio" name="q17" value="c" id="q17c"><label for="q17c">C. can</label></div>
+      <div class="opt"><input type="radio" name="q17" value="d" id="q17d"><label for="q17d">D. should</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="18" data-answer="c">
+    <div class="q-num">Question 18</div>
+    <div class="q-text">If I _____ rich, I would travel the world every year.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q18" value="a" id="q18a"><label for="q18a">A. am</label></div>
+      <div class="opt"><input type="radio" name="q18" value="b" id="q18b"><label for="q18b">B. will be</label></div>
+      <div class="opt"><input type="radio" name="q18" value="c" id="q18c"><label for="q18c">C. were</label></div>
+      <div class="opt"><input type="radio" name="q18" value="d" id="q18d"><label for="q18d">D. would be</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="19" data-answer="a">
+    <div class="q-num">Question 19</div>
+    <div class="q-text">She said that she _____ tired and wanted to go home early.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q19" value="a" id="q19a"><label for="q19a">A. was</label></div>
+      <div class="opt"><input type="radio" name="q19" value="b" id="q19b"><label for="q19b">B. is</label></div>
+      <div class="opt"><input type="radio" name="q19" value="c" id="q19c"><label for="q19c">C. were</label></div>
+      <div class="opt"><input type="radio" name="q19" value="d" id="q19d"><label for="q19d">D. will be</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="20" data-answer="d">
+    <div class="q-num">Question 20</div>
+    <div class="q-text">He told me that he _____ help me the following day.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q20" value="a" id="q20a"><label for="q20a">A. will</label></div>
+      <div class="opt"><input type="radio" name="q20" value="b" id="q20b"><label for="q20b">B. can</label></div>
+      <div class="opt"><input type="radio" name="q20" value="c" id="q20c"><label for="q20c">C. shall</label></div>
+      <div class="opt"><input type="radio" name="q20" value="d" id="q20d"><label for="q20d">D. would</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="21" data-answer="b">
+    <div class="q-num">Question 21</div>
+    <div class="q-text">English _____ all over the world by millions of people.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q21" value="a" id="q21a"><label for="q21a">A. speak</label></div>
+      <div class="opt"><input type="radio" name="q21" value="b" id="q21b"><label for="q21b">B. is spoken</label></div>
+      <div class="opt"><input type="radio" name="q21" value="c" id="q21c"><label for="q21c">C. speaks</label></div>
+      <div class="opt"><input type="radio" name="q21" value="d" id="q21d"><label for="q21d">D. was speaking</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="22" data-answer="c">
+    <div class="q-num">Question 22</div>
+    <div class="q-text">The Eiffel Tower _____ in Paris in 1889.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q22" value="a" id="q22a"><label for="q22a">A. build</label></div>
+      <div class="opt"><input type="radio" name="q22" value="b" id="q22b"><label for="q22b">B. is built</label></div>
+      <div class="opt"><input type="radio" name="q22" value="c" id="q22c"><label for="q22c">C. was built</label></div>
+      <div class="opt"><input type="radio" name="q22" value="d" id="q22d"><label for="q22d">D. built</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="23" data-answer="a">
+    <div class="q-num">Question 23</div>
+    <div class="q-text">The boy _____ lives next door is my best friend.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q23" value="a" id="q23a"><label for="q23a">A. who</label></div>
+      <div class="opt"><input type="radio" name="q23" value="b" id="q23b"><label for="q23b">B. which</label></div>
+      <div class="opt"><input type="radio" name="q23" value="c" id="q23c"><label for="q23c">C. where</label></div>
+      <div class="opt"><input type="radio" name="q23" value="d" id="q23d"><label for="q23d">D. whose</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="24" data-answer="d">
+    <div class="q-num">Question 24</div>
+    <div class="q-text">The book _____ I am reading is really fascinating.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q24" value="a" id="q24a"><label for="q24a">A. who</label></div>
+      <div class="opt"><input type="radio" name="q24" value="b" id="q24b"><label for="q24b">B. where</label></div>
+      <div class="opt"><input type="radio" name="q24" value="c" id="q24c"><label for="q24c">C. whose</label></div>
+      <div class="opt"><input type="radio" name="q24" value="d" id="q24d"><label for="q24d">D. that</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="25" data-answer="b">
+    <div class="q-num">Question 25</div>
+    <div class="q-text">You must _____ on time for the interview. Don't be late!</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q25" value="a" id="q25a"><label for="q25a">A. to arrive</label></div>
+      <div class="opt"><input type="radio" name="q25" value="b" id="q25b"><label for="q25b">B. arrive</label></div>
+      <div class="opt"><input type="radio" name="q25" value="c" id="q25c"><label for="q25c">C. arriving</label></div>
+      <div class="opt"><input type="radio" name="q25" value="d" id="q25d"><label for="q25d">D. arrived</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="26" data-answer="c">
+    <div class="q-num">Question 26</div>
+    <div class="q-text">You _____ use your phone during the exam — it is strictly forbidden.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q26" value="a" id="q26a"><label for="q26a">A. don't need to</label></div>
+      <div class="opt"><input type="radio" name="q26" value="b" id="q26b"><label for="q26b">B. shouldn't</label></div>
+      <div class="opt"><input type="radio" name="q26" value="c" id="q26c"><label for="q26c">C. mustn't</label></div>
+      <div class="opt"><input type="radio" name="q26" value="d" id="q26d"><label for="q26d">D. needn't</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="27" data-answer="a">
+    <div class="q-num">Question 27</div>
+    <div class="q-text">I need _____ this report before Friday. It is urgent!</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q27" value="a" id="q27a"><label for="q27a">A. to finish</label></div>
+      <div class="opt"><input type="radio" name="q27" value="b" id="q27b"><label for="q27b">B. finishing</label></div>
+      <div class="opt"><input type="radio" name="q27" value="c" id="q27c"><label for="q27c">C. finish</label></div>
+      <div class="opt"><input type="radio" name="q27" value="d" id="q27d"><label for="q27d">D. finished</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="28" data-answer="d">
+    <div class="q-num">Question 28</div>
+    <div class="q-text">I enjoy _____ English podcasts on my way to school every morning.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q28" value="a" id="q28a"><label for="q28a">A. to listen</label></div>
+      <div class="opt"><input type="radio" name="q28" value="b" id="q28b"><label for="q28b">B. listen</label></div>
+      <div class="opt"><input type="radio" name="q28" value="c" id="q28c"><label for="q28c">C. listened</label></div>
+      <div class="opt"><input type="radio" name="q28" value="d" id="q28d"><label for="q28d">D. listening</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="29" data-answer="b">
+    <div class="q-num">Question 29</div>
+    <div class="q-text">I'm going _____ Korean next semester. I've already signed up!</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q29" value="a" id="q29a"><label for="q29a">A. learn</label></div>
+      <div class="opt"><input type="radio" name="q29" value="b" id="q29b"><label for="q29b">B. to learn</label></div>
+      <div class="opt"><input type="radio" name="q29" value="c" id="q29c"><label for="q29c">C. learning</label></div>
+      <div class="opt"><input type="radio" name="q29" value="d" id="q29d"><label for="q29d">D. learned</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="30" data-answer="c">
+    <div class="q-num">Question 30</div>
+    <div class="q-text">I have been studying English _____ three months without missing a single day.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q30" value="a" id="q30a"><label for="q30a">A. since</label></div>
+      <div class="opt"><input type="radio" name="q30" value="b" id="q30b"><label for="q30b">B. while</label></div>
+      <div class="opt"><input type="radio" name="q30" value="c" id="q30c"><label for="q30c">C. for</label></div>
+      <div class="opt"><input type="radio" name="q30" value="d" id="q30d"><label for="q30d">D. during</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="31" data-answer="a">
+    <div class="q-num">Question 31</div>
+    <div class="q-text">This bag is not _____ to fit all my books. I need a bigger one.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q31" value="a" id="q31a"><label for="q31a">A. big enough</label></div>
+      <div class="opt"><input type="radio" name="q31" value="b" id="q31b"><label for="q31b">B. too big</label></div>
+      <div class="opt"><input type="radio" name="q31" value="c" id="q31c"><label for="q31c">C. enough big</label></div>
+      <div class="opt"><input type="radio" name="q31" value="d" id="q31d"><label for="q31d">D. very enough</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="32" data-answer="d">
+    <div class="q-num">Question 32</div>
+    <div class="q-text">When I _____ home last night, I saw a shooting star in the sky.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q32" value="a" id="q32a"><label for="q32a">A. am walking</label></div>
+      <div class="opt"><input type="radio" name="q32" value="b" id="q32b"><label for="q32b">B. walk</label></div>
+      <div class="opt"><input type="radio" name="q32" value="c" id="q32c"><label for="q32c">C. walks</label></div>
+      <div class="opt"><input type="radio" name="q32" value="d" id="q32d"><label for="q32d">D. was walking</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="33" data-answer="b">
+    <div class="q-num">Question 33</div>
+    <div class="q-text">The teacher asked _____ we had finished our homework.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q33" value="a" id="q33a"><label for="q33a">A. that</label></div>
+      <div class="opt"><input type="radio" name="q33" value="b" id="q33b"><label for="q33b">B. if</label></div>
+      <div class="opt"><input type="radio" name="q33" value="c" id="q33c"><label for="q33c">C. what</label></div>
+      <div class="opt"><input type="radio" name="q33" value="d" id="q33d"><label for="q33d">D. which</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="34" data-answer="c">
+    <div class="q-num">Question 34</div>
+    <div class="q-text">Could you tell me _____ the nearest bank is? I need to exchange money.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q34" value="a" id="q34a"><label for="q34a">A. where is</label></div>
+      <div class="opt"><input type="radio" name="q34" value="b" id="q34b"><label for="q34b">B. is where</label></div>
+      <div class="opt"><input type="radio" name="q34" value="c" id="q34c"><label for="q34c">C. where</label></div>
+      <div class="opt"><input type="radio" name="q34" value="d" id="q34d"><label for="q34d">D. which</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="35" data-answer="a">
+    <div class="q-num">Question 35</div>
+    <div class="q-text">I think English is _____ subject at school.</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q35" value="a" id="q35a"><label for="q35a">A. the most useful</label></div>
+      <div class="opt"><input type="radio" name="q35" value="b" id="q35b"><label for="q35b">B. more useful</label></div>
+      <div class="opt"><input type="radio" name="q35" value="c" id="q35c"><label for="q35c">C. the usefulest</label></div>
+      <div class="opt"><input type="radio" name="q35" value="d" id="q35d"><label for="q35d">D. most useful</label></div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: READING -->
+  <div class="section-header">
+    <h2>Section 3 — Reading Comprehension (Questions 36–43)</h2>
+    <p>Read the passage carefully, then answer the questions. / Текстийг уншаад хариулаарай.</p>
+  </div>
+
+  <div class="passage-box">
+    <p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:8px;font-weight:500;">Reading passage</p>
+    <p style="font-size:14px;color:var(--color-text-primary);line-height:1.85;">Sarnai has been interested in art since she was a small child. She has always loved drawing, painting, and creating things with her hands. Last year, she decided to apply to the National Art School in Ulaanbaatar. Although she was very nervous about the entrance exam, she worked extremely hard for three months. She practised every single day, and her teacher told her that she had improved significantly. On the day of the exam, Sarnai arrived early and felt calm. She painted a landscape of the Mongolian steppe, which she loves more than any other subject. Two weeks later, she received a letter — she had been accepted! If she continues to work hard, she will become one of the best young artists in Mongolia. Sarnai says: "I have always believed that if you love something and dedicate yourself to it completely, you will achieve your dreams."</p>
+  </div>
+
+  <div class="question" data-q="36" data-answer="b">
+    <div class="q-num">Question 36</div>
+    <div class="q-text">How long has Sarnai been interested in art?</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q36" value="a" id="q36a"><label for="q36a">A. Since last year</label></div>
+      <div class="opt"><input type="radio" name="q36" value="b" id="q36b"><label for="q36b">B. Since she was a small child</label></div>
+      <div class="opt"><input type="radio" name="q36" value="c" id="q36c"><label for="q36c">C. For three months</label></div>
+      <div class="opt"><input type="radio" name="q36" value="d" id="q36d"><label for="q36d">D. For two years</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="37" data-answer="c">
+    <div class="q-num">Question 37</div>
+    <div class="q-text">How long did Sarnai prepare for the entrance exam?</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q37" value="a" id="q37a"><label for="q37a">A. One month</label></div>
+      <div class="opt"><input type="radio" name="q37" value="b" id="q37b"><label for="q37b">B. Two months</label></div>
+      <div class="opt"><input type="radio" name="q37" value="c" id="q37c"><label for="q37c">C. Three months</label></div>
+      <div class="opt"><input type="radio" name="q37" value="d" id="q37d"><label for="q37d">D. Six months</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="38" data-answer="a">
+    <div class="q-num">Question 38</div>
+    <div class="q-text">What did Sarnai paint in the entrance exam?</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q38" value="a" id="q38a"><label for="q38a">A. A landscape of the Mongolian steppe</label></div>
+      <div class="opt"><input type="radio" name="q38" value="b" id="q38b"><label for="q38b">B. A portrait of her family</label></div>
+      <div class="opt"><input type="radio" name="q38" value="c" id="q38c"><label for="q38c">C. An abstract painting</label></div>
+      <div class="opt"><input type="radio" name="q38" value="d" id="q38d"><label for="q38d">D. A picture of Ulaanbaatar</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="39" data-answer="d">
+    <div class="q-num">Question 39</div>
+    <div class="q-text">How did Sarnai feel on the day of the exam?</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q39" value="a" id="q39a"><label for="q39a">A. Very nervous</label></div>
+      <div class="opt"><input type="radio" name="q39" value="b" id="q39b"><label for="q39b">B. Excited and happy</label></div>
+      <div class="opt"><input type="radio" name="q39" value="c" id="q39c"><label for="q39c">C. Worried and unprepared</label></div>
+      <div class="opt"><input type="radio" name="q39" value="d" id="q39d"><label for="q39d">D. Calm</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="40" data-answer="b">
+    <div class="q-num">Question 40</div>
+    <div class="q-text">How long after the exam did Sarnai receive her result?</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q40" value="a" id="q40a"><label for="q40a">A. One week</label></div>
+      <div class="opt"><input type="radio" name="q40" value="b" id="q40b"><label for="q40b">B. Two weeks</label></div>
+      <div class="opt"><input type="radio" name="q40" value="c" id="q40c"><label for="q40c">C. Three weeks</label></div>
+      <div class="opt"><input type="radio" name="q40" value="d" id="q40d"><label for="q40d">D. One month</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="41" data-answer="c">
+    <div class="q-num">Question 41</div>
+    <div class="q-text">What does the passage say will happen if Sarnai continues to work hard?</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q41" value="a" id="q41a"><label for="q41a">A. She will study abroad.</label></div>
+      <div class="opt"><input type="radio" name="q41" value="b" id="q41b"><label for="q41b">B. She will teach art.</label></div>
+      <div class="opt"><input type="radio" name="q41" value="c" id="q41c"><label for="q41c">C. She will become one of the best young artists in Mongolia.</label></div>
+      <div class="opt"><input type="radio" name="q41" value="d" id="q41d"><label for="q41d">D. She will win a prize.</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="42" data-answer="a">
+    <div class="q-num">Question 42</div>
+    <div class="q-text">What did Sarnai's teacher say about her progress?</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q42" value="a" id="q42a"><label for="q42a">A. She had improved significantly.</label></div>
+      <div class="opt"><input type="radio" name="q42" value="b" id="q42b"><label for="q42b">B. She needed more practice.</label></div>
+      <div class="opt"><input type="radio" name="q42" value="c" id="q42c"><label for="q42c">C. She was not ready.</label></div>
+      <div class="opt"><input type="radio" name="q42" value="d" id="q42d"><label for="q42d">D. She should try a different style.</label></div>
+    </div>
+  </div>
+
+  <div class="question" data-q="43" data-answer="d">
+    <div class="q-num">Question 43</div>
+    <div class="q-text">What is Sarnai's personal belief, according to the last sentence?</div>
+    <div class="options">
+      <div class="opt"><input type="radio" name="q43" value="a" id="q43a"><label for="q43a">A. Talent is more important than hard work.</label></div>
+      <div class="opt"><input type="radio" name="q43" value="b" id="q43b"><label for="q43b">B. You need a good teacher to succeed.</label></div>
+      <div class="opt"><input type="radio" name="q43" value="c" id="q43c"><label for="q43c">C. Art school is the best path for everyone.</label></div>
+      <div class="opt"><input type="radio" name="q43" value="d" id="q43d"><label for="q43d">D. If you love something and dedicate yourself to it, you will achieve your dreams.</label></div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: FILL IN THE BLANK -->
+  <div class="section-header">
+    <h2>Section 4 — Fill in the Blank (Questions 44–50)</h2>
+    <p>Type the correct word or short phrase. / Зөв үг бичээрэй.</p>
+  </div>
+
+  <div class="question" data-q="44" data-answer="have visited" data-type="fill" data-alt="have been to">
+    <div class="q-num">Question 44</div>
+    <div class="q-text">I _____ _____ Seoul twice. It is a wonderful city! (Present Perfect)</div>
+    <input class="fill-input" type="text" placeholder="two words..." id="fill44">
+    <div class="answer-key" id="ak44">Correct answer: <strong>have visited</strong> (or "have been to")</div>
+  </div>
+
+  <div class="question" data-q="45" data-answer="was built" data-type="fill">
+    <div class="q-num">Question 45</div>
+    <div class="q-text">The Great Wall _____ _____ in China over many centuries. (Past Passive)</div>
+    <input class="fill-input" type="text" placeholder="two words..." id="fill45">
+    <div class="answer-key" id="ak45">Correct answer: <strong>was built</strong></div>
+  </div>
+
+  <div class="question" data-q="46" data-answer="would travel" data-type="fill">
+    <div class="q-num">Question 46</div>
+    <div class="q-text">If I had more time, I _____ _____ around the world. (2nd Conditional)</div>
+    <input class="fill-input" type="text" placeholder="two words..." id="fill46">
+    <div class="answer-key" id="ak46">Correct answer: <strong>would travel</strong></div>
+  </div>
+
+  <div class="question" data-q="47" data-answer="has been" data-type="fill" data-alt="have been">
+    <div class="q-num">Question 47</div>
+    <div class="q-text">She _____ _____ working at this company since 2019. (Present Perfect)</div>
+    <input class="fill-input" type="text" placeholder="two words..." id="fill47">
+    <div class="answer-key" id="ak47">Correct answer: <strong>has been</strong></div>
+  </div>
+
+  <div class="question" data-q="48" data-answer="is spoken" data-type="fill">
+    <div class="q-num">Question 48</div>
+    <div class="q-text">English _____ _____ as a global language in most international meetings. (Present Passive)</div>
+    <input class="fill-input" type="text" placeholder="two words..." id="fill48">
+    <div class="answer-key" id="ak48">Correct answer: <strong>is spoken</strong></div>
+  </div>
+
+  <div class="question" data-q="49" data-answer="who" data-type="fill" data-alt="that">
+    <div class="q-num">Question 49</div>
+    <div class="q-text">The teacher _____ taught me English changed my life completely. (Relative pronoun for a person)</div>
+    <input class="fill-input" type="text" placeholder="one word..." id="fill49">
+    <div class="answer-key" id="ak49">Correct answer: <strong>who</strong> (or "that")</div>
+  </div>
+
+  <div class="question" data-q="50" data-answer="will study" data-type="fill" data-alt="am going to study">
+    <div class="q-num">Question 50</div>
+    <div class="q-text">If I pass this test, I _____ _____ Book 3 immediately! (1st Conditional — future)</div>
+    <input class="fill-input" type="text" placeholder="two words..." id="fill50">
+    <div class="answer-key" id="ak50">Correct answer: <strong>will study</strong> (or "am going to study")</div>
+  </div>
+
+  <div class="submit-area">
+    <button class="submit-btn" id="submit-btn" onclick="submitTest()">Submit test and see results</button>
+  </div>
+  </div>
+
+  <div class="score-card" id="score-card">
+    <div class="score-big" id="score-num">—</div>
+    <div class="score-pct" id="score-pct">out of 50</div>
+    <div class="score-badge" id="score-badge">—</div>
+    <div class="progress-bar" style="margin:1rem auto;max-width:400px;">
+      <div class="progress-fill" id="score-bar" style="width:0%;background:#1D9E75;"></div>
+    </div>
+    <p style="font-size:14px;color:var(--color-text-secondary);margin-bottom:1.5rem;" id="score-msg"></p>
+    <div class="score-breakdown" id="score-breakdown"></div>
+    <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:0.5px solid var(--color-border-tertiary);">
+      <p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:1rem;">Scroll up to review — correct answers shown in green, incorrect in red.</p>
+      <button onclick="window.scrollTo({top:0,behavior:'smooth'})" style="padding:8px 24px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);cursor:pointer;font-size:14px;color:var(--color-text-primary);">Review my answers</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const mcAnswers={1:'c',2:'b',3:'a',4:'d',5:'b',6:'c',7:'a',8:'d',9:'b',10:'c',11:'a',12:'d',13:'b',14:'c',15:'a',16:'d',17:'b',18:'c',19:'a',20:'d',21:'b',22:'c',23:'a',24:'d',25:'b',26:'c',27:'a',28:'d',29:'b',30:'c',31:'a',32:'d',33:'b',34:'c',35:'a',36:'b',37:'c',38:'a',39:'d',40:'b',41:'c',42:'a',43:'d'};
+const fillAnswers={
+  44:['have visited','have been to','visited','been to'],
+  45:['was built'],
+  46:['would travel','would go','would visit'],
+  47:['has been','have been'],
+  48:['is spoken','is used'],
+  49:['who','that'],
+  50:['will study','will start','will begin','am going to study','am going to start']
+};
+let timerInterval,seconds=50*60,submitted=false;
+function pad(n){return n<10?'0'+n:n;}
+function startTimer(){
+  timerInterval=setInterval(()=>{
+    seconds--;
+    const m=Math.floor(seconds/60),s=seconds%60;
+    document.getElementById('timer').textContent=pad(m)+':'+pad(s);
+    if(seconds<=0){clearInterval(timerInterval);if(!submitted)submitTest();}
+    if(seconds<=300)document.getElementById('timer').style.color='#A32D2D';
+  },1000);
+}
+function updateProgress(){
+  let answered=0;
+  for(let i=1;i<=43;i++){if(document.querySelector(`input[name="q${i}"]:checked`))answered++;}
+  for(let i=44;i<=50;i++){if(document.getElementById(`fill${i}`).value.trim())answered++;}
+  document.getElementById('answered-count').textContent=answered+' / 50 answered';
+  document.getElementById('progress').style.width=Math.round(answered/50*100)+'%';
+}
+document.querySelectorAll('input[type="radio"]').forEach(r=>r.addEventListener('change',updateProgress));
+document.querySelectorAll('.fill-input').forEach(f=>f.addEventListener('input',updateProgress));
+function submitTest(){
+  if(submitted)return;
+  submitted=true;
+  clearInterval(timerInterval);
+  document.getElementById('submit-btn').disabled=true;
+  document.getElementById('submit-btn').textContent='Test submitted!';
+  let mcScore=0,fillScore=0,vocabScore=0,grammarScore=0,readingScore=0;
+  for(let i=1;i<=43;i++){
+    const sel=document.querySelector(`input[name="q${i}"]:checked`);
+    const correct=mcAnswers[i];
+    document.querySelectorAll(`input[name="q${i}"]`).forEach(o=>{
+      const div=o.closest('.opt');
+      if(o.value===correct)div.classList.add('correct');
+      if(sel&&o.value===sel.value&&o.value!==correct)div.classList.add('wrong');
+    });
+    if(sel&&sel.value===correct){
+      mcScore++;
+      if(i<=12)vocabScore++;
+      else if(i<=35)grammarScore++;
+      else readingScore++;
+    }
+  }
+  for(let i=44;i<=50;i++){
+    const inp=document.getElementById('fill'+i);
+    const val=inp.value.trim().toLowerCase().replace(/['']/g,"'").replace(/\s+/g,' ');
+    const valid=fillAnswers[i];
+    const ok=valid.some(a=>a.toLowerCase()===val||val.includes(a.toLowerCase().split(' ')[0]));
+    if(ok){inp.classList.add('correct');fillScore++;}
+    else inp.classList.add('wrong');
+    document.getElementById('ak'+i).style.display='block';
+  }
+  const total=mcScore+fillScore;
+  const pct=Math.round(total/50*100);
+  document.getElementById('score-card').style.display='block';
+  document.getElementById('score-card').scrollIntoView({behavior:'smooth'});
+  document.getElementById('score-num').textContent=total+'/50';
+  document.getElementById('score-pct').textContent=pct+'% — A2 Final Test';
+  document.getElementById('score-bar').style.width=pct+'%';
+  let badge='',msg='',cls='';
+  if(pct>=90){badge='Distinction — Outstanding!';cls='distinction';msg='Incredible! You have completely mastered A2 English. You are fully ready for Book 3 (B1 level). Keep going — you are amazing!';}
+  else if(pct>=70){badge='Pass — Well done!';cls='pass';msg='Congratulations! You have passed the A2 Final Test. Your intermediate foundation is solid. Move to Book 3 with confidence!';}
+  else{badge='Not yet — Keep reviewing!';cls='fail';msg='You are not quite there yet. Focus on the sections with the most mistakes and review those grammar points in Book 2. You can do this!';}
+  document.getElementById('score-badge').textContent=badge;
+  document.getElementById('score-badge').className='score-badge '+cls;
+  document.getElementById('score-msg').textContent=msg;
+  document.getElementById('score-breakdown').innerHTML=`
+    <div class="breakdown-item"><div class="breakdown-num">${vocabScore}/12</div><div class="breakdown-label">Section 1: Vocabulary</div></div>
+    <div class="breakdown-item"><div class="breakdown-num">${grammarScore}/23</div><div class="breakdown-label">Section 2: Grammar</div></div>
+    <div class="breakdown-item"><div class="breakdown-num">${readingScore}/8</div><div class="breakdown-label">Section 3: Reading</div></div>
+    <div class="breakdown-item"><div class="breakdown-num">${fillScore}/7</div><div class="breakdown-label">Section 4: Fill in blank</div></div>
+  `;
+}
+startTimer();
+</script>
+
+</body>
+</html>

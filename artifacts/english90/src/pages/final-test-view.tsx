@@ -131,8 +131,41 @@ export default function FinalTestView() {
     );
   };
 
+  const officialTestUrl = `${import.meta.env.BASE_URL}final-tests/level-${levelNum}.html`;
+  const levelLabel = levelNum === 1 ? "A1" : levelNum === 2 ? "A2" : "B1";
+  const levelMinutes = levelNum === 1 ? 45 : levelNum === 2 ? 50 : 55;
+  const levelGradient = levelNum === 1
+    ? "from-blue-500 to-indigo-600"
+    : levelNum === 2
+      ? "from-emerald-500 to-teal-600"
+      : "from-violet-600 to-purple-700";
+
   return (
     <>
+    {!testResult && (
+      <Card className="max-w-4xl mx-auto mb-6 overflow-hidden border-2 border-primary/30 shadow-lg">
+        <div className={`h-2 bg-gradient-to-r ${levelGradient}`} />
+        <CardHeader className="pb-3">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary">
+            <Sparkles className="w-4 h-4" /> Official final test · Албан ёсны эцсийн шалгалт
+          </div>
+          <CardTitle className="text-2xl mt-1">{levelLabel} Final Test — 50 questions</CardTitle>
+          <CardDescription className="text-base">
+            50 асуулт · {levelMinutes} минут · Pass 35/50 (70%) · Distinction 45/50 (90%)
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+          <p className="text-sm text-muted-foreground">
+            Албан ёсны бүрэн эцсийн шалгалтыг шинэ хуудсанд нээж өгнө үү. Цаг хугацаа автоматаар тоологдоно.
+          </p>
+          <Button asChild size="lg" className={`bg-gradient-to-r ${levelGradient} text-white hover:opacity-95 shrink-0`}>
+            <a href={officialTestUrl} target="_blank" rel="noopener noreferrer">
+              Шалгалтыг нээх →
+            </a>
+          </Button>
+        </CardContent>
+      </Card>
+    )}
     {passageText && !testResult && (
       <>
         <button
