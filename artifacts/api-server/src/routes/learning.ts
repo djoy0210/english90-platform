@@ -1,4 +1,4 @@
-import { getAuth } from "@clerk/express";
+import { getAuth, clerkClient } from "@clerk/express";
 import { db } from "@workspace/db";
 import {
   appSettingsTable,
@@ -501,13 +501,37 @@ class HttpError extends Error {
   }
 }
 
+function parseAdminList(): { emails: Set<string>; ids: Set<string> } {
+  const raw = (process.env.ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const emails = new Set<string>();
+  const ids = new Set<string>();
+  for (const item of raw) {
+    if (item.startsWith("user_")) ids.add(item);
+    else emails.add(item.toLowerCase());
+  }
+  return { emails, ids };
+}
+
+async function fetchClerkProfile(clerkUserId: string): Promise<{ email: string | null; name: string | null }> {
+  try {
+    const u = await clerkClient.users.getUser(clerkUserId);
+    const primary = u.emailAddresses.find((e) => e.id === u.primaryEmailAddressId) ?? u.emailAddresses[0];
+    const email = primary?.emailAddress ?? null;
+    const fullName = [u.firstName, u.lastName].filter(Boolean).join(" ").trim();
+    return { email, name: fullName || u.username || null };
+  } catch (err) {
+    console.warn("[clerk] failed to fetch user profile", clerkUserId, (err as Error).message);
+    return { email: null, name: null };
+  }
+}
+
 async function getCurrentUser(req: Request): Promise<User> {
   const auth = getAuth(req);
   const isProd = process.env.NODE_ENV === "production";
-  const adminEmails = (process.env.ADMIN_EMAILS ?? "")
-    .split(",")
-    .map((s) => s.trim().toLowerCase())
-    .filter(Boolean);
+  const { emails: adminEmails, ids: adminIds } = parseAdminList();
 
   if (!auth.userId) {
     if (isProd) throw new HttpError(401, "Authentication required");
@@ -530,22 +554,40 @@ async function getCurrentUser(req: Request): Promise<User> {
 
   const clerkUserId = auth.userId;
   const claims = (auth as any).sessionClaims ?? {};
-  const claimEmail: string | undefined = claims.email ?? claims.primary_email_address ?? claims.user?.email;
+  const claimEmail: string | undefined =
+    claims.email ?? claims.primary_email_address ?? claims.user?.email ?? claims.eml;
   const claimName: string | undefined = claims.name ?? claims.user?.name ?? claims.full_name;
-  const email = (claimEmail ?? `${clerkUserId}@learner.local`).toLowerCase();
-  const name = claimName ?? email.split("@")[0];
 
-  const existing = await db.select().from(usersTable).where(eq(usersTable.clerkUserId, clerkUserId)).limit(1);
-  if (existing[0]) {
-    // Promote to admin only if email is whitelisted in ADMIN_EMAILS
-    if (adminEmails.includes(existing[0].email.toLowerCase()) && existing[0].role !== "admin") {
-      const [u] = await db.update(usersTable).set({ role: "admin" }).where(eq(usersTable.id, existing[0].id)).returning();
-      return u;
-    }
-    return existing[0];
+  const existing = (await db.select().from(usersTable).where(eq(usersTable.clerkUserId, clerkUserId)).limit(1))[0];
+
+  // Resolve a real email: prefer claims, else fall back to Clerk API if we don't already have a real one stored.
+  const storedEmail = existing?.email?.toLowerCase() ?? "";
+  const storedIsFake = storedEmail.endsWith("@learner.local");
+  let resolvedEmail = claimEmail?.toLowerCase() ?? null;
+  let resolvedName = claimName ?? null;
+
+  if (!resolvedEmail && (!existing || storedIsFake)) {
+    const profile = await fetchClerkProfile(clerkUserId);
+    if (profile.email) resolvedEmail = profile.email.toLowerCase();
+    if (profile.name && !resolvedName) resolvedName = profile.name;
   }
 
-  const role = adminEmails.includes(email) ? "admin" : "learner";
+  const email = resolvedEmail ?? existing?.email ?? `${clerkUserId}@learner.local`;
+  const name = resolvedName ?? existing?.name ?? email.split("@")[0];
+
+  const isAdmin = adminIds.has(clerkUserId) || adminEmails.has(email.toLowerCase());
+
+  if (existing) {
+    const updates: Partial<User> = {};
+    if (resolvedEmail && resolvedEmail !== existing.email.toLowerCase()) updates.email = resolvedEmail;
+    if (resolvedName && resolvedName !== existing.name) updates.name = resolvedName;
+    if (isAdmin && existing.role !== "admin") updates.role = "admin";
+    if (Object.keys(updates).length === 0) return existing;
+    const [u] = await db.update(usersTable).set(updates).where(eq(usersTable.id, existing.id)).returning();
+    return u;
+  }
+
+  const role = isAdmin ? "admin" : "learner";
   const [user] = await db
     .insert(usersTable)
     .values({ id: clerkUserId, clerkUserId, email, name, role, placementCompleted: role === "admin" })
